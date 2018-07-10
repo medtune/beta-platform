@@ -1,0 +1,173 @@
+.mdl-layout__drawer-button {
+    position: absolute;
+    background-color: transparent;
+    justify-content: center;
+    display:flex;
+    align-items: center;
+}
+
+.nav-button-icon {
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.nav-link {
+    font-size: 18;
+    font-weight: 1000;
+}
+
+.nav-link:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(60, 86, 231);
+}
+
+.active-link {
+    background-color: rgba(0, 0, 0, 0.134);
+}
+
+.demo-layout-waterfall .mdl-layout__header-row .mdl-navigation__link:last-of-type  {
+    padding-right: 0;
+}
+  
+
+.version {
+    align-self: center;
+    font-size: 10px;
+}
+
+.mdl-layout__drawer .mdl-layout-title {
+    position: relative;
+    background: #4655c5;
+}
+
+.drawer-separator {
+    height: 1px;
+    background-color: #dcdcdc;
+    margin: 8px 0;
+}
+
+.drawer-title {
+    color: rgb(255, 255, 255);
+}
+
+.demo-avatar {
+    margin: 40px;
+    width: 130px;
+    height: 115px;
+}
+
+.mdl-layout__drawer .demo-navigation .mdl-navigation__link {
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    color: rgba(187, 29, 29, 0.929);
+    font-weight: 500;
+    height: 28px;
+  }
+  
+  
+.mdl-layout__drawer .demo-navigation .mdl-navigation__link:hover {
+    background-color: red;
+    color: blue;
+}
+
+.drawer-nav-link {
+    color: red;
+}
+
+.center-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 90vh;
+}
+
+.main-grid {
+    max-width: 1100px;
+}
+
+.index-header {
+    text-align: center;
+}
+
+
+.wear-section {
+    position: relative;
+    background: url(/static/images/ai.jpg) center top no-repeat;
+    background-size: cover;
+    height: 800px;
+}
+
+.android-slogan {
+    font-size: 60px;
+    padding-top: 80px;
+}
+
+.android-sub-slogan {
+    font-size: 21px;
+    padding-top: 24px;
+}
+  
+
+.android-be-together-section {
+    position: relative;
+    height: 800px;
+    width: auto;
+    background-color: #f3f3f3;
+    background: url('/static/images/slide01.jpg') center 10% no-repeat;
+    background-size: cover;
+}
+
+.android-fab {
+    position: absolute;
+    right: 20%;
+    bottom: -26px;
+    z-index: 3;
+    background: #64ffda !important;
+    color: black !important;
+}
+
+.logo-font {
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    line-height: 1;
+    color: #515151;
+    font-weight: 500;
+}
+
+.android-create-character {
+    font-size: 21px;
+    padding-top: 400px;
+}
+
+.android-create-character a {
+    text-decoration: none;
+    color: #767777;
+    font-weight: 300;
+}
+
+.header {
+    background-color: red;
+}
+
+.signup-card {
+    width: 450px;
+}
+
+.login-card {
+    width: 450px;
+}
+
+.load-bar-form {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
