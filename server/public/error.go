@@ -6,8 +6,8 @@ import (
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"github.com/iallabs/medtune-trials/pkg/tmpl"
-	"github.com/iallabs/medtune-trials/pkg/tmpl/data"
+	"github.com/medtune/beta-platform/pkg/tmpl"
+	"github.com/medtune/beta-platform/pkg/tmpl/data"
 )
 
 func Error(c *gin.Context) {

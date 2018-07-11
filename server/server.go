@@ -2,10 +2,10 @@ package server
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/iallabs/medtune-trials/server/api"
-	"github.com/iallabs/medtune-trials/server/hidden"
-	"github.com/iallabs/medtune-trials/server/middleware"
-	"github.com/iallabs/medtune-trials/server/public"
+	"github.com/medtune/beta-platform/server/api"
+	"github.com/medtune/beta-platform/server/hidden"
+	"github.com/medtune/beta-platform/server/middleware"
+	"github.com/medtune/beta-platform/server/public"
 )
 
 var Default *server

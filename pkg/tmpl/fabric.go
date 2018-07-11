@@ -4,9 +4,9 @@ import (
 	"html/template"
 	"log"
 
-	"github.com/iallabs/medtune-trials/pkg/tmpl/public"
-	"github.com/iallabs/medtune-trials/pkg/tmpl/shared"
-	"github.com/iallabs/medtune-trials/pkg/tmpl/trials"
+	"github.com/medtune/beta-platform/pkg/tmpl/public"
+	"github.com/medtune/beta-platform/pkg/tmpl/shared"
+	"github.com/medtune/beta-platform/pkg/tmpl/trials"
 )
 
 var (

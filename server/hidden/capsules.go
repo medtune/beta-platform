@@ -2,7 +2,7 @@ package hidden
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/iallabs/medtune-trials/pkg/tmpl"
+	"github.com/medtune/beta-platform/pkg/tmpl"
 )
 
 func Inception(c *gin.Context) {
