@@ -22,14 +22,14 @@ func (s *server) Run() {
 func New(static string, port string) *server {
 	engine := gin.New()
 	engine.Static(static, static)
-	AssembleHandlers(engine)
+	assembleHandlers(engine)
 	return &server{
 		engine: engine,
 		port:   port,
 	}
 }
 
-func AssembleHandlers(g *gin.Engine) {
+func assembleHandlers(g *gin.Engine) {
 	// Gin recovery and logger
 	g.Use(gin.Recovery())
 	g.Use(gin.Logger())
