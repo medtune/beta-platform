@@ -4,8 +4,9 @@
 
 - Go compiler
 
+Verify your GOPATH and run the following commands
 `go get -u github.com/medtune/beta-platform/`
-``
+`./beta-platform` 
 
 - With Docker
 
