@@ -1,0 +1,33 @@
+meta:
+  name: medtune beta platform
+  description: beta test
+  version: iron-0.0.3
+
+server:
+  mode: LAS 
+  port: 8005
+  ssltls: false
+
+database:
+  type: postgres
+  prod: mdtn-beta
+  test: mdtn-beta-test
+  creds:
+    host: localhost
+    port: 5432
+    user: amine
+    password: a
+  
+session:
+  type: cookie
+  random: true
+  name: default-session
+  secret: A0123456789
+
+crypto:
+  algo: id
+  salt: TOOMUCHSALT:)
+
+public:
+  static: ./static
+
