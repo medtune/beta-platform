@@ -48,7 +48,6 @@ func assembleHandlers(g *gin.Engine) {
 	}
 
 	PROTECTED := g.Group("/")
-	PROTECTED.Use(middleware.LoggedOnly())
 	{
 		PROTECTED.GET("/logout", hidden.Logout)
 		PROTECTED.GET("/home", hidden.Home)

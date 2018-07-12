@@ -9,14 +9,14 @@ import (
 func Debug(static, port string) *server {
 	engine := gin.New()
 	engine.Static(static, static)
-	assembleHandlersDebug(engine)
+	debugHandlers(engine)
 	return &server{
 		engine: engine,
 		port:   port,
 	}
 }
 
-func assembleHandlersDebug(g *gin.Engine) {
+func debugHandlers(g *gin.Engine) {
 	// Gin recovery and logger
 	g.Use(gin.Recovery())
 	g.Use(gin.Logger())

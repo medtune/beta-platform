@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	Postgres      = "postgres"
+	postgres      = "postgres"
 	sslverifyFull = "verify-full"
 	ssldisable    = "disable"
 )
@@ -20,14 +20,15 @@ type ConnStr struct {
 	Password string
 	Database string
 	Port     int
-	sslMode  int8
+	SslMode  int
+	Maxconn  int
 }
 
 func MakeConnectionString(c ConnStr) string {
 	var ssl string
-	if c.sslMode == 2 {
+	if c.SslMode == 2 {
 		ssl = sslverifyFull
-	} else if c.sslMode == 0 {
+	} else if c.SslMode == 0 {
 		ssl = ssldisable
 	}
 	str := fmt.Sprintf(
@@ -46,6 +47,7 @@ func MakeConnectionString(c ConnStr) string {
 
 func NewPGEngine(c ConnStr) (*xorm.Engine, error) {
 	cstr := MakeConnectionString(c)
-	engine, err := xorm.NewEngine(Postgres, cstr)
+	engine, err := xorm.NewEngine(postgres, cstr)
+	engine.SetMaxOpenConns(c.Maxconn)
 	return engine, err
 }

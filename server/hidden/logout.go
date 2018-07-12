@@ -1,13 +1,14 @@
 package hidden
 
 import (
-	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"github.com/medtune/beta-platform/pkg/session"
 )
 
 func Logout(c *gin.Context) {
-	s := sessions.Default(c)
-	s.Set("logged", false)
-	s.Save()
+	if logged := session.GetLoginStatus(c); logged {
+		session.SetLoginStatus(c, false)
+	}
 	c.Redirect(302, "/index")
+
 }

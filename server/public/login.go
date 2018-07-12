@@ -3,18 +3,17 @@ package public
 import (
 	"fmt"
 
-	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/medtune/beta-platform/pkg/jsonutil"
+	"github.com/medtune/beta-platform/pkg/session"
 	"github.com/medtune/beta-platform/pkg/tmpl"
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
 )
 
 func Login(c *gin.Context) {
 	if c.Request.Method == "GET" {
-		s := sessions.Default(c)
-		log := s.Get("logged")
-		if log != nil && log.(bool) {
+
+		if session.GetLoginStatus(c) {
 			c.Redirect(302, "/home")
 		} else {
 			tmpl.Login.Execute(c.Writer, &data.Main{
@@ -33,10 +32,7 @@ func Login(c *gin.Context) {
 		}
 
 		if _, err := auth(loginData.Username, loginData.Password); err == nil {
-			s := sessions.Default(c)
-			s.Set("username", loginData.Username)
-			s.Set("logged", true)
-			s.Save()
+			session.SetLoginStatus(c, true)
 			c.JSON(200, jsonutil.Success())
 		} else {
 			c.JSON(200, jsonutil.Fail())

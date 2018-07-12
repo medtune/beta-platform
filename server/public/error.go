@@ -4,8 +4,8 @@ import (
 	"html/template"
 	"strconv"
 
-	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"github.com/medtune/beta-platform/pkg/session"
 	"github.com/medtune/beta-platform/pkg/tmpl"
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
 )
@@ -13,9 +13,8 @@ import (
 func Error(c *gin.Context) {
 	errStatus := c.Param("code")
 	code, err := strconv.Atoi(errStatus)
-	s := sessions.Default(c)
 	var response *template.Template
-	if v := s.Get("logged"); v != nil && v.(bool) {
+	if session.GetLoginStatus(c) {
 		response = tmpl.ErrorLogged
 	} else {
 		response = tmpl.Error
