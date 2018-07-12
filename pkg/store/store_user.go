@@ -3,16 +3,16 @@ package store
 import (
 	"fmt"
 
-	"github.com/medtune/beta-platform/pkg/store/model"
+	"github.com/medtune/beta-platform/pkg/Store/model"
 )
 
 type userStore interface {
-	CreateUser()
-	AuthentificateUser()
-	GetUser()
+	CreateUser(string, string) error
+	AuthentificateUser(string, string) (bool, error)
+	GetUser(string) (*model.User, error)
 }
 
-func (s *store) CreateUser(username, password string) error {
+func (s *Store) CreateUser(username, password string) error {
 	user := model.User{
 		Username: username,
 		Password: password,
@@ -26,7 +26,7 @@ func (s *store) CreateUser(username, password string) error {
 	return nil
 }
 
-func (s *store) GetUser(username string) (*model.User, error) {
+func (s *Store) GetUser(username string) (*model.User, error) {
 	user := &model.User{}
 	has, err := s.Where("username = ?", username).Get(user)
 	if err != nil {
@@ -40,7 +40,7 @@ func (s *store) GetUser(username string) (*model.User, error) {
 	return user, nil
 }
 
-func (s *store) AuthentificateUser(username, password string) (bool, error) {
+func (s *Store) AuthentificateUser(username, password string) (bool, error) {
 	user, err := s.GetUser(username)
 	if err != nil {
 		return false, err
