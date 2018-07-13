@@ -4,10 +4,10 @@
 
 Circle CI [configuration](./.circleci/config.yaml)
 
-| branch | status |
+| branch | Build status |
 | --- | --- | 
-| Iron | circleci |
-| Iron-dev | circleci |
+| Iron-master | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/iron-master.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/iron-master) |
+| Dev-1 | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/dev-1.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/dev-1) |
 
 ## Table of content
 
