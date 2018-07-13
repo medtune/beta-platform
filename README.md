@@ -128,23 +128,7 @@ kubectl create -f deploy/k8s-servie.yaml
 
 ### Command line
 
-
-Main flags
-
-| flags | Description |
-| --- | --- |
-| `run` | Run server using local config.yaml  |
-| `debug` | Debug server (Front-end development)|
-| `sync-db` | Sync database models |
-| `check-capsules` | Checks if configurated capsules are running |
-
-
-Subflags
-| sub-flags | Description |
-| --- | --- |
-| `--config -c file` | Run server using different configuration file (default is `config.yaml`)|
-| | 
-
+See [cmd reference](./cmd/medtune-beta/README.md)
 
 ### Change log
 
