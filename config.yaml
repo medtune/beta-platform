@@ -3,11 +3,6 @@ meta:
   description: beta test
   version: iron-0.0.3
 
-server:
-  mode: LAS 
-  port: 8005
-  ssltls: false
-
 database:
   type: postgres
   prod: medtune
@@ -25,18 +20,19 @@ session:
   secret: A0123456789
 
 crypto:
-  algo: id
-  salt: TOOMUCHSALT:)
+  algo: SHA256
+  salt: MORE-SALT-PLEASE
 
 public:
   static: ./static
 
 capsules:
   engine: docker
-  setup:
+  items:
     - image: medtune/inception-0.0.0
-    - port:
-      map: 10001:8500
-    - volume:
-      no-mapping: true
-    - flags: -itd
+      mapped-demo: inception-imagenet
+      port: 8080
+
+    - image: medtune/mnist-0.0.0
+      mapped-demo: mnist
+      port: 9090

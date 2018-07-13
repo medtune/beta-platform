@@ -7,12 +7,10 @@ import (
 )
 
 // Compile static check
-
 var _ userStore = &Store{}
-var _ store = &Store{}
 
 var (
-	Agent *store
+	Agent *Store
 )
 
 func New(config db.ConnStr) (*Store, error) {
@@ -25,13 +23,6 @@ func New(config db.ConnStr) (*Store, error) {
 		valid:  govalidator.ValidateStruct,
 	}
 	return s, nil
-}+:
-
-// Store
-type store interface {
-	Sync()
-	Connect()
-	Abort()
 }
 
 type Store struct {

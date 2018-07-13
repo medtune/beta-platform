@@ -3,7 +3,7 @@ package store
 import (
 	"fmt"
 
-	"github.com/medtune/beta-platform/pkg/Store/model"
+	"github.com/medtune/beta-platform/pkg/store/model"
 )
 
 type userStore interface {

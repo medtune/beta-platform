@@ -12,6 +12,6 @@ jobs:
       - run:
           name: Compile package
           command: |
-            go get ./...
+            go get -v -t -d ./...
             go build -o bin.out cmd/beta-platform
             ls -sh
