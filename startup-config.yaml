@@ -10,8 +10,8 @@ server:
 
 database:
   type: postgres
-  prod: mdtn-beta
-  test: mdtn-beta-test
+  prod: medtune
+  test: medtune-test
   creds:
     host: localhost
     port: 5432
@@ -31,3 +31,12 @@ crypto:
 public:
   static: ./static
 
+capsules:
+  engine: docker
+  setup:
+    - image: medtune/inception-0.0.0
+    - port:
+      map: 10001:8500
+    - volume:
+      no-mapping: true
+    - flags: -itd

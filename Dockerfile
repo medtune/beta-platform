@@ -1,2 +1,3 @@
-from golang:latest
+FROM alpine:latest
+
 

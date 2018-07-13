@@ -8,8 +8,8 @@ import (
 )
 
 func main() {
-
 	gin.SetMode(gin.DebugMode)
+
 	if len(os.Args) > 1 && os.Args[1] == "debug" {
 		Server := server.Debug("./static", ":8007")
 		Server.Run()

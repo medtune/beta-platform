@@ -1,5 +1,5 @@
 package pkg
 
 const (
-	VERSION = "iron-0.0.3"
+	VERSION = "iron-v0.0.3"
 )

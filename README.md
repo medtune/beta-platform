@@ -1,39 +1,49 @@
 # beta-platform
 
-## Usage
+| branch | status | 
+| --- | --- | --- |
+| Iron | circleci |
+| Iron-dev | circleci |
+| Master | circleci|
 
-- Go compiler
+#### Run local
 
-Verify your GOPATH and run the following commands
-`go get -u github.com/medtune/beta-platform/`
-`./beta-platform` 
+- Using Compile project
+
+You need to set your $GOPATH.
+
+```
+# Clone project
+git clone https://github.com/medtune/beta-platform && cd beta-platform
+
+# Change GOOS & GOARCH to compile for other platforms
+GOOS=linux GOARCH=amd go build -o medtune-beta ./cmd/medtune-beta/main.go
+
+# Run server
+medtune-beta run --port=8080 --sync-db --check-capsules
+```
+
+- With go get
+
+```
+go get -u github.com/medtune/beta-platform/
+medtune-beta run --port=8080 --sync-db --check-capsules
+```
 
 - With Docker
 
-`docker pull medtune/beta-platform:latest`
-`docker run --name=beta-platform -p 8080:8007 medtune/beta-platform:latest`
+```
+# Pull image
+docker pull medtune/beta-platform:latest
 
-- From binaries
+# Run container
+docker run --name=beta-platform -p 8080:8007 medtune/beta-platform:latest
+```
 
-/TODO
+- Binaries
 
-## Development
+```
 
-#### Cloning and pushing changes
 
-Clone repository
-`git clone https://github.com/medtune/beta-platform`
-
-Create your development branch
-`git checkout -b my-dev-branch`
-
-Add your changes and commit
-`git add . && git commit -m "Changes"`
-
-Push your branch to origin
-`git push -u origin my-dev-branch`
-
-#### Development tricks
-
-Comming soon
+```
 

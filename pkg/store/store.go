@@ -25,7 +25,7 @@ func New(config db.ConnStr) (*Store, error) {
 		valid:  govalidator.ValidateStruct,
 	}
 	return s, nil
-}
+}+:
 
 // Store
 type store interface {
