@@ -12,16 +12,12 @@ Circle CI [configuration](./.circleci/config.yaml)
 ## Table of content
 
 - [1. Build status](#medtune-beta-platform)
-
 - [2. Table of content](#table-of-content)
-
 - [3. Overview](#overview)
-
 - [4. Concepts](#concepts)
     - [1. Capsules]()
     - [2. Demos]()
     - [3. Slides]()
-
 - [5. Getting Started](#getting-started)
    - [1. Pre-requirements](#1-pre-requirements)
    - [2. Configuration](#2-configuration)
@@ -31,15 +27,10 @@ Circle CI [configuration](./.circleci/config.yaml)
       - [3. Using Docker engine](#using-docker-engine)
       - [4. Using Docker hub](#using-docker-hub)
       - [5. Using Kubernetes](#using-kubernetes)
-
 - [6. Command line specs](#command-line)
-
 - [7. Change log](#change-log)
-
 - [8. Contributing](#contributing)
-
 - [9. Maintainers](#maintainers)
-
 - [10. License](#License)
 
 
