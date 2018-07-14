@@ -1,11 +1,13 @@
 package server
 
 import (
+	"strconv"
+
 	"github.com/gin-gonic/gin"
-	"github.com/medtune/beta-platform/server/api"
-	"github.com/medtune/beta-platform/server/hidden"
+	"github.com/medtune/beta-platform/server/handlers/api"
+	"github.com/medtune/beta-platform/server/handlers/hidden"
+	"github.com/medtune/beta-platform/server/handlers/public"
 	"github.com/medtune/beta-platform/server/middleware"
-	"github.com/medtune/beta-platform/server/public"
 )
 
 var Default *server
@@ -19,13 +21,14 @@ func (s *server) Run() {
 	s.engine.Run(s.port)
 }
 
-func New(static string, port string) *server {
+func New(static string, port int) *server {
 	engine := gin.New()
+	var sport = ":" + strconv.Itoa(port)
 	engine.Static(static, static)
 	assembleHandlers(engine)
 	return &server{
 		engine: engine,
-		port:   port,
+		port:   sport,
 	}
 }
 
@@ -40,6 +43,7 @@ func assembleHandlers(g *gin.Engine) {
 	// Public routes
 	PUBLIC := g.Group("/")
 	{
+		PUBLIC.GET("/", public.Index)
 		PUBLIC.GET("/index", public.Index)
 		PUBLIC.GET("/login", public.Login)
 		PUBLIC.POST("/login", public.Login)

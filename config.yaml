@@ -2,6 +2,7 @@ meta:
   name: medtune beta platform
   description: beta test
   version: iron-0.0.3
+  prod: true
 
 database:
   type: postgres
@@ -36,3 +37,8 @@ capsules:
     - image: medtune/mnist-0.0.0
       mapped-demo: mnist
       port: 9090
+
+secrets:
+  signup:
+    - supersecret
+    - siistrasbourg

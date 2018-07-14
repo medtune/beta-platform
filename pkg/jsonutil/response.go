@@ -13,19 +13,13 @@ func Success() *SimpleResponse {
 	}
 }
 
-func Fail() *SimpleResponse {
-	return &SimpleResponse{
-		Success: false,
-	}
-}
-
-func Errored(errors ...error) *SimpleResponse {
-	e := make([]string, len(errors))
+func Fail(errors ...error) *SimpleResponse {
+	errs := make([]string, 0, len(errors))
 	for _, err := range errors {
-		e = append(e, err.Error())
+		errs = append(errs, err.Error())
 	}
 	return &SimpleResponse{
 		Success: false,
-		Errors:  e,
+		Errors:  errs,
 	}
 }

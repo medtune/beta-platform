@@ -8,13 +8,15 @@ const Login = `{{define "content"}}
 		</div>
 		<div class="mdl-card__supporting-text">
 			<form action="/login" method="POST" id="login-form">
-				<div class="mdl-textfield mdl-js-textfield">
-					<input class="mdl-textfield__input" type="text" name="username" id="username"/>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="fti-username">
+					<input class="mdl-textfield__input" type="text" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{3,20}$" name="username" id="username"/>
 					<label class="mdl-textfield__label" for="username">Username</label>
+					<span class="mdl-textfield__error" id="username-error">3 - 20 Characters (letters and numbers)</span>
 				</div>
-				<div class="mdl-textfield mdl-js-textfield">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="fti-password">
 					<input class="mdl-textfield__input" type="password" name="password" id="password" />
 					<label class="mdl-textfield__label" for="userpass">Password</label>
+					<span class="mdl-textfield__error" id="password-error"></span>
 				</div>
 			</form>
 		</div>

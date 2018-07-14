@@ -4,7 +4,7 @@ type Meta struct {
 	Name        string `yaml:"name"`
 	Description string `yaml:"description"`
 	Version     string `yaml:"version"`
-	Prod        bool   `yaml:"prod"`
+	IsProd      bool   `yaml:"prod"`
 }
 
 type Server struct {
@@ -17,7 +17,6 @@ type Server struct {
 type Database struct {
 	Type    string `yaml:"type"`
 	Prod    string `yaml:"prod"`
-	Debug   string `yaml:"debug"`
 	Test    string `yaml:"test"`
 	SSLMode int8   `yaml:"sslmode"`
 	Creds   struct {
@@ -44,11 +43,16 @@ type PublicContent struct {
 	Static string `yaml:"static`
 }
 
+type Secrets struct {
+	Signup []string `yaml:"signup"`
+}
+
 type StartupConfig struct {
-	Meta     Meta          `yaml:"meta"`
-	Server   Server        `yaml:"server"`
-	Database Database      `yaml:"database"`
-	Session  Session       `yaml:"session"`
-	Crypto   Crypto        `yaml:"crypto"`
-	Public   PublicContent `yaml:"public"`
+	Meta     *Meta          `yaml:"meta"`
+	Server   *Server        `yaml:"server"`
+	Database *Database      `yaml:"database"`
+	Session  *Session       `yaml:"session"`
+	Crypto   *Crypto        `yaml:"crypto"`
+	Public   *PublicContent `yaml:"public"`
+	Secrets  *Secrets       `yaml:"secrets"`
 }

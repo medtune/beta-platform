@@ -1,18 +1,23 @@
 package server
 
 import (
+	"strconv"
+
 	"github.com/gin-gonic/gin"
-	"github.com/medtune/beta-platform/server/debug"
-	"github.com/medtune/beta-platform/server/public"
+	"github.com/medtune/beta-platform/server/handlers/debug"
+	"github.com/medtune/beta-platform/server/handlers/public"
 )
 
-func Debug(static, port string) *server {
+var ()
+
+func Debug(static string, port int) *server {
 	engine := gin.New()
 	engine.Static(static, static)
 	debugHandlers(engine)
+	var sport = ":" + strconv.Itoa(port)
 	return &server{
 		engine: engine,
-		port:   port,
+		port:   sport,
 	}
 }
 

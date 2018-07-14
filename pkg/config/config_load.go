@@ -7,8 +7,8 @@ import (
 )
 
 var (
-	configPath    = "launch.yaml"
-	configPathGen = "launch-gen.yaml"
+	configPath    = "config.yaml"
+	configPathGen = "config-gen.yaml"
 )
 
 func SetDefaultPaths(path string) {
