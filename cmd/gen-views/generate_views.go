@@ -63,7 +63,7 @@ func generateViews() {
 		makeViewsFiles()
 	} else {
 		vs := strings.Split(views, ",")
-		fmt.Printf("Genering views:\n   %v\n\n", strings.Join(vs, ", \n   "))
+		fmt.Printf("Genering views:\n   %v\n\n", strings.Join(vs, "\n   "))
 
 		makeViewsFiles(vs...)
 	}
@@ -84,11 +84,11 @@ func makeViewsFiles(views ...string) {
 		if err != nil {
 			panic(err)
 		}
-		defer f.Close()
 
 		if err := TEMPLATES[name].Execute(f, data.Error401); err != nil {
 			panic(err)
 		}
+		f.Close()
 		fmt.Printf("generated %s.html\n", name)
 	}
 }
