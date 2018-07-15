@@ -48,6 +48,7 @@ func assembleHandlers(g *gin.Engine) {
 		PUBLIC.GET("/login", public.Login)
 		PUBLIC.POST("/login", public.Login)
 		PUBLIC.GET("/signup", public.Signup)
+		PUBLIC.GET("/signup/success", public.SignupSuccess)
 		PUBLIC.POST("/signup", public.Signup)
 	}
 

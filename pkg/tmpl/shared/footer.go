@@ -1,27 +1,32 @@
 package shared
 
 const Footer = `{{define "footer"}}
-<footer class="mdl-mega-footer">
+<div class="social-section">
+  <div class="">
+        <div class="social-links">
+          <button class="social-btn social-btn__googleplus" onclick="">
+            <span class="visuallyhidden">Mattermost</span>
+          </button>
+          <button class="social-btn social-btn__twitter" onclick="window.location.href='https://github.com/medtune-eu'">
+            <span class="visuallyhidden">Twitter</span>
+          </button>
+          <button class="social-btn social-btn__github" onclick="window.location.href='https://github.com/medtune'">
+            <span class="visuallyhidden">Github</span>
+          </button>
+          
+        </div>
+        <div>
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab scroll-top-button" onclick="scrollToTop();">
+              <i class="material-icons">expand_less</i>
+            </button>
+        </div>
+      
+    </div>
+</div>
 
-	<div class="mdl-mega-footer--top-section">
-			<div class="mdl-mega-footer--left-section">
-			<button class="mdl-mini-footer--social-btn social-btn social-btn__googleplus" onclick="">
-					<span class="visuallyhidden">Mattermost</span>
-				</button>
-				<button class="mdl-mini-footer--social-btn social-btn social-btn__twitter" onclick="window.location.href='https://github.com/medtune-eu'">
-					<span class="visuallyhidden">Twitter</span>
-				</button>
-				<button class="mdl-mini-footer--social-btn social-btn social-btn__github" onclick="window.location.href='https://github.com/medtune'">
-				<span class="visuallyhidden">Github</span>
-			</button>
-            </div>
-            <div class="mdl-mega-footer--right-section">
+<footer class="mdl-mega-footer footing">
 
-			  	<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" onclick="scroll('', 'top', 1000);">
-					<i class="material-icons">expand_less</i>
-				</button>
-            </div>
-  </div>
+	
   <div class="mdl-mega-footer__middle-section">
 
     <div class="mdl-mega-footer__drop-down-section">
@@ -74,6 +79,5 @@ const Footer = `{{define "footer"}}
       <li><a href="#">Privacy & Terms</a></li>
     </ul>
   </div>
-
 </footer>
 {{end}}`

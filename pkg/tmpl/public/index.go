@@ -10,7 +10,7 @@ const Index = `{{define "content"}}
         </div>
 
         <a href="#catalog">
-        <button class="android-fab mdl-button--colored mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+        <button class="scroll-down-1 mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
             <i class="material-icons">expand_more</i>
         </button>
         </a>

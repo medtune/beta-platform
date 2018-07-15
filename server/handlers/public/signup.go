@@ -50,3 +50,14 @@ func Signup(c *gin.Context) {
 		}
 	}
 }
+
+func SignupSuccess(c *gin.Context) {
+	if !session.GetLoginStatus(c) {
+		c.Redirect(302, "error/401")
+		return
+	}
+	c.Status(200)
+	tmpl.SignupSuccess.Execute(c.Writer, data.Main{
+		PageTitle: "Signup ~ Success",
+	})
+}

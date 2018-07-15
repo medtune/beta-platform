@@ -27,4 +27,11 @@ const Login = `{{define "content"}}
 		</div>
 	</div>
 </div>
+<script>
+$(document).keydown(function(e){
+    if (e.keyCode == 13) { 
+		Login();
+    }
+});
+</script>
 {{end}}`

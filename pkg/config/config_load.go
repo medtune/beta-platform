@@ -7,13 +7,13 @@ import (
 )
 
 var (
-	configPath    = "config.yaml"
-	configPathGen = "config-gen.yaml"
+	configPath    = "config.yml"
+	configPathGen = "config-gen.yml"
 )
 
 func SetDefaultPaths(path string) {
-	configPath = path + ".yaml"
-	configPathGen = path + "-gen.yaml"
+	configPath = path + ".yml"
+	configPathGen = path + "-gen.yml"
 }
 
 func LoadConfigDefault() (*StartupConfig, error) {

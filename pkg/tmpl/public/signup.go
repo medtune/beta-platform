@@ -47,4 +47,23 @@ const Signup = `{{define "content"}}
 		</div>
 	</div>
 </div>
+<script>
+$(document).keydown(function(e){
+    if (e.keyCode == 13) { 
+		Signup();
+		return false;
+    }
+});
+</script>
+{{end}}`
+
+var SignupSucces = `{{define "content"}}
+<div class="center-screen">
+Sign up successfull. Redirecting to in 5seconds...
+</div>
+<script>
+	setTimeout(function() {
+		window.location.href = "/home";
+	}, 5000)
+</script>
 {{end}}`

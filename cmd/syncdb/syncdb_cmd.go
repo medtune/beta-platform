@@ -29,7 +29,7 @@ var (
 )
 
 func init() {
-	autoMigrateCmd.Flags().StringVarP(&configFile, "file", "f", "config.yaml", "Configuration file name")
+	autoMigrateCmd.Flags().StringVarP(&configFile, "file", "f", "config.yml", "Configuration file name")
 
 	root.Cmd.AddCommand(autoMigrateCmd)
 }

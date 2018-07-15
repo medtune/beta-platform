@@ -10,7 +10,7 @@
     overflow: visible;
 }
 
-.search-box.is-focused + .android-navigation-container {
+.search-box.is-focused + .navigation-container {
     opacity: 0;
     width: 100px;
 }
@@ -48,12 +48,7 @@
 
 .active-link {
     background-color: rgba(0, 0, 0, 0.134);
-}
-
-.demo-layout-waterfall .mdl-layout__header-row .mdl-navigation__link:last-of-type  {
-    padding-right: 0;
-}
-  
+} 
 
 .version {
     align-self: center;
@@ -63,6 +58,22 @@
 .mdl-layout__drawer .mdl-layout-title {
     position: relative;
     background: #4655c5;
+}
+
+.navigation-container .mdl-navigation__link {
+    display: inline-block;
+    height: 60px;
+    line-height: 68px;
+    background-color: transparent !important;
+    border-bottom: 4px solid transparent;
+    font-size: 16;
+}
+
+.navigation-container .mdl-navigation__link:hover {
+    height: 60px;
+    line-height: 68px;
+    color: rgb(255, 255, 255);
+    border-bottom: 4px solid rgb(244, 244, 244);
 }
 
 .drawer-separator {
@@ -79,6 +90,16 @@
     margin: 40px;
     width: 130px;
     height: 115px;
+}
+
+.mdl-layout__drawer .mdl-navigation .drawer-nav-title {
+    color: #1d64c1;
+}
+
+.mdl-navigation .mdl-navigation__link .material-icons {
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.56);
+    margin-right: 32px;
 }
 
 .mdl-layout__drawer .demo-navigation .mdl-navigation__link {
@@ -100,6 +121,13 @@
 .mdl-layout__drawer .demo-navigation .mdl-navigation__link:hover {
     background-color: red;
     color: blue;
+}
+
+.v-beta {
+    position: absolute;
+    font-size: 10;
+    left: 87px;
+    bottom: 12px;
 }
 
 .drawer-nav-link {
@@ -139,6 +167,15 @@
     font-size: 21px;
     padding-top: 24px;
 }
+
+.social-links {
+    justify-content: center;
+    text-align: center;
+}
+
+.footing {
+    background-color: rgba(16, 16, 16, 0.97);
+}
   
 
 .android-be-together-section {
@@ -150,12 +187,25 @@
     background-size: cover;
 }
 
-.android-fab {
+.scroll-down-1 {
     position: absolute;
+    color: white;
+    background-color: #3f51b5;
     right: 20%;
     bottom: -26px;
     z-index: 3;
 }
+
+.scroll-down-1:hover {
+    position: absolute;
+    color: rgb(0, 0, 0);
+    background-color: #ffe32c;
+    right: 20%;
+    bottom: -26px;
+    z-index: 3;
+}
+
+
 
 .logo-font {
     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
@@ -229,34 +279,65 @@ and (max-width : 500px) {
     background-size: contain;
     background-repeat: no-repeat;
     background-color: transparent;
-    margin: 10 10px;
+    margin: 20 20px;
     width: 36px;
     height: 36px;
     cursor: pointer;
-    opacity: 0.80;
+    opacity: 0.9;
     border-radius: 2px;
 }
 
 .social-btn__twitter {
     background-image: url(/static/images/twitter.svg);
+    border-style: none;
 }
 
 .social-btn__github {
     background-image: url(/static/images/github.svg);
+    border-style: none;
 
 }
 
 .social-btn__googleplus {
     background-image: url(/static/images/googleplus.svg);
-
+    border-style: none;
 }
 
 .footer-up--button {
 
 }
 
+.scroll-top-button {
+    position: absolute;
+    color: white;
+    background-color: #3f51b5;
+    right: 50px;
+    bottom: 55px;
+}
+
+.scroll-top-button:hover {
+    color: rgb(0, 0, 0);
+    background-color: #ffe32c;
+}
+
+
+.social-section {
+    position: relative;
+    background-color: rgb(76, 76, 76);
+    text-align: center;
+}
+
 @media (max-width: 900px) {
+    .android-create-character {
+        padding-top: 200px;
+        font-size: 16px;
+      }
+
     .navigation-container {
+        display: none;
+    }
+
+    .scroll-top-button {
         display: none;
     }
 
@@ -292,7 +373,7 @@ and (max-width : 500px) {
         padding-top: 8px;
     }
 
-    .android-fab {
+    .scroll-down-1 {
         display: none;
     }
   

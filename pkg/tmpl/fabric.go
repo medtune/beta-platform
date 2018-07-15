@@ -10,17 +10,30 @@ import (
 )
 
 var (
-	Index       *template.Template
-	Home        *template.Template
-	Login       *template.Template
-	Signup      *template.Template
-	Inception   *template.Template
-	Error       *template.Template
-	ErrorLogged *template.Template
-	Uploads     *template.Template
-	Capsules    *template.Template
-	Settings    *template.Template
+	Index         *template.Template
+	Home          *template.Template
+	Login         *template.Template
+	Signup        *template.Template
+	SignupSuccess *template.Template
+	Inception     *template.Template
+	Error         *template.Template
+	ErrorLogged   *template.Template
+	Uploads       *template.Template
+	Capsules      *template.Template
+	Settings      *template.Template
 )
+
+func GetTemplatesMap() map[string]*template.Template {
+	m := make(map[string]*template.Template)
+	m["index"] = Index
+	m["home"] = Home
+	m["signup"] = Signup
+	m["signup-success"] = SignupSuccess
+	m["login"] = Login
+	m["error"] = Error
+	m["error-logged"] = ErrorLogged
+	return m
+}
 
 func init() {
 	index := template.New("base")
@@ -82,6 +95,22 @@ func init() {
 		signup, err = signup.Parse(public.Signup)
 		must(err)
 		Signup = signup
+	}
+
+	signupSuccess := template.New("base")
+	{
+
+		signupSuccess, err := signupSuccess.Parse(shared.Base)
+		must(err)
+		signupSuccess, err = signupSuccess.Parse(shared.HeaderLogged)
+		must(err)
+		signupSuccess, err = signupSuccess.Parse(shared.SourceHeaderEmpty)
+		must(err)
+		signupSuccess, err = signupSuccess.Parse(shared.Footer)
+		must(err)
+		signupSuccess, err = signupSuccess.Parse(public.SignupSucces)
+		must(err)
+		SignupSuccess = signupSuccess
 	}
 
 	error_ := template.New("base")

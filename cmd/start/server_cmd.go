@@ -33,7 +33,7 @@ var (
 )
 
 func init() {
-	startCmd.Flags().StringVarP(&configFile, "file", "f", "config.yaml", "Configuration file name")
+	startCmd.Flags().StringVarP(&configFile, "file", "f", "config.yml", "Configuration file name")
 	startCmd.Flags().StringVarP(&static, "static", "s", "./static", "Static files directory")
 
 	startCmd.Flags().IntVarP(&port, "port", "p", 8005, "port")

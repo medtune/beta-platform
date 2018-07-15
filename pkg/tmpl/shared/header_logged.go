@@ -4,24 +4,18 @@ var HeaderLogged = `{{define "header"}}
 <div class="mdl-layout--fixed-header mdl-layout mdl-js-layout">
 	<header class="mdl-layout__header page-header">
 	<div class="mdl-layout__header-row">
-			<div class="search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
-			<label class="mdl-button mdl-js-button mdl-button--icon" for="search-field">
-			<i class="material-icons">search</i>
-			</label>
-			<div class="mdl-textfield__expandable-holder">
-			<input class="mdl-textfield__input" type="text" id="search-field">
-			</div>
-		</div>
-		<span class="mdl-layout-title">MedTune</span>
-
+			
+		<span class="mdl-layout-title">MedTune <span class="v-beta">beta</span></span>
+		
 		<div class="mdl-layout-spacer"></div>
 
 		<!-- Navigation -->
 		<div class="navigation-container">
 			<nav class="mdl-navigation">
-				<a class="mdl-navigation__link" href="/home">Home</a>
-				<a class="mdl-navigation__link" href="">Demos</a>
-				<a class="mdl-navigation__link" href="">Slides</a>
+				<a class="mdl-navigation__link" href="/home">Explore</a>
+				<a class="mdl-navigation__link" href="">Account</a>
+				<a class="mdl-navigation__link" href="">The Project</a>
+				<a class="mdl-navigation__link" href="">Contribute</a>
 			</nav>
 		</div>
 		<button class="mdl-button mdl-js-button mdl-button--icon nav-button-icon">
@@ -53,14 +47,40 @@ var HeaderLogged = `{{define "header"}}
 		<div>
 
 		<nav class="mdl-navigation">
+
 			<div class="drawer-separator"></div>
-			<a class="mdl-navigation__link drawer-nav-link" href="/tryouts">Tryouts</a>
-			<a class="mdl-navigation__link drawer-nav-link" href="/slides">Slides</a>
-			<a class="mdl-navigation__link drawer-nav-link" href="/about">About</a>
+			<span class="mdl-navigation__link drawer-nav-title" href="">Explore</span>
+			<a class="mdl-navigation__link drawer-nav-link" href="/tryouts">Demos</a>
+			<a class="mdl-navigation__link drawer-nav-link" href="/slides">Case studies</a>
+			<a class="mdl-navigation__link drawer-nav-link" href="/about">Slides</a>
+			<a class="mdl-navigation__link drawer-nav-link" href="/about">Data hub</a>
+		
 			<div class="drawer-separator"></div>
-			<a class="mdl-navigation__link drawer-nav-link" href="/uploads">Uploads</a>
-			<a class="mdl-navigation__link drawer-nav-link" href="/capsules">Capsules</a>
+			<span class="mdl-navigation__link drawer-nav-title" href="">Account</span>
+			
+			<a class="mdl-navigation__link drawer-nav-link" href="/uploads">My data</a>
+			<a class="mdl-navigation__link drawer-nav-link" href="/uploads">Informations</a>
 			<a class="mdl-navigation__link drawer-nav-link" href="/settings">Settings</a>
+
+			<div class="drawer-separator"></div>
+			<span class="mdl-navigation__link drawer-nav-title" href="">The project</span>
+
+			<a class="mdl-navigation__link drawer-nav-link" href="/partners">About</a>
+			<a class="mdl-navigation__link drawer-nav-link" href="/partners">Terms</a>
+			<a class="mdl-navigation__link drawer-nav-link" href="/partners">RGPD</a>
+			<a class="mdl-navigation__link drawer-nav-link" href="/partners">Partners</a>
+
+			<div class="drawer-separator"></div>
+			<span class="mdl-navigation__link drawer-nav-title" href="">Contact</span>
+
+			<a class="mdl-navigation__link drawer-nav-link" href="/beta-test">Beta Test</a>
+			<a class="mdl-navigation__link drawer-nav-link" href="/contact">Contact us</a>
+
+			<div class="drawer-separator"></div>
+			<span class="mdl-navigation__link drawer-nav-title" href="">Contribute</span>
+			
+			<a class="mdl-navigation__link drawer-nav-link" href="/contact">Report a bug</a>
+
 			<div class="drawer-separator"></div>
 		</nav>
 	</div>
