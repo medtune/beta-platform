@@ -1,0 +1,16 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.10
+    working_directory: /go/src/github.com/medtune/beta-platform
+    steps:
+      - checkout
+
+
+      # specify any bash command here prefixed with `run: `
+      - run: go get -v -t -d ./...
+      - run: go build -o medtune-beta ./cmd/main.go
+      - run: go test -v ./...
+      - run: ls -sh
+
