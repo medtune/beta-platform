@@ -7,9 +7,11 @@
 
 | branch | Build status |
 | --- | --- | 
-| Iron-Master | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/iron-master.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/iron-master) |
 | Dev | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/dev-1.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/dev-1) |
+| Iron-Master | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/iron-master.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/iron-master) |
 | 0.0.3 | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/dev-1.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/dev-1) |
+
+***
 
 ## Table of content
 
@@ -50,11 +52,7 @@ MedTune Beta platform is a _proof of concept_ prototype, focused on serving scal
 
 ### Concepts
 
-- Medtune Platform
-- Capsules
-- Architecture
-- Service Discovery
-
+**TODO ASAP**
 
 ### Getting started
 
