@@ -23,18 +23,6 @@ var (
 	Settings      *template.Template
 )
 
-func GetTemplatesMap() map[string]*template.Template {
-	m := make(map[string]*template.Template)
-	m["index"] = Index
-	m["home"] = Home
-	m["signup"] = Signup
-	m["signup-success"] = SignupSuccess
-	m["login"] = Login
-	m["error"] = Error
-	m["error-logged"] = ErrorLogged
-	return m
-}
-
 func init() {
 	index := template.New("base")
 
@@ -157,6 +145,18 @@ func init() {
 		must(err)
 		Inception = inception
 	}
+}
+
+func GetTemplatesMap() map[string]*template.Template {
+	m := make(map[string]*template.Template)
+	m["index"] = Index
+	m["home"] = Home
+	m["signup"] = Signup
+	m["signup-success"] = SignupSuccess
+	m["login"] = Login
+	m["error"] = Error
+	m["error-logged"] = ErrorLogged
+	return m
 }
 
 func must(err error) {

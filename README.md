@@ -8,8 +8,8 @@
 | branch | Build status |
 | --- | --- | 
 | Iron-Master | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/iron-master.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/iron-master) |
-| Iron-0.0.3 |  |
 | Dev | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/dev-1.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/dev-1) |
+| 0.0.3 | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/dev-1.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/dev-1) |
 
 ## Table of content
 
@@ -141,7 +141,7 @@ kubectl create -f deploy/kubernetes.yaml
 
 ```shell
 # Create docker swarm
-docker-swarm up
+docker-compose up -d
 ```
 
 ### Command line
@@ -236,16 +236,15 @@ Aliases:
   start, run, run-server
 
 Flags:
-  -a, --max-attempt int Wait timestamp (default 10 times) (default 10)
-  -f, --file string     Configuration file name (default "config.yml")
-  -g, --gin-mode int    Gin server mode
-  -h, --help            help for start
-  -p, --port int        port (default 8005)
-  -s, --static string   Static files directory (default "./static")
-  -t, --timestamp int   Wait timestamp (default 1second) (default 1000)
-  -w, --wait bool       Wait all services to go up
-  -x, --syncdb bool     Sync database before start (default true)
-  
+  -f, --file string          Configuration file name (default "./config.yml")
+  -g, --gin-mode int         Gin server mode [0 OR 1]
+  -h, --help                 help for start
+  -p, --port int             port (default 8005)
+  -s, --static string        Static files directory (default "./static")
+  -x, --syncdb               Sync database before start (default true)
+  -w, --wait                 Wait all services to go up
+  -c, --wait-attempts int    Wait max attempts (default 30)
+  -t, --wait-timestamp int   Wait timestamp (default 1)
 ```
 
 

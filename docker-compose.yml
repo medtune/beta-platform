@@ -7,6 +7,7 @@ services:
       - POSTGRES_PASSWORD=mdtn
       - POSTGRES_DB=medtune
 
+
   webapp:
     image: medtune/beta-platform:v1
     ports:
@@ -15,3 +16,18 @@ services:
       - "postgres"
     links:
       - postgres:postgres
+    deploy:
+      mode: replicated
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 100M
+        reservations:
+          cpus: '0.25'
+          memory: 50M

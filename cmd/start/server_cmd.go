@@ -40,16 +40,16 @@ var (
 )
 
 func init() {
-	startCmd.Flags().StringVarP(&configFile, "file", "f", "config.yml", "Configuration file name")
+	startCmd.Flags().StringVarP(&configFile, "file", "f", "./config.yml", "Configuration file name")
 	startCmd.Flags().StringVarP(&static, "static", "s", "./static", "Static files directory")
 
 	startCmd.Flags().IntVarP(&port, "port", "p", 8005, "port")
-	startCmd.Flags().IntVarP(&ginMode, "gin-mode", "g", 0, "Gin server mode")
+	startCmd.Flags().IntVarP(&ginMode, "gin-mode", "g", 0, "Gin server mode [0 OR 1]")
 	startCmd.Flags().BoolVarP(&syncdb, "syncdb", "x", true, "Sync database before start")
 
 	startCmd.Flags().BoolVarP(&wait, "wait", "w", false, "Wait all services to go up")
-	startCmd.Flags().IntVarP(&maxattempt, "max-attempt", "a", 30, "Wait timestamp (default 10 times)")
-	startCmd.Flags().IntVarP(&timestamp, "timestamp", "t", 1, "Wait timestamp (default 1second)")
+	startCmd.Flags().IntVarP(&maxattempt, "wait-attempts", "c", 30, "Wait max attempts")
+	startCmd.Flags().IntVarP(&timestamp, "wait-timestamp", "t", 1, "Wait timestamp")
 
 	root.Cmd.AddCommand(startCmd)
 }
@@ -86,10 +86,11 @@ func runServer() {
 
 	if syncdb {
 		fmt.Printf("syncing database %s\n", configuration.Database.Prod)
+		var err error
+		err = store.Agent.Sync()
 
-		err := store.Agent.Sync()
-		attempt := 0
-		if wait {
+		if err != nil && wait {
+			attempt := 0
 			for err != nil {
 				time.Sleep(time.Duration(timestamp) * time.Second)
 				fmt.Println("Waiting for database to get seted up")

@@ -1,6 +1,6 @@
-version: 1
+version: '1'
 
-UID: 0x00000000
+UID: '0x00000000'
 name: capsules
 engine: docker
 engine-hub: hub.docker.com

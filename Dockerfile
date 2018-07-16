@@ -8,8 +8,6 @@ RUN go get -v ./...
 
 RUN go build -v -o ./medtune-beta ./cmd/main.go
 
-RUN ls -la
-
 EXPOSE 8005
 
 ENTRYPOINT [ "./medtune-beta", "start", "--syncdb", "--wait" ]
