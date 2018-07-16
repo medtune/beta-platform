@@ -1,13 +1,15 @@
-# MedTune Beta Platform
+# MedTune Platform ~ Beta
+
+[![GitHub release](https://img.shields.io/github/release/medtune/beta-platform.svg)](https://GitHub.com/Naereen/StrapDown.js/releases/) [![Percentage of issues still open](http://isitmaintained.com/badge/open/medtune/beta-platform.svg)](http://isitmaintained.com/project/Naereen/badges) [![GitHub license](https://img.shields.io/github/license/medtune/beta-platform.svg)](https://github.com/medtune/beta-platform/blob/master/LICENSE) [![GitHub pull-requests](https://img.shields.io/github/issues-pr/medtune/beta-platform.svg)](https://GitHub.com/Naereen/StrapDown.js/pull/)
+
 
 ## Build status
 
-Circle CI [configuration](./.circleci/config.yaml)
-
 | branch | Build status |
 | --- | --- | 
-| Iron-master | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/iron-master.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/iron-master) |
-| Dev-1 | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/dev-1.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/dev-1) |
+| Iron-Master | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/iron-master.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/iron-master) |
+| Iron-0.0.3 |  |
+| Dev | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/dev-1.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/dev-1) |
 
 ## Table of content
 
@@ -19,25 +21,27 @@ Circle CI [configuration](./.circleci/config.yaml)
     - [2. Capsules](#capsules)
     - [3. Architecture](#demo)
     - [4. Service Discovery](#slides)
-- [5. Getting Started](#getting-started)
-   - [1. Pre-requirements](#1-pre-requirements)
+- [5. Getting started](#getting-started)
+   - [1. Prerequisites](#1-prerequisites)
    - [2. Configuration](#2-configuration)
-   - [3. Run server](#3-run-server)
+   - [3. Deploy application](#3-deploy)
       - [1. Using Golang compiler](#using-golang-compiler)
       - [2. Using go get](#using-go-get-goguette)
       - [3. Using Docker engine](#using-docker-engine)
       - [4. Using Docker hub](#using-docker-hub)
       - [5. Using Kubernetes](#using-kubernetes)
-- [6. Command line specs](#command-line)
-- [7. Change log](#change-log)
+      - [6. Using Swarm](#using-swarm)
+- [6. Command: _medtune-beta_](#command-line)
+- [7. Change log](#changelog)
 - [8. Contributing](#contributing)
 - [9. Maintainers](#maintainers)
 - [10. License](#License)
+- [11. Partners](#Licence)
 
 
 ### Overview
 
-MedTune Beta platform is a proof of concept for building robust and scalable AI solutions served into one user interface.
+MedTune Beta platform is a _proof of concept_ prototype, focused on serving scalable AI solutions, into different types of customers.
 
 ### Concepts
 
@@ -49,23 +53,26 @@ MedTune Beta platform is a proof of concept for building robust and scalable AI 
 
 ### Getting started
 
-##### 1 - Pre-Requirements
+##### 1 - Prerequisites
 
-Some of MedTune demos might need to setup a set of local Capsules. You can use [run_capsules.sh]() for default setup.
+To use medtune-beta command line you need a Golang Compiler (Tested on 1.10 and 1.9) 
 
-To run Capsules we recommand container engine like [Docker](https://github.com/moby/moby) or [cri-o](https://github.com/kubernetes/cri-o), please refer to [medtune/capsules](https://github.com/medtune/capsules) setup instructions for more informations.
+To run medtune-beta platform services localy you will need a container engine/orchestrator (like Docker swarm, Kubernetes).
 
-You can assert that needed Capsules are running, by adding the flag `--check-capsules=true` to medtune-beta command line.
+###### Database
 
-To gain access to all of our demos, please make sure the following Capsules are running and well configured in [config.yaml](config.yaml):
-- inception
-- mnist
+Medtune Beta runs next to postgres database (if you want to go beyond signup).
+
+###### Capsules
+
+Some of MedTune demos might need to setup some Capsules. [Docker](https://github.com/moby/moby) or [cri-o](https://github.com/kubernetes/cri-o) are enought to make things work, but it requires a lot of handy work. We recommand to use [Swarm](#using-swarm) or [Kubernetes](#kubernetes) for easier setup.
+
 
 ##### 2 - Configuration
 
 All configurations needed are well commented in [config.yaml](config.yaml)
 
-##### 3 - Web application
+##### 3 - Deploy
 
 Once capsules are set (or not), you can build MedTune Beta Platform and use it localy:
 
@@ -83,7 +90,7 @@ git clone https://github.com/medtune/beta-platform && cd beta-platform
 go build -o medtune-beta ./cmd/medtune-beta/main.go
 
 # Run server
-medtune-beta run --port=8080 --sync-db --check-capsules
+medtune-beta start
 ```
 
 ###### Using go get (GOGUETTE)
@@ -93,7 +100,7 @@ medtune-beta run --port=8080 --sync-db --check-capsules
 go get -u github.com/medtune/beta-platform/
 
 # Run server
-medtune-beta run --port=8080 --sync-db --check-capsules
+medtune-beta run --port=8005 --static=$GOPATH/src/github.com/medtune/beta-platform/static
 ```
 
 ###### Using Docker engine
@@ -103,7 +110,7 @@ medtune-beta run --port=8080 --sync-db --check-capsules
 docker build -t . medtune-beta:iron
 
 # Run container
-docker run --name=beta-platform -p 8080:8007 medtune/beta-platform:latest
+docker run --name=beta-platform -p 8005:8005 medtune/beta-platform:latest
 ```
 
 
@@ -114,7 +121,7 @@ docker run --name=beta-platform -p 8080:8007 medtune/beta-platform:latest
 docker pull medtune/beta-platform:latest
 
 # Run container
-docker run --name=beta-platform -p 8080:8007 medtune/beta-platform:latest
+docker run --name=beta-platform -p 8005:8005 medtune/beta-platform:latest
 ```
 
 
@@ -122,18 +129,119 @@ docker run --name=beta-platform -p 8080:8007 medtune/beta-platform:latest
 
 ```shell
 # Create deployment
-kubectl create -f deploy/k8s-deployment.yaml
-# Expose service
-kubectl create -f deploy/k8s-servie.yaml 
+kubectl create -f deploy/kubernetes.yaml
+```
+
+###### Using swarm
+
+```shell
+# Create docker swarm
+docker-swarm up
 ```
 
 ### Command line
 
-See [cmd reference](./cmd/medtune-beta/README.md)
+###### Root command
+```
+Usage:
+  medtune-beta [command]
 
-### Change log
+Available Commands:
+  automigrate Auto migrate database
+  capsules    Not implemented
+  debug       debug server for UI dev
+  gen-views   Generate views html files
+  help        Help about any command
+  start       Run Medtune beta server
+  version     Medtune beta actual version
 
-- 0.1.0 - Iron
+Flags:
+  -h, --help   help for medtune-beta
+```
+
+###### Subcommands
+
+- Version
+```
+Print Medtune Beta version
+
+Usage:
+  medtune-beta version [flags]
+
+Flags:
+  -h, --help   help for version
+```
+
+- Auto-migrate
+```
+Sync database models by updating/creating existing
+database tables
+
+Usage:
+  medtune-beta automigrate [flags]
+
+Aliases:
+  automigrate, syncdb
+
+Flags:
+  -f, --file string   Configuration file name (default "config.yml")
+  -h, --help          help for automigrate
+```
+
+- Start
+```
+Run Medtune beta server
+
+Usage:
+  medtune-beta start [flags]
+
+Aliases:
+  start, run, run-server
+
+Flags:
+  -f, --file string     Configuration file name (default "config.yml")
+  -g, --gin-mode int    Gin server mode
+  -h, --help            help for start
+  -p, --port int        port (default 8005)
+  -s, --static string   Static files directory (default "./static")
+```
+
+- Debug
+```
+Debug UI server for dev purposes
+
+Usage:
+  medtune-beta debug [flags]
+
+Aliases:
+  debug, debug-server
+
+Flags:
+  -h, --help            help for debug
+  -p, --port int        port (default 8005)
+  -s, --static string   Static files directory (default "./static")
+```
+
+- Generate views
+```
+Generate views html files
+
+Usage:
+  medtune-beta gen-views [flags]
+
+Aliases:
+  gen-views, gen-tmpl, gen
+
+Flags:
+  -h, --help            help for gen-views
+  -o, --output string   output directory (default generate-views) (default "generated-views")
+  -v, --views string    views to generate (comma separated string) (default "...")
+  ``` 
+
+
+### Changelog
+
+See [CHANGELOG.md](CHANGELOG.md)
 
 ### Contributing
 
@@ -141,8 +249,8 @@ For contributions please refer to our friendly code of conduct in [how-we-work](
 
 ### Maintainers
 
-See [MAINTAINERS](MAINTAINERS)
+See [MAINTAINERS](MAINTAINERS.txt)
 
 ### License
 
-Medtune Beta Platform is released under the Apache 2.0 license. See [LICENSE.txt](License).
+Medtune Beta Platform is released under the Apache 2.0 license. See [LICENSE.txt](LICENSE.txt).

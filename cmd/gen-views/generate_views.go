@@ -49,8 +49,8 @@ func init() {
 var genViewsCmd = &cobra.Command{
 	Use:     "gen-views",
 	Aliases: []string{"gen-tmpl", "gen"},
-	Short:   "generate views html files",
-	Long:    `generate views html files`,
+	Short:   "Generate views html files",
+	Long:    `Generate views html files`,
 	Run: func(cmd *cobra.Command, args []string) {
 		generateViews()
 	},

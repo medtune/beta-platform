@@ -13,7 +13,6 @@ import (
 
 func Login(c *gin.Context) {
 	if c.Request.Method == "GET" {
-
 		if session.GetLoginStatus(c) {
 			c.Redirect(302, "/home")
 		} else {

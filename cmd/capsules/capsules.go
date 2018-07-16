@@ -24,7 +24,7 @@ import (
 // checkCapsulesCmd represents the checkCapsules command
 var checkCapsulesCmd = &cobra.Command{
 	Use:   "capsules",
-	Short: "A brief description of your command",
+	Short: "Not implemented",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("check Capsules called")
