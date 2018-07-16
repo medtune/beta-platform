@@ -12,5 +12,5 @@ RUN ls -la
 
 EXPOSE 8005
 
-ENTRYPOINT [ "./medtune-beta", "start" ]
+ENTRYPOINT [ "./medtune-beta", "start", "--syncdb", "--wait" ]
 

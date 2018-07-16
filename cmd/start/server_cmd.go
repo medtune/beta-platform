@@ -15,12 +15,15 @@
 package start
 
 import (
+	"fmt"
 	"log"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/medtune/beta-platform/cmd/root"
 	"github.com/medtune/beta-platform/pkg/config"
 	"github.com/medtune/beta-platform/pkg/initpkg"
+	"github.com/medtune/beta-platform/pkg/store"
 	"github.com/medtune/beta-platform/server"
 	"github.com/spf13/cobra"
 )
@@ -30,6 +33,10 @@ var (
 	configFile string
 	port       int
 	ginMode    int
+	syncdb     bool
+	wait       bool
+	maxattempt int
+	timestamp  int
 )
 
 func init() {
@@ -38,6 +45,11 @@ func init() {
 
 	startCmd.Flags().IntVarP(&port, "port", "p", 8005, "port")
 	startCmd.Flags().IntVarP(&ginMode, "gin-mode", "g", 0, "Gin server mode")
+	startCmd.Flags().BoolVarP(&syncdb, "syncdb", "x", true, "Sync database before start")
+
+	startCmd.Flags().BoolVarP(&wait, "wait", "w", false, "Wait all services to go up")
+	startCmd.Flags().IntVarP(&maxattempt, "max-attempt", "a", 30, "Wait timestamp (default 10 times)")
+	startCmd.Flags().IntVarP(&timestamp, "timestamp", "t", 1, "Wait timestamp (default 1second)")
 
 	root.Cmd.AddCommand(startCmd)
 }
@@ -71,6 +83,30 @@ func runServer() {
 	if err := initpkg.InitFromConfig(configuration); err != nil {
 		log.Panic(err)
 	}
+
+	if syncdb {
+		fmt.Printf("syncing database %s\n", configuration.Database.Prod)
+
+		err := store.Agent.Sync()
+		attempt := 0
+		if wait {
+			for err != nil {
+				time.Sleep(time.Duration(timestamp) * time.Second)
+				fmt.Println("Waiting for database to get seted up")
+				err = store.Agent.Sync()
+				attempt++
+				if attempt == maxattempt {
+					break
+				}
+			}
+		}
+		if err != nil {
+			panic(err)
+		}
+
+	}
+
+	fmt.Println("Starting server...")
 
 	Server := server.New(
 		static,

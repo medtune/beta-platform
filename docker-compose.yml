@@ -1,19 +1,17 @@
 version: '3'
 services:
-  medtune-beta:
-    image: medtune/platform:beta-platform-iron-v0.0.3
-    ports:
-     - "8005:8005"
-    links: 
-      - postgres:postgres
-      - mnist:capsule-mnist
-      - inception-imagenet:capsule-inception-imagenet
-
   postgres:
     image: postgres:latest
+    environment:
+      - POSTGRES_USER=mdtn
+      - POSTGRES_PASSWORD=mdtn
+      - POSTGRES_DB=medtune
 
-  capsule-mnist:
-    image: medtune/capsules:mnist-v0
-
-  capsule-inception-imagenet:
-    image: medtune/capsules:inception-imagenet-v0
+  webapp:
+    image: medtune/beta-platform:v1
+    ports:
+      - 8005:8005
+    depends_on:
+      - "postgres"
+    links:
+      - postgres:postgres

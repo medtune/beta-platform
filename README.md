@@ -17,10 +17,10 @@
 - [2. Table of content](#table-of-content)
 - [3. Overview](#overview)
 - [4. Concepts](#concepts)
-    - [1. Platform]()
+    - [1. Platform](#platform)
     - [2. Capsules](#capsules)
-    - [3. Architecture](#demo)
-    - [4. Service Discovery](#slides)
+    - [3. Architecture](#architecture)
+    - [4. Service Discovery](#service-discovery)
 - [5. Getting started](#getting-started)
    - [1. Prerequisites](#1-prerequisites)
    - [2. Configuration](#2-configuration)
@@ -31,12 +31,17 @@
       - [4. Using Docker hub](#using-docker-hub)
       - [5. Using Kubernetes](#using-kubernetes)
       - [6. Using Swarm](#using-swarm)
-- [6. Command: _medtune-beta_](#command-line)
+- [6. Command line: _medtune-beta_](#command-line)
+   - [1. Root](#root-command)
+   - [2. Version](#version)
+   - [3. Automigrate](#automigrate)
+   - [4. Generate views](#generate-views)
+   - [5. Debug server](#debug-server)
+   - [6. Run server](#run-server)
 - [7. Change log](#changelog)
 - [8. Contributing](#contributing)
 - [9. Maintainers](#maintainers)
 - [10. License](#License)
-- [11. Partners](#Licence)
 
 
 ### Overview
@@ -141,7 +146,7 @@ docker-swarm up
 
 ### Command line
 
-###### Root command
+#### Root command
 ```
 Usage:
   medtune-beta [command]
@@ -159,9 +164,9 @@ Flags:
   -h, --help   help for medtune-beta
 ```
 
-###### Subcommands
+#### Subcommands
 
-- Version
+###### Version
 ```
 Print Medtune Beta version
 
@@ -172,7 +177,7 @@ Flags:
   -h, --help   help for version
 ```
 
-- Auto-migrate
+###### Auto-migrate
 ```
 Sync database models by updating/creating existing
 database tables
@@ -188,25 +193,23 @@ Flags:
   -h, --help          help for automigrate
 ```
 
-- Start
+###### Generate views
 ```
-Run Medtune beta server
+Generate views html files
 
 Usage:
-  medtune-beta start [flags]
+  medtune-beta gen-views [flags]
 
 Aliases:
-  start, run, run-server
+  gen-views, gen-tmpl, gen
 
 Flags:
-  -f, --file string     Configuration file name (default "config.yml")
-  -g, --gin-mode int    Gin server mode
-  -h, --help            help for start
-  -p, --port int        port (default 8005)
-  -s, --static string   Static files directory (default "./static")
-```
+  -h, --help            help for gen-views
+  -o, --output string   output directory (default generate-views) (default "generated-views")
+  -v, --views string    views to generate (comma separated string) (default "...")
+``` 
 
-- Debug
+###### Debug server
 ```
 Debug UI server for dev purposes
 
@@ -222,21 +225,29 @@ Flags:
   -s, --static string   Static files directory (default "./static")
 ```
 
-- Generate views
+###### Run server
 ```
-Generate views html files
+Run Medtune beta server
 
 Usage:
-  medtune-beta gen-views [flags]
+  medtune-beta start [flags]
 
 Aliases:
-  gen-views, gen-tmpl, gen
+  start, run, run-server
 
 Flags:
-  -h, --help            help for gen-views
-  -o, --output string   output directory (default generate-views) (default "generated-views")
-  -v, --views string    views to generate (comma separated string) (default "...")
-  ``` 
+  -a, --max-attempt int Wait timestamp (default 10 times) (default 10)
+  -f, --file string     Configuration file name (default "config.yml")
+  -g, --gin-mode int    Gin server mode
+  -h, --help            help for start
+  -p, --port int        port (default 8005)
+  -s, --static string   Static files directory (default "./static")
+  -t, --timestamp int   Wait timestamp (default 1second) (default 1000)
+  -w, --wait bool       Wait all services to go up
+  -x, --syncdb bool     Sync database before start (default true)
+  
+```
+
 
 
 ### Changelog
