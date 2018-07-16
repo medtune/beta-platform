@@ -1,9 +1,10 @@
 # MedTune Platform ~ Beta
 
-[![GitHub release](https://img.shields.io/github/release/medtune/beta-platform.svg)](https://GitHub.com/Naereen/StrapDown.js/releases/) [![Percentage of issues still open](http://isitmaintained.com/badge/open/medtune/beta-platform.svg)](http://isitmaintained.com/project/Naereen/badges) [![GitHub license](https://img.shields.io/github/license/medtune/beta-platform.svg)](https://github.com/medtune/beta-platform/blob/master/LICENSE) [![GitHub pull-requests](https://img.shields.io/github/issues-pr/medtune/beta-platform.svg)](https://GitHub.com/Naereen/StrapDown.js/pull/)
+[![GitHub release](https://img.shields.io/github/release/medtune/beta-platform.svg)](https://GitHub.com/Naereen/StrapDown.js/releases/) [![Percentage of issues still open](http://isitmaintained.com/badge/open/medtune/beta-platform.svg)](http://isitmaintained.com/project/medtune/beta-platform) [![GitHub license](https://img.shields.io/github/license/medtune/beta-platform.svg)](https://github.com/medtune/beta-platform/blob/master/LICENSE) [![GitHub pull-requests](https://img.shields.io/github/issues-pr/medtune/beta-platform.svg)](https://GitHub.com/Naereen/StrapDown.js/pull/)
 
 
 ## Build status
+
 
 | branch | Build status |
 | --- | --- | 
@@ -34,12 +35,12 @@
       - [5. Using Kubernetes](#using-kubernetes)
       - [6. Using Swarm](#using-swarm)
 - [6. Command line: _medtune-beta_](#command-line)
-   - [1. Root](#root-command)
-   - [2. Version](#version)
-   - [3. Automigrate](#automigrate)
-   - [4. Generate views](#generate-views)
-   - [5. Debug server](#debug-server)
-   - [6. Run server](#run-server)
+   - [1. Root](./cmd/README.md#root-command)
+   - [2. Version](./cmd/README.md#version)
+   - [3. Automigrate](./cmd/README.md#automigrate)
+   - [4. Generate views](./cmd/README.md#generate-views)
+   - [5. Debug server](./cmd/README.md#debug-server)
+   - [6. Run server](./cmd/README.md#run-server)
 - [7. Change log](#changelog)
 - [8. Contributing](#contributing)
 - [9. Maintainers](#maintainers)
@@ -144,108 +145,7 @@ docker-compose up -d
 
 ### Command line
 
-#### Root command
-```
-Usage:
-  medtune-beta [command]
-
-Available Commands:
-  automigrate Auto migrate database
-  capsules    Not implemented
-  debug       debug server for UI dev
-  gen-views   Generate views html files
-  help        Help about any command
-  start       Run Medtune beta server
-  version     Medtune beta actual version
-
-Flags:
-  -h, --help   help for medtune-beta
-```
-
-#### Subcommands
-
-###### Version
-```
-Print Medtune Beta version
-
-Usage:
-  medtune-beta version [flags]
-
-Flags:
-  -h, --help   help for version
-```
-
-###### Auto-migrate
-```
-Sync database models by updating/creating existing
-database tables
-
-Usage:
-  medtune-beta automigrate [flags]
-
-Aliases:
-  automigrate, syncdb
-
-Flags:
-  -f, --file string   Configuration file name (default "config.yml")
-  -h, --help          help for automigrate
-```
-
-###### Generate views
-```
-Generate views html files
-
-Usage:
-  medtune-beta gen-views [flags]
-
-Aliases:
-  gen-views, gen-tmpl, gen
-
-Flags:
-  -h, --help            help for gen-views
-  -o, --output string   output directory (default generate-views) (default "generated-views")
-  -v, --views string    views to generate (comma separated string) (default "...")
-``` 
-
-###### Debug server
-```
-Debug UI server for dev purposes
-
-Usage:
-  medtune-beta debug [flags]
-
-Aliases:
-  debug, debug-server
-
-Flags:
-  -h, --help            help for debug
-  -p, --port int        port (default 8005)
-  -s, --static string   Static files directory (default "./static")
-```
-
-###### Run server
-```
-Run Medtune beta server
-
-Usage:
-  medtune-beta start [flags]
-
-Aliases:
-  start, run, run-server
-
-Flags:
-  -f, --file string          Configuration file name (default "./config.yml")
-  -g, --gin-mode int         Gin server mode [0 OR 1]
-  -h, --help                 help for start
-  -p, --port int             port (default 8005)
-  -s, --static string        Static files directory (default "./static")
-  -x, --syncdb               Sync database before start (default true)
-  -w, --wait                 Wait all services to go up
-  -c, --wait-attempts int    Wait max attempts (default 30)
-  -t, --wait-timestamp int   Wait timestamp (default 1)
-```
-
-
+ You can find medtune-beta [command line docs](cmd/README.md) at `./cmd`
 
 ### Changelog
 
