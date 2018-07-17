@@ -4,22 +4,23 @@ import (
 	"html/template"
 	"log"
 
-	"github.com/iallabs/medtune-trials/pkg/tmpl/public"
-	"github.com/iallabs/medtune-trials/pkg/tmpl/shared"
-	"github.com/iallabs/medtune-trials/pkg/tmpl/trials"
+	"github.com/medtune/beta-platform/pkg/tmpl/public"
+	"github.com/medtune/beta-platform/pkg/tmpl/shared"
+	"github.com/medtune/beta-platform/pkg/tmpl/trials"
 )
 
 var (
-	Index       *template.Template
-	Home        *template.Template
-	Login       *template.Template
-	Signup      *template.Template
-	Inception   *template.Template
-	Error       *template.Template
-	ErrorLogged *template.Template
-	Uploads     *template.Template
-	Capsules    *template.Template
-	Settings    *template.Template
+	Index         *template.Template
+	Home          *template.Template
+	Login         *template.Template
+	Signup        *template.Template
+	SignupSuccess *template.Template
+	Inception     *template.Template
+	Error         *template.Template
+	ErrorLogged   *template.Template
+	Uploads       *template.Template
+	Capsules      *template.Template
+	Settings      *template.Template
 )
 
 func init() {
@@ -60,7 +61,7 @@ func init() {
 		must(err)
 		login, err = login.Parse(shared.HeaderPublic)
 		must(err)
-		login, err = login.Parse(shared.SourceHeaderApiHelpers)
+		login, err = login.Parse(shared.SourceHeaderLogin)
 		must(err)
 		login, err = login.Parse(shared.Footer)
 		must(err)
@@ -75,13 +76,29 @@ func init() {
 		must(err)
 		signup, err = signup.Parse(shared.HeaderPublic)
 		must(err)
-		signup, err = signup.Parse(shared.SourceHeaderApiHelpers)
+		signup, err = signup.Parse(shared.SourceHeaderSignup)
 		must(err)
 		signup, err = signup.Parse(shared.Footer)
 		must(err)
 		signup, err = signup.Parse(public.Signup)
 		must(err)
 		Signup = signup
+	}
+
+	signupSuccess := template.New("base")
+	{
+
+		signupSuccess, err := signupSuccess.Parse(shared.Base)
+		must(err)
+		signupSuccess, err = signupSuccess.Parse(shared.HeaderLogged)
+		must(err)
+		signupSuccess, err = signupSuccess.Parse(shared.SourceHeaderEmpty)
+		must(err)
+		signupSuccess, err = signupSuccess.Parse(shared.Footer)
+		must(err)
+		signupSuccess, err = signupSuccess.Parse(public.SignupSucces)
+		must(err)
+		SignupSuccess = signupSuccess
 	}
 
 	error_ := template.New("base")
@@ -128,6 +145,18 @@ func init() {
 		must(err)
 		Inception = inception
 	}
+}
+
+func GetTemplatesMap() map[string]*template.Template {
+	m := make(map[string]*template.Template)
+	m["index"] = Index
+	m["home"] = Home
+	m["signup"] = Signup
+	m["signup-success"] = SignupSuccess
+	m["login"] = Login
+	m["error"] = Error
+	m["error-logged"] = ErrorLogged
+	return m
 }
 
 func must(err error) {

@@ -1,12 +1,16 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/iallabs/medtune-trials/server"
+	_ "github.com/medtune/beta-platform/cmd/capsules"
+	_ "github.com/medtune/beta-platform/cmd/debug"
+	_ "github.com/medtune/beta-platform/cmd/gen-views"
+	_ "github.com/medtune/beta-platform/cmd/start"
+	_ "github.com/medtune/beta-platform/cmd/syncdb"
+	_ "github.com/medtune/beta-platform/cmd/version"
+
+	"github.com/medtune/beta-platform/cmd/root"
 )
 
 func main() {
-	gin.SetMode(gin.DebugMode)
-	Server := server.New("./static", ":8007")
-	Server.Run()
+	root.Execute()
 }

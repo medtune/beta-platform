@@ -1,2 +1,16 @@
+# local dev files
 .dev/
 templates-gen/
+generated-views/
+
+# Default binary
+main
+
+# Binaries ext
+*.a
+*.so
+*.out
+*.exe
+
+# Medtune bin
+medtune-beta

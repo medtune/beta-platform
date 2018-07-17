@@ -6,6 +6,31 @@
     align-items: center;
 }
 
+.page-header {
+    overflow: visible;
+}
+
+.search-box.is-focused + .navigation-container {
+    opacity: 0;
+    width: 100px;
+}
+
+.search-box {
+    -webkit-order: 2;
+        -ms-flex-order: 2;
+            order: 2;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.mdl-textfield--expandable {
+    width: auto;
+}
+
+.search-box .mdl-textfield__input {
+    color: rgba(0, 0, 0, 0.87);
+}
+
 .nav-button-icon {
     margin-right: 5px;
     margin-left: 5px;
@@ -23,12 +48,7 @@
 
 .active-link {
     background-color: rgba(0, 0, 0, 0.134);
-}
-
-.demo-layout-waterfall .mdl-layout__header-row .mdl-navigation__link:last-of-type  {
-    padding-right: 0;
-}
-  
+} 
 
 .version {
     align-self: center;
@@ -38,6 +58,22 @@
 .mdl-layout__drawer .mdl-layout-title {
     position: relative;
     background: #4655c5;
+}
+
+.navigation-container .mdl-navigation__link {
+    display: inline-block;
+    height: 60px;
+    line-height: 68px;
+    background-color: transparent !important;
+    border-bottom: 4px solid transparent;
+    font-size: 16;
+}
+
+.navigation-container .mdl-navigation__link:hover {
+    height: 60px;
+    line-height: 68px;
+    color: rgb(255, 255, 255);
+    border-bottom: 4px solid rgb(244, 244, 244);
 }
 
 .drawer-separator {
@@ -54,6 +90,16 @@
     margin: 40px;
     width: 130px;
     height: 115px;
+}
+
+.mdl-layout__drawer .mdl-navigation .drawer-nav-title {
+    color: #1d64c1;
+}
+
+.mdl-navigation .mdl-navigation__link .material-icons {
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.56);
+    margin-right: 32px;
 }
 
 .mdl-layout__drawer .demo-navigation .mdl-navigation__link {
@@ -77,13 +123,19 @@
     color: blue;
 }
 
+.v-beta {
+    position: absolute;
+    font-size: 10;
+    left: 87px;
+    bottom: 12px;
+}
+
 .drawer-nav-link {
     color: red;
 }
 
 .center-screen {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -115,6 +167,15 @@
     font-size: 21px;
     padding-top: 24px;
 }
+
+.social-links {
+    justify-content: center;
+    text-align: center;
+}
+
+.footing {
+    background-color: rgba(16, 16, 16, 0.97);
+}
   
 
 .android-be-together-section {
@@ -126,14 +187,25 @@
     background-size: cover;
 }
 
-.android-fab {
+.scroll-down-1 {
     position: absolute;
+    color: white;
+    background-color: #3f51b5;
     right: 20%;
     bottom: -26px;
     z-index: 3;
-    background: #64ffda !important;
-    color: black !important;
 }
+
+.scroll-down-1:hover {
+    position: absolute;
+    color: rgb(0, 0, 0);
+    background-color: #ffe32c;
+    right: 20%;
+    bottom: -26px;
+    z-index: 3;
+}
+
+
 
 .logo-font {
     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
@@ -162,7 +234,8 @@
 }
 
 .login-card {
-    width: 450px;
+    width: auto;
+    max-width: 450px;
 }
 
 .load-bar-form {
@@ -170,4 +243,138 @@
     top: 0;
     left: 0;
     display: none;
+}
+
+.page-error {
+    width: auth;
+    min-height: 85vh;
+}
+
+@media only screen 
+and (min-width : 500px) {
+    /* Styles */
+    .cell--side-space {
+        
+    }
+
+    .cell--zone-spacer {
+        height: 50px;
+    }
+}
+
+@media only screen 
+and (max-width : 500px) {
+    /* Styles */
+    .cell--side-space {
+        display: none;
+    }
+
+    .cell--zone-spacer {
+        display: none;
+    }
+}
+
+.social-btn {
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    margin: 20 20px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    opacity: 0.9;
+    border-radius: 2px;
+}
+
+.social-btn__twitter {
+    background-image: url(/static/images/twitter.svg);
+    border-style: none;
+}
+
+.social-btn__github {
+    background-image: url(/static/images/github.svg);
+    border-style: none;
+
+}
+
+.social-btn__googleplus {
+    background-image: url(/static/images/googleplus.svg);
+    border-style: none;
+}
+
+.footer-up--button {
+
+}
+
+.scroll-top-button {
+    position: absolute;
+    color: white;
+    background-color: #3f51b5;
+    right: 50px;
+    bottom: 55px;
+}
+
+.scroll-top-button:hover {
+    color: rgb(0, 0, 0);
+    background-color: #ffe32c;
+}
+
+
+.social-section {
+    position: relative;
+    background-color: rgb(76, 76, 76);
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .android-create-character {
+        padding-top: 200px;
+        font-size: 16px;
+      }
+
+    .navigation-container {
+        display: none;
+    }
+
+    .scroll-top-button {
+        display: none;
+    }
+
+    .android-title {
+        display: none !important;
+    }
+
+    .android-more-button {
+        display: none;
+    }
+
+    .search-box.is-focused {
+        width: calc(100% - 48px);
+    }
+
+    .search-box .mdl-textfield__expandable-holder {
+        width: 100%;
+    }
+
+    .android-be-together-section {
+        height: 350px;
+    }
+
+    .android-slogan {
+        font-size: 26px;
+        margin: 0 16px;
+        padding-top: 24px;
+    }
+
+    .android-sub-slogan {
+        font-size: 16px;
+        margin: 0 16px;
+        padding-top: 8px;
+    }
+
+    .scroll-down-1 {
+        display: none;
+    }
+  
 }

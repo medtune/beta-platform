@@ -1,0 +1,22 @@
+version: '1'
+
+UID: '0x00000000'
+name: capsules
+engine: docker
+engine-hub: hub.docker.com
+secrets:
+  env: $DOCKER_TOKEN
+tags-prefix: beta
+
+process:
+  - package : .
+    name: beta-platform
+    version : 0.0.3
+    tag-format: $(%name %version)
+
+    build:
+      file : Dockerfile
+
+    push:
+      org: medtune
+      repo: platform

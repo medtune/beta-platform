@@ -1,13 +1,14 @@
 package jsonutil
 
 type LoginData struct {
-	Username string
-	Password string
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
 type SignupData struct {
-	Secret          string
-	Username        string
-	Password        string
+	Secret          string `json:"secret"`
+	Email           string `json:"email"`
+	Username        string `json:"username"`
+	Password        string `json:"password"`
 	PasswordConfirm string `json:"passwordc"`
 }

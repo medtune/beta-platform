@@ -20,6 +20,8 @@ const Base = `{{define "base"}}
     {{template "header" .}}
     </div>
         <main class="mdl-layout__content">
+        <a name="top" id="top"></a>
+
             {{template "content" .}}
             {{template "footer" .}}
         </main>
