@@ -1,18 +1,17 @@
 version: '1'
 
 UID: '0x00000000'
-name: capsules
+name: platform
 engine: docker
-engine-hub: hub.docker.com
+storage: hub.docker.com
 secrets:
   env: $DOCKER_TOKEN
-tags-prefix: beta
 
 process:
   - package : .
-    name: beta-platform
-    version : 0.0.3
-    tag-format: $(%name %version)
+    name: beta
+    version : v0.0.3
+    tag-format: $(%name-%version)
 
     build:
       file : Dockerfile

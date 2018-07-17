@@ -1,0 +1,15 @@
+FROM alpine:3.7
+
+WORKDIR /medtune/beta-platform
+
+# Make configuration dir
+COPY config.yml .
+
+COPY medtune-beta .
+
+# Port to expose
+EXPOSE 8005
+
+# please precise -v $CONFIGPATH:/medtune/beta-platform/deploy
+ENTRYPOINT [ "./medtune-beta", "start", "--syncdb", "--wait" ]
+

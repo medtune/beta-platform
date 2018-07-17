@@ -2,13 +2,21 @@ FROM golang:1.10
 
 WORKDIR /go/src/github.com/medtune/beta-platform
 
-COPY . .
+COPY ./cmd ./cmd
+COPY ./pkg ./pkg
+COPY ./server ./server
+COPY ./static ./static
+COPY config.yml .
 
+# Download dependencies
 RUN go get -v ./...
 
+# Build binaries
 RUN go build -v -o ./medtune-beta ./cmd/main.go
 
+# Port to expose
 EXPOSE 8005
 
+# please precise -v $CONFIGPATH:/config
 ENTRYPOINT [ "./medtune-beta", "start", "--syncdb", "--wait" ]
 
