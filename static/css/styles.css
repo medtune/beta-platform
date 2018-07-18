@@ -378,3 +378,39 @@ and (max-width : 500px) {
     }
   
 }
+
+.home-menu {
+    text-align: center;
+}
+
+.home-menu-grid {
+    display: inline-block;
+}
+
+.home-menu-card.mdl-card {
+    margin: 10px;
+    width: auto;
+  }
+
+.home-menu-card > .mdl-card__title__project {
+    background: url('/static/images/medtune.jpg') center / cover;
+}
+
+.home-menu-card > .mdl-card__title__demos {
+    background: url('/static/images/test.jpeg') center / cover;
+}
+
+.home-menu-card > .mdl-card__title__slides {
+    background: url('/static/images/projector.jpg') center / cover;
+}
+
+
+.home-menu-card > .mdl-card__title {
+    color: #fff;
+    height: 176px;
+}
+
+
+.home-menu-card > .mdl-card__menu {
+    color: rgb(255, 255, 255);
+}

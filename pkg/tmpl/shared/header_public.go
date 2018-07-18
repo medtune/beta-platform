@@ -20,7 +20,7 @@ var HeaderPublic = `{{define "header"}}
 
 	</header>
 	<div class="mdl-layout__drawer">
-		<span class="version">v 0.0.2</span>
+		<span class="version">v0.0.3</span>
 
 		<div style="text-align:center">
 			<img src="/static/images/logo.png" class="demo-avatar" onclick="window.location.href='/index'">

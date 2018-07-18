@@ -52,6 +52,7 @@ func assembleHandlers(g *gin.Engine) {
 		PUBLIC.POST("/signup", public.Signup)
 	}
 
+	// Login protected routes
 	PROTECTED := g.Group("/")
 	{
 		PROTECTED.GET("/logout", hidden.Logout)
@@ -67,5 +68,11 @@ func assembleHandlers(g *gin.Engine) {
 	ERRORS := g.Group("/error")
 	{
 		ERRORS.GET("/:code", public.Error)
+	}
+
+	DEMOS := g.Group("/demos")
+	{
+		DEMOS.GET("/image_class", hidden.ImageClassification)
+		DEMOS.GET("/linear_regression", hidden.PolynomialRegression)
 	}
 }

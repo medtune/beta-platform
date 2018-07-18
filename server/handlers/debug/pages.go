@@ -58,3 +58,17 @@ func Error(c *gin.Context) {
 		tmpl.Error.Execute(c.Writer, &data.ErrorFinalBoss)
 	}
 }
+
+func PolynomialRegression(c *gin.Context) {
+	c.Status(200)
+	tmpl.DemoPolynomialRegression.Execute(c.Writer, &data.Main{
+		PageTitle: "Demo: Polynomial Regression",
+	})
+}
+
+func ImageClassification(c *gin.Context) {
+	c.Status(200)
+	tmpl.DemoImageClassification.Execute(c.Writer, &data.Main{
+		PageTitle: "Demo: Image classification",
+	})
+}

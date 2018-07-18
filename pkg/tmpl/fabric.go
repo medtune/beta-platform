@@ -4,9 +4,9 @@ import (
 	"html/template"
 	"log"
 
+	"github.com/medtune/beta-platform/pkg/tmpl/demos"
 	"github.com/medtune/beta-platform/pkg/tmpl/public"
 	"github.com/medtune/beta-platform/pkg/tmpl/shared"
-	"github.com/medtune/beta-platform/pkg/tmpl/trials"
 )
 
 var (
@@ -15,12 +15,14 @@ var (
 	Login         *template.Template
 	Signup        *template.Template
 	SignupSuccess *template.Template
-	Inception     *template.Template
 	Error         *template.Template
 	ErrorLogged   *template.Template
 	Uploads       *template.Template
 	Capsules      *template.Template
 	Settings      *template.Template
+
+	DemoPolynomialRegression *template.Template
+	DemoImageClassification  *template.Template
 )
 
 func init() {
@@ -50,7 +52,7 @@ func init() {
 		must(err)
 		home, err = home.Parse(shared.Footer)
 		must(err)
-		home, err = home.Parse(public.Index)
+		home, err = home.Parse(demos.Menu)
 		must(err)
 		Home = home
 	}
@@ -131,19 +133,34 @@ func init() {
 		ErrorLogged = error_logged
 	}
 
-	inception := template.New("base")
+	image_classification := template.New("base")
 	{
-		inception, err := inception.Parse(shared.Base)
+		image_classification, err := image_classification.Parse(shared.Base)
 		must(err)
-		inception, err = inception.Parse(shared.HeaderPublic)
+		image_classification, err = image_classification.Parse(shared.HeaderLogged)
 		must(err)
-		inception, err = inception.Parse(shared.SourceHeaderEmpty)
+		image_classification, err = image_classification.Parse(shared.SourceHeaderAPIS)
 		must(err)
-		inception, err = inception.Parse(shared.Footer)
+		image_classification, err = image_classification.Parse(shared.Footer)
 		must(err)
-		inception, err = inception.Parse(trials.Inception)
+		image_classification, err = image_classification.Parse(demos.ImageClassification)
 		must(err)
-		Inception = inception
+		DemoImageClassification = image_classification
+	}
+
+	polynomial_regression := template.New("base")
+	{
+		polynomial_regression, err := polynomial_regression.Parse(shared.Base)
+		must(err)
+		polynomial_regression, err = polynomial_regression.Parse(shared.HeaderLogged)
+		must(err)
+		polynomial_regression, err = polynomial_regression.Parse(shared.SourceHeaderTFJS)
+		must(err)
+		polynomial_regression, err = polynomial_regression.Parse(shared.Footer)
+		must(err)
+		polynomial_regression, err = polynomial_regression.Parse(demos.ImageClassification)
+		must(err)
+		DemoPolynomialRegression = polynomial_regression
 	}
 }
 
@@ -156,6 +173,8 @@ func GetTemplatesMap() map[string]*template.Template {
 	m["login"] = Login
 	m["error"] = Error
 	m["error-logged"] = ErrorLogged
+	m["demo-polynomial-regression"] = DemoPolynomialRegression
+	m["demo-image-classification"] = DemoImageClassification
 	return m
 }
 
