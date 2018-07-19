@@ -1,6 +1,7 @@
 package shared
 
 const Base = `{{define "base"}}
+<!doctype html>
 <html lang="en">
 
 <head>

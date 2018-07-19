@@ -64,6 +64,14 @@ func Error(c *gin.Context) {
 	}
 }
 
+func DemosMenu(c *gin.Context) {
+	c.Status(200)
+	tmpl.DemosMenu.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Demo: Image classification",
+	})
+}
+
 func PolynomialRegression(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemoPolynomialRegression.Execute(c.Writer, &data.Main{

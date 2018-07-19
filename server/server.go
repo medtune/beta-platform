@@ -59,14 +59,15 @@ func assembleHandlers(g *gin.Engine) {
 		PROTECTED.GET("/home", hidden.Home)
 
 		// Demonstrations routes
-		DEMOS := g.Group("/demos")
+		DEMOS := PROTECTED.Group("/demos")
 		{
+			DEMOS.GET("/", hidden.DemosMenu)
 			DEMOS.GET("/image_class", hidden.ImageClassification)
-			DEMOS.GET("/linear_regression", hidden.PolynomialRegression)
+			DEMOS.GET("/polynomial_regression", hidden.PolynomialRegression)
 		}
 
 		// Api routes
-		API := g.Group("/api")
+		API := PROTECTED.Group("/api")
 		{
 			API.GET("/capsule", api.Capsule)
 		}

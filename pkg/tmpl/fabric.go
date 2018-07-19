@@ -12,7 +12,6 @@ import (
 
 var (
 	Index         *template.Template
-	Home          *template.Template
 	Login         *template.Template
 	Signup        *template.Template
 	SignupSuccess *template.Template
@@ -22,6 +21,8 @@ var (
 	Capsules      *template.Template
 	Settings      *template.Template
 
+	Home                     *template.Template
+	DemosMenu                *template.Template
 	DemoPolynomialRegression *template.Template
 	DemoImageClassification  *template.Template
 )
@@ -41,21 +42,6 @@ func init() {
 		index, err = index.Parse(public.Index)
 		must(err)
 		Index = index
-	}
-
-	{
-		home := template.New("base")
-		home, err := home.Parse(shared.Base)
-		must(err)
-		home, err = home.Parse(shared.HeaderLogged)
-		must(err)
-		home, err = home.Parse(shared.SourceHeaderIndex)
-		must(err)
-		home, err = home.Parse(shared.Footer)
-		must(err)
-		home, err = home.Parse(private.Home)
-		must(err)
-		Home = home
 	}
 
 	{
@@ -130,6 +116,36 @@ func init() {
 		error_logged, err = error_logged.Parse(public.Error)
 		must(err)
 		ErrorLogged = error_logged
+	}
+
+	{
+		home := template.New("base")
+		home, err := home.Parse(shared.Base)
+		must(err)
+		home, err = home.Parse(shared.HeaderLogged)
+		must(err)
+		home, err = home.Parse(shared.SourceHeaderIndex)
+		must(err)
+		home, err = home.Parse(shared.Footer)
+		must(err)
+		home, err = home.Parse(private.Home)
+		must(err)
+		Home = home
+	}
+
+	{
+		demosMenu := template.New("base")
+		demosMenu, err := demosMenu.Parse(shared.Base)
+		must(err)
+		demosMenu, err = demosMenu.Parse(shared.HeaderLogged)
+		must(err)
+		demosMenu, err = demosMenu.Parse(shared.SourceHeaderIndex)
+		must(err)
+		demosMenu, err = demosMenu.Parse(shared.Footer)
+		must(err)
+		demosMenu, err = demosMenu.Parse(private.Demos)
+		must(err)
+		DemosMenu = demosMenu
 	}
 
 	{

@@ -4,7 +4,7 @@ const Footer = `{{define "footer"}}
 <div class="social-section">
     <div class="">
         <div class="madeby">
-            <span class="madeby-text"> Made with <i class="material-icons madeby-love">favorite</i> by <img class="madeby-img" src="/static/images/siiresearch.png"></img> </span>
+            <span class="madeby-text"> Made with <i class="material-icons madeby-love">favorite</i> by <img class="madeby-img" height="20" src="/static/images/siiresearch.png"></img> </span>
         </div>
         <div>
             <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab scroll-top-button" onclick="scrollToTop();">
@@ -50,7 +50,7 @@ const Footer = `{{define "footer"}}
       </ul>
     </div>
 
-    <div class="mdl-mega-footer__drop-down-section">
+    <div class="mdl-mega-footer__drop-down-section footer-faq">
       <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
       <h1 class="mdl-mega-footer__heading">FAQ</h1>
       <ul class="mdl-mega-footer__link-list">

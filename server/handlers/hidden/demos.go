@@ -8,6 +8,18 @@ import (
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
 )
 
+func DemosMenu(c *gin.Context) {
+	if logged := session.GetLoginStatus(c); !logged {
+		c.Redirect(302, "/index")
+		return
+	}
+	c.Status(200)
+	tmpl.DemosMenu.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Demonstrations",
+	})
+}
+
 func PolynomialRegression(c *gin.Context) {
 	if logged := session.GetLoginStatus(c); !logged {
 		c.Redirect(302, "/index")
@@ -16,7 +28,7 @@ func PolynomialRegression(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemoPolynomialRegression.Execute(c.Writer, &data.Main{
 		Version:   pkg.VERSION,
-		PageTitle: "Demo: Polynomial Regression",
+		PageTitle: "Polynomial Regression",
 	})
 }
 
@@ -25,10 +37,9 @@ func ImageClassification(c *gin.Context) {
 		c.Redirect(302, "/index")
 		return
 	}
-
 	c.Status(200)
 	tmpl.DemoImageClassification.Execute(c.Writer, &data.Main{
 		Version:   pkg.VERSION,
-		PageTitle: "Demo: Image classification",
+		PageTitle: "Image classification",
 	})
 }
