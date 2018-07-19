@@ -40,7 +40,7 @@ var HeaderLogged = `{{define "header"}}
 	</header>
 	
 	<div class="mdl-layout__drawer">
-		<span class="version">v0.0.3</span>
+		<span class="version">{{ .Version }}</span>
 
 		<div style="text-align:center">
 			<img src="/static/images/logo.png" class="demo-avatar" onclick="window.location.href='/home'">

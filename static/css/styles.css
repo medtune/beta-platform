@@ -312,7 +312,7 @@ and (max-width : 500px) {
     color: white;
     background-color: #3f51b5;
     right: 50px;
-    bottom: 55px;
+    bottom: 25px;
 }
 
 .scroll-top-button:hover {
@@ -320,10 +320,34 @@ and (max-width : 500px) {
     background-color: #ffe32c;
 }
 
+.madeby {
+    padding: 10px;
+    text-align: center;
+}
+
+.madeby-text {
+    font-size: 16px;
+    color: white;
+    justify-content: center;
+    display: flex;
+}
+
+.madeby-love {
+    color: rgb(255, 84, 84);
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.madeby-img {
+    margin-left: 12px;
+    width: auto;
+    height: 20;
+}
+
 
 .social-section {
     position: relative;
-    background-color: rgb(76, 76, 76);
+    background-color: rgba(89, 89, 89, 0.614);
     text-align: center;
 }
 
@@ -380,29 +404,37 @@ and (max-width : 500px) {
 }
 
 .home-menu {
-    text-align: center;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .home-menu-grid {
-    display: inline-block;
+    max-width: 900px;  
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .home-menu-card.mdl-card {
-    margin: 10px;
-    width: auto;
-  }
+
+}
 
 .home-menu-card > .mdl-card__title__project {
-    background: url('/static/images/medtune.jpg') center / cover;
+    background: url('/static/images/project.jpg') center / cover;
 }
 
 .home-menu-card > .mdl-card__title__demos {
-    background: url('/static/images/test.jpeg') center / cover;
+    background: url('/static/images/demonstrations.jpeg') center / cover;
 }
 
-.home-menu-card > .mdl-card__title__slides {
-    background: url('/static/images/projector.jpg') center / cover;
+.home-menu-card > .mdl-card__title__learn {
+    background: url('/static/images/learn.jpg') center / cover;
 }
+
+.home-menu-card > .mdl-card__title__howitworks {
+    background: url('/static/images/gears.png') center / cover;
+    background-color: rgb(86, 86, 86);
+}
+
 
 
 .home-menu-card > .mdl-card__title {

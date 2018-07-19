@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
+	"github.com/medtune/beta-platform/pkg"
 	"github.com/medtune/beta-platform/pkg/jsonutil"
 	"github.com/medtune/beta-platform/pkg/session"
 	"github.com/medtune/beta-platform/pkg/store"
@@ -17,6 +18,7 @@ func Login(c *gin.Context) {
 			c.Redirect(302, "/home")
 		} else {
 			tmpl.Login.Execute(c.Writer, &data.Main{
+				Version:   pkg.VERSION,
 				PageTitle: "login",
 			})
 		}

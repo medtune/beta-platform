@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
+	"github.com/medtune/beta-platform/pkg"
 	"github.com/medtune/beta-platform/pkg/jsonutil"
 	"github.com/medtune/beta-platform/pkg/secret"
 	"github.com/medtune/beta-platform/pkg/session"
@@ -58,6 +59,7 @@ func SignupSuccess(c *gin.Context) {
 	}
 	c.Status(200)
 	tmpl.SignupSuccess.Execute(c.Writer, data.Main{
+		Version:   pkg.VERSION,
 		PageTitle: "Signup ~ Success",
 	})
 }

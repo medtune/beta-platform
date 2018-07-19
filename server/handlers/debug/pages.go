@@ -4,12 +4,14 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/medtune/beta-platform/pkg"
 	"github.com/medtune/beta-platform/pkg/tmpl"
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
 )
 
 func Home(c *gin.Context) {
 	inject := data.Main{
+		Version:   pkg.VERSION,
 		PageTitle: "Home",
 	}
 	c.Status(200)
@@ -19,6 +21,7 @@ func Home(c *gin.Context) {
 func Index(c *gin.Context) {
 	c.Status(200)
 	inject := data.Main{
+		Version:   pkg.VERSION,
 		PageTitle: "Index",
 	}
 	tmpl.Index.Execute(c.Writer, &inject)
@@ -27,6 +30,7 @@ func Index(c *gin.Context) {
 func Login(c *gin.Context) {
 	c.Status(200)
 	tmpl.Login.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
 		PageTitle: "login",
 	})
 }
@@ -34,6 +38,7 @@ func Login(c *gin.Context) {
 func Signup(c *gin.Context) {
 	c.Status(200)
 	tmpl.Signup.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
 		PageTitle: "Signup",
 	})
 }
@@ -62,6 +67,7 @@ func Error(c *gin.Context) {
 func PolynomialRegression(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemoPolynomialRegression.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
 		PageTitle: "Demo: Polynomial Regression",
 	})
 }
@@ -69,6 +75,7 @@ func PolynomialRegression(c *gin.Context) {
 func ImageClassification(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemoImageClassification.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
 		PageTitle: "Demo: Image classification",
 	})
 }

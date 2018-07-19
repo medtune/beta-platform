@@ -4,7 +4,8 @@ import (
 	"html/template"
 	"log"
 
-	"github.com/medtune/beta-platform/pkg/tmpl/demos"
+	"github.com/medtune/beta-platform/pkg/tmpl/private"
+	"github.com/medtune/beta-platform/pkg/tmpl/private/demos"
 	"github.com/medtune/beta-platform/pkg/tmpl/public"
 	"github.com/medtune/beta-platform/pkg/tmpl/shared"
 )
@@ -26,9 +27,9 @@ var (
 )
 
 func init() {
-	index := template.New("base")
 
 	{
+		index := template.New("base")
 		index, err := index.Parse(shared.Base)
 		must(err)
 		index, err = index.Parse(shared.HeaderPublic)
@@ -42,8 +43,8 @@ func init() {
 		Index = index
 	}
 
-	home := template.New("base")
 	{
+		home := template.New("base")
 		home, err := home.Parse(shared.Base)
 		must(err)
 		home, err = home.Parse(shared.HeaderLogged)
@@ -52,13 +53,13 @@ func init() {
 		must(err)
 		home, err = home.Parse(shared.Footer)
 		must(err)
-		home, err = home.Parse(demos.Menu)
+		home, err = home.Parse(private.Home)
 		must(err)
 		Home = home
 	}
 
-	login := template.New("base")
 	{
+		login := template.New("base")
 		login, err := login.Parse(shared.Base)
 		must(err)
 		login, err = login.Parse(shared.HeaderPublic)
@@ -71,9 +72,8 @@ func init() {
 		Login = login
 	}
 
-	signup := template.New("base")
 	{
-
+		signup := template.New("base")
 		signup, err := signup.Parse(shared.Base)
 		must(err)
 		signup, err = signup.Parse(shared.HeaderPublic)
@@ -87,9 +87,8 @@ func init() {
 		Signup = signup
 	}
 
-	signupSuccess := template.New("base")
 	{
-
+		signupSuccess := template.New("base")
 		signupSuccess, err := signupSuccess.Parse(shared.Base)
 		must(err)
 		signupSuccess, err = signupSuccess.Parse(shared.HeaderLogged)
@@ -103,8 +102,8 @@ func init() {
 		SignupSuccess = signupSuccess
 	}
 
-	error_ := template.New("base")
 	{
+		error_ := template.New("base")
 		error_, err := error_.Parse(shared.Base)
 		must(err)
 		error_, err = error_.Parse(shared.HeaderPublic)
@@ -118,8 +117,8 @@ func init() {
 		Error = error_
 	}
 
-	error_logged := template.New("base")
 	{
+		error_logged := template.New("base")
 		error_logged, err := error_logged.Parse(shared.Base)
 		must(err)
 		error_logged, err = error_logged.Parse(shared.HeaderLogged)
@@ -133,37 +132,38 @@ func init() {
 		ErrorLogged = error_logged
 	}
 
-	image_classification := template.New("base")
 	{
-		image_classification, err := image_classification.Parse(shared.Base)
+		imageClassification := template.New("base")
+		imageClassification, err := imageClassification.Parse(shared.Base)
 		must(err)
-		image_classification, err = image_classification.Parse(shared.HeaderLogged)
+		imageClassification, err = imageClassification.Parse(shared.HeaderLogged)
 		must(err)
-		image_classification, err = image_classification.Parse(shared.SourceHeaderAPIS)
+		imageClassification, err = imageClassification.Parse(shared.SourceHeaderImgClass)
 		must(err)
-		image_classification, err = image_classification.Parse(shared.Footer)
+		imageClassification, err = imageClassification.Parse(shared.Footer)
 		must(err)
-		image_classification, err = image_classification.Parse(demos.ImageClassification)
+		imageClassification, err = imageClassification.Parse(demos.ImageClassification)
 		must(err)
-		DemoImageClassification = image_classification
+		DemoImageClassification = imageClassification
 	}
 
-	polynomial_regression := template.New("base")
 	{
-		polynomial_regression, err := polynomial_regression.Parse(shared.Base)
+		polynomialRegression := template.New("base")
+		polynomialRegression, err := polynomialRegression.Parse(shared.Base)
 		must(err)
-		polynomial_regression, err = polynomial_regression.Parse(shared.HeaderLogged)
+		polynomialRegression, err = polynomialRegression.Parse(shared.HeaderLogged)
 		must(err)
-		polynomial_regression, err = polynomial_regression.Parse(shared.SourceHeaderTFJS)
+		polynomialRegression, err = polynomialRegression.Parse(shared.SourceHeaderPolyReg)
 		must(err)
-		polynomial_regression, err = polynomial_regression.Parse(shared.Footer)
+		polynomialRegression, err = polynomialRegression.Parse(shared.Footer)
 		must(err)
-		polynomial_regression, err = polynomial_regression.Parse(demos.ImageClassification)
+		polynomialRegression, err = polynomialRegression.Parse(demos.PolynomialRegression)
 		must(err)
-		DemoPolynomialRegression = polynomial_regression
+		DemoPolynomialRegression = polynomialRegression
 	}
 }
 
+// Return map of templates. Used by cmd/gen-views
 func GetTemplatesMap() map[string]*template.Template {
 	m := make(map[string]*template.Template)
 	m["index"] = Index

@@ -22,6 +22,14 @@ push-alpine:
 	@echo "pushing alpine image to docker hub"
 	docker push medtune/platform:beta.alpine-v0.0.3 
 
+swarm-up:
+	docker-compose up
+
+swarm-down:
+	docker-compose down
+
 clean:
 	rm medtune-beta
 
+clean-gen:
+	rm -rf genered-views

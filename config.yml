@@ -9,10 +9,10 @@ database:
   prod: medtune
   test: medtune-test
   creds:
-    host: postgres
+    host: localhost #postgres
     port: 5432
-    user: mdtn
-    password: mdtn
+    user: amine
+    password: a
   
 session:
   type: cookie
