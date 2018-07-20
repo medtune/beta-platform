@@ -10,13 +10,20 @@ type User struct {
 	AccountLevel  int8   `xorm:"default 5"`
 }
 
+type GlobalData struct {
+	Id   int64
+	Name int64
+}
+
 type DemoData struct {
-	Id         int64
-	Name       string `xorm:"varchar(64) not null"`
+	Id   int64
+	Name string `xorm:"varchar(64) not null"`
+
 	Visibility string `xorm:"not null default 'basic'"`
 	OwnerId    int64  `xorm:"not null"`
 	DemoId     string `xorm:"not null"`
 	Type       string `xorm:"varchar(16) not null"`
+	Kind       string `xorm:"varchar(16) not null"`
 
 	Bytes string `xorm:"varchar(2097152) not null" valid:""`
 	Link  string `xorm:"varchar(256) not null" valid:""`
