@@ -36,5 +36,6 @@ func debugHandlers(g *gin.Engine) {
 		DEBUG.GET("/demos", debug.DemosMenu)
 		DEBUG.GET("/demos/image_classification", debug.ImageClassification)
 		DEBUG.GET("/demos/polynomial_regression", debug.PolynomialRegression)
+		DEBUG.GET("/datahub", debug.Datahub)
 	}
 }

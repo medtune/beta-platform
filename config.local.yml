@@ -9,10 +9,10 @@ database:
   prod: medtune
   test: medtune-test
   creds:
-    host: postgres #postgres
+    host: localhost #postgres
     port: 5432
-    user: mdtn
-    password: mdtn
+    user: amine
+    password: a
   
 session:
   type: cookie
@@ -32,11 +32,11 @@ capsules:
   items:
     - image: medtune/inception-0.0.0
       mapped-demo: inception-imagenet
-      port: 8080
+      port: 7501
 
     - image: medtune/mnist-0.0.0
       mapped-demo: mnist
-      port: 9090
+      port: 7500
 
 secrets:
   signup:

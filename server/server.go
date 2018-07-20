@@ -57,12 +57,12 @@ func assembleHandlers(g *gin.Engine) {
 	{
 		PROTECTED.GET("/logout", hidden.Logout)
 		PROTECTED.GET("/home", hidden.Home)
+		PROTECTED.GET("/demos", hidden.DemosMenu)
 
 		// Demonstrations routes
 		DEMOS := PROTECTED.Group("/demos")
 		{
-			DEMOS.GET("/", hidden.DemosMenu)
-			DEMOS.GET("/image_class", hidden.ImageClassification)
+			DEMOS.GET("/image_classification", hidden.ImageClassification)
 			DEMOS.GET("/polynomial_regression", hidden.PolynomialRegression)
 		}
 

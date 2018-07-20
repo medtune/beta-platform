@@ -1,5 +1,13 @@
 version: '3'
 services:
+  #Database
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=mdtn
+      - POSTGRES_PASSWORD=mdtn
+      - POSTGRES_DB=medtune
+
   platform-server:
     image: medtune/platform:beta.alpine-v0.0.3
     ports:
@@ -23,19 +31,3 @@ services:
         reservations:
           cpus: '0.25'
           memory: 50M
-
-  #Database
-  postgres:
-    image: postgres:latest
-    environment:
-      - POSTGRES_USER=mdtn
-      - POSTGRES_PASSWORD=mdtn
-      - POSTGRES_DB=medtune
-
-  #mnist capsules
-  mnist:
-    image: todo
-
-  #inception capsules
-  inception:
-    image: todo

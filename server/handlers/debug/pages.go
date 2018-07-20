@@ -87,3 +87,11 @@ func ImageClassification(c *gin.Context) {
 		PageTitle: "Demo: Image classification",
 	})
 }
+
+func Datahub(c *gin.Context) {
+	c.Status(200)
+	tmpl.Settings.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Datahub",
+	})
+}

@@ -15,7 +15,7 @@ type DemoData struct {
 	Name       string `xorm:"varchar(64) not null"`
 	Visibility string `xorm:"not null default 'basic'"`
 	OwnerId    int64  `xorm:"not null"`
-	DemoId     int64  `xorm:"not null"`
+	DemoId     string `xorm:"not null"`
 	Type       string `xorm:"varchar(16) not null"`
 
 	Bytes string `xorm:"varchar(2097152) not null" valid:""`

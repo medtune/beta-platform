@@ -1,31 +1,26 @@
-bin:
-	@echo "building default binaries"
-	go build -o medtune-beta ./cmd/main.go
-
-build:
-	@echo "building default image"
-	docker build -t medtune/platform:beta.go1.10-v0.0.3 -f Dockerfile.go-1.10 .
-
-push:
-	@echo "pushing default image to docker hub"
-	docker push medtune/platform:beta.go1.10-v0.0.3 
-
-bin-alpine:
+compile:
 	@echo "building alpine binaries"
 	GOOS=linux go build -o medtune-beta ./cmd/main.go
 
-build-alpine:
+build: compile
 	@echo "building alpine docker image"
 	docker build -t medtune/platform:beta.alpine-v0.0.3 -f Dockerfile.alpine .
 
-push-alpine:
+push:
 	@echo "pushing alpine image to docker hub"
 	docker push medtune/platform:beta.alpine-v0.0.3 
 
-swarm-up:
+pull:
+	@echo "pulling alpine image from docker hub"
+	docker pull medtune/platform:beta.alpine-v0.0.3 
+
+up:
 	docker-compose up
 
-swarm-down:
+gen:
+	go run ./cmd/main.go gen
+
+down:
 	docker-compose down
 
 clean:

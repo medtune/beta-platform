@@ -17,21 +17,22 @@ var (
 	SignupSuccess *template.Template
 	Error         *template.Template
 	ErrorLogged   *template.Template
-	Uploads       *template.Template
-	Capsules      *template.Template
-	Settings      *template.Template
 
 	Home                     *template.Template
 	DemosMenu                *template.Template
 	DemoPolynomialRegression *template.Template
 	DemoImageClassification  *template.Template
+	DataHub                  *template.Template
+	Settings                 *template.Template
 )
 
 func init() {
 
+	var err error
+
 	{
 		index := template.New("base")
-		index, err := index.Parse(shared.Base)
+		index, err = index.Parse(shared.Base)
 		must(err)
 		index, err = index.Parse(shared.HeaderPublic)
 		must(err)
@@ -46,7 +47,7 @@ func init() {
 
 	{
 		login := template.New("base")
-		login, err := login.Parse(shared.Base)
+		login, err = login.Parse(shared.Base)
 		must(err)
 		login, err = login.Parse(shared.HeaderPublic)
 		must(err)
@@ -60,7 +61,7 @@ func init() {
 
 	{
 		signup := template.New("base")
-		signup, err := signup.Parse(shared.Base)
+		signup, err = signup.Parse(shared.Base)
 		must(err)
 		signup, err = signup.Parse(shared.HeaderPublic)
 		must(err)
@@ -75,7 +76,7 @@ func init() {
 
 	{
 		signupSuccess := template.New("base")
-		signupSuccess, err := signupSuccess.Parse(shared.Base)
+		signupSuccess, err = signupSuccess.Parse(shared.Base)
 		must(err)
 		signupSuccess, err = signupSuccess.Parse(shared.HeaderLogged)
 		must(err)
@@ -90,7 +91,7 @@ func init() {
 
 	{
 		error_ := template.New("base")
-		error_, err := error_.Parse(shared.Base)
+		error_, err = error_.Parse(shared.Base)
 		must(err)
 		error_, err = error_.Parse(shared.HeaderPublic)
 		must(err)
@@ -105,7 +106,7 @@ func init() {
 
 	{
 		error_logged := template.New("base")
-		error_logged, err := error_logged.Parse(shared.Base)
+		error_logged, err = error_logged.Parse(shared.Base)
 		must(err)
 		error_logged, err = error_logged.Parse(shared.HeaderLogged)
 		must(err)
@@ -120,7 +121,7 @@ func init() {
 
 	{
 		home := template.New("base")
-		home, err := home.Parse(shared.Base)
+		home, err = home.Parse(shared.Base)
 		must(err)
 		home, err = home.Parse(shared.HeaderLogged)
 		must(err)
@@ -135,7 +136,7 @@ func init() {
 
 	{
 		demosMenu := template.New("base")
-		demosMenu, err := demosMenu.Parse(shared.Base)
+		demosMenu, err = demosMenu.Parse(shared.Base)
 		must(err)
 		demosMenu, err = demosMenu.Parse(shared.HeaderLogged)
 		must(err)
@@ -150,7 +151,7 @@ func init() {
 
 	{
 		imageClassification := template.New("base")
-		imageClassification, err := imageClassification.Parse(shared.Base)
+		imageClassification, err = imageClassification.Parse(shared.Base)
 		must(err)
 		imageClassification, err = imageClassification.Parse(shared.HeaderLogged)
 		must(err)
@@ -165,7 +166,7 @@ func init() {
 
 	{
 		polynomialRegression := template.New("base")
-		polynomialRegression, err := polynomialRegression.Parse(shared.Base)
+		polynomialRegression, err = polynomialRegression.Parse(shared.Base)
 		must(err)
 		polynomialRegression, err = polynomialRegression.Parse(shared.HeaderLogged)
 		must(err)
@@ -176,6 +177,34 @@ func init() {
 		polynomialRegression, err = polynomialRegression.Parse(demos.PolynomialRegression)
 		must(err)
 		DemoPolynomialRegression = polynomialRegression
+	}
+
+	{
+		datahub := template.New("base")
+		datahub, err = datahub.Parse(shared.Base)
+		must(err)
+		datahub, err = datahub.Parse(shared.HeaderLogged)
+		must(err)
+		datahub, err = datahub.Parse(shared.SourceHeaderEmpty)
+		must(err)
+		datahub, err = datahub.Parse(shared.Footer)
+		must(err)
+		datahub, err = datahub.Parse(private.Datahub)
+		DataHub = datahub
+	}
+
+	{
+		settings := template.New("base")
+		settings, err = settings.Parse(shared.Base)
+		must(err)
+		settings, err = settings.Parse(shared.HeaderLogged)
+		must(err)
+		settings, err = settings.Parse(shared.SourceHeaderEmpty)
+		must(err)
+		settings, err = settings.Parse(shared.Footer)
+		must(err)
+		settings, err = settings.Parse(private.Datahub)
+		Settings = settings
 	}
 }
 
@@ -189,8 +218,11 @@ func GetTemplatesMap() map[string]*template.Template {
 	m["login"] = Login
 	m["error"] = Error
 	m["error-logged"] = ErrorLogged
+	m["demos-menu"] = DemosMenu
 	m["demo-polynomial-regression"] = DemoPolynomialRegression
 	m["demo-image-classification"] = DemoImageClassification
+	m["datahub"] = DataHub
+	m["settings"] = Settings
 	return m
 }
 

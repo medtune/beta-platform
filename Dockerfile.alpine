@@ -5,6 +5,8 @@ WORKDIR /medtune/beta-platform
 # Make configuration dir
 COPY config.yml .
 
+COPY static ./static
+
 COPY medtune-beta .
 
 # Port to expose

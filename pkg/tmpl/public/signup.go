@@ -11,7 +11,7 @@ const Signup = `{{define "content"}}
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="fti-email">
 					<input class="mdl-textfield__input" type="text" name="email" id="email"/>
 					<label class="mdl-textfield__label" for="email">Email</label>
-					<span class="mdl-textfield__error" id="email-error"></span>
+					<span class="mdl-textfield__error" id="email-error">Email error</span>
 
 				</div>
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="fti-username">

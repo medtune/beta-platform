@@ -34,7 +34,7 @@ const PolynomialRegression = `{{define "content"}}
 					<i class="material-icons">clear</i>
 				</button>
 				<button id="clearPointsButton" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect demo-polyreg-ctrl__button demo-polyreg-info-button">
-					<i class="material-icons">info</i>
+					<i class="material-icons">info_outline</i>
 				</button>
 			</div>
 		</div>
