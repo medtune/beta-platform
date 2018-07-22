@@ -11,19 +11,24 @@ import (
 )
 
 var (
+	// Public
 	Index         *template.Template
 	Login         *template.Template
 	Signup        *template.Template
 	SignupSuccess *template.Template
 	Error         *template.Template
-	ErrorLogged   *template.Template
 
-	Home                     *template.Template
+	// Logged
+	ErrorLogged *template.Template
+	Home        *template.Template
+	DataHub     *template.Template
+	Settings    *template.Template
+
+	//Demos
 	DemosMenu                *template.Template
 	DemoPolynomialRegression *template.Template
-	DemoImageClassification  *template.Template
-	DataHub                  *template.Template
-	Settings                 *template.Template
+	DemoMnist                *template.Template
+	DemoInceptionImagenet    *template.Template
 )
 
 func init() {
@@ -150,21 +155,6 @@ func init() {
 	}
 
 	{
-		imageClassification := template.New("base")
-		imageClassification, err = imageClassification.Parse(shared.Base)
-		must(err)
-		imageClassification, err = imageClassification.Parse(shared.HeaderLogged)
-		must(err)
-		imageClassification, err = imageClassification.Parse(shared.SourceHeaderImgClass)
-		must(err)
-		imageClassification, err = imageClassification.Parse(shared.Footer)
-		must(err)
-		imageClassification, err = imageClassification.Parse(demos.ImageClassification)
-		must(err)
-		DemoImageClassification = imageClassification
-	}
-
-	{
 		polynomialRegression := template.New("base")
 		polynomialRegression, err = polynomialRegression.Parse(shared.Base)
 		must(err)
@@ -177,6 +167,36 @@ func init() {
 		polynomialRegression, err = polynomialRegression.Parse(demos.PolynomialRegression)
 		must(err)
 		DemoPolynomialRegression = polynomialRegression
+	}
+
+	{
+		mnist := template.New("base")
+		mnist, err = mnist.Parse(shared.Base)
+		must(err)
+		mnist, err = mnist.Parse(shared.HeaderLogged)
+		must(err)
+		mnist, err = mnist.Parse(shared.SourceHeaderMnist)
+		must(err)
+		mnist, err = mnist.Parse(shared.Footer)
+		must(err)
+		mnist, err = mnist.Parse(demos.Mnist)
+		must(err)
+		DemoMnist = mnist
+	}
+
+	{
+		inceptionImagenet := template.New("base")
+		inceptionImagenet, err = inceptionImagenet.Parse(shared.Base)
+		must(err)
+		inceptionImagenet, err = inceptionImagenet.Parse(shared.HeaderLogged)
+		must(err)
+		inceptionImagenet, err = inceptionImagenet.Parse(shared.SourceHeaderInceptionImagenet)
+		must(err)
+		inceptionImagenet, err = inceptionImagenet.Parse(shared.Footer)
+		must(err)
+		inceptionImagenet, err = inceptionImagenet.Parse(demos.InceptionImagenet)
+		must(err)
+		DemoInceptionImagenet = inceptionImagenet
 	}
 
 	{
@@ -220,7 +240,8 @@ func GetTemplatesMap() map[string]*template.Template {
 	m["error-logged"] = ErrorLogged
 	m["demos-menu"] = DemosMenu
 	m["demo-polynomial-regression"] = DemoPolynomialRegression
-	m["demo-image-classification"] = DemoImageClassification
+	m["demo-inception-imagenet"] = DemoInceptionImagenet
+	m["demo-mnist"] = DemoMnist
 	m["datahub"] = DataHub
 	m["settings"] = Settings
 	return m

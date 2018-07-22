@@ -552,12 +552,28 @@ and (max-width : 500px) {
 
 }
 
-.demos-menu-card > .mdl-card__title__polyreg {
-    background: url('/static/images/numbers.png') center / cover;
+.demo-text-dark {
+    color: rgba(0, 0, 0, 0.6);
 }
 
-.demos-menu-card > .mdl-card__title__imgclass {
+.demo-text-colored {
+    color: rgba(26, 83, 255, 0.884);
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.demos-menu-card > .mdl-card__title__polyreg {
+    background: url('/static/images/polyreg.png') center / cover;
+}
+
+.demos-menu-card > .mdl-card__title__inception {
     background: url('/static/images/inception.jpg') center / cover;
+}
+
+.demos-menu-card > .mdl-card__title__mnist {
+    background: url('/static/images/mnist.png') center / cover;
 }
 
 .demos-menu-card > .mdl-card__title__undefined {

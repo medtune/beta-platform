@@ -1,35 +1,39 @@
-/*
-Demo polynomial regression styles
-*/
-
-.demo-polyreg {
-    width: 100%;
-    margin: 0 auto;
+canvas { 
+    border: 1px solid #ccc;
+    background-color: black;
 }
 
-.demo-polyreg-grid {
+.demo-mnist {
+
+}
+
+.draw-space {
+    
+}
+
+.demo-mnist-grid {
     max-width: 1100px;
     margin-bottom: 30px;
 }
 
-.demo-polyreg-ctrl {
+.demo-mnist-ctrl {
     text-align: center;
     display: inline-block;
     position: relative;
 }
 
-.demo-polyreg-ctrl__div {
+.demo-mnist-ctrl__div {
     min-height: 60px;
 }
 
-.demo-polyreg-ctrl__buttons {
+.demo-mnist-ctrl__buttons {
     min-height: 60px;
 }
 
 @media only screen 
 and (min-width : 500px) {
     /* Styles */
-    .demo-polyreg-ctrl__buttons {
+    .demo-mnist-ctrl__buttons {
         min-height: 60px;
         position: absolute;
         bottom: 0;
@@ -37,36 +41,46 @@ and (min-width : 500px) {
 
 }
 
-.demo-polyreg-ctrl__title {
+.demo-mnist-ctrl__title {
     margin: auto;
     color: rgb(72, 72, 72);
 }
 
-.demo-polyreg-equation {
+.demo-mnist-equation {
     min-height: 60px;
 }
 
-.demo-polyreg-clear-button {
+.demo-mnist-clear-button {
     color: white;
     background-color: rgb(255, 77, 77);
 }
 
-.demo-polyreg-clear-button:hover {
+.demo-mnist-clear-button:hover {
     color: rgb(255, 77, 77);
     background-color: white;
 }
 
-.demo-polyreg-info-button {
+.demo-mnist-info-button {
     color: rgb(255, 255, 255);
     background-color: rgb(255, 191, 0);
 }
 
-.demo-polyreg-info-button:hover {
+.demo-mnist-info-button:hover {
     color: rgb(255, 191, 0);
     background-color: white;
 }
 
-.demo-polyreg-ctrl__button {
+.demo-mnist-run-button {
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 106, 255);
+}
+
+.demo-mnist-run-button:hover {
+    color: rgb(0, 106, 255);
+    background-color: white;
+}
+
+.demo-mnist-ctrl__button {
     margin-left: 5px;
     margin-right: 5px;
 }

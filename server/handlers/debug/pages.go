@@ -80,9 +80,17 @@ func PolynomialRegression(c *gin.Context) {
 	})
 }
 
-func ImageClassification(c *gin.Context) {
+func Mnist(c *gin.Context) {
 	c.Status(200)
-	tmpl.DemoImageClassification.Execute(c.Writer, &data.Main{
+	tmpl.DemoMnist.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Demo: Image classification",
+	})
+}
+
+func InceptionImagenet(c *gin.Context) {
+	c.Status(200)
+	tmpl.DemoInceptionImagenet.Execute(c.Writer, &data.Main{
 		Version:   pkg.VERSION,
 		PageTitle: "Demo: Image classification",
 	})

@@ -32,14 +32,26 @@ func PolynomialRegression(c *gin.Context) {
 	})
 }
 
-func ImageClassification(c *gin.Context) {
+func Mnist(c *gin.Context) {
 	if logged := session.GetLoginStatus(c); !logged {
 		c.Redirect(302, "/index")
 		return
 	}
 	c.Status(200)
-	tmpl.DemoImageClassification.Execute(c.Writer, &data.Main{
+	tmpl.DemoMnist.Execute(c.Writer, &data.Main{
 		Version:   pkg.VERSION,
-		PageTitle: "Image classification",
+		PageTitle: "Handwritten digits classification",
+	})
+}
+
+func InceptionImagenet(c *gin.Context) {
+	if logged := session.GetLoginStatus(c); !logged {
+		c.Redirect(302, "/index")
+		return
+	}
+	c.Status(200)
+	tmpl.DemoInceptionImagenet.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Image classification - Inception",
 	})
 }

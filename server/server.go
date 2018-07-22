@@ -62,7 +62,8 @@ func assembleHandlers(g *gin.Engine) {
 		// Demonstrations routes
 		DEMOS := PROTECTED.Group("/demos")
 		{
-			DEMOS.GET("/image_classification", hidden.ImageClassification)
+			DEMOS.GET("/inception_imagenet", hidden.InceptionImagenet)
+			DEMOS.GET("/mnist", hidden.Mnist)
 			DEMOS.GET("/polynomial_regression", hidden.PolynomialRegression)
 		}
 

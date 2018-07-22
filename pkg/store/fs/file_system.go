@@ -1,13 +1,9 @@
 package fs
 
-import "path/filepath"
-
 var (
 	// BasePath is the mother path of all stored files
 	// on the file system
-	BasePath        = "/store"
-	defaultDataPath = filepath.Join(BasePath, "default")
-	usersDataPath   = filepath.Join(BasePath, "users")
+	BasePath = "/store/default"
 )
 
 func FileExist(file string) error {

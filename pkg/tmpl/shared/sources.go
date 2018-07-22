@@ -38,7 +38,16 @@ const (
 	
 {{end}}`
 
-	SourceHeaderImgClass = `{{define "srcheader"}}
+	SourceHeaderInceptionImagenet = `{{define "srcheader"}}
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{{end}}`
+
+	SourceHeaderMnist = `{{define "srcheader"}}
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="/static/js/common.js"></script>
+		<script src="/static/js/required.js"></script>
+		<link rel="stylesheet" href="/static/demos/mnist/styles.css"/>
+		<script src="/static/demos/mnist/main.js"></script>
+
 {{end}}`
 )
