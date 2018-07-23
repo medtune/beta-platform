@@ -274,6 +274,8 @@ func GetTemplatesMap() map[string]*template.Template {
 	m["demo-polynomial-regression"] = DemoPolynomialRegression
 	m["demo-inception-imagenet"] = DemoInceptionImagenet
 	m["demo-mnist"] = DemoMnist
+	m["demo-mura"] = DemoMura
+	m["demo-chexray"] = DemoChexray
 	m["datahub"] = DataHub
 	m["settings"] = Settings
 	return m

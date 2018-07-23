@@ -62,15 +62,20 @@ func assembleHandlers(g *gin.Engine) {
 		// Demonstrations routes
 		DEMOS := PROTECTED.Group("/demos")
 		{
-			DEMOS.GET("/inception_imagenet", hidden.InceptionImagenet)
-			DEMOS.GET("/mnist", hidden.Mnist)
 			DEMOS.GET("/polynomial_regression", hidden.PolynomialRegression)
+			DEMOS.GET("/mnist", hidden.Mnist)
+			DEMOS.GET("/inception_imagenet", hidden.InceptionImagenet)
+			DEMOS.GET("/mura", hidden.Mura)
+			DEMOS.GET("/chexray", hidden.Chexray)
 		}
 
 		// Api routes
 		API := PROTECTED.Group("/api")
 		{
 			API.POST("/mnist/run_inference", api.MnistRunInference)
+			API.POST("/inception_imagenet/run_inference", api.InceptionImagenetRunInference)
+			API.POST("/mura/run_inference", api.MuraRunInference)
+			API.POST("/chexray/run_inference", api.ChexrayRunInference)
 		}
 	}
 

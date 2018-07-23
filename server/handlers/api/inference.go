@@ -3,18 +3,24 @@ package api
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"image/png"
 
 	"github.com/anthonynsimon/bild/transform"
 	"github.com/gin-gonic/gin"
 	"github.com/medtune/beta-platform/pkg/jsonutil"
+	"github.com/medtune/beta-platform/pkg/session"
 	mnist "github.com/medtune/capsules/capsules/mnist/v1"
 	"github.com/vincent-petithory/dataurl"
 )
 
 func MnistRunInference(c *gin.Context) {
-	infData := jsonutil.RunImageInference{}
+	if logged := session.GetLoginStatus(c); !logged {
+		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied :rip:")))
+		return
+	}
 
+	infData := jsonutil.RunImageInference{}
 	err := c.ShouldBindJSON(&infData)
 	if err != nil {
 		c.JSON(200, jsonutil.Fail(err))
@@ -66,4 +72,28 @@ func MnistRunInference(c *gin.Context) {
 
 		c.JSON(200, jsonutil.SuccessData(resp.Outputs))
 	}
+}
+
+func InceptionImagenetRunInference(c *gin.Context) {
+	if logged := session.GetLoginStatus(c); !logged {
+		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied :rip:")))
+		return
+	}
+	c.JSON(200, jsonutil.Success())
+}
+
+func MuraRunInference(c *gin.Context) {
+	if logged := session.GetLoginStatus(c); !logged {
+		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied :rip:")))
+		return
+	}
+	c.JSON(200, jsonutil.Success())
+}
+
+func ChexrayRunInference(c *gin.Context) {
+	if logged := session.GetLoginStatus(c); !logged {
+		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied :rip:")))
+		return
+	}
+	c.JSON(200, jsonutil.Success())
 }

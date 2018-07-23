@@ -55,3 +55,27 @@ func InceptionImagenet(c *gin.Context) {
 		PageTitle: "Image classification - Inception",
 	})
 }
+
+func Mura(c *gin.Context) {
+	if logged := session.GetLoginStatus(c); !logged {
+		c.Redirect(302, "/index")
+		return
+	}
+	c.Status(200)
+	tmpl.DemoMura.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Demo: MURA Classification",
+	})
+}
+
+func Chexray(c *gin.Context) {
+	if logged := session.GetLoginStatus(c); !logged {
+		c.Redirect(302, "/index")
+		return
+	}
+	c.Status(200)
+	tmpl.DemoChexray.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Demo: Chest X-Ray Classification",
+	})
+}
