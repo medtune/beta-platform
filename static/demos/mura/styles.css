@@ -1,0 +1,35 @@
+.demo-mura {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.demo-mura-grid {
+    max-width: 900px;  
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.demo-mura-card > .mdl-card__title {
+    color: #fff;
+    height: 176px;
+}
+
+.demo-mura-card > .mdl-card__menu {
+    color: rgb(255, 255, 255);
+}
+
+.mdl-card__title__image {
+    height: 500px;
+}
+
+.action-left {
+    position: absolute;
+    text-align: left;
+    bottom: 100px;
+}
+
+.action-right {
+    position: absolute;
+    text-align: right;
+    bottom: 100px;
+}

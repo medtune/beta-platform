@@ -37,6 +37,8 @@ func debugHandlers(g *gin.Engine) {
 		DEBUG.GET("/demos/mnist", debug.Mnist)
 		DEBUG.GET("/demos/inception_imagenet", debug.InceptionImagenet)
 		DEBUG.GET("/demos/polynomial_regression", debug.PolynomialRegression)
+		DEBUG.GET("/demos/mura", debug.Mura)
+		DEBUG.GET("/demos/chexray", debug.Chexray)
 		DEBUG.GET("/datahub", debug.Datahub)
 	}
 }

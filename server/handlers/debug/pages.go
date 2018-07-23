@@ -90,15 +90,44 @@ func Mnist(c *gin.Context) {
 
 func InceptionImagenet(c *gin.Context) {
 	c.Status(200)
-	tmpl.DemoInceptionImagenet.Execute(c.Writer, &data.Main{
+	tmpl.DemoInceptionImagenet.Execute(c.Writer, &data.InceptionDemo{
+		Main: data.Main{
+			Version:   pkg.VERSION,
+			PageTitle: "Demo: Image classification",
+		},
+		Samples: []data.Image{
+			{"/static/images/inception.jpg", "inception", "", ""},
+			{"/static/images/inception.jpg", "inception", "", ""},
+			{"/static/images/inception.jpg", "inception", "", ""},
+			{"/static/images/inception.jpg", "inception", "", ""},
+			{"/static/images/inception.jpg", "inception", "", ""},
+			{"/static/images/inception.jpg", "inception", "", ""},
+			{"/static/images/inception.jpg", "inception", "", ""},
+			{"/static/images/inception.jpg", "inception", "", ""},
+		},
+	},
+	)
+}
+
+func Mura(c *gin.Context) {
+	c.Status(200)
+	tmpl.DemoMura.Execute(c.Writer, &data.Main{
 		Version:   pkg.VERSION,
-		PageTitle: "Demo: Image classification",
+		PageTitle: "Demo: MURA Classification",
+	})
+}
+
+func Chexray(c *gin.Context) {
+	c.Status(200)
+	tmpl.DemoChexray.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Demo: Chest X-Ray Classification",
 	})
 }
 
 func Datahub(c *gin.Context) {
 	c.Status(200)
-	tmpl.Settings.Execute(c.Writer, &data.Main{
+	tmpl.DataHub.Execute(c.Writer, &data.Main{
 		Version:   pkg.VERSION,
 		PageTitle: "Datahub",
 	})

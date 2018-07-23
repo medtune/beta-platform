@@ -29,6 +29,8 @@ var (
 	DemoPolynomialRegression *template.Template
 	DemoMnist                *template.Template
 	DemoInceptionImagenet    *template.Template
+	DemoMura                 *template.Template
+	DemoChexray              *template.Template
 )
 
 func init() {
@@ -197,6 +199,36 @@ func init() {
 		inceptionImagenet, err = inceptionImagenet.Parse(demos.InceptionImagenet)
 		must(err)
 		DemoInceptionImagenet = inceptionImagenet
+	}
+
+	{
+		mura := template.New("base")
+		mura, err = mura.Parse(shared.Base)
+		must(err)
+		mura, err = mura.Parse(shared.HeaderLogged)
+		must(err)
+		mura, err = mura.Parse(shared.SourceHeaderMura)
+		must(err)
+		mura, err = mura.Parse(shared.Footer)
+		must(err)
+		mura, err = mura.Parse(demos.Mura)
+		must(err)
+		DemoMura = mura
+	}
+
+	{
+		chexray := template.New("base")
+		chexray, err = chexray.Parse(shared.Base)
+		must(err)
+		chexray, err = chexray.Parse(shared.HeaderLogged)
+		must(err)
+		chexray, err = chexray.Parse(shared.SourceHeaderChexray)
+		must(err)
+		chexray, err = chexray.Parse(shared.Footer)
+		must(err)
+		chexray, err = chexray.Parse(demos.Chexray)
+		must(err)
+		DemoChexray = chexray
 	}
 
 	{
