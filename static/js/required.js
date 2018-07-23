@@ -18,3 +18,4 @@ var scrollToWear = function() {
     var target = top ? 0 : $("#try-beta").height();
     content.stop().animate({ scrollTop: target }, "fast");
 }
+

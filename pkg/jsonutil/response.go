@@ -13,6 +13,13 @@ func Success() *SimpleResponse {
 	}
 }
 
+func SuccessData(data interface{}) *SimpleResponse {
+	return &SimpleResponse{
+		Success: true,
+		Data:    data,
+	}
+}
+
 func Fail(errors ...error) *SimpleResponse {
 	errs := make([]string, 0, len(errors))
 	for _, err := range errors {

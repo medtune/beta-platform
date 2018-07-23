@@ -70,7 +70,7 @@ func assembleHandlers(g *gin.Engine) {
 		// Api routes
 		API := PROTECTED.Group("/api")
 		{
-			API.GET("/capsule", api.Capsule)
+			API.POST("/mnist/run_inference", api.MnistRunInference)
 		}
 	}
 

@@ -12,3 +12,8 @@ type SignupData struct {
 	Password        string `json:"password" valid:"required"`
 	PasswordConfirm string `json:"passwordc" valid:"required"`
 }
+
+type RunImageInference struct {
+	Image string `json:"image"`
+	File  string `json:"file"`
+}
