@@ -77,7 +77,7 @@ var saveAndRun = function() {
                 var x = getMax(resp.data.scores.float_val);
                 document.getElementById('elapsed-time').innerHTML = "Elapsed time: " + diff(start, end) + "s";
                 document.getElementById('top-prediction').innerHTML = "Top prediction: " + x.maxi + '(scalar : ' + x.max + ')';
-            } else if (resp.success) {
+            } else if (resp.success == false) {
                 document.getElementById('elapsed-time').innerHTML = "Elapsed time:" + diff(start, end) + "s";
                 document.getElementById("top-prediction").innerHTML = "Top prediction: ERROR";
 

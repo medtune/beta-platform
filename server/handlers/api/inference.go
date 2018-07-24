@@ -10,6 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/medtune/beta-platform/pkg/jsonutil"
 	"github.com/medtune/beta-platform/pkg/session"
+	inception "github.com/medtune/capsules/capsules/inception/v1"
 	mnist "github.com/medtune/capsules/capsules/mnist/v1"
 	"github.com/vincent-petithory/dataurl"
 )
@@ -75,6 +76,47 @@ func MnistRunInference(c *gin.Context) {
 }
 
 func InceptionImagenetRunInference(c *gin.Context) {
+	fmt.Println("called")
+	if logged := session.GetLoginStatus(c); !logged {
+		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied :rip:")))
+		return
+	}
+
+	infData := jsonutil.RunImageInference{}
+	err := c.ShouldBindJSON(&infData)
+	if err != nil {
+		c.JSON(200, jsonutil.Fail(err))
+		return
+	}
+
+	if infData.File == "" {
+		c.JSON(200, jsonutil.Fail(fmt.Errorf("File field is empty: Got struct %v", infData)))
+		return
+	}
+
+	fmt.Println("Got data: ", infData)
+
+	resp, err := inception.RunInferenceOnImagePath(infData.File)
+	if err != nil {
+		c.JSON(200, jsonutil.Fail(err))
+		return
+	}
+
+	result := jsonutil.InferenceResult{}
+	result.Scores = resp.Outputs["scores"].FloatVal
+
+	var s []string
+	for _, e := range resp.Outputs["classes"].StringVal {
+		s = append(s, string(e))
+	}
+	result.Keys = s
+
+	//fmt.Printf("result keys %v", result.Keys)
+	//fmt.Printf("result scores: %v", result.Scores)
+	c.JSON(200, jsonutil.SuccessData(result))
+}
+
+func InceptionImagenetDropImage(c *gin.Context) {
 	if logged := session.GetLoginStatus(c); !logged {
 		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied :rip:")))
 		return

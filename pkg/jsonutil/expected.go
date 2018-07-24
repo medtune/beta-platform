@@ -14,6 +14,7 @@ type SignupData struct {
 }
 
 type RunImageInference struct {
-	Image string `json:"image"`
-	File  string `json:"file"`
+	Image    string `json:"image"`
+	File     string `json:"file"`
+	NumPreds string `json:"numpreds"`
 }

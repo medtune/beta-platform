@@ -54,3 +54,13 @@ img.article-image {
 .settings-model {
     height: auto;
 }
+
+.start-hidden {
+    display: none;
+}
+
+.pred-time {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+}

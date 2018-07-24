@@ -1,8 +1,11 @@
 package hidden
 
 import (
+	"fmt"
+
 	"github.com/gin-gonic/gin"
 	"github.com/medtune/beta-platform/pkg"
+	"github.com/medtune/beta-platform/pkg/service/global"
 	"github.com/medtune/beta-platform/pkg/session"
 	"github.com/medtune/beta-platform/pkg/tmpl"
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
@@ -49,10 +52,21 @@ func InceptionImagenet(c *gin.Context) {
 		c.Redirect(302, "/index")
 		return
 	}
+	images, err := global.CollectImagesData("inception")
+	if err != nil {
+		c.Redirect(302, "/error/500")
+		return
+	}
+
+	fmt.Println(images)
+
 	c.Status(200)
-	tmpl.DemoInceptionImagenet.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
-		PageTitle: "Image classification - Inception",
+	tmpl.DemoInceptionImagenet.Execute(c.Writer, &data.InceptionDemo{
+		Main: data.Main{
+			Version:   pkg.VERSION,
+			PageTitle: "Demo: Image classification",
+		},
+		Samples: images,
 	})
 }
 

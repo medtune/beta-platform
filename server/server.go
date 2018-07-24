@@ -74,6 +74,7 @@ func assembleHandlers(g *gin.Engine) {
 		{
 			API.POST("/mnist/run_inference", api.MnistRunInference)
 			API.POST("/inception_imagenet/run_inference", api.InceptionImagenetRunInference)
+			API.POST("/inception/drop_image", api.InceptionImagenetDropImage)
 			API.POST("/mura/run_inference", api.MuraRunInference)
 			API.POST("/chexray/run_inference", api.ChexrayRunInference)
 		}

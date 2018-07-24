@@ -38,6 +38,12 @@ capsules:
       mapped-demo: mnist
       port: 9090
 
+    - image: medtune/chexray-0.0.0
+
+    - image: medtune/mnist-0.0.0
+    
+    - image: medtune/mura-0.0.0
+
 secrets:
   signup:
     - supersecret

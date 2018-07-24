@@ -250,8 +250,7 @@
     height: 800px;
     width: auto;
     background-color: #f3f3f3;
-    background: url('/static/images/slide01.jpg') center 10% no-repeat;
-    background-size: cover;
+    background: url('/static/images/slide01.png') center 20% no-repeat;
 }
 
 .scroll-down-1 {
