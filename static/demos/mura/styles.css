@@ -5,13 +5,12 @@
 
 .demo-mura-grid {
     max-width: 900px;  
-    margin-top: 30px;
-    margin-bottom: 30px;
+
 }
 
 .demo-mura-card > .mdl-card__title {
     color: #fff;
-    height: 176px;
+    height: 400px;
 }
 
 .demo-mura-card > .mdl-card__menu {
@@ -19,17 +18,76 @@
 }
 
 .mdl-card__title__image {
-    height: 500px;
+    background-size:     cover;                      /* <------ */
+    background-repeat:   no-repeat;
+    background-position: center center;
+    background-image: url('/static/demos/mura/images/image1.png');
 }
 
-.action-left {
-    position: absolute;
-    text-align: left;
+.action {
     bottom: 100px;
+    text-align: center;
 }
 
-.action-right {
-    position: absolute;
-    text-align: right;
-    bottom: 100px;
+.button-play {
+    color: rgb(37, 117, 255);
+    background-color: rgb(255, 255, 255);
+}
+
+.button-play:hover {
+    background-color: rgb(37, 117, 255);
+    color: rgb(255, 255, 255);
+}
+
+.button-change {
+    color: rgb(64, 156, 96);
+    background-color: rgb(255, 255, 255);
+}
+
+.button-change:hover {
+    background-color: rgb(64, 156, 96);
+    color: rgb(255, 255, 255);
+}
+
+.button-info {
+    background-color: rgb(255, 212, 82);
+    color: rgb(255, 255, 255);
+}
+
+.button-info:hover {
+    color: rgb(255, 212, 82);
+    background-color: rgb(255, 255, 255);
+}
+
+.page-info {
+    text-align: center;
+}
+
+.title {
+    font-size: 45px;
+    color: rgb(71, 71, 71);
+}
+
+.real-info {
+    text-align: center;
+    width: 100%;
+}
+
+.class-pred {
+    text-align: center;
+    width: 100%;
+}
+
+.pred-zone {
+    color: white;
+    background-color: gray;
+    height: 50%;
+    width: auto;
+    border-radius: 5px;
+    text-align: center;
+    justify-content: center;
+}
+
+.keykey {
+    margin-top: 10px;
 }
