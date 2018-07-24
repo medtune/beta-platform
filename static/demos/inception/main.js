@@ -95,8 +95,7 @@ var run = function(image) {
 
 var drop = function(image) {
     data = {
-        'image' : image,
-        'action' : 'delete',
+        'file' : image,
     };
     sendJSON(
         'POST',
@@ -105,8 +104,12 @@ var drop = function(image) {
         (res) => {
             resp = JSON.parse(res);
             console.log(resp);
-            if (res.success) {
+            if (resp.success == true) {
+                console.log("droping ok");
+                //alert("-----");
                 window.location.href = '/demos/inception_imagenet';
+            } else {
+                console.log("failed to drop file:" + image)
             };
         },
     );

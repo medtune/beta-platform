@@ -5,6 +5,7 @@ import (
 	"context"
 	"fmt"
 	"image/png"
+	"os"
 
 	"github.com/anthonynsimon/bild/transform"
 	"github.com/gin-gonic/gin"
@@ -121,6 +122,25 @@ func InceptionImagenetDropImage(c *gin.Context) {
 		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied :rip:")))
 		return
 	}
+
+	infData := jsonutil.RunImageInference{}
+	err := c.ShouldBindJSON(&infData)
+	if err != nil {
+		c.JSON(200, jsonutil.Fail(err))
+		return
+	}
+
+	if infData.File == "" {
+		c.JSON(200, jsonutil.Fail(fmt.Errorf("File field is empty: Got struct %v", infData)))
+		return
+	}
+
+	err = os.Remove(infData.File)
+	if err != nil {
+		c.JSON(200, jsonutil.Fail(err))
+		return
+	}
+
 	c.JSON(200, jsonutil.Success())
 }
 
