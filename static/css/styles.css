@@ -132,7 +132,7 @@
 
 .v-beta {
     position: absolute;
-    font-size: 8;
+    font-size: 10px;
     left: 170px;
     top: 12px;
 }
@@ -533,6 +533,7 @@ and (max-width : 500px) {
 .demo-goback {
     margin-top: 10px;
     margin-left: 45px;
+    position: absolute;
 }
 
 
@@ -594,4 +595,55 @@ and (max-width : 500px) {
 
 .demos-menu-card > .mdl-card__menu {
     color: rgb(255, 255, 255);
+}
+
+.page-info {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.title {
+    font-size: 45px;
+    color: rgb(71, 71, 71);
+}
+
+.back-button {
+    
+}
+
+.page-datahub {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.grid-datahub {
+    max-width: 400px;  
+    margin-top: 130px;
+    margin-bottom: 140px;
+}
+
+
+.mdl-button--file input {
+    cursor: pointer;
+    height: 100%;
+    right: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 300px;
+    z-index: 4;    
+}
+  
+.mdl-textfield--file .mdl-textfield__input {
+      box-sizing: border-box;
+      width: calc(100% - 32px);
+}
+ 
+.mdl-textfield--file .mdl-button--file {
+      right: 0;
+}
+
+.frm {
+    height: 250px;
 }

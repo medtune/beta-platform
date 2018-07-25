@@ -3,14 +3,10 @@ package demos
 const Mnist = `{{define "content"}}
 
 <div class="demo-mnist">
-	<div class="demo-goback">
-			<button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="window.location.href='/demos'">
-				Go back
-			</button>
-	</div>
-
 	<div class="mdl-grid demo-mnist-grid">
-
+		<div class="mdl-cell mdl-cell--12-col page-info">
+			<span class="title">MNIST: Handwritten digits</span>
+		</div>
 		<div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet" id="demo">
 			<canvas id="c" width="500" height="500"></canvas>
 		</div>

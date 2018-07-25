@@ -8,8 +8,8 @@ const (
 			<span class="title">Musculoskeletal Radiographs</span>
 		</div>
 		<div class="mdl-cell mdl-cell--12-col demo-mura-card mdl-card mdl-shadow--2dp">
-			<div class="mdl-card__title mdl-card__title__image">
-				<h2 class="mdl-card__title-text demo-text-dark bold">Image id</h2>
+			<div class="mdl-card__title mdl-card__title__image" id="main-image">
+				<h2 class="mdl-card__title-text bold"></h2>
 			</div>
 
 			<div class="mdl-card__actions action">
@@ -47,12 +47,15 @@ const (
 				<div class="class-pred">
 					<h5>Class Prediction</h5>
 				</div>
-				<div class="pred-zone">
-					Positive (Timing: 0 ms)
+				<div class="pred-zone" id="pred-zone">
+					Undefined (Timing: NaN ms)
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<script>
+	_showActualSample();
+</script>
 {{end}}`
 )

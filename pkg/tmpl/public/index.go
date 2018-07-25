@@ -6,7 +6,6 @@ const Index = `{{define "content"}}
         <div class="logo-font android-slogan">Medtune Beta Platform</div>
         <div class="logo-font android-sub-slogan"><span id="typed"></span></div>
         <div class="logo-font android-create-character">
-            <a style="padding-right: 10px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at commodo tellus</a>
         </div>
 
         <button class="scroll-down-1 mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" id="godown-btn-1">

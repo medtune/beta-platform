@@ -4,12 +4,6 @@ const (
 	Demos = `{{define "content"}}
 <div class="demos-menu">
 
-	<div class="demo-goback">
-		<button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="window.location.href='/home'">
-			Go back
-		</button>
-	</div>
-
 	<!--
 	<div class="mdl-grid">
 		<div class="mdl-cell mdl-cell--12-col">

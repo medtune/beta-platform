@@ -35,8 +35,8 @@ var _setPredsUI = function(num) {
 
 var _createResultStatOne = function(tags, perc, id) {
     document.getElementById('s' + id).innerHTML = tags;
-    document.getElementById('r' + id).innerHTML = perc + '%:';
-    document.querySelector('#p' + id).MaterialProgress.setProgress(perc);
+    document.getElementById('r' + id).innerHTML = perc + ':';
+    document.querySelector('#p' + id).MaterialProgress.setProgress(perc * 4);
 };
 
 var _alertFailure = function() {
@@ -45,6 +45,17 @@ var _alertFailure = function() {
 
 var _showTime = function(t) {
     document.getElementById('elapsed-time').innerHTML = 'Elapsed time: ' + t * 1000 + 'ms';
+};
+
+
+var _showResults = function(res) {
+    var i = 0;
+    console.log("***called***");
+    for (var key in res.keys) {
+        console.log("going on key: ", res.keys[i], res.scores[i], i+1)
+        _createResultStatOne(res.keys[i], res.scores[i], i+1)
+        i++;
+    };
 };
 
 var _requestInference = function(image, numpreds) {
@@ -75,16 +86,6 @@ var _deleteOldResults = function() {
     incr = 0;
     resultDiv = document.getElementById('predictions-results');
     resultDiv.innerHTML = ``
-};
-
-var _showResults = function(res) {
-    var i = 0;
-    console.log("***called***");
-    for (var key in res.keys) {
-        console.log("going on key: ", res.keys[i], res.scores[i], i+1)
-        _createResultStatOne(res.keys[i], res.scores[i], i+1)
-        i++;
-    };
 };
 
 var run = function(image) {

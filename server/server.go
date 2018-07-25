@@ -58,6 +58,7 @@ func assembleHandlers(g *gin.Engine) {
 		PROTECTED.GET("/logout", hidden.Logout)
 		PROTECTED.GET("/home", hidden.Home)
 		PROTECTED.GET("/demos", hidden.DemosMenu)
+		PROTECTED.GET("/datahub", hidden.Datahub)
 
 		// Demonstrations routes
 		DEMOS := PROTECTED.Group("/demos")
@@ -74,9 +75,10 @@ func assembleHandlers(g *gin.Engine) {
 		{
 			API.POST("/mnist/run_inference", api.MnistRunInference)
 			API.POST("/inception_imagenet/run_inference", api.InceptionImagenetRunInference)
-			API.POST("/inception/drop_image", api.InceptionImagenetDropImage)
+			API.POST("/inception_imagenet/drop_image", api.InceptionImagenetDropImage)
 			API.POST("/mura/run_inference", api.MuraRunInference)
 			API.POST("/chexray/run_inference", api.ChexrayRunInference)
+			API.POST("/datahub_upload", api.DatahubUpload)
 		}
 	}
 
