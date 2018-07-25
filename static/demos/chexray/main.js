@@ -1,24 +1,15 @@
 var actualSampleId = 0;
-var numSamples = 4;
+var numSamples = 2;
 
 var samples = [
     {
         'id': 0,
-        'label' : 'CLASS1',
+        'label' : 'Positive',
     },
     {
         'id': 1,
-        'label' : 'CLASS2',
+        'label' : 'Positive',
     },
-    {
-        'id': 2,
-        'label' : 'CLASS3',
-    },
-    {
-        'id': 3,
-        'label' : 'CLASS3',
-    },
-    
 ];
 
 var getSample = function(id) {

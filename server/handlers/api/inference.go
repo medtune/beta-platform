@@ -205,10 +205,10 @@ func ChexrayRunInference(c *gin.Context) {
 
 	switch infData.Id {
 	case 0:
-		response.Prediction = "CLASS1"
+		response.Prediction = "Positive"
 		response.Correct = true
 	case 1:
-		response.Prediction = "CLASS4"
+		response.Prediction = "Negative"
 		response.Correct = false
 	case 2:
 		response.Prediction = "CLASS4"

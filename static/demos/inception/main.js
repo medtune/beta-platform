@@ -36,7 +36,7 @@ var _setPredsUI = function(num) {
 var _createResultStatOne = function(tags, perc, id) {
     document.getElementById('s' + id).innerHTML = tags;
     document.getElementById('r' + id).innerHTML = perc + ':';
-    document.querySelector('#p' + id).MaterialProgress.setProgress(perc * 4);
+    document.querySelector('#p' + id).MaterialProgress.setProgress(perc * 6);
 };
 
 var _alertFailure = function() {

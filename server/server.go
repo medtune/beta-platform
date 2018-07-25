@@ -54,6 +54,7 @@ func assembleHandlers(g *gin.Engine) {
 
 	// Login protected routes
 	PROTECTED := g.Group("/")
+
 	{
 		PROTECTED.GET("/logout", hidden.Logout)
 		PROTECTED.GET("/home", hidden.Home)
