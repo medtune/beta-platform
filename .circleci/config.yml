@@ -6,11 +6,15 @@ jobs:
     working_directory: /go/src/github.com/medtune/beta-platform
     steps:
       - checkout
-      
+
       - run:
-          name: installing dependencies
-          command: go get -v -t -d ./...
-          
+          name: installing pkg dependencies
+          command: go get -v -t -d ./pkg/...
+
+      - run:
+          name: installing gin framework
+          command: go get -u github.com/gin-gonic/gin
+      
       - run: go build -o medtune-beta -tags=cicd ./cmd/main.go
       - run: go test -v ./...
       - run: ls -sh
