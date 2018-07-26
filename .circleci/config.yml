@@ -9,15 +9,12 @@ jobs:
 
       - run:
           name: installing pkg dependencies
-          command: go get -v -t -d ./pkg/...
-
-      - run:
-          name: installing framworks
           command: |
+            go get -v -t -d ./pkg/...
             go get -u github.com/gin-gonic/gin
             go get -u github.com/spf13/cobra
       
-      - run: go build -o medtune-beta -tags=cicd ./cmd/main.go
-      - run: go test -v ./...
-      - run: ls -sh
+      - run:
+           name: build binaries
+           command : go build -o medtune-beta -tags=cicd ./cmd/main.go
 
