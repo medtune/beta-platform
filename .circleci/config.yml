@@ -9,7 +9,7 @@ jobs:
 
       - run:
           name: installing pkg dependencies
-          command: go get -v -t -d ./pkg/...
+          command: go get -v -t -d ./{pkg,cmd}/...
 
       - run:
           name: installing gin framework
