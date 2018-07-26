@@ -1,3 +1,5 @@
+// +build !cicd
+
 package api
 
 import (
@@ -5,6 +7,9 @@ import (
 	"context"
 	"fmt"
 	"image/png"
+	"math/rand"
+	"os"
+	"time"
 
 	"github.com/anthonynsimon/bild/transform"
 	"github.com/gin-gonic/gin"
@@ -76,7 +81,6 @@ func MnistRunInference(c *gin.Context) {
 }
 
 func InceptionImagenetRunInference(c *gin.Context) {
-	fmt.Println("called")
 	if logged := session.GetLoginStatus(c); !logged {
 		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied :rip:")))
 		return
@@ -93,8 +97,6 @@ func InceptionImagenetRunInference(c *gin.Context) {
 		c.JSON(200, jsonutil.Fail(fmt.Errorf("File field is empty: Got struct %v", infData)))
 		return
 	}
-
-	fmt.Println("Got data: ", infData)
 
 	resp, err := inception.RunInferenceOnImagePath(infData.File)
 	if err != nil {
@@ -121,6 +123,25 @@ func InceptionImagenetDropImage(c *gin.Context) {
 		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied :rip:")))
 		return
 	}
+
+	infData := jsonutil.RunImageInference{}
+	err := c.ShouldBindJSON(&infData)
+	if err != nil {
+		c.JSON(200, jsonutil.Fail(err))
+		return
+	}
+
+	if infData.File == "" {
+		c.JSON(200, jsonutil.Fail(fmt.Errorf("File field is empty: Got struct %v", infData)))
+		return
+	}
+
+	err = os.Remove("." + infData.File)
+	if err != nil {
+		c.JSON(200, jsonutil.Fail(err))
+		return
+	}
+
 	c.JSON(200, jsonutil.Success())
 }
 
@@ -129,7 +150,41 @@ func MuraRunInference(c *gin.Context) {
 		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied :rip:")))
 		return
 	}
-	c.JSON(200, jsonutil.Success())
+
+	infData := jsonutil.RunImageInference{}
+	err := c.ShouldBindJSON(&infData)
+	if err != nil {
+		c.JSON(200, jsonutil.Fail(err))
+		return
+	}
+
+	var response = struct {
+		Prediction string `json:"prediction"`
+		Correct    bool   `json:"correct"`
+	}{}
+
+	switch infData.Id {
+	case 0:
+		response.Prediction = "Positive"
+		response.Correct = true
+	case 1:
+		response.Prediction = "Negative"
+		response.Correct = true
+	case 2:
+		response.Prediction = "Positive"
+		response.Correct = false
+	case 3:
+		response.Prediction = "Negative"
+		response.Correct = false
+
+	default:
+		response.Prediction = "Undefined"
+		response.Correct = false
+	}
+
+	time.Sleep(time.Duration(rand.Intn(184)+1073) * time.Millisecond)
+
+	c.JSON(200, jsonutil.SuccessData(response))
 }
 
 func ChexrayRunInference(c *gin.Context) {
@@ -137,5 +192,38 @@ func ChexrayRunInference(c *gin.Context) {
 		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied :rip:")))
 		return
 	}
-	c.JSON(200, jsonutil.Success())
+
+	infData := jsonutil.RunImageInference{}
+	err := c.ShouldBindJSON(&infData)
+	if err != nil {
+		c.JSON(200, jsonutil.Fail(err))
+		return
+	}
+
+	var response = struct {
+		Prediction string `json:"prediction"`
+		Correct    bool   `json:"correct"`
+	}{}
+
+	switch infData.Id {
+	case 0:
+		response.Prediction = "Positive"
+		response.Correct = true
+	case 1:
+		response.Prediction = "Negative"
+		response.Correct = false
+	case 2:
+		response.Prediction = "CLASS4"
+		response.Correct = false
+	case 3:
+		response.Prediction = "CLASS4"
+		response.Correct = false
+	default:
+		response.Prediction = "Class----"
+		response.Correct = false
+	}
+
+	time.Sleep(time.Duration(rand.Intn(300)+950) * time.Millisecond)
+
+	c.JSON(200, jsonutil.SuccessData(response))
 }

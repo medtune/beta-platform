@@ -5,12 +5,13 @@
 
 .demo-mura-grid {
     max-width: 900px;  
-
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .demo-mura-card > .mdl-card__title {
     color: #fff;
-    height: 400px;
+    height: 600px;
 }
 
 .demo-mura-card > .mdl-card__menu {
@@ -21,7 +22,6 @@
     background-size:     cover;                      /* <------ */
     background-repeat:   no-repeat;
     background-position: center center;
-    background-image: url('/static/demos/mura/images/image1.png');
 }
 
 .action {
@@ -59,9 +59,6 @@
     background-color: rgb(255, 255, 255);
 }
 
-.page-info {
-    text-align: center;
-}
 
 .title {
     font-size: 45px;

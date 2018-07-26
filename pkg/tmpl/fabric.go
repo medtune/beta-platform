@@ -237,7 +237,7 @@ func init() {
 		must(err)
 		datahub, err = datahub.Parse(shared.HeaderLogged)
 		must(err)
-		datahub, err = datahub.Parse(shared.SourceHeaderEmpty)
+		datahub, err = datahub.Parse(shared.SourceHeaderDatahub)
 		must(err)
 		datahub, err = datahub.Parse(shared.Footer)
 		must(err)

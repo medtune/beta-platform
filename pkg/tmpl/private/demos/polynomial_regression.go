@@ -2,12 +2,11 @@ package demos
 
 const PolynomialRegression = `{{define "content"}}
 <div class="demo-polyreg">
-	<div class="demo-goback">
-			<button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="window.location.href='/demos'">
-				Go back
-			</button>
-	</div>
+
 	<div class="mdl-grid demo-polyreg-grid">
+		<div class="mdl-cell mdl-cell--12-col page-info">
+			<span class="title"> Polynomial Regression</span>
+		</div>
 		<div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp" id="demo">
 		</div>
 		<div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-grid mdl-shadow--2dp demo-polyreg-ctrl">

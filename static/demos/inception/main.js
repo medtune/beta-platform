@@ -35,8 +35,8 @@ var _setPredsUI = function(num) {
 
 var _createResultStatOne = function(tags, perc, id) {
     document.getElementById('s' + id).innerHTML = tags;
-    document.getElementById('r' + id).innerHTML = perc + '%:';
-    document.querySelector('#p' + id).MaterialProgress.setProgress(perc);
+    document.getElementById('r' + id).innerHTML = perc + ':';
+    document.querySelector('#p' + id).MaterialProgress.setProgress(perc * 6);
 };
 
 var _alertFailure = function() {
@@ -45,6 +45,17 @@ var _alertFailure = function() {
 
 var _showTime = function(t) {
     document.getElementById('elapsed-time').innerHTML = 'Elapsed time: ' + t * 1000 + 'ms';
+};
+
+
+var _showResults = function(res) {
+    var i = 0;
+    console.log("***called***");
+    for (var key in res.keys) {
+        console.log("going on key: ", res.keys[i], res.scores[i], i+1)
+        _createResultStatOne(res.keys[i], res.scores[i], i+1)
+        i++;
+    };
 };
 
 var _requestInference = function(image, numpreds) {
@@ -77,16 +88,6 @@ var _deleteOldResults = function() {
     resultDiv.innerHTML = ``
 };
 
-var _showResults = function(res) {
-    var i = 0;
-    console.log("***called***");
-    for (var key in res.keys) {
-        console.log("going on key: ", res.keys[i], res.scores[i], i+1)
-        _createResultStatOne(res.keys[i], res.scores[i], i+1)
-        i++;
-    };
-};
-
 var run = function(image) {
     settings = _getSettings();
     _setPredsUI(settings.numpreds);
@@ -95,8 +96,7 @@ var run = function(image) {
 
 var drop = function(image) {
     data = {
-        'image' : image,
-        'action' : 'delete',
+        'file' : image,
     };
     sendJSON(
         'POST',
@@ -105,8 +105,12 @@ var drop = function(image) {
         (res) => {
             resp = JSON.parse(res);
             console.log(resp);
-            if (res.success) {
+            if (resp.success == true) {
+                console.log("droping ok");
+                //alert("-----");
                 window.location.href = '/demos/inception_imagenet';
+            } else {
+                console.log("failed to drop file:" + image)
             };
         },
     );

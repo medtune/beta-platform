@@ -1,4 +1,11 @@
+.page-inception {
+    width: 100%;
+    margin: 0 auto;
+}
 
+.grid-inception {
+    max-width: 1300px;
+}
 
 .mdl-layout__title {
     padding-top:15px;
