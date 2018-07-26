@@ -9,11 +9,13 @@ jobs:
 
       - run:
           name: installing pkg dependencies
-          command: go get -v -t -d ./{pkg,cmd}/...
+          command: go get -v -t -d ./pkg/...
 
       - run:
-          name: installing gin framework
-          command: go get -u github.com/gin-gonic/gin
+          name: installing framworks
+          command: |
+            - go get -u github.com/gin-gonic/gin
+            - go get -u github.com/spf13/cobra
       
       - run: go build -o medtune-beta -tags=cicd ./cmd/main.go
       - run: go test -v ./...
