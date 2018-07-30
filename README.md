@@ -1,4 +1,4 @@
-# MedTune Platform ~ Beta
+# MedTune Platform ~ Beta v0.0.4
 
 [![GitHub license](https://img.shields.io/github/license/medtune/beta-platform.svg)](https://github.com/medtune/beta-platform/blob/iron-master/LICENSE.txt) [![GitHub pull-requests](https://img.shields.io/github/issues-pr/medtune/beta-platform.svg)](https://GitHub.com/medtune/beta-platform/pull/) [![GitHub issues](https://img.shields.io/github/issues/medtune/beta-platform.svg)](https://github.com/medtune/beta-platform/issues) [![GitHub release](https://img.shields.io/github/release/medtune/beta-platform.svg)](https://GitHub.com/medtune/beta-platform/releases) 
 
@@ -61,7 +61,6 @@ To use medtune-beta command line you need a Golang Compiler (Tested on 1.10 and 
 To run medtune-beta platform services localy you will need a container engine/orchestrator (like Docker swarm, Kubernetes).
 
 ###### Database
-
 Medtune Beta runs next to postgres database (if you want to go beyond signup).
 
 ###### Capsules

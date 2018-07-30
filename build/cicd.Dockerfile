@@ -17,11 +17,5 @@ COPY config.yml .
 RUN go get -v ./...
 
 # Build binaries
-RUN go build -v -o ./medtune-beta ./cmd/main.go
-
-# Port to expose
-EXPOSE 8005
-
-# please precise -v $CONFIGPATH:/config
-ENTRYPOINT [ "./medtune-beta", "start", "--syncdb", "--wait", "--create-users" ]
+RUN go build -v -o -tags=cidi ./medtune-beta ./cmd/main.go
 
