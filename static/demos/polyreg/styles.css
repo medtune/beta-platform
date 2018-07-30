@@ -1,0 +1,72 @@
+/*
+Demo polynomial regression styles
+*/
+
+.demo-polyreg {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.demo-polyreg-grid {
+    max-width: 1100px;
+    margin-bottom: 30px;
+}
+
+.demo-polyreg-ctrl {
+    text-align: center;
+    display: inline-block;
+    position: relative;
+}
+
+.demo-polyreg-ctrl__div {
+    min-height: 60px;
+}
+
+.demo-polyreg-ctrl__buttons {
+    min-height: 60px;
+}
+
+@media only screen 
+and (min-width : 500px) {
+    /* Styles */
+    .demo-polyreg-ctrl__buttons {
+        min-height: 60px;
+        position: absolute;
+        bottom: 0;
+    }
+
+}
+
+.demo-polyreg-ctrl__title {
+    margin: auto;
+    color: rgb(72, 72, 72);
+}
+
+.demo-polyreg-equation {
+    min-height: 60px;
+}
+
+.demo-polyreg-clear-button {
+    color: white;
+    background-color: rgb(255, 77, 77);
+}
+
+.demo-polyreg-clear-button:hover {
+    color: rgb(255, 77, 77);
+    background-color: white;
+}
+
+.demo-polyreg-info-button {
+    color: rgb(255, 255, 255);
+    background-color: rgb(255, 191, 0);
+}
+
+.demo-polyreg-info-button:hover {
+    color: rgb(255, 191, 0);
+    background-color: white;
+}
+
+.demo-polyreg-ctrl__button {
+    margin-left: 5px;
+    margin-right: 5px;
+}

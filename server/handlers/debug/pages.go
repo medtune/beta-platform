@@ -4,12 +4,14 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/medtune/beta-platform/pkg"
 	"github.com/medtune/beta-platform/pkg/tmpl"
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
 )
 
 func Home(c *gin.Context) {
 	inject := data.Main{
+		Version:   pkg.VERSION,
 		PageTitle: "Home",
 	}
 	c.Status(200)
@@ -19,6 +21,7 @@ func Home(c *gin.Context) {
 func Index(c *gin.Context) {
 	c.Status(200)
 	inject := data.Main{
+		Version:   pkg.VERSION,
 		PageTitle: "Index",
 	}
 	tmpl.Index.Execute(c.Writer, &inject)
@@ -27,6 +30,7 @@ func Index(c *gin.Context) {
 func Login(c *gin.Context) {
 	c.Status(200)
 	tmpl.Login.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
 		PageTitle: "login",
 	})
 }
@@ -34,6 +38,7 @@ func Login(c *gin.Context) {
 func Signup(c *gin.Context) {
 	c.Status(200)
 	tmpl.Signup.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
 		PageTitle: "Signup",
 	})
 }
@@ -57,4 +62,73 @@ func Error(c *gin.Context) {
 		c.Status(418)
 		tmpl.Error.Execute(c.Writer, &data.ErrorFinalBoss)
 	}
+}
+
+func DemosMenu(c *gin.Context) {
+	c.Status(200)
+	tmpl.DemosMenu.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Demo: Image classification",
+	})
+}
+
+func PolynomialRegression(c *gin.Context) {
+	c.Status(200)
+	tmpl.DemoPolynomialRegression.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Demo: Polynomial Regression",
+	})
+}
+
+func Mnist(c *gin.Context) {
+	c.Status(200)
+	tmpl.DemoMnist.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Demo: Image classification",
+	})
+}
+
+func InceptionImagenet(c *gin.Context) {
+	c.Status(200)
+	tmpl.DemoInceptionImagenet.Execute(c.Writer, &data.InceptionDemo{
+		Main: data.Main{
+			Version:   pkg.VERSION,
+			PageTitle: "Demo: Image classification",
+		},
+		Samples: []data.Image{
+			{"/static/images/inception.jpg", "inception", "", ""},
+			{"/static/images/inception.jpg", "inception", "", ""},
+			{"/static/images/inception.jpg", "inception", "", ""},
+			{"/static/images/inception.jpg", "inception", "", ""},
+			{"/static/images/inception.jpg", "inception", "", ""},
+			{"/static/images/inception.jpg", "inception", "", ""},
+			{"/static/images/inception.jpg", "inception", "", ""},
+			{"/static/images/inception.jpg", "inception", "", ""},
+		},
+	},
+	)
+}
+
+func Mura(c *gin.Context) {
+	c.Status(200)
+	tmpl.DemoMura.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Demo: MURA Classification",
+	})
+}
+
+func Chexray(c *gin.Context) {
+	c.Status(200)
+	tmpl.DemoChexray.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Demo: Chest X-Ray Classification",
+	})
+}
+
+func Datahub(c *gin.Context) {
+	c.Status(200)
+	tmpl.DataHub.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Datahub",
+	})
 }

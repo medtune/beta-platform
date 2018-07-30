@@ -1,5 +1,6 @@
 version: '3'
 services:
+  #Database
   postgres:
     image: postgres:latest
     environment:
@@ -7,9 +8,8 @@ services:
       - POSTGRES_PASSWORD=mdtn
       - POSTGRES_DB=medtune
 
-
-  webapp:
-    image: medtune/beta-platform:v1
+  platform-server:
+    image: medtune/platform:beta.alpine-v0.0.3
     ports:
       - 8005:8005
     depends_on:

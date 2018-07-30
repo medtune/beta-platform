@@ -5,7 +5,7 @@ var HeaderLogged = `{{define "header"}}
 	<header class="mdl-layout__header page-header">
 	<div class="mdl-layout__header-row">
 			
-		<span class="mdl-layout-title">MedTune <span class="v-beta">beta</span></span>
+		<span class="mdl-layout-title">MedTune</span><span class="v-beta">beta</span>
 		
 		<div class="mdl-layout-spacer"></div>
 
@@ -40,10 +40,10 @@ var HeaderLogged = `{{define "header"}}
 	</header>
 	
 	<div class="mdl-layout__drawer">
-		<span class="version">v 0.0.2</span>
+		<span class="version">{{ .Version }}</span>
 
 		<div style="text-align:center">
-			<img src="/static/images/logo.png" class="demo-avatar" onclick="window.location.href='/home'">
+			<img src="/static/images/slide01.png" class="demo-avatar" onclick="window.location.href='/home'">
 		<div>
 
 		<nav class="mdl-navigation">

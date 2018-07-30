@@ -1,0 +1,54 @@
+meta:
+  name: medtune beta platform
+  description: beta test
+  version: iron-0.0.3
+  prod: true
+
+database:
+  type: postgres
+  prod: medtune
+  test: medtune-test
+  creds:
+    host: localhost #postgres
+    port: 5432
+    user: amine
+    password: a
+  
+session:
+  type: cookie
+  random: true
+  name: default-session
+  secret: A0123456789
+
+crypto:
+  algo: SHA256
+  salt: MORE-SALT-PLEASE
+
+public:
+  static: ./static
+
+capsules:
+  engine: docker
+  items:
+    - image: medtune/inception-0.0.0
+      mapped-demo: inception-imagenet
+      port: 7501
+
+    - image: medtune/mnist-0.0.0
+      mapped-demo: mnist
+      port: 7500
+
+secrets:
+  signup:
+    - supersecret
+    - siistrasbourg
+
+create:
+  users:
+    - username: admin
+      email: admin@medtune.org
+      password: admin
+
+    - username: test
+      email: test@medtune.org
+      password: test

@@ -1,5 +1,7 @@
 package config
 
+import "github.com/medtune/beta-platform/pkg/store/model"
+
 type Meta struct {
 	Name        string `yaml:"name"`
 	Description string `yaml:"description"`
@@ -47,6 +49,10 @@ type Secrets struct {
 	Signup []string `yaml:"signup"`
 }
 
+type Create struct {
+	Users []*model.User `yaml:"users"`
+}
+
 type StartupConfig struct {
 	Meta     *Meta          `yaml:"meta"`
 	Server   *Server        `yaml:"server"`
@@ -55,4 +61,5 @@ type StartupConfig struct {
 	Crypto   *Crypto        `yaml:"crypto"`
 	Public   *PublicContent `yaml:"public"`
 	Secrets  *Secrets       `yaml:"secrets"`
+	Create   *Create        `yaml:"create"`
 }

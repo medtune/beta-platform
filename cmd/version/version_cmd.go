@@ -28,11 +28,10 @@ var versionCmd = &cobra.Command{
 	Short: "Medtune beta actual version",
 	Long:  `Print Medtune Beta version`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("Version: %s\n", pkg.VERSION)
+		fmt.Printf("Medtune beta command line\nVersion: %s\n", pkg.VERSION)
 	},
 }
 
 func init() {
-
 	root.Cmd.AddCommand(versionCmd)
 }

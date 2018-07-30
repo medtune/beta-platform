@@ -29,14 +29,15 @@ import (
 )
 
 var (
-	static     string
-	configFile string
-	port       int
-	ginMode    int
-	syncdb     bool
-	wait       bool
-	maxattempt int
-	timestamp  int
+	static      string
+	configFile  string
+	port        int
+	ginMode     int
+	syncdb      bool
+	wait        bool
+	maxattempt  int
+	timestamp   int
+	createUsers bool
 )
 
 func init() {
@@ -46,6 +47,7 @@ func init() {
 	startCmd.Flags().IntVarP(&port, "port", "p", 8005, "port")
 	startCmd.Flags().IntVarP(&ginMode, "gin-mode", "g", 0, "Gin server mode [0 OR 1]")
 	startCmd.Flags().BoolVarP(&syncdb, "syncdb", "x", true, "Sync database before start")
+	startCmd.Flags().BoolVarP(&createUsers, "create-users", "y", true, "Create default users before start")
 
 	startCmd.Flags().BoolVarP(&wait, "wait", "w", false, "Wait all services to go up")
 	startCmd.Flags().IntVarP(&maxattempt, "wait-attempts", "c", 30, "Wait max attempts")
@@ -85,29 +87,39 @@ func runServer() {
 	}
 
 	if syncdb {
-		fmt.Printf("syncing database %s\n", configuration.Database.Prod)
 		var err error
+
 		err = store.Agent.Sync()
+		fmt.Printf("trying to connect database %s\n", configuration.Database.Prod)
 
 		if err != nil && wait {
 			attempt := 0
-			for err != nil {
+			for err != nil && attempt < maxattempt {
 				time.Sleep(time.Duration(timestamp) * time.Second)
-				fmt.Println("Waiting for database to get seted up")
+				fmt.Printf("waiting for database response (host: %s)\n", configuration.Database.Creds.Host)
 				err = store.Agent.Sync()
 				attempt++
-				if attempt == maxattempt {
-					break
-				}
 			}
 		}
 		if err != nil {
 			panic(err)
 		}
-
+		fmt.Println("connected to database...")
 	}
 
-	fmt.Println("Starting server...")
+	if createUsers && configuration.Create != nil {
+		var err error
+		for _, user := range configuration.Create.Users {
+			err = store.Agent.CreateUser(user.Email, user.Username, user.Password)
+			if err != nil {
+				fmt.Printf("failed to create user: %s\n    error: %v\n", user.Username, err)
+				continue
+			}
+			fmt.Printf("created user %s %s %s\n", user.Email, user.Username, user.Password)
+		}
+	}
+
+	fmt.Println("starting server...")
 
 	Server := server.New(
 		static,

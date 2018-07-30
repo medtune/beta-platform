@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-//TODO
+//FIXME
 func LoggedOnly() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		s := sessions.Default(c)

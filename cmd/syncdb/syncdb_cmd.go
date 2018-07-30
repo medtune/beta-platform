@@ -15,21 +15,25 @@
 package syncdb
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/medtune/beta-platform/cmd/root"
 	"github.com/medtune/beta-platform/pkg/config"
 	"github.com/medtune/beta-platform/pkg/store"
 	"github.com/medtune/beta-platform/pkg/store/db"
+	"github.com/medtune/beta-platform/pkg/store/model"
 	"github.com/spf13/cobra"
 )
 
 var (
-	configFile string
+	configFile  string
+	createUsers bool
 )
 
 func init() {
 	autoMigrateCmd.Flags().StringVarP(&configFile, "file", "f", "config.yml", "Configuration file name")
+	autoMigrateCmd.Flags().BoolVarP(&createUsers, "create-users", "y", true, "Create default users before start")
 
 	root.Cmd.AddCommand(autoMigrateCmd)
 }
@@ -48,11 +52,13 @@ database tables`,
 
 func autoMigrateDatabase() {
 	var dbconfig *config.Database
+	var usersConfig []*model.User
 
-	if cfg, err := config.LoadConfigFromPath(configFile); err != nil {
+	if configuration, err := config.LoadConfigFromPath(configFile); err != nil {
 		log.Panic(err)
 	} else {
-		dbconfig = cfg.Database
+		dbconfig = configuration.Database
+		usersConfig = configuration.Create.Users
 	}
 
 	log.Printf("starting auto-migration on database: %v", dbconfig.Prod)
@@ -74,6 +80,18 @@ func autoMigrateDatabase() {
 			log.Panic(err)
 		}
 
+		if createUsers && usersConfig != nil {
+			var err error
+			for _, user := range usersConfig {
+				err = engine.CreateUser(user.Email, user.Username, user.Password)
+				if err != nil {
+					fmt.Printf("failed to create user: %s\n    error: %v\n", user.Username, err)
+					continue
+				}
+				fmt.Printf("created user %s %s %s\n", user.Email, user.Username, user.Password)
+			}
+		}
+
 	}
 
 	log.Printf("starting auto-migration on database: %v", dbconfig.Test)
@@ -92,6 +110,18 @@ func autoMigrateDatabase() {
 		}
 		if err := engine.Sync(); err != nil {
 			log.Panic(err)
+		}
+
+		if createUsers && usersConfig != nil {
+			var err error
+			for _, user := range usersConfig {
+				err = engine.CreateUser(user.Email, user.Username, user.Password)
+				if err != nil {
+					fmt.Printf("failed to create user: %s\n    error: %v\n", user.Username, err)
+					continue
+				}
+				fmt.Printf("created user %s %s %s\n", user.Email, user.Username, user.Password)
+			}
 		}
 
 	}

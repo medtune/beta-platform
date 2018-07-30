@@ -65,12 +65,14 @@ func (s *Store) getUserByEmail(email string) (*model.User, error) {
 func (s *Store) AuthentificateUser(username, password string) (bool, error) {
 	user, err := s.GetUser(username)
 	if err != nil {
-		return false, fmt.Errorf("user not found: %v", err)
+		// Database server error or record not found
+		return false, fmt.Errorf("username or password incorrect")
 	}
 
 	if crypto.Sha256(password) == user.Password {
 		return true, nil
 	}
 
-	return false, fmt.Errorf("wrong password")
+	// Password is incorrect
+	return false, fmt.Errorf("username or password incorrect")
 }

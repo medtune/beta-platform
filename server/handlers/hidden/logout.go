@@ -10,5 +10,4 @@ func Logout(c *gin.Context) {
 		session.SetLoginStatus(c, false)
 	}
 	c.Redirect(302, "/index")
-
 }

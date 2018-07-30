@@ -7,9 +7,21 @@ type SimpleResponse struct {
 	Errors   []string    `json:"errors"`
 }
 
+type InferenceResult struct {
+	Keys   []string  `json:"keys"`
+	Scores []float32 `json:"scores"`
+}
+
 func Success() *SimpleResponse {
 	return &SimpleResponse{
 		Success: true,
+	}
+}
+
+func SuccessData(data interface{}) *SimpleResponse {
+	return &SimpleResponse{
+		Success: true,
+		Data:    data,
 	}
 }
 

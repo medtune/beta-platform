@@ -1,14 +1,7 @@
-//TODO Scroll
-
-/*
- * Important things to note-
- *  the usual 'html, body' is replaced with mdl-layout__content
- *  the height of the document is now the page content's height
- */
 var scrollTo = function(top) {
     var content = $(".mdl-layout__content");
     var target = top ? 0 : $(".page-content").height();
-    content.stop().animate({ scrollTop: target }, "slow");
+    content.stop().animate({ scrollTop: target }, "fast");
 };
   
 var scrollToTop = function() {
@@ -18,3 +11,11 @@ var scrollToTop = function() {
 var scrollToBottom = function() {
     scrollTo(false);
 };
+
+var scrollToWear = function() {
+    console.log("hiiii");
+    var content = $(".mdl-layout__content");
+    var target = top ? 0 : $("#try-beta").height();
+    content.stop().animate({ scrollTop: target }, "fast");
+}
+

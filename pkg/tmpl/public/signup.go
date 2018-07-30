@@ -11,7 +11,7 @@ const Signup = `{{define "content"}}
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="fti-email">
 					<input class="mdl-textfield__input" type="text" name="email" id="email"/>
 					<label class="mdl-textfield__label" for="email">Email</label>
-					<span class="mdl-textfield__error" id="email-error"></span>
+					<span class="mdl-textfield__error" id="email-error">Email error</span>
 
 				</div>
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="fti-username">
@@ -34,7 +34,7 @@ const Signup = `{{define "content"}}
 				</div>
 				
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="fti-secret">
-					<input class="mdl-textfield__input" type="text" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{3,20}$" name="secret" id="secret"/>
+					<input class="mdl-textfield__input" type="text" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{0,20}$" name="secret" autocomplete="" id="secret"/>
 					<label class="mdl-textfield__label" for="secret">Secret Key</label>
 					<span class="mdl-textfield__error" id="secret-error">Invalid secret key</span>
 				</div>
