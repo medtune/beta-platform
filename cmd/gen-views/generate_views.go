@@ -85,7 +85,7 @@ func makeViewsFiles(views ...string) {
 			panic(err)
 		}
 
-		if err := TEMPLATES[name].Execute(f, data.Error401); err != nil {
+		if err := TEMPLATES[name].Execute(f, data.Gen()); err != nil {
 			panic(err)
 		}
 		f.Close()

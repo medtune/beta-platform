@@ -14,7 +14,6 @@ Usage:
 
 Available Commands:
   automigrate Auto migrate database
-  capsules    Not implemented
   debug       debug server for UI dev
   gen-views   Generate views html files
   help        Help about any command
@@ -50,8 +49,9 @@ Aliases:
   automigrate, syncdb
 
 Flags:
-  -f, --file string   Configuration file name (default "config.yml")
-  -h, --help          help for automigrate
+  -y, --create-users   Create default users before start (default true)
+  -f, --file string    Configuration file name (default "config.yml")
+  -h, --help           help for automigrate
 ```
 
 ###### Generate views
@@ -97,6 +97,7 @@ Aliases:
   start, run, run-server
 
 Flags:
+  -y, --create-users         Create default users before start (default true)
   -f, --file string          Configuration file name (default "./config.yml")
   -g, --gin-mode int         Gin server mode [0 OR 1]
   -h, --help                 help for start

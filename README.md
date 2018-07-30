@@ -2,16 +2,13 @@
 
 [![GitHub license](https://img.shields.io/github/license/medtune/beta-platform.svg)](https://github.com/medtune/beta-platform/blob/iron-master/LICENSE.txt) [![GitHub pull-requests](https://img.shields.io/github/issues-pr/medtune/beta-platform.svg)](https://GitHub.com/medtune/beta-platform/pull/) [![GitHub issues](https://img.shields.io/github/issues/medtune/beta-platform.svg)](https://github.com/medtune/beta-platform/issues) [![GitHub release](https://img.shields.io/github/release/medtune/beta-platform.svg)](https://GitHub.com/medtune/beta-platform/releases) 
 
-
-
 ## Build status
 
 | branch | Build status |
 | --- | --- | 
 | Master | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/master.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/master) |
 | Iron-Master | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/iron-master.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/iron-master) |
-| Dev-Master | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/dev-1.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/dev-1) |
-
+| Dev | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/dev-1.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/dev-1) |
 
 ***
 
@@ -46,7 +43,6 @@
 - [8. Contributing](#contributing)
 - [9. Maintainers](#maintainers)
 - [10. License](#License)
-
 
 ### Overview
 

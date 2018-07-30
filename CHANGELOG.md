@@ -6,6 +6,59 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+(See dev branch)
+
+## 0.0.4 - 2018-07-30
+
+### Added
+General:
+- Bump v0.0.4
+- add ldflag `cicd` to controll compiling gRPC Clients (Capsul dependencies used to cause problems while compiling on CircleCI/CD)
+
+Command:
+- Added debug mode for UI dev (called with flag `debug`) 
+- cmd flags `start` and `syndb` now support `--create-users` subflag ( This will precreate users in database before starting the service)  
+
+Application:
+- Add mnist - inception - pr - chexray - mura demos
+- Add their backed capsules
+- Add package `service` (central buisness logic)
+- Add filesystem package `fs` 
+- Add gRPC capsul clients (see project capsul)
+- Support upload/drop image to inception demo
+
+Front:
+- Add home menu
+- Add demos menu
+- Add small datahub (for inception demo only)
+- Add mnist - Inception - Polynomial regression - chexray - mura Demos UI
+- tmpl engine automatically render version
+
+Deployment:
+- Add swarm support
+
+### Changed
+General:
+- Align badges
+- Add home menu
+- Fix Broken CI/CD tests
+
+Command:
+- Fix gen views bug (generated views have now one global data see `pkg/tmpl/data.Gen()`)
+
+Front
+- Footer 'Made with <3 by SII RESEARCH'
+
+Deployment:
+- Fix kubernetes deploy config
+- Updated makefiles and dockerfiles
+- Move docker-compose.yml to `./deploy`
+
+### Removed 
+
+Command:
+- Capsules flag (will be medtune/capsul project responsability)
+
 ## 0.0.3 - 2018-07-16
 
 ### Added
@@ -77,4 +130,4 @@ Deployement
 ### Init
 - Init project
 
-[Unreleased]: https://github.com/medtune/beta-platform/compare/v0.0.3...HEAD
+[Unreleased]: https://github.com/medtune/beta-platform/compare/v0.0.4...HEAD

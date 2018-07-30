@@ -7,22 +7,22 @@ spec:
   template:
     metadata:
       labels:
-        app: my-app
+        app: beta-platform
     spec:
       containers:
-      - name: my-app
-        image: test-app:v1
+      - name: beta-platform-v0.0.4
+        image: medtune/beta-platform:v0.0.4
         ports:
-        - containerPort: 8080
+        - containerPort: 8005
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: test-svc
+  name: mdtn-service
 spec:
   selector:
-    app: my-app
+    app: beta-platform
   ports:
     - protocol: TCP
-      port: 8080
+      port: 8005
   type: LoadBalancer
