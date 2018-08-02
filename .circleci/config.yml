@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build-golang-1.10.x:
+  build:
     docker:
       - image: circleci/golang:1.10
     working_directory: /go/src/github.com/medtune/beta-platform
