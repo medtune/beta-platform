@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  build-golang-1.10.x:
     docker:
       - image: circleci/golang:1.10
     working_directory: /go/src/github.com/medtune/beta-platform
@@ -12,7 +12,6 @@ jobs:
           command: |
             go get -v -t -d ./pkg/{config,initpkg,secret}
             go get -v -t -d ./pkg/{jsonutil,session,store}
-
             go get -u github.com/gin-gonic/gin
             go get -u github.com/spf13/cobra
       
@@ -20,3 +19,21 @@ jobs:
            name: build binaries
            command : go build -o medtune-beta -tags=cicd ./cmd/main.go
 
+  build-golang-latest:
+    docker:
+      - image: circleci/golang:latest
+    working_directory: /go/src/github.com/medtune/beta-platform
+    steps:
+      - checkout
+
+      - run:
+          name: installing pkg dependencies
+          command: |
+            go get -v -t -d ./pkg/{config,initpkg,secret}
+            go get -v -t -d ./pkg/{jsonutil,session,store}
+            go get -u github.com/gin-gonic/gin
+            go get -u github.com/spf13/cobra
+      
+      - run:
+           name: build binaries
+           command : go build -o medtune-beta -tags=cicd ./cmd/main.go
