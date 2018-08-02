@@ -10,7 +10,7 @@ secrets:
 process:
   - package : .
     name: beta-platform
-    version : v0.0.4
+    version : v0.1.0
     tag-format: $(%name-%version)
 
     build:

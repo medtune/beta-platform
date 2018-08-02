@@ -42,7 +42,7 @@ type Crypto struct {
 }
 
 type PublicContent struct {
-	Static string `yaml:"static`
+	Static string `yaml:"static"`
 }
 
 type Secrets struct {

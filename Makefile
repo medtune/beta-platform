@@ -4,15 +4,15 @@ compile:
 
 build: compile
 	@echo "building alpine docker image"
-	docker build -t medtune/platform:beta.alpine-v0.0.4 -f Dockerfile .
+	docker build -t medtune/platform:beta.alpine-v0.1.0 -f Dockerfile .
 
 push:
 	@echo "pushing alpine image to docker hub"
-	docker push medtune/platform:beta.alpine-v0.0.4
+	docker push medtune/platform:beta.alpine-v0.1.0
 
 pull:
 	@echo "pulling alpine image from docker hub"
-	docker pull medtune/platform:beta.alpine-v0.0.4 
+	docker pull medtune/platform:beta.alpine-v0.1.0 
 
 up:
 	docker-compose up

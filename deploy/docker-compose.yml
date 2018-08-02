@@ -9,7 +9,7 @@ services:
       - POSTGRES_DB=medtune
 
   platform-server:
-    image: medtune/platform:beta.alpine-v0.0.3
+    image: medtune/platform:beta.alpine-v0.1.0
     ports:
       - 8005:8005
     depends_on:

@@ -10,8 +10,8 @@ spec:
         app: beta-platform
     spec:
       containers:
-      - name: beta-platform-v0.0.4
-        image: medtune/beta-platform:v0.0.4
+      - name: beta-platform-v0.1.0
+        image: medtune/beta-platform:v0.1.0
         ports:
         - containerPort: 8005
 ---

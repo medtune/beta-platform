@@ -1,7 +1,7 @@
 meta:
   name: medtune beta platform
   description: beta test
-  version: iron-0.0.4
+  version: iron-0.1.0
   prod: true
 
 database:
