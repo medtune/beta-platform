@@ -8,7 +8,7 @@
 | --- | --- | 
 | Master | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/master.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/master) |
 | Iron-Master | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/iron-master.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/iron-master) |
-| Dev | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/dev-1.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/dev-1) |
+| Dev | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/dev.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/dev) |
 
 ***
 
