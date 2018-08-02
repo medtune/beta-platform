@@ -1,6 +1,8 @@
 package initpkg
 
 import (
+	"log"
+
 	"github.com/medtune/beta-platform/pkg/config"
 	"github.com/medtune/beta-platform/pkg/secret"
 	"github.com/medtune/beta-platform/pkg/session"
@@ -42,9 +44,10 @@ func initSession(c *config.Session) error {
 		session.SessID = c.Name
 		s = c.Secret
 	} else {
-		session.SessID = random.String(10)
-		s = random.String(10)
+		session.SessID = random.Alpha(10)
+		s = random.Alpha(10)
 	}
+	log.Printf("Session secrets:\n\t-> %v\n\t-> %v\n", session.SessID, s)
 	session.Store = session.NewStore(s)
 	return nil
 }
