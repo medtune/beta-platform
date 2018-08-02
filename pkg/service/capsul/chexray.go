@@ -1,0 +1,3 @@
+// +build !cicd
+
+package capsul
