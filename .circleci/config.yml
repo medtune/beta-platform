@@ -1,5 +1,6 @@
 version: 2
 jobs:
+  #go-1.8
   golang-1.8:
     docker:
       - image: circleci/golang:1.8
@@ -19,6 +20,7 @@ jobs:
            name: build binaries
            command : go build -o medtune-beta -tags=cicd ./cmd/main.go
 
+  #go-1.9
   golang-1.9:
     docker:
       - image: circleci/golang:1.9
@@ -38,6 +40,7 @@ jobs:
            name: build binaries
            command : go build -o medtune-beta -tags=cicd ./cmd/main.go
 
+  #go-1.10
   golang-1.10:
     docker:
       - image: circleci/golang:1.10
@@ -57,6 +60,8 @@ jobs:
            name: build binaries
            command : go build -o medtune-beta -tags=cicd ./cmd/main.go
 
+
+  #go-latest
   golang-latest:
     docker:
       - image: circleci/golang:latest
