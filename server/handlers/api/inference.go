@@ -1,11 +1,7 @@
-// +build !cicd
-
 package api
 
 import (
 	"fmt"
-	"math/rand"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/medtune/beta-platform/pkg/jsonutil"
@@ -102,33 +98,15 @@ func MuraRunInference(c *gin.Context) {
 		return
 	}
 
-	var response = struct {
-		Prediction string `json:"prediction"`
-		Correct    bool   `json:"correct"`
-	}{}
-
-	switch infData.Id {
-	case 0:
-		response.Prediction = "Positive"
-		response.Correct = true
-	case 1:
-		response.Prediction = "Negative"
-		response.Correct = true
-	case 2:
-		response.Prediction = "Positive"
-		response.Correct = false
-	case 3:
-		response.Prediction = "Negative"
-		response.Correct = false
-
-	default:
-		response.Prediction = "Undefined"
-		response.Correct = false
+	// Run inference
+	result, err := capsul.RunMuraInference(&infData)
+	if err != nil {
+		c.JSON(200, jsonutil.Fail(err))
+		return
 	}
 
-	time.Sleep(time.Duration(rand.Intn(184)+1073) * time.Millisecond)
-
-	c.JSON(200, jsonutil.SuccessData(response))
+	// Success
+	c.JSON(200, jsonutil.SuccessData(result))
 }
 
 func ChexrayRunInference(c *gin.Context) {
@@ -144,30 +122,14 @@ func ChexrayRunInference(c *gin.Context) {
 		return
 	}
 
-	var response = struct {
-		Prediction string `json:"prediction"`
-		Correct    bool   `json:"correct"`
-	}{}
-
-	switch infData.Id {
-	case 0:
-		response.Prediction = "Positive"
-		response.Correct = true
-	case 1:
-		response.Prediction = "Negative"
-		response.Correct = false
-	case 2:
-		response.Prediction = "CLASS4"
-		response.Correct = false
-	case 3:
-		response.Prediction = "CLASS4"
-		response.Correct = false
-	default:
-		response.Prediction = "Class----"
-		response.Correct = false
+	// Run inference
+	result, err := capsul.RunChexrayInference(&infData)
+	if err != nil {
+		c.JSON(200, jsonutil.Fail(err))
+		return
 	}
 
-	time.Sleep(time.Duration(rand.Intn(300)+950) * time.Millisecond)
+	// Success
+	c.JSON(200, jsonutil.SuccessData(result))
 
-	c.JSON(200, jsonutil.SuccessData(response))
 }
