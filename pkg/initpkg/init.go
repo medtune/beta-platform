@@ -93,6 +93,6 @@ func initSecrets(c *config.Secrets) error {
 	return nil
 }
 
-func initCapsules() error {
+func initCapsulClient() error {
 	return nil
 }
