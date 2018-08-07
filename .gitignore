@@ -17,3 +17,6 @@ medtune-beta
 
 # local config
 config.local.yml
+
+# dev dockerfile
+local.Dockerfile

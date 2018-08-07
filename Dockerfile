@@ -1,15 +1,16 @@
-FROM alpine:3.7
+FROM medtune/capsul:dev-v0.1.0
 
-WORKDIR /medtune/beta-platform
+WORKDIR /go/src/github.com/medtune/beta-platform
 
-# Copy binaries
-COPY medtune-beta .
+ADD . .
 
-# Copy configuration
-COPY config.yml .
+RUN go get -v ./pkg/config 
+RUN go get -v ./pkg/session 
+RUN go get -v ./pkg/store 
+RUN go get -v ./pkg/jsonutil
 
-# Copy static files
-COPY static ./static
+RUN go get -u github.com/gin-gonic/gin
+RUN go get -u github.com/spf13/cobra
 
 # Port to expose
 EXPOSE 8005
