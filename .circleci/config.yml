@@ -11,6 +11,7 @@ jobs:
       - run:
           name: installing pkg dependencies
           command: |
+            sudo apt install -y curl
             cd .. && git clone -b dev https://github.com/medtune/capsul && cd capsul && sudo bash build.sh
             go get -v -t -d ./pkg/{config,initpkg,secret}
             go get -v -t -d ./pkg/{jsonutil,session,store}
