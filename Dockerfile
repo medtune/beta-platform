@@ -1,3 +1,4 @@
+#Base image
 FROM medtune/capsul:dev-v0.1.0
 
 WORKDIR /go/src/github.com/medtune/beta-platform
@@ -15,10 +16,3 @@ RUN go get -u github.com/anthonynsimon/bild/transform
 RUN go get -u github.com/vincent-petithory/dataurl
 
 RUN go build -tags=cicd -o medtune-beta cmd/main.go
-
-# Port to expose
-EXPOSE 8005
-
-# please precise -v $CONFIGPATH:/medtune/beta-platform/deploy
-ENTRYPOINT [ "./medtune-beta", "start", "--syncdb", "--wait", "--create-users" ]
-
