@@ -11,6 +11,8 @@ RUN go get -v ./pkg/jsonutil
 
 RUN go get -u github.com/gin-gonic/gin
 RUN go get -u github.com/spf13/cobra
+RUN go get -u github.com/anthonynsimon/bild/transform
+RUN go get -u github.com/vincent-petithory/dataurl
 
 RUN go build -tags=cicd -o medtune cmd/main.go
 
