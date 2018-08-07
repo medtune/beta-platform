@@ -16,4 +16,9 @@ RUN go get -u github.com/vincent-petithory/dataurl
 
 RUN go build -tags=cicd -o medtune cmd/main.go
 
-RUN ls -la
+# Port to expose
+EXPOSE 8005
+
+# please precise -v $CONFIGPATH:/medtune/beta-platform/deploy
+ENTRYPOINT [ "./medtune-beta", "start", "--syncdb", "--wait", "--create-users" ]
+
