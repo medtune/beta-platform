@@ -3,19 +3,30 @@
 package capsul
 
 import (
+	"context"
 	"fmt"
+	"io/ioutil"
 
 	"github.com/medtune/beta-platform/pkg/jsonutil"
-	inception "github.com/medtune/capsules/capsules/inception/v1"
+	"github.com/medtune/capsul/pkg/request/chexray"
+	tfsclient "github.com/medtune/capsul/pkg/tfs-client"
 )
 
-func RunChexrayInference(infData *jsonutil.RunImageInference) (interface{}, error) {
+var ChexrayClient *tfsclient.Client
+
+func RunChexrayInference(ctx context.Context, infData *jsonutil.RunImageInference) (interface{}, error) {
 	if infData.File == "" {
 		return nil, fmt.Errorf("File field is empty: Got struct %v", infData)
 	}
 
+	// Read file
+	b, err := ioutil.ReadFile(infData.File)
+	if err != nil {
+		panic(err)
+	}
+
 	// Run inference on image path (chexray/images)
-	resp, err := inception.RunInferenceOnImagePath(infData.File)
+	resp, err := ChexrayClient.Predict(ctx, chexray.Default(b))
 	if err != nil {
 		return nil, err
 	}

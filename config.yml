@@ -27,22 +27,16 @@ crypto:
 public:
   static: ./static
 
-capsules:
-  engine: docker
-  items:
-    - image: medtune/inception-0.0.0
-      mapped-demo: inception-imagenet
-      port: 8080
+capsul:
+  - model: inception
+    signature: predict_images
+    version: 1
+    port: 9001
 
-    - image: medtune/mnist-0.0.0
-      mapped-demo: mnist
-      port: 9090
-
-    - image: medtune/chexray-0.0.0
-
-    - image: medtune/mnist-0.0.0
-    
-    - image: medtune/mura-0.0.0
+  - model: mnist
+    signature: predict_images
+    version: 1
+    port: 9000
 
 secrets:
   signup:

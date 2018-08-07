@@ -3,19 +3,29 @@
 package capsul
 
 import (
+	"context"
 	"fmt"
+	"io/ioutil"
 
 	"github.com/medtune/beta-platform/pkg/jsonutil"
-	inception "github.com/medtune/capsules/capsules/inception/v1"
+	"github.com/medtune/capsul/pkg/request/mura"
+	tfsclient "github.com/medtune/capsul/pkg/tfs-client"
 )
 
-func RunMuraInference(infData *jsonutil.RunImageInference) (interface{}, error) {
+var MuraClient *tfsclient.Client
+
+func RunMuraInference(ctx context.Context, infData *jsonutil.RunImageInference) (interface{}, error) {
 	if infData.File == "" {
 		return nil, fmt.Errorf("File field is empty: Got struct %v", infData)
 	}
 
-	// Run inference on image path (mura/images)
-	resp, err := inception.RunInferenceOnImagePath(infData.File)
+	// Read file
+	b, err := ioutil.ReadFile(infData.File)
+	if err != nil {
+		panic(err)
+	}
+
+	resp, err := MuraClient.Predict(ctx, mura.Default(b))
 	if err != nil {
 		return nil, err
 	}
