@@ -11,6 +11,30 @@ jobs:
       - run:
           name: installing pkg dependencies
           command: |
+            apt-get update
+            apt update
+            apt install -y unzip 
+            apt install -y curl
+            curl -OL https://github.com/google/protobuf/releases/download/v3.6.1/protoc-3.6.1-linux-x86_64.zip
+            unzip ./protoc-3.6.1-linux-x86_64.zip -d protoc3
+            mv protoc3/bin/* /usr/local/bin/
+            mv protoc3/include/* /usr/local/include/
+            go get github.com/golang/protobuf/ptypes/wrappers
+            go get google.golang.org/grpc
+            go get github.com/golang/protobuf/protoc-gen-go
+            git clone -b r1.7 https://github.com/tensorflow/serving.git 
+            git clone -b r1.7 https://github.com/tensorflow/tensorflow.git 
+            PROTOC_OPTS='-I tensorflow -I serving --go_out=plugins=grpc:/go/src'
+            eval "protoc $PROTOC_OPTS serving/tensorflow_serving/apis/*.proto" 
+            eval "protoc $PROTOC_OPTS serving/tensorflow_serving/config/*.proto" 
+            eval "protoc $PROTOC_OPTS serving/tensorflow_serving/util/*.proto" 
+            eval "protoc $PROTOC_OPTS serving/tensorflow_serving/sources/storage_path/*.proto" 
+            eval "protoc $PROTOC_OPTS tensorflow/tensorflow/core/framework/*.proto" 
+            eval "protoc $PROTOC_OPTS tensorflow/tensorflow/core/example/*.proto" 
+            eval "protoc $PROTOC_OPTS tensorflow/tensorflow/core/lib/core/*.proto" 
+            eval "protoc $PROTOC_OPTS tensorflow/tensorflow/core/protobuf/meta_graph.proto" 
+            eval "protoc $PROTOC_OPTS tensorflow/tensorflow/core/protobuf/saver.proto"
+            
             cd .. && git clone -b dev https://github.com/medtune/capsul && cd capsul && chmod +x build.sh && sudo ./build.sh
             go get -v -t -d ./pkg/{config,initpkg,secret}
             go get -v -t -d ./pkg/{jsonutil,session,store}
