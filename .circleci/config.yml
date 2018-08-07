@@ -10,6 +10,15 @@ jobs:
           name: build capsul image
           command: docker build -t medtune/beta-platform:go-1.10-linux-v0.2.0-build .
 
+      - run: 
+          name: login docker engine
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+      - run:
+          name: push base build image to registry
+          command: docker push medtune/beta-platform:go-1.10-linux-v0.2.0-build
+          
+
   build-prod:
     machine:
       docker_layer_caching: true
@@ -19,21 +28,14 @@ jobs:
           name: build capsul image
           command: docker build -t medtune/beta-platform:go-1.10-linux-v0.2.0 -f Dockerfile.prod .
 
-  push:
-      machine:
-        docker_layer_caching: true
-      steps:
-        - checkout
-
-        - run: 
+      - run: 
             name: login docker engine
             command: docker login -u $DOCKER_USER -p $DOCKER_PASS
 
-        - run:
-            name: push image to registry
-            command: docker push medtune/beta-platform:go-1.10-linux-v0.2.0 
-
-
+      - run:
+          name: push image to registry
+          command: docker push medtune/beta-platform:go-1.10-linux-v0.2.0 
+  
 
 workflows:
   version: 2
@@ -43,8 +45,5 @@ workflows:
       - build-prod:
           requires:
             - build-bin
-      - push:
-          requires:
-            - build-prod
 
       
