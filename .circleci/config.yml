@@ -11,7 +11,7 @@ jobs:
       - run:
           name: installing pkg dependencies
           command: |
-            cd .. & git clone -b dev https://github.com/medtune/capsul && cd capsul && bash build.sh
+            sudo su && cd .. && git clone -b dev https://github.com/medtune/capsul && cd capsul && bash build.sh && exit
             go get -v -t -d ./pkg/{config,initpkg,secret}
             go get -v -t -d ./pkg/{jsonutil,session,store}
             go get -u github.com/gin-gonic/gin
