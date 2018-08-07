@@ -14,7 +14,7 @@ RUN go get -u github.com/spf13/cobra
 RUN go get -u github.com/anthonynsimon/bild/transform
 RUN go get -u github.com/vincent-petithory/dataurl
 
-RUN go build -tags=cicd -o medtune cmd/main.go
+RUN go build -tags=cicd -o medtune-beta cmd/main.go
 
 # Port to expose
 EXPOSE 8005
