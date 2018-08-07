@@ -12,9 +12,6 @@ RUN go get -v ./pkg/jsonutil
 RUN go get -u github.com/gin-gonic/gin
 RUN go get -u github.com/spf13/cobra
 
-# Port to expose
-EXPOSE 8005
+RUN go build -o medtune cmd/main.go
 
-# please precise -v $CONFIGPATH:/medtune/beta-platform/deploy
-ENTRYPOINT [ "./medtune-beta", "start", "--syncdb", "--wait", "--create-users" ]
-
+RUN ls -la
