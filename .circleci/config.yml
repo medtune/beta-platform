@@ -3,7 +3,7 @@ jobs:
   #go-latest
   golang-latest:
     docker:
-      - image: circleci/golang:latest
+      - image: circleci/golang:1.10
     working_directory: /go/src/github.com/medtune/beta-platform
     steps:
       - checkout
