@@ -1,66 +1,5 @@
 version: 2
 jobs:
-  #go-1.8
-  golang-1.8:
-    docker:
-      - image: circleci/golang:1.8
-    working_directory: /go/src/github.com/medtune/beta-platform
-    steps:
-      - checkout
-
-      - run:
-          name: installing pkg dependencies
-          command: |
-            go get -v -t -d ./pkg/{config,initpkg,secret}
-            go get -v -t -d ./pkg/{jsonutil,session,store}
-            go get -u github.com/gin-gonic/gin
-            go get -u github.com/spf13/cobra
-      
-      - run:
-           name: build binaries
-           command : go build -o medtune-beta -tags=cicd ./cmd/main.go
-
-  #go-1.9
-  golang-1.9:
-    docker:
-      - image: circleci/golang:1.9
-    working_directory: /go/src/github.com/medtune/beta-platform
-    steps:
-      - checkout
-
-      - run:
-          name: installing pkg dependencies
-          command: |
-            go get -v -t -d ./pkg/{config,initpkg,secret}
-            go get -v -t -d ./pkg/{jsonutil,session,store}
-            go get -u github.com/gin-gonic/gin
-            go get -u github.com/spf13/cobra
-      
-      - run:
-           name: build binaries
-           command : go build -o medtune-beta -tags=cicd ./cmd/main.go
-
-  #go-1.10
-  golang-1.10:
-    docker:
-      - image: circleci/golang:1.10
-    working_directory: /go/src/github.com/medtune/beta-platform
-    steps:
-      - checkout
-
-      - run:
-          name: installing pkg dependencies
-          command: |
-            go get -v -t -d ./pkg/{config,initpkg,secret}
-            go get -v -t -d ./pkg/{jsonutil,session,store}
-            go get -u github.com/gin-gonic/gin
-            go get -u github.com/spf13/cobra
-      
-      - run:
-           name: build binaries
-           command : go build -o medtune-beta -tags=cicd ./cmd/main.go
-
-
   #go-latest
   golang-latest:
     docker:
@@ -72,6 +11,7 @@ jobs:
       - run:
           name: installing pkg dependencies
           command: |
+            cd .. & git clone -b dev https://github.com/medtune/capsul && cd capsul && bash build.sh
             go get -v -t -d ./pkg/{config,initpkg,secret}
             go get -v -t -d ./pkg/{jsonutil,session,store}
             go get -u github.com/gin-gonic/gin
@@ -85,7 +25,4 @@ workflows:
   version: 2
   build:
     jobs:
-      - golang-1.8
-      - golang-1.9
-      - golang-1.10
       - golang-latest

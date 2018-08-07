@@ -28,15 +28,24 @@ public:
   static: ./static
 
 capsul:
-  - model: inception
+  inception:
+    model: inception
     signature: predict_images
     version: 1
-    port: 9001
+    address: localhost:9001
+  
+  mnist:
+    model: mnist
+    signature: predict_images
+    version: 1
+    address: localhost:9000
 
-  - model: mnist
+  mura:
+    model: mura
     signature: predict_images
     version: 1
-    port: 9000
+    address: localhost:6666
+
 
 secrets:
   signup:

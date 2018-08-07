@@ -1,6 +1,7 @@
 package api
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/gin-gonic/gin"
@@ -10,6 +11,7 @@ import (
 	"github.com/medtune/beta-platform/pkg/session"
 )
 
+// MnistRunInference .
 func MnistRunInference(c *gin.Context) {
 	// Check session
 	if logged := session.GetLoginStatus(c); !logged {
@@ -25,8 +27,9 @@ func MnistRunInference(c *gin.Context) {
 		return
 	}
 
+	ctx := context.Background()
 	// Run inference
-	resp, err := capsul.RunMnistInference(&infData)
+	resp, err := capsul.RunMnistInference(ctx, &infData)
 	if err != nil {
 		c.JSON(200, jsonutil.Fail(err))
 		return
@@ -36,6 +39,7 @@ func MnistRunInference(c *gin.Context) {
 	c.JSON(200, jsonutil.SuccessData(resp))
 }
 
+// InceptionImagenetRunInference .
 func InceptionImagenetRunInference(c *gin.Context) {
 	if logged := session.GetLoginStatus(c); !logged {
 		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied :rip")))
@@ -50,8 +54,9 @@ func InceptionImagenetRunInference(c *gin.Context) {
 		return
 	}
 
+	ctx := context.Background()
 	// Run inference
-	result, err := capsul.RunInceptionInference(&infData)
+	result, err := capsul.RunInceptionInference(ctx, &infData)
 	if err != nil {
 		c.JSON(200, jsonutil.Fail(err))
 		return
@@ -61,6 +66,7 @@ func InceptionImagenetRunInference(c *gin.Context) {
 	c.JSON(200, jsonutil.SuccessData(result))
 }
 
+// InceptionImagenetDropImage .
 func InceptionImagenetDropImage(c *gin.Context) {
 	if logged := session.GetLoginStatus(c); !logged {
 		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied :rip")))
@@ -75,6 +81,7 @@ func InceptionImagenetDropImage(c *gin.Context) {
 		return
 	}
 
+	// drop image
 	err = demos.DropImage(&infData)
 	if err != nil {
 		c.JSON(200, jsonutil.Fail(err))
@@ -84,6 +91,7 @@ func InceptionImagenetDropImage(c *gin.Context) {
 	c.JSON(200, jsonutil.Success())
 }
 
+// MuraRunInference .
 func MuraRunInference(c *gin.Context) {
 	if logged := session.GetLoginStatus(c); !logged {
 		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied :rip")))
@@ -98,8 +106,10 @@ func MuraRunInference(c *gin.Context) {
 		return
 	}
 
+	ctx := context.Background()
+
 	// Run inference
-	result, err := capsul.RunMuraInference(&infData)
+	result, err := capsul.RunMuraInference(ctx, &infData)
 	if err != nil {
 		c.JSON(200, jsonutil.Fail(err))
 		return
@@ -109,6 +119,7 @@ func MuraRunInference(c *gin.Context) {
 	c.JSON(200, jsonutil.SuccessData(result))
 }
 
+// ChexrayRunInference .
 func ChexrayRunInference(c *gin.Context) {
 	if logged := session.GetLoginStatus(c); !logged {
 		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied :rip")))
@@ -122,8 +133,10 @@ func ChexrayRunInference(c *gin.Context) {
 		return
 	}
 
+	ctx := context.Background()
+
 	// Run inference
-	result, err := capsul.RunChexrayInference(&infData)
+	result, err := capsul.RunChexrayInference(ctx, &infData)
 	if err != nil {
 		c.JSON(200, jsonutil.Fail(err))
 		return

@@ -11,15 +11,18 @@ var (
 	configPathGen = "config-gen.yml"
 )
 
+// SetDefaultPaths .
 func SetDefaultPaths(path string) {
 	configPath = path + ".yml"
 	configPathGen = path + "-gen.yml"
 }
 
+// LoadConfigDefault .
 func LoadConfigDefault() (*StartupConfig, error) {
 	return LoadConfigFromPath(configPath)
 }
 
+// LoadConfigFromPath .
 func LoadConfigFromPath(path string) (*StartupConfig, error) {
 	var config StartupConfig
 	configFile, err := ioutil.ReadFile(path)

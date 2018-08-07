@@ -9,7 +9,7 @@ import (
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
 )
 
-// Collect pictures informations for demo
+// CollectImagesData collect pictures informations for demo
 func CollectImagesData(demo string) ([]data.Image, error) {
 	path := "static/demos/" + demo + "/images"
 	if _, err := os.Stat(path); err != nil || os.IsNotExist(err) {
@@ -34,6 +34,7 @@ func CollectImagesData(demo string) ([]data.Image, error) {
 	return images, nil
 }
 
+// DropImage .
 func DropImage(infData *jsonutil.RunImageInference) error {
 	if infData.File == "" {
 		return fmt.Errorf("file field is empty: got struct %v", infData)

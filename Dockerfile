@@ -6,7 +6,7 @@ WORKDIR /medtune/beta-platform
 COPY medtune-beta .
 
 # Copy configuration
-COPY config/config.yml .
+COPY config.yml .
 
 # Copy static files
 COPY static ./static

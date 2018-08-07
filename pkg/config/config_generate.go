@@ -6,11 +6,13 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+// GenDefault generate empty config file with default name
 func GenDefault() error {
-	return Gen(StartupConfig{}, configPathGen)
+	return Generate(&StartupConfig{}, configPathGen)
 }
 
-func Gen(config StartupConfig, filename string) error {
+// Generate empty config file
+func Generate(config *StartupConfig, filename string) error {
 	yamlBytes, err := yaml.Marshal(config)
 	if err != nil {
 		return err

@@ -1,5 +1,3 @@
-// +build !cicd
-
 package capsul
 
 import (
@@ -12,8 +10,10 @@ import (
 	tfsclient "github.com/medtune/capsul/pkg/tfs-client"
 )
 
+// ChexrayClient .
 var ChexrayClient *tfsclient.Client
 
+// RunChexrayInference .
 func RunChexrayInference(ctx context.Context, infData *jsonutil.RunImageInference) (interface{}, error) {
 	if infData.File == "" {
 		return nil, fmt.Errorf("File field is empty: Got struct %v", infData)
@@ -31,7 +31,7 @@ func RunChexrayInference(ctx context.Context, infData *jsonutil.RunImageInferenc
 		return nil, err
 	}
 
-	// construct responses
+	// construct response
 	result := jsonutil.InferenceResult{}
 	result.Scores = resp.Outputs["scores"].FloatVal
 

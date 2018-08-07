@@ -1,11 +1,8 @@
-// +build !cicd
-
 package capsul
 
 import (
 	"bytes"
 	"context"
-	"fmt"
 	"image/png"
 	"io/ioutil"
 
@@ -14,29 +11,34 @@ import (
 	"github.com/medtune/capsul/pkg/request/mnist"
 	tfsclient "github.com/medtune/capsul/pkg/tfs-client"
 	"github.com/vincent-petithory/dataurl"
-	"gocv.io/x/gocv"
 )
 
+// MnistClient .
 var MnistClient *tfsclient.Client
 
+// RunMnistInference .
 func RunMnistInference(ctx context.Context, infData *jsonutil.RunImageInference) (interface{}, error) {
 	var data []byte
 
 	// Canvas draw data
 	if infData.File == "" {
+		// decode base64 image
 		dataURL, err := dataurl.DecodeString(infData.Image)
 		if err != nil {
 			return nil, err
 		}
 
+		// decode png
 		img, err := png.Decode(bytes.NewReader(dataURL.Data))
 		if err != nil {
 			return nil, err
 		}
 
+		// resize image
 		img = transform.Resize(img, 28, 28, transform.Linear)
 		buf := new(bytes.Buffer)
 
+		// encode png 'resized image'
 		err = png.Encode(buf, img)
 		if err != nil {
 			return nil, err
@@ -62,23 +64,4 @@ func RunMnistInference(ctx context.Context, infData *jsonutil.RunImageInference)
 	}
 
 	return resp.Outputs, nil
-}
-
-func bytesToFloat32(ib []byte) ([]float32, error) {
-	matb, err := gocv.IMDecode(ib, -1)
-	if err != nil {
-		return nil, fmt.Errorf("not an image %v", err)
-	}
-
-	mat := gocv.NewMat()
-	matb.ConvertTo(&mat, gocv.MatTypeCV32F)
-
-	imgfloat := make([]float32, 0, 0)
-
-	for i := 0; i < 28; i++ {
-		for j := 0; j < 28; j++ {
-			imgfloat = append(imgfloat, mat.GetFloatAt(i, j))
-		}
-	}
-	return imgfloat, nil
 }

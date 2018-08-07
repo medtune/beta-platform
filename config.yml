@@ -9,7 +9,7 @@ database:
   prod: medtune
   test: medtune-test
   creds:
-    host: postgres #postgres
+    host: postgres
     port: 5432
     user: mdtn
     password: mdtn
@@ -28,15 +28,29 @@ public:
   static: ./static
 
 capsul:
-  - model: inception
+  inception:
+    model: inception
     signature: predict_images
     version: 1
-    port: 9001
+    address: localhost:9001
+  
+  mnist:
+    model: mnist
+    signature: predict_images
+    version: 1
+    address: localhost:9000
 
-  - model: mnist
+  mura:
+    model: mura
     signature: predict_images
     version: 1
-    port: 9000
+    address: localhost:6666
+
+  chexray:
+    model: chexray
+    signature: predict_images
+    version: 1
+    address: localhost:6666
 
 secrets:
   signup:

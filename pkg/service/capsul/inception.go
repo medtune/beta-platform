@@ -1,5 +1,3 @@
-// +build !cicd
-
 package capsul
 
 import (
@@ -8,10 +6,11 @@ import (
 	"io/ioutil"
 
 	"github.com/medtune/beta-platform/pkg/jsonutil"
-	"github.com/medtune/capsul/pkg/request/chexray"
+	"github.com/medtune/capsul/pkg/request/inception"
 	tfsclient "github.com/medtune/capsul/pkg/tfs-client"
 )
 
+// InceptionClient .
 var InceptionClient *tfsclient.Client
 
 // RunInceptionInference .
@@ -26,7 +25,8 @@ func RunInceptionInference(ctx context.Context, infData *jsonutil.RunImageInfere
 		panic(err)
 	}
 
-	resp, err := InceptionClient.Predict(ctx, chexray.Default(b))
+	// Send prediction request
+	resp, err := InceptionClient.Predict(ctx, inception.Default(b))
 	if err != nil {
 		return nil, err
 	}
