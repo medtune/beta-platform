@@ -25,3 +25,6 @@ generated-views/
 
 # Generate config
 gen.config.yml
+
+# excel files
+*.xlsx

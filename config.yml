@@ -51,7 +51,7 @@ capsul:
     signature: predict_images
     version: 1
     address: localhost:6666
-
+      
 secrets:
   signup:
     - supersecret
