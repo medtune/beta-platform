@@ -18,18 +18,21 @@ type Server struct {
 	SSLTLS   bool   `yaml:"ssltls"`
 }
 
+// DBCreds .
+type DBCreds struct {
+	Host     string `yaml:"host"`
+	Port     int    `yaml:"port"`
+	User     string `yaml:"user"`
+	Password string `yaml:"password"`
+}
+
 // Database .
 type Database struct {
-	Type    string `yaml:"type"`
-	Prod    string `yaml:"prod"`
-	Test    string `yaml:"test"`
-	SSLMode int8   `yaml:"sslmode"`
-	Creds   struct {
-		Host     string `yaml:"host"`
-		Port     int    `yaml:"port"`
-		User     string `yaml:"user"`
-		Password string `yaml:"password"`
-	} `yaml:"creds"`
+	Type    string   `yaml:"type"`
+	Prod    string   `yaml:"prod"`
+	Test    string   `yaml:"test"`
+	SSLMode int8     `yaml:"sslmode"`
+	Creds   *DBCreds `yaml:"creds"`
 }
 
 // Session .
@@ -71,10 +74,10 @@ type ModelConfig struct {
 
 // Capsul .
 type Capsul struct {
-	Inception ModelConfig `yaml:"inception"`
-	Mnist     ModelConfig `yaml:"mnist"`
-	Mura      ModelConfig `yaml:"mura"`
-	Chexray   ModelConfig `yaml:"chexray"`
+	Inception *ModelConfig `yaml:"inception"`
+	Mnist     *ModelConfig `yaml:"mnist"`
+	Mura      *ModelConfig `yaml:"mura"`
+	Chexray   *ModelConfig `yaml:"chexray"`
 }
 
 // StartupConfig main configuration

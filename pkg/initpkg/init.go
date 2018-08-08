@@ -1,7 +1,6 @@
 package initpkg
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/medtune/beta-platform/pkg/service/capsul"
@@ -22,6 +21,7 @@ func InitFromFile(file string) error {
 	if err != nil {
 		return err
 	}
+	// Init from config
 	err = InitFromConfig(config)
 	if err != nil {
 		return err
@@ -31,15 +31,19 @@ func InitFromFile(file string) error {
 
 // InitFromConfig uration file
 func InitFromConfig(c *config.StartupConfig) error {
+	// init package pkg/session
 	if err := initSession(c.Session); err != nil {
 		return err
 	}
+	// init package pkg/store + pkg/store/db
 	if err := initStore(c.Database, c.Meta.IsProd); err != nil {
 		return err
 	}
+	// init package pkg/secret
 	if err := initSecrets(c.Secrets); err != nil {
 		return err
 	}
+	// init package pkg/service/capsul
 	if err := initCapsulClients(c.Capsul); err != nil {
 		return err
 	}
@@ -103,7 +107,6 @@ func initSecrets(c *config.Secrets) error {
 }
 
 func initCapsulClients(c *config.Capsul) error {
-	fmt.Println("hi")
 	// init mnist client
 	mnistClient, err := tfsclient.New(c.Mnist.Address)
 	if err != nil {
@@ -132,7 +135,6 @@ func initCapsulClients(c *config.Capsul) error {
 		return err
 	}
 	capsul.ChexrayClient = chexrayClient
-	fmt.Println("hi")
 
 	return nil
 }

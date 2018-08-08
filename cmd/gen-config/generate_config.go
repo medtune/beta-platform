@@ -25,14 +25,14 @@ var (
 )
 
 func init() {
-	genViewsCmd.Flags().StringVarP(&output, "output", "o", "gen.config.yml", "output directory")
+	genConfigCmd.Flags().StringVarP(&output, "output", "o", "gen.config.yml", "output directory")
 
-	root.Cmd.AddCommand(genViewsCmd)
+	root.Cmd.AddCommand(genConfigCmd)
 }
 
-var genViewsCmd = &cobra.Command{
-	Use:     "gen-views",
-	Aliases: []string{"gen-config", "gen"},
+var genConfigCmd = &cobra.Command{
+	Use:     "gen-config",
+	Aliases: []string{"gen-cfg"},
 	Short:   "Generate empty startup config file",
 	Long:    `Generate empty startup config file`,
 	Run: func(cmd *cobra.Command, args []string) {
@@ -41,5 +41,22 @@ var genViewsCmd = &cobra.Command{
 }
 
 func generateConfig() {
-	config.Generate(&config.StartupConfig{}, output)
+	config.Generate(&config.StartupConfig{
+		Meta:   &config.Meta{},
+		Server: &config.Server{},
+		Database: &config.Database{
+			Creds: &config.DBCreds{},
+		},
+		Session: &config.Session{},
+		Crypto:  &config.Crypto{},
+		Public:  &config.PublicContent{},
+		Secrets: &config.Secrets{},
+		Create:  &config.Create{},
+		Capsul: &config.Capsul{
+			Inception: &config.ModelConfig{},
+			Mnist:     &config.ModelConfig{},
+			Mura:      &config.ModelConfig{},
+			Chexray:   &config.ModelConfig{},
+		},
+	}, output)
 }

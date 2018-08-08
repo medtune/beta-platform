@@ -46,6 +46,11 @@ capsul:
     version: 1
     address: localhost:6666
 
+  chexray:
+    model: chexray
+    signature: predict_images
+    version: 1
+    address: localhost:6666
 
 secrets:
   signup:

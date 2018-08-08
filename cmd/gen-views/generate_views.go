@@ -33,6 +33,7 @@ var (
 )
 
 var (
+	// TEMPLATES var
 	TEMPLATES map[string]*template.Template
 )
 
@@ -48,7 +49,7 @@ func init() {
 // startCmd represents the start command
 var genViewsCmd = &cobra.Command{
 	Use:     "gen-views",
-	Aliases: []string{"gen-tmpl", "gen"},
+	Aliases: []string{"gen-tmpl"},
 	Short:   "Generate views html files",
 	Long:    `Generate views html files`,
 	Run: func(cmd *cobra.Command, args []string) {
