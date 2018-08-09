@@ -2,9 +2,8 @@ package model
 
 // PathologyAnalysisLevel .
 type PathologyAnalysisLevel struct {
-	Id   int64
-	Name string
-
+	Id                 int64
+	Name               string
 	RedCells           string
 	Hemoglobin         string
 	Hematocrit         string
@@ -36,6 +35,6 @@ type SpecAnalysisPool struct {
 	Id   int64
 	Name string
 	Unit string
-	Min  int
-	Max  int
+	Min  int64
+	Max  int64
 }
