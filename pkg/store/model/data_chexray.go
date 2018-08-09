@@ -2,34 +2,33 @@ package model
 
 // PathologyAnalysisLevel .
 type PathologyAnalysisLevel struct {
-	Id           int64
-	Name         string
-	AnalysisCode string
+	Id   int64
+	Name string
 
 	RedCells           string
-	Hemoglobine        string
-	Hematocrite        string
-	VGM                string
-	CCMH               string
-	TCMH               string
+	Hemoglobin         string
+	Hematocrit         string
+	MCV                string
+	MCHC               string
+	MCH                string
 	WhiteCells         string
-	PNNeutrophiles     string
-	PNBasophiles       string
+	PNNeutrophils      string
+	PNBasophils        string
 	Lymphocytes        string
 	Monocytes          string
-	Plaquettes         string
+	Platelet           string
 	SedimentationSpeed string
 	Creatinine         string
-	GlycemieAjeun      string
+	GlucoseLevelAtFast string
 	Triglycerides      string
-	CholesterolTotal   string
+	CholesterolLevel   string
 	HDLCholesterol     string
-	SGOTASAT           string
-	SGPTALAT           string
-	ProteinesUrine     string
-	GlucoseUrine       string
-	LeucocytesUrine    string
-	HematiesUrines     string
+	SGOTAST            string
+	SGPTALT            string
+	ProteinUrin        string
+	GlucoseUrin        string
+	LeukocyteUrin      string
+	Hematuria          string
 }
 
 // SpecAnalysisPool .
