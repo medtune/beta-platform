@@ -50,7 +50,6 @@ func syncCXPBAexcel(file string) {
 	for _, sheet := range xlFile.Sheets {
 		fmt.Println("-------", sheet)
 		for _, row := range sheet.Rows {
-			fmt.Println("------", row)
 			for _, cell := range row.Cells {
 				text := cell.String()
 				fmt.Printf("%s\n", text)
