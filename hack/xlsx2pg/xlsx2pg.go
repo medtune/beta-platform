@@ -41,6 +41,8 @@ func syncCXPBAexcel(file string) {
 		panic(err)
 	}
 
+	fmt.Println("Start copying sheets")
+
 	// Read XLSXFILE
 	xlFile, err := xlsx.OpenFile(file)
 	if err != nil {
@@ -63,10 +65,10 @@ func syncCXPBAexcel(file string) {
 	}
 
 	// Copy medical analysis
-	for index, raw := range sheetMA.Rows[1:] {
+	for _, raw := range sheetMA.Rows[1:] {
 		analysisData = append(analysisData,
 			&model.PathologyAnalysisLevel{
-				int64(index),
+				0,
 				raw.Cells[0].String(),
 				raw.Cells[1].String(),
 				raw.Cells[2].String(),
@@ -92,18 +94,17 @@ func syncCXPBAexcel(file string) {
 				raw.Cells[23].String(),
 				raw.Cells[24].String(),
 				raw.Cells[25].String(),
+				raw.Cells[26].String(),
 			},
 		)
 	}
 
-	for _, e := range analysisData {
-		fmt.Println(e.Name)
-	}
+	fmt.Println("Copied sheet: Medical analysis")
 
 	// Copy medical analysis
 	for index, raw := range sheetN.Rows[1:] {
-		min, _ := raw.Cells[2].Int64()
-		max, _ := raw.Cells[3].Int64()
+		min, _ := raw.Cells[2].Float()
+		max, _ := raw.Cells[3].Float()
 		specs = append(specs,
 			&model.SpecAnalysisPool{
 				int64(index),
@@ -114,8 +115,25 @@ func syncCXPBAexcel(file string) {
 			},
 		)
 	}
-	for _, e := range specs {
-		fmt.Println(e.Name)
+
+	fmt.Println("Copied sheet: Norms")
+
+	fmt.Println("Injecting pathology analysis data")
+	for _, e := range analysisData {
+		err := engine.CreatePathologyAL(e)
+		if err != nil {
+			panic(err)
+		}
 	}
+	fmt.Println("Done.")
+
+	fmt.Println("Injecting analysis specs")
+	for _, e := range specs {
+		err := engine.CreateSpec(e.Name, e.Unit, e.Max, e.Min)
+		if err != nil {
+			panic(err)
+		}
+	}
+	fmt.Println("Done.")
 
 }

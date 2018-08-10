@@ -11,6 +11,7 @@ import (
 
 // Compile static check
 var _ userStore = &Store{}
+var _ bioAnalysisStore = &Store{}
 
 var (
 	// Agent main object used by other packages
@@ -46,7 +47,7 @@ func (s *Store) Sync() error {
 	} else if err := s.Sync2(&model.SpecAnalysisPool{}); err != nil {
 		return err
 	} else {
-		fmt.Printf("migrated: %s\n", "model.User | model.PathologyAnalysisLevel | model.SpecAnalysisPool")
+		fmt.Printf("migrated: %s\n", "model.{User|PathologyAnalysisLevel|SpecAnalysisPool}")
 	}
 	return nil
 }
