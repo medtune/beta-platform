@@ -1,7 +1,6 @@
 meta:
   name: medtune beta platform
   description: beta test
-  version: iron-0.1.0
   prod: true
 
 database:
@@ -9,7 +8,7 @@ database:
   prod: medtune
   test: medtune-test
   creds:
-    host: localhost #postgres
+    host: localhost
     port: 5432
     user: amine
     password: a
