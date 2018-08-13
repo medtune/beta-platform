@@ -1,0 +1,4 @@
+#ci config
+
+.circleci/
+deploy/

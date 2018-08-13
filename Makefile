@@ -1,6 +1,6 @@
 compile:
 	@echo "building alpine binaries"
-	GOOS=linux go build -o medtune-beta ./cmd/main.go
+	GOOS=linux go build -tags cicd -o medtune-beta ./cmd/main.go
 
 build: compile
 	@echo "building alpine docker image"

@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/medtune/beta-platform/pkg"
 	"github.com/medtune/beta-platform/pkg/jsonutil"
-	"github.com/medtune/beta-platform/pkg/service/global"
+	"github.com/medtune/beta-platform/pkg/service/access"
 	"github.com/medtune/beta-platform/pkg/session"
 	"github.com/medtune/beta-platform/pkg/tmpl"
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
@@ -28,7 +28,7 @@ func Signup(c *gin.Context) {
 			return
 		}
 
-		ok, err := global.CreateUser(signupData)
+		ok, err := access.CreateUser(signupData)
 		if err != nil || !ok {
 			c.JSON(200, jsonutil.Fail(err))
 			return

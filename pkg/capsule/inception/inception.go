@@ -1,5 +1,0 @@
-package plugin
-
-func init() {
-
-}

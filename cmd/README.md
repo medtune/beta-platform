@@ -13,8 +13,9 @@ Usage:
   medtune-beta [command]
 
 Available Commands:
-  automigrate Auto migrate database
+  syncdb Auto migrate database
   debug       debug server for UI dev
+  gen-config  Generate empty startup config file
   gen-views   Generate views html files
   help        Help about any command
   start       Run Medtune beta server
@@ -37,7 +38,7 @@ Flags:
   -h, --help   help for version
 ```
 
-###### Auto-migrate
+###### Syncdb
 ```
 Sync database models by updating/creating existing
 database tables
@@ -47,11 +48,27 @@ Usage:
 
 Aliases:
   automigrate, syncdb
-
+)
 Flags:
   -y, --create-users   Create default users before start (default true)
   -f, --file string    Configuration file name (default "config.yml")
   -h, --help           help for automigrate
+```
+
+###### Generate start up config
+
+```
+Generate empty startup config file
+
+Usage:
+  medtune-beta gen-config [flags]
+
+Aliases:
+  gen-config, gen-cfg
+
+Flags:
+  -h, --help            help for gen-config
+  -o, --output string   output directory (default "gen.config.yml")
 ```
 
 ###### Generate views

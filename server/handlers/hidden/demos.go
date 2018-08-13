@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/medtune/beta-platform/pkg"
-	"github.com/medtune/beta-platform/pkg/service/global"
+	"github.com/medtune/beta-platform/pkg/service/demos"
 	"github.com/medtune/beta-platform/pkg/session"
 	"github.com/medtune/beta-platform/pkg/tmpl"
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
@@ -52,7 +52,7 @@ func InceptionImagenet(c *gin.Context) {
 		c.Redirect(302, "/index")
 		return
 	}
-	images, err := global.CollectImagesData("inception")
+	images, err := demos.CollectImagesData("inception")
 	if err != nil {
 		c.Redirect(302, "/error/500")
 		return

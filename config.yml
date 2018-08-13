@@ -1,7 +1,7 @@
 meta:
   name: medtune beta platform
-  description: beta test
-  version: iron-0.1.0
+  description: medtune beta test
+  version: v0.1.1
   prod: true
 
 database:
@@ -9,7 +9,7 @@ database:
   prod: medtune
   test: medtune-test
   creds:
-    host: postgres #postgres
+    host: postgres
     port: 5432
     user: mdtn
     password: mdtn
@@ -27,23 +27,31 @@ crypto:
 public:
   static: ./static
 
-capsules:
-  engine: docker
-  items:
-    - image: medtune/inception-0.0.0
-      mapped-demo: inception-imagenet
-      port: 8080
+capsul:
+  inception:
+    model: inception
+    signature: predict_images
+    version: 1
+    address: localhost:9001
+  
+  mnist:
+    model: mnist
+    signature: predict_images
+    version: 1
+    address: localhost:9000
 
-    - image: medtune/mnist-0.0.0
-      mapped-demo: mnist
-      port: 9090
+  mura:
+    model: mura
+    signature: predict_images
+    version: 1
+    address: localhost:6666
 
-    - image: medtune/chexray-0.0.0
-
-    - image: medtune/mnist-0.0.0
-    
-    - image: medtune/mura-0.0.0
-
+  chexray:
+    model: chexray
+    signature: predict_images
+    version: 1
+    address: localhost:6666
+      
 secrets:
   signup:
     - supersecret

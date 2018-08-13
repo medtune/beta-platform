@@ -1,19 +1,18 @@
-FROM alpine:3.7
+#Base image
+FROM medtune/capsul:dev-v0.1.0
 
-WORKDIR /medtune/beta-platform
+WORKDIR /go/src/github.com/medtune/beta-platform
 
-# Copy binaries
-COPY medtune-beta .
+ADD . .
 
-# Copy configuration
-COPY config/config.yml .
+RUN go get -v ./pkg/config 
+RUN go get -v ./pkg/session 
+RUN go get -v ./pkg/store 
+RUN go get -v ./pkg/jsonutil
 
-# Copy static files
-COPY static ./static
+RUN go get -u github.com/gin-gonic/gin
+RUN go get -u github.com/spf13/cobra
+RUN go get -u github.com/anthonynsimon/bild/transform
+RUN go get -u github.com/vincent-petithory/dataurl
 
-# Port to expose
-EXPOSE 8005
-
-# please precise -v $CONFIGPATH:/medtune/beta-platform/deploy
-ENTRYPOINT [ "./medtune-beta", "start", "--syncdb", "--wait", "--create-users" ]
-
+RUN go build -tags=cicd -o medtune-beta cmd/main.go

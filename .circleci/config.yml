@@ -1,20 +1,51 @@
 version: 2
 jobs:
-  build:
-    docker:
-      - image: circleci/golang:1.10
-    working_directory: /go/src/github.com/medtune/beta-platform
+  #go-latest
+  build-bin:
+    machine:
+      docker_layer_caching: true
     steps:
       - checkout
+      - run: 
+          name: build capsul image
+          command: docker build -t medtune/beta-platform:go-1.10-linux-v0.2.0-build .
+
+      - run: 
+          name: login docker engine
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
 
       - run:
-          name: installing pkg dependencies
-          command: |
-            go get -v -t -d ./pkg/...
-            go get -u github.com/gin-gonic/gin
-            go get -u github.com/spf13/cobra
+          name: push base build image to registry
+          command: docker push medtune/beta-platform:go-1.10-linux-v0.2.0-build
+          
+
+  build-prod:
+    machine:
+      docker_layer_caching: true
+    steps:
+      - checkout
+      - run: 
+          name: build capsul image
+          command: docker build -t medtune/beta-platform:go-1.10-linux-v0.2.0 -f Dockerfile.prod .
+
+      - run: 
+            name: login docker engine
+            command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+      - run:
+          name: push image to registry
+          command: docker push medtune/beta-platform:go-1.10-linux-v0.2.0 
+  
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build-bin
       
-      - run:
-           name: build binaries
-           command : go build -o medtune-beta -tags=cicd ./cmd/main.go
+      - build-prod:
+          requires:
+            - build-bin
+            
 
+      

@@ -1,19 +1,30 @@
-# local dev files
-.dev/
-templates-gen/
-generated-views/
-
-# Default binary
-main
-
 # Binaries ext
 *.a
 *.so
 *.out
 *.exe
 
+# Default binary
+main
+
 # Medtune bin
 medtune-beta
 
 # local config
 config.local.yml
+
+# dev dockerfile
+local.Dockerfile
+
+# local dev files
+.dev/
+templates-gen/
+
+# Generated views
+generated-views/
+
+# Generate config
+gen.config.yml
+
+# excel files
+*.xlsx

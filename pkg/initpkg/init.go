@@ -3,6 +3,10 @@ package initpkg
 import (
 	"log"
 
+	"github.com/medtune/beta-platform/pkg/service/capsul"
+
+	tfsclient "github.com/medtune/capsul/pkg/tfs-client"
+
 	"github.com/medtune/beta-platform/pkg/config"
 	"github.com/medtune/beta-platform/pkg/secret"
 	"github.com/medtune/beta-platform/pkg/session"
@@ -17,6 +21,7 @@ func InitFromFile(file string) error {
 	if err != nil {
 		return err
 	}
+	// Init from config
 	err = InitFromConfig(config)
 	if err != nil {
 		return err
@@ -24,14 +29,22 @@ func InitFromFile(file string) error {
 	return nil
 }
 
+// InitFromConfig uration file
 func InitFromConfig(c *config.StartupConfig) error {
+	// init package pkg/session
 	if err := initSession(c.Session); err != nil {
 		return err
 	}
+	// init package pkg/store + pkg/store/db
 	if err := initStore(c.Database, c.Meta.IsProd); err != nil {
 		return err
 	}
+	// init package pkg/secret
 	if err := initSecrets(c.Secrets); err != nil {
+		return err
+	}
+	// init package pkg/service/capsul
+	if err := initCapsulClients(c.Capsul); err != nil {
 		return err
 	}
 
@@ -93,6 +106,35 @@ func initSecrets(c *config.Secrets) error {
 	return nil
 }
 
-func initCapsules() error {
+func initCapsulClients(c *config.Capsul) error {
+	// init mnist client
+	mnistClient, err := tfsclient.New(c.Mnist.Address)
+	if err != nil {
+		return err
+	}
+	capsul.MnistClient = mnistClient
+
+	// init inception client
+	inceptionClient, err := tfsclient.New(c.Inception.Address)
+	if err != nil {
+		return err
+	}
+	capsul.InceptionClient = inceptionClient
+
+	// init mura client
+	muraClient, err := tfsclient.New(c.Mura.Address)
+	if err != nil {
+		return err
+
+	}
+	capsul.MuraClient = muraClient
+
+	// init chexray client
+	chexrayClient, err := tfsclient.New(c.Chexray.Address)
+	if err != nil {
+		return err
+	}
+	capsul.ChexrayClient = chexrayClient
+
 	return nil
 }
