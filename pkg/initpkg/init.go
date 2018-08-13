@@ -1,8 +1,10 @@
 package initpkg
 
 import (
+	"fmt"
 	"log"
 
+	"github.com/medtune/beta-platform/pkg"
 	"github.com/medtune/beta-platform/pkg/service/capsul"
 
 	tfsclient "github.com/medtune/capsul/pkg/tfs-client"
@@ -15,7 +17,7 @@ import (
 	"github.com/medtune/go-utils/random"
 )
 
-// Init packages from configuration file
+// InitFromFile from configuration file
 func InitFromFile(file string) error {
 	config, err := config.LoadConfigFromPath(file)
 	if err != nil {
@@ -31,6 +33,10 @@ func InitFromFile(file string) error {
 
 // InitFromConfig uration file
 func InitFromConfig(c *config.StartupConfig) error {
+	// Check version
+	if c.Meta.Version != pkg.VERSION {
+		return fmt.Errorf("Configuration meta version did'nt match\n\tpackage version: %v\n\tconfigs version: %v", pkg.VERSION, c.Meta.Version)
+	}
 	// init package pkg/session
 	if err := initSession(c.Session); err != nil {
 		return err

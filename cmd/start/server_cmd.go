@@ -77,13 +77,13 @@ func runServer() {
 	var configuration *config.StartupConfig
 
 	if cfg, err := config.LoadConfigFromPath(configFile); err != nil {
-		log.Panic(err)
+		log.Fatal(err)
 	} else {
 		configuration = cfg
 	}
 
 	if err := initpkg.InitFromConfig(configuration); err != nil {
-		log.Panic(err)
+		log.Fatal(err)
 	}
 
 	if syncdb {
@@ -102,7 +102,7 @@ func runServer() {
 			}
 		}
 		if err != nil {
-			panic(err)
+			log.Fatal(err)
 		}
 		fmt.Println("connected to database...")
 	}
