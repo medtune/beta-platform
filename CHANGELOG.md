@@ -8,9 +8,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (See dev branch)
 
+## 0.1.1 - 2018-08-13
+
+### Added
+General:
+- Bump v0.1.1
+
+Build:
+- add ldflag `prod`: compile only version & run-server commands
+
+Command:
+- Added new command `gen-config`: generate an empty configuration file
+- run-server now assert version compatibility before runing
+- Assert beta-platform/pkg && startup config versions to avoid backward breaking changes
+
+Hack/Tooling:
+- Script for linting code
+- Script for formating code
+- `xlsx2pg` is excel to postgres command line (it is not general, just adapted to our use case)
+- Install scripts
+- Commented diferent packages in the project
+
+### Changed
+
+Libraries:
+- `Tensorflow serving` servers client moved to github.com/medtune/capsul
+- beta-platform uses capsul client to interact with tf servers
+- gocv isn't used yet in CICD services (capsul handles the tf protos compilation)
+
+CICD:
+- Circle CI now docker images
+- Push images (still need some sort of ctrl)
+
+
 ## 0.1.0 - 2018-08-01
 
-Release 0.1.0 base on 0.0.4
+Release 0.1.0 based on 0.0.4
 
 ## 0.0.4 - 2018-07-30
 
