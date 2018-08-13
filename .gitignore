@@ -10,8 +10,8 @@ main
 # Medtune bin
 medtune-beta
 
-# local config
-config.local.yml
+# dev config
+dev.config.yml
 
 # dev dockerfile
 local.Dockerfile
