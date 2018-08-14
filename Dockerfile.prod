@@ -1,4 +1,4 @@
-FROM medtune/beta-platform:go-1.10-linux-v0.2.0-build
+FROM medtune/beta-platform:go-1.10-linux-v0.1.2-build
 
 # Port to expose
 EXPOSE 8005

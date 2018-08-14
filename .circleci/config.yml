@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run: 
           name: build capsul image
-          command: docker build -t medtune/beta-platform:go-1.10-linux-v0.2.0-build .
+          command: docker build -t medtune/beta-platform:go-1.10-linux-v0.1.2-build .
 
       - run: 
           name: login docker engine
@@ -16,7 +16,7 @@ jobs:
 
       - run:
           name: push base build image to registry
-          command: docker push medtune/beta-platform:go-1.10-linux-v0.2.0-build
+          command: docker push medtune/beta-platform:go-1.10-linux-v0.1.2-build
           
 
   build-prod:
@@ -26,7 +26,7 @@ jobs:
       - checkout
       - run: 
           name: build capsul image
-          command: docker build -t medtune/beta-platform:go-1.10-linux-v0.2.0 -f Dockerfile.prod .
+          command: docker build -t medtune/beta-platform:go-1.10-linux-v0.1.2 -f Dockerfile.prod .
 
       - run: 
             name: login docker engine
@@ -34,7 +34,7 @@ jobs:
 
       - run:
           name: push image to registry
-          command: docker push medtune/beta-platform:go-1.10-linux-v0.2.0 
+          command: docker push medtune/beta-platform:go-1.10-linux-v0.1.2 
   
 
 workflows:
