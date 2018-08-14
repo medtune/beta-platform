@@ -3,9 +3,11 @@ package data
 import "github.com/medtune/beta-platform/pkg"
 
 var (
+	// Default .
 	Default = &defaultHolder{}
 )
 
+// Main .
 type Main struct {
 	Version   string
 	PageTitle string
@@ -25,6 +27,8 @@ type genData struct {
 	Samples   []Image
 }
 
+// Gen erate data
+// Used for inception in debug mode
 func Gen() *genData {
 	return &genData{
 		Version:   pkg.VERSION,
@@ -45,4 +49,5 @@ func Gen() *genData {
 	}
 }
 
+// Null .
 func Null() *Main { return &Main{} }

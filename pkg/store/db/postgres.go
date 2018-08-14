@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/go-xorm/xorm"
+	// Load postgres lib
 	_ "github.com/lib/pq"
 )
 
@@ -14,6 +15,7 @@ const (
 	ssldisable    = "disable"
 )
 
+// ConnStr .
 type ConnStr struct {
 	Host     string
 	User     string
@@ -24,6 +26,7 @@ type ConnStr struct {
 	Maxconn  int
 }
 
+// MakeConnectionString .
 func MakeConnectionString(c ConnStr) string {
 	var ssl string
 	if c.SslMode == 2 {
@@ -45,6 +48,7 @@ func MakeConnectionString(c ConnStr) string {
 	return str
 }
 
+// NewPGEngine .
 func NewPGEngine(c ConnStr) (*xorm.Engine, error) {
 	cstr := MakeConnectionString(c)
 	engine, err := xorm.NewEngine(postgres, cstr)

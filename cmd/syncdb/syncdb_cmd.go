@@ -55,7 +55,7 @@ func autoMigrateDatabase() {
 	var usersConfig []*model.User
 
 	if configuration, err := config.LoadConfigFromPath(configFile); err != nil {
-		log.Panic(err)
+		log.Fatal(err)
 	} else {
 		dbconfig = configuration.Database
 		usersConfig = configuration.Create.Users
@@ -74,10 +74,10 @@ func autoMigrateDatabase() {
 			Maxconn:  2,
 		})
 		if err != nil {
-			log.Panic(err)
+			log.Fatal(err)
 		}
 		if err := engine.Sync(); err != nil {
-			log.Panic(err)
+			log.Fatal(err)
 		}
 
 		if createUsers && usersConfig != nil {
@@ -94,7 +94,7 @@ func autoMigrateDatabase() {
 
 	}
 
-	log.Printf("starting auto-migration on database: %v", dbconfig.Test)
+	log.Printf("\nstarting auto-migration on database: %v", dbconfig.Test)
 	{
 		engine, err := store.New(db.ConnStr{
 			Host:     dbconfig.Creds.Host,
@@ -106,10 +106,10 @@ func autoMigrateDatabase() {
 			Maxconn:  2,
 		})
 		if err != nil {
-			log.Panic(err)
+			log.Fatal(err)
 		}
 		if err := engine.Sync(); err != nil {
-			log.Panic(err)
+			log.Fatal(err)
 		}
 
 		if createUsers && usersConfig != nil {
@@ -117,10 +117,14 @@ func autoMigrateDatabase() {
 			for _, user := range usersConfig {
 				err = engine.CreateUser(user.Email, user.Username, user.Password)
 				if err != nil {
-					fmt.Printf("failed to create user: %s\n    error: %v\n", user.Username, err)
+					fmt.Printf("failed to create user: %s\n\terror: %v\n", user.Username, err)
 					continue
 				}
-				fmt.Printf("created user %s %s %s\n", user.Email, user.Username, user.Password)
+				fmt.Printf("created user:\n\temail:%s \n\tusername: %s\n\tpassword: %s\n",
+					user.Email,
+					user.Username,
+					user.Password,
+				)
 			}
 		}
 

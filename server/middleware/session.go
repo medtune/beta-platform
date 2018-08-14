@@ -5,6 +5,7 @@ import (
 	"github.com/medtune/beta-platform/pkg/session"
 )
 
+// Session .
 func Session() gin.HandlerFunc {
 	return session.DefaultHandler()
 }

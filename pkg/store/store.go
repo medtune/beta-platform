@@ -31,7 +31,7 @@ func New(config db.ConnStr) (*Store, error) {
 	return s, nil
 }
 
-// Type store is the abstraction behind data interactions
+// Store type is the abstraction behind data interactions
 // Database io & validation
 type Store struct {
 	*xorm.Engine
@@ -47,7 +47,7 @@ func (s *Store) Sync() error {
 	} else if err := s.Sync2(&model.SpecAnalysisPool{}); err != nil {
 		return err
 	} else {
-		fmt.Printf("migrated: %s\n", "model.{User|PathologyAnalysisLevel|SpecAnalysisPool}")
+		fmt.Printf("migrated: %s", "model.{User | PathologyAnalysisLevel | SpecAnalysisPool}\n")
 	}
 	return nil
 }

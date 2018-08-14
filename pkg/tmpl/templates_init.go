@@ -10,33 +10,13 @@ import (
 	"github.com/medtune/beta-platform/pkg/tmpl/shared"
 )
 
-var (
-	// Public
-	Index         *template.Template
-	Login         *template.Template
-	Signup        *template.Template
-	SignupSuccess *template.Template
-	Error         *template.Template
-
-	// Logged
-	ErrorLogged *template.Template
-	Home        *template.Template
-	DataHub     *template.Template
-	Settings    *template.Template
-
-	//Demos
-	DemosMenu                *template.Template
-	DemoPolynomialRegression *template.Template
-	DemoMnist                *template.Template
-	DemoInceptionImagenet    *template.Template
-	DemoMura                 *template.Template
-	DemoChexray              *template.Template
-)
-
-func init() {
-
+// CompileTemplates will construct known templates.
+// by default it will panic when error is occured
+func CompileTemplates() {
+	// Just helping garbage collector
 	var err error
 
+	// Index page
 	{
 		index := template.New("base")
 		index, err = index.Parse(shared.Base)
@@ -52,6 +32,7 @@ func init() {
 		Index = index
 	}
 
+	// login page
 	{
 		login := template.New("base")
 		login, err = login.Parse(shared.Base)
@@ -66,6 +47,7 @@ func init() {
 		Login = login
 	}
 
+	// Signup page
 	{
 		signup := template.New("base")
 		signup, err = signup.Parse(shared.Base)
@@ -81,6 +63,7 @@ func init() {
 		Signup = signup
 	}
 
+	// Signup success page
 	{
 		signupSuccess := template.New("base")
 		signupSuccess, err = signupSuccess.Parse(shared.Base)
@@ -96,36 +79,39 @@ func init() {
 		SignupSuccess = signupSuccess
 	}
 
+	// Error public page
 	{
-		error_ := template.New("base")
-		error_, err = error_.Parse(shared.Base)
+		errorPublic := template.New("base")
+		errorPublic, err = errorPublic.Parse(shared.Base)
 		must(err)
-		error_, err = error_.Parse(shared.HeaderPublic)
+		errorPublic, err = errorPublic.Parse(shared.HeaderPublic)
 		must(err)
-		error_, err = error_.Parse(shared.SourceHeaderEmpty)
+		errorPublic, err = errorPublic.Parse(shared.SourceHeaderEmpty)
 		must(err)
-		error_, err = error_.Parse(shared.Footer)
+		errorPublic, err = errorPublic.Parse(shared.Footer)
 		must(err)
-		error_, err = error_.Parse(public.Error)
+		errorPublic, err = errorPublic.Parse(public.Error)
 		must(err)
-		Error = error_
+		Error = errorPublic
 	}
 
+	// Error private page
 	{
-		error_logged := template.New("base")
-		error_logged, err = error_logged.Parse(shared.Base)
+		errorLogged := template.New("base")
+		errorLogged, err = errorLogged.Parse(shared.Base)
 		must(err)
-		error_logged, err = error_logged.Parse(shared.HeaderLogged)
+		errorLogged, err = errorLogged.Parse(shared.HeaderLogged)
 		must(err)
-		error_logged, err = error_logged.Parse(shared.SourceHeaderEmpty)
+		errorLogged, err = errorLogged.Parse(shared.SourceHeaderEmpty)
 		must(err)
-		error_logged, err = error_logged.Parse(shared.Footer)
+		errorLogged, err = errorLogged.Parse(shared.Footer)
 		must(err)
-		error_logged, err = error_logged.Parse(public.Error)
+		errorLogged, err = errorLogged.Parse(public.Error)
 		must(err)
-		ErrorLogged = error_logged
+		ErrorLogged = errorLogged
 	}
 
+	// Home page
 	{
 		home := template.New("base")
 		home, err = home.Parse(shared.Base)
@@ -141,6 +127,7 @@ func init() {
 		Home = home
 	}
 
+	// Demos menu page
 	{
 		demosMenu := template.New("base")
 		demosMenu, err = demosMenu.Parse(shared.Base)
@@ -156,6 +143,23 @@ func init() {
 		DemosMenu = demosMenu
 	}
 
+	// Slides menu page
+	{
+		slidesMenu := template.New("base")
+		slidesMenu, err = slidesMenu.Parse(shared.Base)
+		must(err)
+		slidesMenu, err = slidesMenu.Parse(shared.HeaderLogged)
+		must(err)
+		slidesMenu, err = slidesMenu.Parse(shared.SourceHeaderIndex)
+		must(err)
+		slidesMenu, err = slidesMenu.Parse(shared.Footer)
+		must(err)
+		slidesMenu, err = slidesMenu.Parse(private.Slides)
+		must(err)
+		SlidesMenu = slidesMenu
+	}
+
+	// Polynomial regression page
 	{
 		polynomialRegression := template.New("base")
 		polynomialRegression, err = polynomialRegression.Parse(shared.Base)
@@ -171,6 +175,7 @@ func init() {
 		DemoPolynomialRegression = polynomialRegression
 	}
 
+	// Mnist page
 	{
 		mnist := template.New("base")
 		mnist, err = mnist.Parse(shared.Base)
@@ -186,6 +191,7 @@ func init() {
 		DemoMnist = mnist
 	}
 
+	// Inception imagenet page
 	{
 		inceptionImagenet := template.New("base")
 		inceptionImagenet, err = inceptionImagenet.Parse(shared.Base)
@@ -201,6 +207,7 @@ func init() {
 		DemoInceptionImagenet = inceptionImagenet
 	}
 
+	// Mura imagenet
 	{
 		mura := template.New("base")
 		mura, err = mura.Parse(shared.Base)
@@ -216,6 +223,23 @@ func init() {
 		DemoMura = mura
 	}
 
+	// Mura imagenet
+	{
+		mura := template.New("base")
+		mura, err = mura.Parse(shared.Base)
+		must(err)
+		mura, err = mura.Parse(shared.HeaderLogged)
+		must(err)
+		mura, err = mura.Parse(shared.SourceHeaderMuraV2)
+		must(err)
+		mura, err = mura.Parse(shared.Footer)
+		must(err)
+		mura, err = mura.Parse(demos.MuraV2)
+		must(err)
+		DemoMuraV2 = mura
+	}
+
+	// Chexray page
 	{
 		chexray := template.New("base")
 		chexray, err = chexray.Parse(shared.Base)
@@ -231,6 +255,39 @@ func init() {
 		DemoChexray = chexray
 	}
 
+	// Chexray V2 page
+	{
+		chexray := template.New("base")
+		chexray, err = chexray.Parse(shared.Base)
+		must(err)
+		chexray, err = chexray.Parse(shared.HeaderLogged)
+		must(err)
+		chexray, err = chexray.Parse(shared.SourceHeaderChexrayV2)
+		must(err)
+		chexray, err = chexray.Parse(shared.Footer)
+		must(err)
+		chexray, err = chexray.Parse(demos.ChexrayV2)
+		must(err)
+		DemoChexrayV2 = chexray
+	}
+
+	// Sentiment analysis page
+	{
+		sentimentAnalysis := template.New("base")
+		sentimentAnalysis, err = sentimentAnalysis.Parse(shared.Base)
+		must(err)
+		sentimentAnalysis, err = sentimentAnalysis.Parse(shared.HeaderLogged)
+		must(err)
+		sentimentAnalysis, err = sentimentAnalysis.Parse(shared.SourceHeaderChexray)
+		must(err)
+		sentimentAnalysis, err = sentimentAnalysis.Parse(shared.Footer)
+		must(err)
+		sentimentAnalysis, err = sentimentAnalysis.Parse(demos.SentimentAnalysis)
+		must(err)
+		DemoSentimentAnalysis = sentimentAnalysis
+	}
+
+	// Datahub page
 	{
 		datahub := template.New("base")
 		datahub, err = datahub.Parse(shared.Base)
@@ -245,6 +302,7 @@ func init() {
 		DataHub = datahub
 	}
 
+	// Settings page
 	{
 		settings := template.New("base")
 		settings, err = settings.Parse(shared.Base)
@@ -260,29 +318,13 @@ func init() {
 	}
 }
 
-// Return map of templates. Used by cmd/gen-views
-func GetTemplatesMap() map[string]*template.Template {
-	m := make(map[string]*template.Template)
-	m["index"] = Index
-	m["home"] = Home
-	m["signup"] = Signup
-	m["signup-success"] = SignupSuccess
-	m["login"] = Login
-	m["error"] = Error
-	m["error-logged"] = ErrorLogged
-	m["demos-menu"] = DemosMenu
-	m["demo-polynomial-regression"] = DemoPolynomialRegression
-	m["demo-inception-imagenet"] = DemoInceptionImagenet
-	m["demo-mnist"] = DemoMnist
-	m["demo-mura"] = DemoMura
-	m["demo-chexray"] = DemoChexray
-	m["datahub"] = DataHub
-	m["settings"] = Settings
-	return m
-}
-
-func must(err error) {
+var must = func(err error) {
 	if err != nil {
 		log.Panic(err)
 	}
+}
+
+// SetErrorHandler sets the 'must' function
+func SetErrorHandler(f func(err error)) {
+	must = f
 }

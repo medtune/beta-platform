@@ -3,12 +3,13 @@
 - [1. Root](#root-command)
 - [2. Version](#version)
 - [3. Automigrate](#automigrate)
-- [4. Generate views](#generate-views)
-- [5. Debug server](#debug-server)
-- [6. Run server](#run-server)
+- [4. Generate config](#generate-startup-config)
+- [5. Generate views](#generate-views)
+- [6. Debug server](#debug-server)
+- [7. Run server](#run-server)
 
 #### Root command
-```
+```shell
 Usage:
   medtune-beta [command]
 
@@ -28,7 +29,7 @@ Flags:
 #### Subcommands
 
 ###### Version
-```
+```shell
 Print Medtune Beta version
 
 Usage:
@@ -39,7 +40,7 @@ Flags:
 ```
 
 ###### Syncdb
-```
+```shell
 Sync database models by updating/creating existing
 database tables
 
@@ -55,9 +56,9 @@ Flags:
   -h, --help           help for automigrate
 ```
 
-###### Generate start up config
+###### Generate startup config
 
-```
+```shell
 Generate empty startup config file
 
 Usage:
@@ -72,7 +73,7 @@ Flags:
 ```
 
 ###### Generate views
-```
+```shell
 Generate views html files
 
 Usage:
@@ -88,7 +89,7 @@ Flags:
 ``` 
 
 ###### Debug server
-```
+```shell
 Debug UI server for dev purposes
 
 Usage:
@@ -104,7 +105,7 @@ Flags:
 ```
 
 ###### Run server
-```
+```shell
 Run Medtune beta server
 
 Usage:

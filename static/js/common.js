@@ -15,7 +15,7 @@ var sendJSON = function(method, url, obj, callback) {
 };
 
 var setDisplay = function(state, id) {
-    if (state == true) {
+    if (state === true) {
         document.getElementById(id).style.display = "block";
     } else {
         document.getElementById(id).style.display = "none";
@@ -30,8 +30,8 @@ var diff = function(t1, t2) {
 }
 
 var getMax = function(l) {
-    maxi = 0;
-    max = l[0];
+    var maxi = 0;
+    var max = l[0];
     for (var i=0; i<10; i++) {
         if (l[i] > max){
             maxi = i;
@@ -39,7 +39,7 @@ var getMax = function(l) {
         } 
     }
     console.log(maxi, max);
-    d = {
+    var d = {
         'maxi' : maxi,
         'max' : max,
     };

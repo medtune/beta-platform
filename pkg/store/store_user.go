@@ -8,10 +8,12 @@ import (
 )
 
 const (
-	// ACCOUNT_ADMIN .
-	ACCOUNT_ADMIN      = "admin"
-	ACCOUNT_BETATESTER = "betatester"
-	ACCOUNT_SII        = "sii"
+	// ADMIN USER
+	ADMIN = "admin"
+	// BETATESTER USER
+	BETATESTER = "betatester"
+	// SII USER
+	SII = "sii"
 )
 
 type userStore interface {
@@ -27,7 +29,7 @@ func (s *Store) CreateUser(email, username, password string) error {
 		Username:      username,
 		Password:      crypto.Sha256(password),
 		AccountStatus: true,
-		AccountType:   ACCOUNT_BETATESTER,
+		AccountType:   BETATESTER,
 		AccountLevel:  5,
 	}
 	// validate user
@@ -68,6 +70,7 @@ func (s *Store) getUserByEmail(email string) (*model.User, error) {
 	return user, nil
 }
 
+// AuthentificateUser auth a user
 func (s *Store) AuthentificateUser(username, password string) (bool, error) {
 	user, err := s.GetUser(username)
 	if err != nil {

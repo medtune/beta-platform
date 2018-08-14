@@ -1,6 +1,6 @@
 package shared
 
-var HeaderPublic = `{{define "header"}}
+const HeaderPublic = `{{define "header"}}
 <div class="mdl-layout--fixed-header mdl-layout mdl-js-layout">
 	<header class="mdl-layout__header page-header">
 		<div class="mdl-layout__header-row">

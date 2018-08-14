@@ -5,16 +5,18 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/medtune/beta-platform/server/handlers/debug"
-	"github.com/medtune/beta-platform/server/handlers/public"
 )
 
-func Debug(static string, port int) *server {
-	engine := gin.New()
-	engine.Static(static, static)
-	debugHandlers(engine)
+// Debug return a debuged version of medtune beta platform
+// it will serve static content only
+// pkg session / db / cache arent connected to the debug mode
+func Debug(static string, port int) Engine {
+	server := gin.New()
+	server.Static(static, static)
+	debugHandlers(server)
 	var sport = ":" + strconv.Itoa(port)
-	return &server{
-		engine: engine,
+	return &engine{
+		engine: server,
 		port:   sport,
 	}
 }
@@ -23,11 +25,10 @@ func debugHandlers(g *gin.Engine) {
 	// Gin recovery and logger
 	g.Use(gin.Recovery())
 	g.Use(gin.Logger())
-	// No route set
-	g.NoRoute(public.NoRouteProxy)
 
 	DEBUG := g.Group("/")
 	{
+		DEBUG.GET("/", debug.Index)
 		DEBUG.GET("/index", debug.Index)
 		DEBUG.GET("/home", debug.Home)
 		DEBUG.GET("/login", debug.Login)
@@ -38,7 +39,11 @@ func debugHandlers(g *gin.Engine) {
 		DEBUG.GET("/demos/inception_imagenet", debug.InceptionImagenet)
 		DEBUG.GET("/demos/polynomial_regression", debug.PolynomialRegression)
 		DEBUG.GET("/demos/mura", debug.Mura)
+		DEBUG.GET("/demos/mura.v2", debug.MuraV2)
 		DEBUG.GET("/demos/chexray", debug.Chexray)
+		DEBUG.GET("/demos/chexray.v2", debug.ChexrayV2)
+		DEBUG.GET("/demos/sentiment_analysis", debug.SentimentAnalysis)
 		DEBUG.GET("/datahub", debug.Datahub)
+		DEBUG.GET("/slides", debug.SlidesMenu)
 	}
 }

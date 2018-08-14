@@ -8,7 +8,7 @@ import (
 // VERSION is the version string for built artifacts. It's set by the build system, and should
 // not be changed in this codebase
 const (
-	VERSION = "v0.1.1"
+	VERSION = "v0.1.2"
 )
 
 // PrintAndExit will print the version and exit.

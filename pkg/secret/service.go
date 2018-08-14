@@ -15,22 +15,25 @@ func init() {
 	secrets["auth"] = make([]string, 0, 0)
 }
 
+// Register a new secret key
 func Register(service, key string) error {
 	if _, ok := secrets[service]; !ok {
-		return fmt.Errorf("Unknown service")
+		return fmt.Errorf("unknown service")
 	}
 	secrets[service] = append(secrets[service], key)
 	return nil
 }
 
+// Check if service exists then if secret exist
+// within service
 func Check(service, key string) (bool, error) {
 	if _, ok := secrets[service]; !ok {
-		return false, fmt.Errorf("Unknown service")
+		return false, fmt.Errorf("unknown service")
 	}
 	for _, s := range secrets[service] {
 		if key == s {
 			return true, nil
 		}
 	}
-	return false, fmt.Errorf("Wrong secret.")
+	return false, fmt.Errorf("wrong secret")
 }

@@ -14,8 +14,8 @@ type Meta struct {
 type Server struct {
 	Mode     string `yaml:"mode"`
 	Port     int    `yaml:"port"`
-	Protocol string `yaml:"protocol"`
-	SSLTLS   bool   `yaml:"ssltls"`
+	Protocol string `yaml:"protocol,omitempty"`
+	SSLTLS   bool   `yaml:"ssltls,omitempty"`
 }
 
 // DBCreds .

@@ -1,10 +1,12 @@
 package model
 
+// GlobalData .
 type GlobalData struct {
 	Id   int64
 	Name int64
 }
 
+// DemoData .
 type DemoData struct {
 	Id   int64
 	Name string `xorm:"varchar(64) not null"`
@@ -20,6 +22,7 @@ type DemoData struct {
 	//TODO hash data
 }
 
+// Demo .
 type Demo struct {
 	Id          int64
 	Name        string `xorm:"varchar(64) not null" valid:"required"`

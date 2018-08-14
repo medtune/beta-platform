@@ -1,6 +1,6 @@
 package shared
 
-var HeaderLogged = `{{define "header"}}
+const HeaderLogged = `{{define "header"}}
 <div class="mdl-layout--fixed-header mdl-layout mdl-js-layout">
 	<header class="mdl-layout__header page-header">
 	<div class="mdl-layout__header-row">

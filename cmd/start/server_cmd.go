@@ -68,63 +68,78 @@ var startCmd = &cobra.Command{
 }
 
 func runServer() {
+	// Set gin mode (0 for debug, 1 for production)
 	if ginMode == 0 {
 		gin.SetMode(gin.DebugMode)
 	} else if ginMode == 1 {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
+	// Alloc configuration
 	var configuration *config.StartupConfig
 
+	// Load configuration
 	if cfg, err := config.LoadConfigFromPath(configFile); err != nil {
 		log.Fatal(err)
 	} else {
 		configuration = cfg
 	}
 
+	// Init packages
 	if err := initpkg.InitFromConfig(configuration); err != nil {
 		log.Fatal(err)
 	}
 
+	// Syndb
+	// Create tables from models structs
 	if syncdb {
-		var err error
-
-		err = store.Agent.Sync()
 		fmt.Printf("trying to connect database %s\n", configuration.Database.Prod)
 
-		if err != nil && wait {
-			attempt := 0
-			for err != nil && attempt < maxattempt {
-				time.Sleep(time.Duration(timestamp) * time.Second)
-				fmt.Printf("waiting for database response (host: %s)\n", configuration.Database.Creds.Host)
-				err = store.Agent.Sync()
-				attempt++
-			}
-		}
-		if err != nil {
-			log.Fatal(err)
-		}
-		fmt.Println("connected to database...")
-	}
-
-	if createUsers && configuration.Create != nil {
 		var err error
-		for _, user := range configuration.Create.Users {
-			err = store.Agent.CreateUser(user.Email, user.Username, user.Password)
-			if err != nil {
-				fmt.Printf("failed to create user: %s\n    error: %v\n", user.Username, err)
-				continue
+
+		// First sync
+		err = store.Agent.Sync()
+		if err != nil {
+
+			if err != nil && wait {
+				attempt := 0
+				for err != nil && attempt < maxattempt {
+					time.Sleep(time.Duration(timestamp) * time.Second)
+					fmt.Printf("waiting for database response (host: %s)\n", configuration.Database.Creds.Host)
+					err = store.Agent.Sync()
+					attempt++
+				}
 			}
-			fmt.Printf("created user %s %s %s\n", user.Email, user.Username, user.Password)
+			if err != nil {
+				log.Fatal(err)
+			}
+			fmt.Println("connected to database...")
 		}
+
+		// Create config.Users
+		if createUsers && configuration.Create != nil {
+			var err error
+			for _, user := range configuration.Create.Users {
+				err = store.Agent.CreateUser(user.Email, user.Username, user.Password)
+				if err != nil {
+					fmt.Printf("failed to create user: %s\n\terror: %v\n", user.Username, err)
+					continue
+				}
+				fmt.Printf("created user:\n\temail:%s \n\tusername: %s\n\tpassword: %s\n",
+					user.Email,
+					user.Username,
+					user.Password,
+				)
+			}
+		}
+
+		fmt.Println("starting server...")
+
+		Server := server.New(
+			static,
+			port,
+		)
+
+		Server.Run()
 	}
-
-	fmt.Println("starting server...")
-
-	Server := server.New(
-		static,
-		port,
-	)
-
-	Server.Run()
 }

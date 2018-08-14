@@ -59,7 +59,7 @@ $(document).keydown(function(e){
 
 var SignupSucces = `{{define "content"}}
 <div class="center-screen">
-Sign up successfull. Redirecting to in 5seconds...
+Sign up successfull. Redirecting to home pagein 5seconds...
 </div>
 <script>
 	setTimeout(function() {

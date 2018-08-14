@@ -16,6 +16,7 @@ func DatahubUpload(c *gin.Context) {
 	file, err := c.FormFile("file")
 	if err != nil {
 		c.Redirect(302, "/error/500")
+		return
 	}
 
 	// Save file

@@ -15,13 +15,15 @@ func CollectImagesData(demo string) ([]data.Image, error) {
 	if _, err := os.Stat(path); err != nil || os.IsNotExist(err) {
 		return nil, err
 	}
-
 	images := make([]data.Image, 0, 0)
+
+	// ls dir
 	files, err := ioutil.ReadDir(path)
 	if err != nil {
 		return nil, err
 	}
 
+	// walk over file
 	for _, f := range files {
 		if !f.IsDir() {
 			images = append(images, data.Image{

@@ -1,7 +1,7 @@
 meta:
   name: medtune beta platform
   description: medtune beta test
-  version: v0.1.1
+  version: v0.1.2
   prod: true
 
 database:
@@ -28,29 +28,29 @@ public:
   static: ./static
 
 capsul:
-  inception:
-    model: inception
-    signature: predict_images
-    version: 1
-    address: localhost:9001
-  
   mnist:
     model: mnist
     signature: predict_images
     version: 1
     address: localhost:9000
 
+  inception:
+    model: inception
+    signature: predict_images
+    version: 1
+    address: localhost:9001
+
   mura:
     model: mura
     signature: predict_images
     version: 1
-    address: localhost:6666
+    address: localhost:9002
 
   chexray:
     model: chexray
     signature: predict_images
     version: 1
-    address: localhost:6666
+    address: localhost:9003
       
 secrets:
   signup:
@@ -66,3 +66,5 @@ create:
     - username: test
       email: test@medtune.org
       password: test
+
+      

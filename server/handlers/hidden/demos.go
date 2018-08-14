@@ -1,8 +1,6 @@
 package hidden
 
 import (
-	"fmt"
-
 	"github.com/gin-gonic/gin"
 	"github.com/medtune/beta-platform/pkg"
 	"github.com/medtune/beta-platform/pkg/service/demos"
@@ -58,8 +56,6 @@ func InceptionImagenet(c *gin.Context) {
 		return
 	}
 
-	fmt.Println(images)
-
 	c.Status(200)
 	tmpl.DemoInceptionImagenet.Execute(c.Writer, &data.InceptionDemo{
 		Main: data.Main{
@@ -82,6 +78,18 @@ func Mura(c *gin.Context) {
 	})
 }
 
+func MuraV2(c *gin.Context) {
+	if logged := session.GetLoginStatus(c); !logged {
+		c.Redirect(302, "/index")
+		return
+	}
+	c.Status(200)
+	tmpl.DemoMuraV2.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Demo V2: MURA Classification",
+	})
+}
+
 func Chexray(c *gin.Context) {
 	if logged := session.GetLoginStatus(c); !logged {
 		c.Redirect(302, "/index")
@@ -91,5 +99,29 @@ func Chexray(c *gin.Context) {
 	tmpl.DemoChexray.Execute(c.Writer, &data.Main{
 		Version:   pkg.VERSION,
 		PageTitle: "Demo: Chest X-Ray Classification",
+	})
+}
+
+func ChexrayV2(c *gin.Context) {
+	if logged := session.GetLoginStatus(c); !logged {
+		c.Redirect(302, "/index")
+		return
+	}
+	c.Status(200)
+	tmpl.DemoChexrayV2.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Demo V2: Chest X-Ray Classification",
+	})
+}
+
+func SentimentAnalysis(c *gin.Context) {
+	if logged := session.GetLoginStatus(c); !logged {
+		c.Redirect(302, "/index")
+		return
+	}
+	c.Status(200)
+	tmpl.DemoSentimentAnalysis.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Demo: Sentiment Analysis",
 	})
 }

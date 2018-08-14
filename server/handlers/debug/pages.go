@@ -68,7 +68,7 @@ func DemosMenu(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemosMenu.Execute(c.Writer, &data.Main{
 		Version:   pkg.VERSION,
-		PageTitle: "Demo: Image classification",
+		PageTitle: "Demos menu",
 	})
 }
 
@@ -117,6 +117,14 @@ func Mura(c *gin.Context) {
 	})
 }
 
+func MuraV2(c *gin.Context) {
+	c.Status(200)
+	tmpl.DemoMuraV2.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Demo V2: MURA Classification",
+	})
+}
+
 func Chexray(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemoChexray.Execute(c.Writer, &data.Main{
@@ -125,10 +133,34 @@ func Chexray(c *gin.Context) {
 	})
 }
 
+func ChexrayV2(c *gin.Context) {
+	c.Status(200)
+	tmpl.DemoChexrayV2.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Demo V2: Chest X-Ray Classification",
+	})
+}
+
+func SentimentAnalysis(c *gin.Context) {
+	c.Status(200)
+	tmpl.DemoSentimentAnalysis.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Demo: Sentiment Analysis",
+	})
+}
+
 func Datahub(c *gin.Context) {
 	c.Status(200)
 	tmpl.DataHub.Execute(c.Writer, &data.Main{
 		Version:   pkg.VERSION,
 		PageTitle: "Datahub",
+	})
+}
+
+func SlidesMenu(c *gin.Context) {
+	c.Status(200)
+	tmpl.SlidesMenu.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Slides menu",
 	})
 }

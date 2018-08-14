@@ -26,6 +26,7 @@ const (
 					</a>
 				</div>
 			</div>
+			
 		<div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet home-menu-card mdl-card mdl-shadow--2dp" id="div">
 			<div class="mdl-card__title mdl-card__title__demos">
 				<h2 class="mdl-card__title-text">Demonstrations</h2>
