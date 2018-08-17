@@ -6,75 +6,62 @@ jobs:
       docker_layer_caching: true
     steps:
       - checkout
-      - run: 
-          name: build capsul image
-          command: docker build -t medtune/beta-platform:go-1.10-linux-v0.1.2-build .
-
-      - run: 
-          name: login docker engine
-          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
-
       - run:
-          name: push base build image to registry
+          name: build base image
+          command: docker build -t medtune/beta-platform:go-1.10-linux-v0.1.2-build .
+      - run:
+          name: registry auth
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run:
+          name: push image to registry
           command: docker push medtune/beta-platform:go-1.10-linux-v0.1.2-build
 
-          
   test:
     machine:
       docker_layer_caching: true
     steps:
       - checkout
-      - run: 
+
+      - run:
           name: test packages
-          command: docker build -t medtune/beta-platform:go-1.10-linux-v0.1.2 -f Dockerfile.test .
+          command: docker build -t test -f Dockerfile.test .
 
   test-cov:
     machine:
       docker_layer_caching: true
     steps:
       - checkout
-      - run: 
-          name: test packages -race
-          command: docker build -t medtune/beta-platform:go-1.10-linux-v0.1.2 --build-arg CODECOV_TOKEN=$CODECOV_TOKEN -f Dockerfile.test-cov .
-
       - run:
-          name: push coverage report
-          command: docker push medtune/beta-platform:go-1.10-linux-v0.1.2 
+          name: test coverage
+          command: docker build -t test-cov --build-arg CODECOV_TOKEN=$CODECOV_TOKEN -f Dockerfile.test-cov .
 
   build-prod:
     machine:
       docker_layer_caching: true
     steps:
       - checkout
-      - run: 
+      - run:
           name: build capsul image
           command: docker build -t medtune/beta-platform:go-1.10-linux-v0.1.2 -f Dockerfile.prod .
-
-      - run: 
+      - run:
             name: login docker engine
             command: docker login -u $DOCKER_USER -p $DOCKER_PASS
-
       - run:
           name: push image to registry
-          command: docker push medtune/beta-platform:go-1.10-linux-v0.1.2 
+          command: docker push medtune/beta-platform:go-1.10-linux-v0.1.2
         
-  
-
 workflows:
   version: 2
   build:
     jobs:
       - build-base
-      
+      - test:
+          requires:
+            - build-base
       - build-prod:
           requires:
             - build-base
             - test
-
-      - test:
-          requires:
-            - build-base
-
       - test-cov:
           requires:
             - test
