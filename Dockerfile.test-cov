@@ -1,0 +1,7 @@
+FROM medtune/beta-platform:go-1.10-linux-v0.1.2-build
+
+RUN bash ./hack/go.test-race.sh
+
+ARG CODECOV_TOKEN
+
+RUN bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN

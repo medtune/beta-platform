@@ -2,12 +2,12 @@
 
 [![GitHub license](https://img.shields.io/github/license/medtune/beta-platform.svg)](https://github.com/medtune/beta-platform/blob/iron-master/LICENSE.txt) [![GitHub pull-requests](https://img.shields.io/github/issues-pr/medtune/beta-platform.svg)](https://GitHub.com/medtune/beta-platform/pull/) [![GitHub issues](https://img.shields.io/github/issues/medtune/beta-platform.svg)](https://github.com/medtune/beta-platform/issues) [![GitHub release](https://img.shields.io/github/release/medtune/beta-platform.svg)](https://GitHub.com/medtune/beta-platform/releases) 
 
-## Build status
+## Build Status & Coverage
 
-| branch | Build status |
-| --- | --- | 
-| Master | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/master.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/master) |
-| Dev | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/dev.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/dev) |
+| branch | Status | C.C | C.Q |
+| --- | --- | --- | --- |
+| Master | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/master.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/master) | [![CodeFactor](https://www.codefactor.io/repository/github/medtune/beta-platform/badge)](https://www.codefactor.io/repository/github/medtune/beta-platform) | [![codecov](https://codecov.io/gh/medtune/beta-platform/branch/master/graph/badge.svg)](https://codecov.io/gh/medtune/beta-platform) |
+| Dev | [![CircleCI](https://circleci.com/gh/medtune/beta-platform/tree/dev.svg?style=svg)](https://circleci.com/gh/medtune/beta-platform/tree/dev) | [![CodeFactor](https://www.codefactor.io/repository/github/medtune/beta-platform/badge/dev)](https://www.codefactor.io/repository/github/medtune/beta-platform/overview/dev) | |
 
 ***
 
