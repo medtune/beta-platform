@@ -63,8 +63,7 @@ func assembleHandlers(g *gin.Engine) {
 			DEMOS.GET("/mura.v2", hidden.MuraV2)
 			DEMOS.GET("/chexray", hidden.Chexray)
 			DEMOS.GET("/chexray.v2", hidden.ChexrayV2)
-
-			DEMOS.GET("/demos/mnist", hidden.SentimentAnalysis)
+			DEMOS.GET("/sentiment_analysis", hidden.SentimentAnalysis)
 		}
 
 		// Api routes

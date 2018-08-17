@@ -16,15 +16,15 @@ const (
 					<span class="mdl-textfield__error">Letters and spaces only</span>
 				</div>
 				<div>
-				<div class="mdl-textfield mdl-js-textfield getmdl-select" style="width: 100%;">
-					<input class="mdl-textfield__input" value="" id="model" readonly/>
-					<input value="" type="hidden" name="model"/>
-					<label class="mdl-textfield__label" for="model">Demo</label>
-					<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu" for="model">
-						<li class="mdl-menu__item" data-val="MNS" disabled>MNIST</li>
-						<li class="mdl-menu__item" data-val="INC">Inception</li>
-					</ul>
-				</div>
+					<div class="mdl-textfield mdl-js-textfield getmdl-select" style="width: 100%;">
+						<input class="mdl-textfield__input" value="" id="model" readonly/>
+						<input value="" type="hidden" name="model"/>
+						<label class="mdl-textfield__label" for="model">Demo</label>
+						<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu" for="model">
+							<li class="mdl-menu__item" data-val="MNS" disabled>MNIST</li>
+							<li class="mdl-menu__item" data-val="INC">Inception</li>
+						</ul>
+					</div>
 				</div>
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--file" style="width: 100%;">
 					<input class="mdl-textfield__input" placeholder="File" type="text" id="TEXT" readonly/>
