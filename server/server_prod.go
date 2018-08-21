@@ -69,12 +69,32 @@ func assembleHandlers(g *gin.Engine) {
 		// Api routes
 		API := PROTECTED.Group("/api")
 		{
+
+			API.POST("version", api.Version)
+
+			// Mnist
 			API.POST("/mnist/run_inference", api.MnistRunInference)
+
+			// Inception
 			API.POST("/inception_imagenet/run_inference", api.InceptionImagenetRunInference)
 			API.POST("/inception_imagenet/drop_image", api.InceptionImagenetDropImage)
+
+			// Mura
 			API.POST("/mura/run_inference", api.MuraRunInference)
+			API.POST("/mura/run_cam", api.MuraRunCam)
+			API.POST("/mura/drop_image", api.InceptionImagenetDropImage)
+
+			// Chexray
 			API.POST("/chexray/run_inference", api.ChexrayRunInference)
+
+			// Datahub
 			API.POST("/datahub_upload", api.DatahubUpload)
+			API.POST("/datahub/upload/:demo", api.DatahubDemoUpload)
+			API.POST("/datahub/drop/:demo", api.DatahubDemoDrop)
+
+			// Test routes
+			API.POST("/test", api.Test)
+
 		}
 	}
 

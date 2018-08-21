@@ -23,6 +23,7 @@ func InitFromFile(file string) error {
 	if err != nil {
 		return err
 	}
+
 	// Init from config
 	err = InitFromConfig(config)
 	if err != nil {
@@ -37,23 +38,26 @@ func InitFromConfig(c *config.StartupConfig) error {
 	if c.Meta.Version != pkg.VERSION {
 		return fmt.Errorf("Configuration meta version did'nt match\n\tpackage version: %v\n\tconfigs version: %v", pkg.VERSION, c.Meta.Version)
 	}
+
 	// init package pkg/session
 	if err := initSession(c.Session); err != nil {
 		return err
 	}
+
 	// init package pkg/store + pkg/store/db
 	if err := initStore(c.Database, c.Meta.IsProd); err != nil {
 		return err
 	}
+
 	// init package pkg/secret
 	if err := initSecrets(c.Secrets); err != nil {
 		return err
 	}
+
 	// init package pkg/service/capsul
 	if err := initCapsulClients(c.Capsul); err != nil {
 		return err
 	}
-
 	return nil
 }
 
@@ -66,6 +70,7 @@ func initSession(c *config.Session) error {
 		session.SessID = random.Alpha(10)
 		s = random.Alpha(10)
 	}
+
 	log.Printf("Session secrets:\n\t-> %v\n\t-> %v\n", session.SessID, s)
 	session.Store = session.NewStore(s)
 	return nil
@@ -82,13 +87,14 @@ func initStore(c *config.Database, prod bool) error {
 
 	// Create store engine
 	engine, err := store.New(db.ConnStr{
-		Host:     c.Creds.Host,
-		Database: database,
-		User:     c.Creds.User,
-		Password: c.Creds.Password,
-		Port:     c.Creds.Port,
-		SslMode:  0,
-		Maxconn:  2,
+		Host:         c.Creds.Host,
+		Database:     database,
+		User:         c.Creds.User,
+		Password:     c.Creds.Password,
+		Port:         c.Creds.Port,
+		SslMode:      0,
+		MaxIdleConns: c.MIC,
+		MaxOpenConns: c.MOC,
 	})
 	if err != nil {
 		return err

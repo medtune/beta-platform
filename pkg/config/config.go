@@ -32,6 +32,8 @@ type Database struct {
 	Prod    string   `yaml:"prod"`
 	Test    string   `yaml:"test"`
 	SSLMode int8     `yaml:"sslmode"`
+	MOC     int      `yaml:"max_idle_conns"`
+	MIC     int      `yaml:"max_open_conns"`
 	Creds   *DBCreds `yaml:"creds"`
 }
 
@@ -82,13 +84,20 @@ type Capsul struct {
 
 // StartupConfig main configuration
 type StartupConfig struct {
-	Meta     *Meta          `yaml:"meta"`
-	Server   *Server        `yaml:"server"`
-	Database *Database      `yaml:"database"`
-	Session  *Session       `yaml:"session"`
-	Crypto   *Crypto        `yaml:"crypto"`
-	Public   *PublicContent `yaml:"public"`
-	Secrets  *Secrets       `yaml:"secrets"`
-	Create   *Create        `yaml:"create"`
-	Capsul   *Capsul        `yaml:"capsul"`
+	Meta          *Meta              `yaml:"meta"`
+	Server        *Server            `yaml:"server"`
+	Database      *Database          `yaml:"database"`
+	Session       *Session           `yaml:"session"`
+	Crypto        *Crypto            `yaml:"crypto"`
+	Public        *PublicContent     `yaml:"public"`
+	Secrets       *Secrets           `yaml:"secrets"`
+	Create        *Create            `yaml:"create"`
+	Capsul        *Capsul            `yaml:"capsul"`
+	CapsulHelpers []*ServiceEndpoint `yaml:"capsul_helpers"`
+}
+
+// ServiceEndpoint .
+type ServiceEndpoint struct {
+	Name    string `yaml:"name"`
+	Address string `yaml:"address"`
 }

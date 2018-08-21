@@ -140,6 +140,8 @@ func runServer() {
 			port,
 		)
 
-		Server.Run()
+		if err := Server.Run(); err != nil {
+			log.Fatal(err)
+		}
 	}
 }

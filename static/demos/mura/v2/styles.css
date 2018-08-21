@@ -1,3 +1,21 @@
 .demo-mura {
     width: 100%;
+    justify-content: center;
+    min-height: 500px;
+}
+
+.mura-grid {
+}
+
+.mura-grid-view {
+    max-width: 1100px;
+}
+
+.demo-card-square.mdl-card {
+    height: 500px;
+}
+
+.demo-card-square > .mdl-card__title {
+    color: #fff;
+    background: url('/static/images/sky.jpg') bottom right 15% no-repeat #46B6AC;
 }

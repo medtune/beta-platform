@@ -8,6 +8,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (See dev branch)
 
+## 0.1.2 - WIP
+
+## Changed
+
+General:
+
+Build:
+
+CICD:
+
+Hack:
+
+Front:
+
+Application:
+
+## Added 
+
+
+
 ## 0.1.1 - 2018-08-13
 
 ### Added
@@ -19,14 +39,13 @@ Build:
 
 Command:
 - Added new command `gen-config`: generate an empty configuration file
-- run-server now assert version compatibility before runing
-- Assert beta-platform/pkg && startup config versions to avoid backward breaking changes
+- run-server now verify version compatibility (pkg, config) before runing
 
-Hack/Tooling:
+Hack:
 - Script for linting code
 - Script for formating code
 - `xlsx2pg` is excel to postgres command line (it is not general, just adapted to our use case)
-- Install scripts
+- Dependencies installation script
 - Commented diferent packages in the project
 
 ### Changed

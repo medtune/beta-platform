@@ -15,6 +15,8 @@
 package debug
 
 import (
+	"log"
+
 	"github.com/gin-gonic/gin"
 	"github.com/medtune/beta-platform/cmd/root"
 	"github.com/medtune/beta-platform/server"
@@ -38,7 +40,7 @@ var debugCmd = &cobra.Command{
 	Use:     "debug",
 	Aliases: []string{"debug-server"},
 	Short:   "debug server for UI dev",
-	Long:    `Debug UI server for dev purposes`,
+	Long:    `Debug UI server`,
 	Run: func(cmd *cobra.Command, args []string) {
 		debugServer()
 	},
@@ -52,5 +54,7 @@ func debugServer() {
 		port,
 	)
 
-	Server.Run()
+	if err := Server.Run(); err != nil {
+		log.Fatal(err)
+	}
 }

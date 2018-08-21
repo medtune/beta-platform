@@ -63,16 +63,19 @@ func autoMigrateDatabase() {
 
 	log.Printf("starting auto-migration on database: %v", dbconfig.Prod)
 
+	cnxStr := db.ConnStr{
+		Host:         dbconfig.Creds.Host,
+		Database:     dbconfig.Prod,
+		User:         dbconfig.Creds.User,
+		Password:     dbconfig.Creds.Password,
+		Port:         dbconfig.Creds.Port,
+		SslMode:      dbconfig.SSLMode,
+		MaxIdleConns: dbconfig.MIC,
+		MaxOpenConns: dbconfig.MOC,
+	}
+
 	{
-		engine, err := store.New(db.ConnStr{
-			Host:     dbconfig.Creds.Host,
-			Database: dbconfig.Prod,
-			User:     dbconfig.Creds.User,
-			Password: dbconfig.Creds.Password,
-			Port:     dbconfig.Creds.Port,
-			SslMode:  0,
-			Maxconn:  2,
-		})
+		engine, err := store.New(cnxStr)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -96,15 +99,8 @@ func autoMigrateDatabase() {
 
 	log.Printf("\nstarting auto-migration on database: %v", dbconfig.Test)
 	{
-		engine, err := store.New(db.ConnStr{
-			Host:     dbconfig.Creds.Host,
-			Database: dbconfig.Test,
-			User:     dbconfig.Creds.User,
-			Password: dbconfig.Creds.Password,
-			Port:     dbconfig.Creds.Port,
-			SslMode:  0,
-			Maxconn:  2,
-		})
+		cnxStr.Database = dbconfig.Test
+		engine, err := store.New(cnxStr)
 		if err != nil {
 			log.Fatal(err)
 		}

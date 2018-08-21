@@ -49,3 +49,16 @@ func DropImage(infData *jsonutil.RunImageInference) error {
 
 	return nil
 }
+
+// DropImagePath .
+func DropImagePath(p string) error {
+	if p == "" {
+		return fmt.Errorf("file field is empty: got %v", p)
+	}
+
+	err := os.Remove("./" + p)
+	if err != nil {
+		return err
+	}
+	return nil
+}

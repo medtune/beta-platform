@@ -13,6 +13,9 @@ database:
     port: 5432
     user: mdtn
     password: mdtn
+  ssl_mode: 0
+  max_idle_conn: 100
+  max_open_conn: 100
   
 session:
   type: cookie
@@ -51,6 +54,10 @@ capsul:
     signature: predict_images
     version: 1
     address: localhost:9003
+
+capsul_helpers:
+  - name: mura-cam
+    address: localhost:9020
       
 secrets:
   signup:

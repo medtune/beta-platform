@@ -32,11 +32,13 @@ func (s *Store) CreateUser(email, username, password string) error {
 		AccountType:   BETATESTER,
 		AccountLevel:  5,
 	}
+
 	// validate user
 	v, err := s.Valid(user)
 	if err != nil || !v {
 		return err
 	}
+
 	// insert user
 	if _, err := s.Insert(&user); err != nil {
 		return err
@@ -51,6 +53,7 @@ func (s *Store) GetUser(username string) (*model.User, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	if !has {
 		return nil, fmt.Errorf("record doesnt exist")
 	}
@@ -64,6 +67,7 @@ func (s *Store) getUserByEmail(email string) (*model.User, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	if !has {
 		return nil, fmt.Errorf("record doesnt exist")
 	}
@@ -77,6 +81,7 @@ func (s *Store) AuthentificateUser(username, password string) (bool, error) {
 		// Database server error or record not found
 		return false, fmt.Errorf("username or password incorrect")
 	}
+
 	// Hashpassword
 	if crypto.Sha256(password) == user.Password {
 		return true, nil

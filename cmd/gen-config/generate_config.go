@@ -73,6 +73,9 @@ func generateConfig() {
 				User:     "mdtn",
 				Password: "mdtn",
 			},
+			SSLMode: 0,
+			MOC:     100,
+			MIC:     100,
 		},
 		Session: &config.Session{
 			Type:   "cookie",

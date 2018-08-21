@@ -16,7 +16,7 @@ var InceptionClient *tfsclient.Client
 // RunInceptionInference .
 func RunInceptionInference(ctx context.Context, infData *jsonutil.RunImageInference) (interface{}, error) {
 	if infData.File == "" {
-		return nil, fmt.Errorf("File field is empty: Got struct %v", infData)
+		return nil, fmt.Errorf("file field is empty: got struct %v", infData)
 	}
 
 	// Read file

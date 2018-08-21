@@ -22,3 +22,17 @@ type RunImageInference struct {
 	File     string `json:"file"`
 	NumPreds string `json:"numpreds"`
 }
+
+// RunImageCam .
+type RunImageCam struct {
+	Id            int    `json:"id"`
+	Image         string `json:"image"`
+	File          string `json:"file"`
+	CamOutputFile string `json:"cam_output_dir"`
+}
+
+// TestRequest .
+type TestRequest struct {
+	Test  bool `json:"test"`
+	Sleep int  `json:"sleep"`
+}
