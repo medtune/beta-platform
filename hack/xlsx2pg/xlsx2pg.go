@@ -22,13 +22,14 @@ func syncCXPBAexcel(file string) {
 
 	// create engine
 	engine, err := store.New(db.ConnStr{
-		Host:     dbconfig.Creds.Host,
-		Database: dbconfig.Prod,
-		User:     dbconfig.Creds.User,
-		Password: dbconfig.Creds.Password,
-		Port:     dbconfig.Creds.Port,
-		SslMode:  0,
-		Maxconn:  2,
+		Host:         dbconfig.Creds.Host,
+		Database:     dbconfig.Prod,
+		User:         dbconfig.Creds.User,
+		Password:     dbconfig.Creds.Password,
+		Port:         dbconfig.Creds.Port,
+		SslMode:      0,
+		MaxIdleConns: dbconfig.MIC,
+		MaxOpenConns: dbconfig.MOC,
 	})
 
 	if err != nil {
