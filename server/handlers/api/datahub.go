@@ -13,37 +13,8 @@ func staticPath(demo string, file string) string {
 	return fmt.Sprintf("static/demos/%s/images/%s", demo, file)
 }
 
-// DatahubUpload .
-func DatahubUpload(c *gin.Context) {
-	if logged := session.GetLoginStatus(c); !logged {
-		c.Redirect(302, "/index")
-		return
-	}
-
-	demo := c.PostForm("demo")
-	if demo == "" {
-		demo = "inception"
-	}
-
-	file, err := c.FormFile("file")
-	if err != nil {
-		c.Redirect(302, "/error/500")
-		return
-	}
-
-	path := staticPath(demo, file.Filename)
-
-	// Save file
-	if err := c.SaveUploadedFile(file, "./"+path); err != nil {
-		c.Redirect(302, "/error/500")
-		return
-	}
-
-	c.Redirect(302, "/datahub")
-}
-
-// DatahubDemoUpload .
-func DatahubDemoUpload(c *gin.Context) {
+// DemoDataUpload .
+func DemoDataUpload(c *gin.Context) {
 	if logged := session.GetLoginStatus(c); !logged {
 		c.Redirect(302, "/index")
 		return
@@ -67,8 +38,8 @@ func DatahubDemoUpload(c *gin.Context) {
 	c.Redirect(302, "/demos/"+demo)
 }
 
-// DatahubDemoDrop .
-func DatahubDemoDrop(c *gin.Context) {
+// DemoDataDrop .
+func DemoDataDrop(c *gin.Context) {
 	if logged := session.GetLoginStatus(c); !logged {
 		c.Redirect(302, "/index")
 		return

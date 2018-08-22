@@ -51,6 +51,7 @@ func assembleHandlers(g *gin.Engine) {
 		PROTECTED.GET("/home", hidden.Home)
 		PROTECTED.GET("/demos", hidden.DemosMenu)
 		PROTECTED.GET("/datahub", hidden.Datahub)
+		PROTECTED.POST("/datahub_upload", hidden.DatahubUpload)
 		PROTECTED.GET("/slides", hidden.SlidesMenu)
 
 		// Demonstrations routes
@@ -69,7 +70,7 @@ func assembleHandlers(g *gin.Engine) {
 		// Api routes
 		API := PROTECTED.Group("/api")
 		{
-
+			// Version
 			API.POST("version", api.Version)
 
 			// Mnist
@@ -88,9 +89,8 @@ func assembleHandlers(g *gin.Engine) {
 			API.POST("/chexray/run_inference", api.ChexrayRunInference)
 
 			// Datahub
-			API.POST("/datahub_upload", api.DatahubUpload)
-			API.POST("/datahub/upload/:demo", api.DatahubDemoUpload)
-			API.POST("/datahub/drop/:demo", api.DatahubDemoDrop)
+			API.POST("/datahub/upload/:demo", api.DemoDataUpload)
+			API.POST("/datahub/drop/:demo", api.DemoDataDrop)
 
 			// Test routes
 			API.POST("/test", api.Test)

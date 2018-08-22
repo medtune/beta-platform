@@ -548,9 +548,10 @@ and (max-width : 500px) {
     margin-bottom: 30px;
 }
 
+/*
 .demos-menu-card.mdl-card {
 
-}
+}*/
 
 .demo-text-dark {
     color: rgba(0, 0, 0, 0.6);
@@ -608,19 +609,28 @@ and (max-width : 500px) {
     color: rgb(71, 71, 71);
 }
 
-.back-button {
-    
-}
-
 .page-datahub {
     width: 100%;
     margin: 0 auto;
 }
 
 .grid-datahub {
-    max-width: 400px;  
+    max-width: 450px;  
     margin-top: 130px;
     margin-bottom: 140px;
+}
+
+.datahub-uplaod-format {
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.datahub-radio-jpeg {
+    padding-right: 5px;
+}
+
+.datahub-radio-png {
+    padding-left: 5px;
 }
 
 
@@ -645,5 +655,5 @@ and (max-width : 500px) {
 }
 
 .frm {
-    height: 250px;
+    height: auto;
 }
