@@ -71,7 +71,7 @@ func assembleHandlers(g *gin.Engine) {
 		API := PROTECTED.Group("/api")
 		{
 			// Version
-			API.POST("version", api.Version)
+			API.GET("/version", api.Version)
 
 			// Mnist
 			API.POST("/mnist/run_inference", api.MnistRunInference)

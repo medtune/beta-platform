@@ -1,21 +1,66 @@
 .demo-mura {
     width: 100%;
     justify-content: center;
-    min-height: 500px;
+    min-height: 600px;
+    padding-bottom: 50px;
 }
 
 .mura-grid {
 }
 
 .mura-grid-view {
-    max-width: 1100px;
-}
-
-.demo-card-square.mdl-card {
-    height: 500px;
+    max-width: 1000px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .demo-card-square > .mdl-card__title {
+    height: 246px;
     color: #fff;
-    background: url('/static/images/sky.jpg') bottom right 15% no-repeat #46B6AC;
+    background: url('/static/demos/mura/images/image0.png') bottom right 15% no-repeat #46B6AC;
+}
+
+.mura-settings-ctx {
+    min-height: 200px;
+    min-width: 400px;
+}
+
+.settings-container {
+    padding-top: 50px;
+    display: table;
+    margin: 0 auto;
+}
+
+.settings-card {
+    width: 400px;
+}
+
+.ctrl-btn {
+    position: absolute;
+    bottom: 25px;
+}
+
+.delete-btn {
+    right: 80px;
+    color: rgb(236, 61, 61);
+    background-color: white;
+}
+
+.delete-btn:hover {
+    right: 80px;
+    color: white;
+    background-color: rgb(236, 61, 61);
+}
+
+
+.run-btn:hover {
+    right: 15px;
+    color: white;
+    background: rgb(32, 125, 255);
+}
+
+.run-btn {
+    right: 15px;
+    color: rgb(32, 125, 255);
+    background: rgb(255, 255, 255);
 }

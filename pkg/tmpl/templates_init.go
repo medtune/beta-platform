@@ -225,18 +225,18 @@ func CompileTemplates() {
 
 	// Mura imagenet
 	{
-		mura := template.New("base")
-		mura, err = mura.Parse(shared.Base)
+		muraV2 := template.New("base")
+		muraV2, err = muraV2.Parse(shared.Base)
 		must(err)
-		mura, err = mura.Parse(shared.HeaderLogged)
+		muraV2, err = muraV2.Parse(shared.HeaderLogged)
 		must(err)
-		mura, err = mura.Parse(shared.SourceHeaderMuraV2)
+		muraV2, err = muraV2.Parse(shared.SourceHeaderMuraV2)
 		must(err)
-		mura, err = mura.Parse(shared.Footer)
+		muraV2, err = muraV2.Parse(shared.Footer)
 		must(err)
-		mura, err = mura.Parse(demos.MuraV2)
+		muraV2, err = muraV2.Parse(demos.MuraV2)
 		must(err)
-		DemoMuraV2 = mura
+		DemoMuraV2 = muraV2
 	}
 
 	// Chexray page
@@ -257,18 +257,18 @@ func CompileTemplates() {
 
 	// Chexray V2 page
 	{
-		chexray := template.New("base")
-		chexray, err = chexray.Parse(shared.Base)
+		chexrayV2 := template.New("base")
+		chexrayV2, err = chexrayV2.Parse(shared.Base)
 		must(err)
-		chexray, err = chexray.Parse(shared.HeaderLogged)
+		chexrayV2, err = chexrayV2.Parse(shared.HeaderLogged)
 		must(err)
-		chexray, err = chexray.Parse(shared.SourceHeaderChexrayV2)
+		chexrayV2, err = chexrayV2.Parse(shared.SourceHeaderChexrayV2)
 		must(err)
-		chexray, err = chexray.Parse(shared.Footer)
+		chexrayV2, err = chexrayV2.Parse(shared.Footer)
 		must(err)
-		chexray, err = chexray.Parse(demos.ChexrayV2)
+		chexrayV2, err = chexrayV2.Parse(demos.ChexrayV2)
 		must(err)
-		DemoChexrayV2 = chexray
+		DemoChexrayV2 = chexrayV2
 	}
 
 	// Sentiment analysis page
