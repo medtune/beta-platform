@@ -33,7 +33,7 @@ jobs:
       - checkout
       - run:
           name: test coverage
-          command: docker build -t test-cov --build-arg CODECOV_TOKEN=$CODECOV_TOKEN -f Dockerfile.test-cov .
+          command: docker build -t test-cov -f Dockerfile.test-cov --build-arg CODECOV_TOKEN=$CODECOV_TOKEN .
 
   build-prod:
     machine:

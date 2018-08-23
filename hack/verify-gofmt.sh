@@ -11,3 +11,5 @@ if [[ -n "${diff}" ]]; then
   echo "Please run hack/update-gofmt.sh"
   exit 1
 fi
+
+echo "done"
