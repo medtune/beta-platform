@@ -119,10 +119,26 @@ func Mura(c *gin.Context) {
 
 func MuraV2(c *gin.Context) {
 	c.Status(200)
-	tmpl.DemoMuraV2.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
-		PageTitle: "Demo V2: MURA Classification",
-	})
+	tmpl.DemoMuraV2.Execute(c.Writer, &data.MuraV2Demo{
+		Main: data.Main{
+			Version:   pkg.VERSION,
+			PageTitle: "Demo: Image classification",
+		},
+		Samples: []data.Image{
+			{"/static/demos/mura/images/image_2.png", "image_2", "", ""},
+			{"/static/demos/mura/images/image_2.png", "image_2", "", ""},
+			{"/static/demos/mura/images/image_2.png", "image_2", "", ""},
+			{"/static/demos/mura/images/image_2.png", "image_2", "", ""},
+			{"/static/demos/mura/images/image_2.png", "image_2", "", ""},
+			{"/static/demos/mura/images/image_2.png", "image_2", "", ""},
+			{"/static/demos/mura/images/image_2.png", "image_2", "", ""},
+			{"/static/demos/mura/images/image_2.png", "image_2", "", ""},
+			{"/static/demos/mura/images/image_2.png", "image_2", "", ""},
+			{"/static/demos/mura/images/image_2.png", "image_2", "", ""},
+			{"/static/demos/mura/images/image_2.png", "image_2", "", ""},
+		},
+	},
+	)
 }
 
 func Chexray(c *gin.Context) {

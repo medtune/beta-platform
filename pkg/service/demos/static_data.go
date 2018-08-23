@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strings"
 
 	"github.com/medtune/beta-platform/pkg/jsonutil"
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
@@ -11,7 +12,7 @@ import (
 
 // CollectImagesData collect pictures informations for demo
 func CollectImagesData(demo string) ([]data.Image, error) {
-	path := "static/demos/" + demo + "/images"
+	path := fmt.Sprintf("static/demos/%v/images", demo)
 	if _, err := os.Stat(path); err != nil || os.IsNotExist(err) {
 		return nil, err
 	}
@@ -27,7 +28,7 @@ func CollectImagesData(demo string) ([]data.Image, error) {
 	for _, f := range files {
 		if !f.IsDir() {
 			images = append(images, data.Image{
-				Name: f.Name(),
+				Name: strings.Split(f.Name(), ".")[0],
 				URL:  "/" + path + "/" + f.Name(),
 			})
 		}

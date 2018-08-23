@@ -13,3 +13,9 @@ type InceptionDemo struct {
 	Main
 	Samples []Image
 }
+
+// MuraV2Demo data struct
+type MuraV2Demo struct {
+	Main
+	Samples []Image
+}

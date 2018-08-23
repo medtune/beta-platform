@@ -83,10 +83,18 @@ func MuraV2(c *gin.Context) {
 		c.Redirect(302, "/index")
 		return
 	}
+	images, err := demos.CollectImagesData("mura")
+	if err != nil {
+		c.Redirect(302, "/error/500")
+		return
+	}
 	c.Status(200)
-	tmpl.DemoMuraV2.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
-		PageTitle: "Demo V2: MURA Classification",
+	tmpl.DemoMuraV2.Execute(c.Writer, &data.MuraV2Demo{
+		Main: data.Main{
+			Version:   pkg.VERSION,
+			PageTitle: "Demo V2: MURA Classification",
+		},
+		Samples: images,
 	})
 }
 

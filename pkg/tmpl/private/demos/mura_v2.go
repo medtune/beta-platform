@@ -11,140 +11,38 @@ const (
 			<a href="#settings-panel" class="mdl-tabs__tab">Settings</a>
 		</div>
 
+		<!-- ----------- -->
+		<!-- CASES PANEL -->
+		<!-- ----------- -->
+		
 
 		<div class="mdl-tabs__panel is-active" id="cases-panel">
 			<div class="mdl-grid mura-grid-view">
-				<div class="mdl-cell mdl-cell--4-col demo-card-square mdl-card mdl-shadow--2dp">
-					<div class="mdl-card__title">
+				{{range .Samples}}
+				<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet demo-card-square mdl-card mdl-shadow--2dp">
+					<div class="mdl-card__media">
+						<img class="article-image" src="{{ .URL }}" border="0" alt="">
 					</div>
+
 					<div class="mdl-card__supporting-text">
-						Patient X
+						{{ .Name }}
 					</div>
 
 					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect ctrl-btn run-btn" onclick="">
 						<i class="material-icons">arrow_forward_ios</i>
 					</button>
+
 					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect ctrl-btn delete-btn" onclick="">
 						<i class="material-icons">remove_red_eye</i>
 					</button>
 				</div>
-				<div class="mdl-cell mdl-cell--4-col demo-card-square mdl-card mdl-shadow--2dp">
-					<div class="mdl-card__title">
-					</div>
-					<div class="mdl-card__supporting-text">
-						Patient X
-					</div>
-
-					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect ctrl-btn run-btn" onclick="">
-						<i class="material-icons">arrow_forward_ios</i>
-					</button>
-					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect ctrl-btn delete-btn" onclick="">
-						<i class="material-icons">delete</i>
-					</button>
-
-				</div>
-				<div class="mdl-cell mdl-cell--4-col demo-card-square mdl-card mdl-shadow--2dp">
-					<div class="mdl-card__title">
-					</div>
-					<div class="mdl-card__supporting-text">
-						Patient X
-					</div>
-
-					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect ctrl-btn run-btn" onclick="">
-						<i class="material-icons">arrow_forward_ios</i>
-					</button>
-					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect ctrl-btn delete-btn" onclick="">
-						<i class="material-icons">delete</i>
-					</button>
-
-				</div>
-				<div class="mdl-cell mdl-cell--4-col demo-card-square mdl-card mdl-shadow--2dp">
-					<div class="mdl-card__title">
-					</div>
-					<div class="mdl-card__supporting-text">
-						Patient X
-					</div>
-
-					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect ctrl-btn run-btn" onclick="">
-						<i class="material-icons">arrow_forward_ios</i>
-					</button>
-					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect ctrl-btn delete-btn" onclick="">
-						<i class="material-icons">delete</i>
-					</button>
-
-				</div>
-				<div class="mdl-cell mdl-cell--4-col demo-card-square mdl-card mdl-shadow--2dp">
-					<div class="mdl-card__title">
-					</div>
-					<div class="mdl-card__supporting-text">
-						Patient X
-					</div>
-
-					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect ctrl-btn run-btn" onclick="">
-						<i class="material-icons">arrow_forward_ios</i>
-					</button>
-					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect ctrl-btn delete-btn" onclick="">
-						<i class="material-icons">delete</i>
-					</button>
-
-				</div>
-				<div class="mdl-cell mdl-cell--4-col demo-card-square mdl-card mdl-shadow--2dp">
-					<div class="mdl-card__title">
-					</div>
-					<div class="mdl-card__supporting-text">
-						Patient X
-					</div>
-
-					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect ctrl-btn run-btn" onclick="">
-						<i class="material-icons">arrow_forward_ios</i>
-					</button>
-					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect ctrl-btn delete-btn" onclick="">
-						<i class="material-icons">delete</i>
-					</button>
-
-				</div>
-				<div class="mdl-cell mdl-cell--4-col demo-card-square mdl-card mdl-shadow--2dp">
-					<div class="mdl-card__title">
-					</div>
-					<div class="mdl-card__supporting-text">
-						Patient X
-					</div>
-
-					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect ctrl-btn run-btn" onclick="">
-						<i class="material-icons">arrow_forward_ios</i>
-					</button>
-					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect ctrl-btn delete-btn" onclick="">
-						<i class="material-icons">delete</i>
-					</button>
-
-				</div>
-
-<div class="mdl-cell mdl-cell--12-col metadata">
-meta is here
-</div>
-
-<div class="mdl-cell mdl-cell--6-col demo-card-square mdl-card mdl-shadow--4dp">
-
-<div class="mdl-card__supporting-text">
-	Preview
-</div>
-<div class="mdl-card__title mdl-card--expand">
-</div>
-
-</div>
-
-<div class="mdl-cell mdl-cell--6-col demo-card-square mdl-card mdl-shadow--4dp">
-
-<div class="mdl-card__supporting-text">
-	Grad CAM
-</div>
-
-<div class="mdl-card__title mdl-card--expand">
-</div>
-
-</div>
+				{{end}}
 			</div>
 		</div>
+
+		<!-- ------------ -->
+		<!-- UPLOAD PANEL -->
+		<!-- ------------ -->
 
 		<div class="mdl-tabs__panel" id="upload-panel">
 			<div class="settings-container">
@@ -160,12 +58,6 @@ meta is here
 							<input class="mdl-textfield__input" type="text" pattern="[A-Z,a-z, ]*" name="name"/>
 							<label class="mdl-textfield__label">Name</label>
 							<span class="mdl-textfield__error">Letters and spaces only</span>
-						</div>
-
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="">
-							<input class="mdl-textfield__input" type="text" pattern="[A-Z,a-z,0-9, ]*" name="label"/>
-							<label class="mdl-textfield__label">Label</label>
-							<span class="mdl-textfield__error">Letters/Digits and spaces only</span>
 						</div>
 
 						<div class="mdl-textfield mdl-js-textfield mdl-textfield--file" style="">
@@ -185,7 +77,9 @@ meta is here
 			</div>
 		</div>
 
-
+		<!-- -------------- -->
+		<!-- SETTINGS PANEL -->
+		<!-- -------------- -->
 
 		<div class="mdl-tabs__panel" id="settings-panel">
 			<div class="settings-container">
@@ -198,7 +92,7 @@ meta is here
 						<div class="mdl-textfield mdl-js-textfield getmdl-select" style="">
 							<input class="mdl-textfield__input" value="" id="model" readonly/>
 							<input value="" type="hidden" name="model-engine"/>
-							<label class="mdl-textfield__label" for="model">Model</label>
+							<label class="mdl-textfield__label" for="model">Model [MobileNet]</label>
 							<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu" for="model">
 								<li class="mdl-menu__item" data-val="mobilenet">MobileNet</li>
 								<li class="mdl-menu__item" data-val="densenet121" disabled>DenseNet-121</li>
@@ -208,23 +102,23 @@ meta is here
 
 						<div>
 							<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
-								<input type="checkbox" id="switch-1" class="mdl-switch__input" checked>
+								<input type="checkbox" id="switch-1" class="mdl-switch__input">
 								<span class="mdl-switch__label">Normalize</span>
 							</label>
 							<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-2">
-								<input type="checkbox" id="switch-2" class="mdl-switch__input" checked>
+								<input type="checkbox" id="switch-2" class="mdl-switch__input">
 								<span class="mdl-switch__label">Auto save results</span>
 							</label>
 							<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-3">
-								<input type="checkbox" id="switch-3" class="mdl-switch__input" checked>
+								<input type="checkbox" id="switch-3" class="mdl-switch__input">
 								<span class="mdl-switch__label">Show logs</span>
 							</label>
 							<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-4">
-								<input type="checkbox" id="switch-4" class="mdl-switch__input" checked>
+								<input type="checkbox" id="switch-4" class="mdl-switch__input">
 								<span class="mdl-switch__label">Calculate round trip</span>
 							</label>
 							<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-5">
-								<input type="checkbox" id="switch-5" class="mdl-switch__input" checked>
+								<input type="checkbox" id="switch-5" class="mdl-switch__input">
 								<span class="mdl-switch__label">Always run GRAD-CAM</span>
 							</label>
 						</div>

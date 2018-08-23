@@ -15,7 +15,7 @@
 }
 
 .demo-card-square > .mdl-card__title {
-    height: 246px;
+    height: 256px;
     color: #fff;
     background: url('/static/demos/mura/images/image0.png') bottom right 15% no-repeat #46B6AC;
 }
@@ -63,4 +63,9 @@
     right: 15px;
     color: rgb(32, 125, 255);
     background: rgb(255, 255, 255);
+}
+
+img.article-image {
+    height: 250px;
+    width: 100%;
 }
