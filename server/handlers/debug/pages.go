@@ -134,8 +134,6 @@ func MuraV2(c *gin.Context) {
 			{"/static/demos/mura/images/image_2.png", "image_2", "", ""},
 			{"/static/demos/mura/images/image_2.png", "image_2", "", ""},
 			{"/static/demos/mura/images/image_2.png", "image_2", "", ""},
-			{"/static/demos/mura/images/image_2.png", "image_2", "", ""},
-			{"/static/demos/mura/images/image_2.png", "image_2", "", ""},
 		},
 	},
 	)
