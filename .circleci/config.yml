@@ -37,8 +37,16 @@ jobs:
           command: docker image inspect medtune/beta-platform:go-1.10-linux-v0.1.2-build    
 
       - run:
+          name: pull
+          command: docker pull medtune/beta-platform:go-1.10-linux-v0.1.2-build  
+
+      - run:
           name: test coverage
           command: docker build -t test-cov -f Dockerfile.test-cov --build-arg CODECOV_TOKEN=$CODECOV_TOKEN .
+
+      - run:
+          name: inspect image
+          command: docker image inspect medtune/beta-platform:go-1.10-linux-v0.1.2-build    
 
   build-prod:
     machine:
