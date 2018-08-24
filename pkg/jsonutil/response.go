@@ -1,5 +1,7 @@
 package jsonutil
 
+import "time"
+
 // SimpleResponse .
 type SimpleResponse struct {
 	Success  bool        `json:"success"`
@@ -37,4 +39,27 @@ type ServiceStatus struct {
 // TestResponse .
 type TestResponse struct {
 	Test bool `json:"test"`
+}
+
+// JobResult .
+type JobResult struct {
+	Name            string          `json:"name"`
+	Success         bool            `json:"success"`
+	Errors          []string        `json:"errors"`
+	Warnings        []string        `json:"warnings"`
+	RoundTrip       time.Duration   `json:"round_trip"`
+	CamResult       CamResult       `json:"cam_result"`
+	InferenceResult InferenceResult `json:"inference_result"`
+}
+
+// CustomExecutionResponse .
+type CustomExecutionResponse struct {
+	Id                 string        `json:"id"`
+	Name               string        `json:"name"`
+	Success            bool          `json:"success"`
+	RoundTrip          time.Duration `json:"round_trip"`
+	ExecutionRoundTrip time.Duration `json:"execution_round_trip"`
+	Jobs               []*JobResult  `json:"jobs"`
+	Errors             []string      `json:"errors"`
+	Warnings           []string      `json:"warnings"`
 }

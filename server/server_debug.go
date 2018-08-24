@@ -7,9 +7,9 @@ import (
 	"github.com/medtune/beta-platform/server/handlers/debug"
 )
 
-// Debug return a debuged version of medtune beta platform
+// Debug return a ui oriented debug version of the plaform server
 // it will serve static content only
-// pkg session / db / cache arent connected to the debug mode
+// pkg session / db / cache are inexistent in the debug mode
 func Debug(static string, port int) Engine {
 	server := gin.New()
 	server.Static(static, static)
@@ -21,6 +21,7 @@ func Debug(static string, port int) Engine {
 	}
 }
 
+// Assemble static ui
 func debugHandlers(g *gin.Engine) {
 	// Gin recovery and logger
 	g.Use(gin.Recovery())

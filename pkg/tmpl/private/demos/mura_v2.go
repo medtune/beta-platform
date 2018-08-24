@@ -2,7 +2,7 @@ package demos
 
 const (
 	MuraV2 = `{{define "content"}}
-	<div id="overlay"></div>
+	<div id="overlay" onclick="closeFAB();"></div>
 
 <div class="demo-mura">
 	<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
@@ -19,43 +19,42 @@ const (
 
 		<div class="fab">
 		
-		  <div class='cntt-wrapper'>
-			<div id="fab-hdr">
-			  <h3>Result</h3>
-			  	<div class="btn-wrapper">
-					    <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab btn-cancel" id="cancel">
+		    <div class='cntt-wrapper'>
+				<div id="fab-hdr">
+			  		<h3>Result</h3>
+			  		<div class="btn-wrapper">
+						<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab btn-cancel" id="cancel" onclick="closeFAB();">
 							<i class="material-icons">clear</i>
 						</button>
+					</div>
 				</div>
-			</div>
 		
-			<div class="cntt mdl-grid">
-			  
+				<div class="cntt mdl-grid">
+				
+					<div class="mdl-cell mdl-cell--12-col metadata">
+						meta is here
+					</div>
 
-				<div class="mdl-cell mdl-cell--12-col metadata">
-					meta is here
-				</div>
-				<div class="mdl-cell mdl-cell--6-col demo-card-square mdl-card mdl-shadow--4dp">
-					<div class="mdl-card__supporting-text">
-						Preview
+					<div class="mdl-cell mdl-cell--6-col demo-card-square mdl-card mdl-shadow--4dp">
+						<div class="mdl-card__supporting-text">
+							Preview
+						</div>
+						<div class="mdl-card__title mdl-card--expand">
+						</div>
 					</div>
-					<div class="mdl-card__title mdl-card--expand">
-					</div>
-				</div>
 
-				<div class="mdl-cell mdl-cell--6-col demo-card-square mdl-card mdl-shadow--4dp">
-					<div class="mdl-card__supporting-text">
-						Grad CAM
+					<div class="mdl-cell mdl-cell--6-col demo-card-square mdl-card mdl-shadow--4dp">
+						<div class="mdl-card__supporting-text">
+							Grad CAM
+						</div>
+						<div class="mdl-card__title mdl-card--expand">
+						</div>
 					</div>
-					<div class="mdl-card__title mdl-card--expand">
-					</div>
-				</div>
 
-			</div>
-		
-		
-		  </div>
+				</div>
+		 	</div>
 		</div>
+
 		<script src="/static/demos/mura/v2/load.js"></script>
 
 		<!-- ----------- -->

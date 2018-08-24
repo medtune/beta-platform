@@ -36,3 +36,82 @@ type TestRequest struct {
 	Test  bool `json:"test"`
 	Sleep int  `json:"sleep"`
 }
+
+// Job .
+type Job struct {
+	Name            string            `json:"name"`
+	Requires        string            `json:"requires"`
+	Function        string            `json:"function"`
+	InferenceParams RunImageInference `json:"inference_params"`
+	CamParams       RunImageCam       `json:"cam_params"`
+	Context         string            `json:"context"`
+}
+
+// CustomExecutionRequest .
+type CustomExecutionRequest struct {
+	Id            string `json:"id" valid:"required"`
+	Name          string `json:"name" valid:"required"`
+	Jobs          []*Job `json:"jobs"`
+	Concurrency   bool   `json:"concurrency"`
+	MaxGoroutines int    `json:"max_goroutines"`
+	Context       string `json:"context" valid:"required"`
+}
+
+/*
+# Request example
+{
+	"id" : "J9E83U2J9",
+	"name" : "client-job-num-1"
+	"concurrency" : true,
+	"max_goroutines": 8,
+	"context" : "timeout 5",
+	"jobs" : [
+		{
+			"name" : "simple-inference",
+			"requires" : "",
+			"function" : "demo/mura/run_inference",
+			"inference_params" : {
+				"file" : "image_0.png"
+			},
+			"cam_params" : {},
+		},
+		{
+			"name" : "simple-inference",
+			"requires" : "",
+			"type": "cam",
+			"function" : "demo/mura/run_cam",
+			"inference_params" : {},
+			"cam_params" : {
+				"file": "image_0.png",
+			},
+		},
+	]
+}
+
+# Response example
+{
+	"id" : "J9E83U2J9",
+	"name" : "client-job-num-1",
+	"round_trip" : 1.392892,
+	"execution_round_trip" : 1.1232,
+	"success" : true,
+	"warning" : [],
+	"errors" : [],
+	"jobs" : [
+		{
+			"name" : "simple-inference",
+			"round_trip" : 1.008992,
+			"success" : true,
+			"errors": [],
+			"warnings": [],
+		},
+		{
+			"name" : "simple-inference",
+			"round_trip" : 0.9598,
+			"success" : true,
+			"errors": [],
+			"warnings": [],
+		},
+	],
+}
+*/

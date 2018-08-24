@@ -24,6 +24,7 @@ func New(static string, port int) Engine {
 
 // Make production engine server
 func assembleHandlers(g *gin.Engine) {
+
 	// Set gin middlewares
 	g.Use(gin.Recovery())
 	g.Use(gin.Logger())
@@ -92,9 +93,11 @@ func assembleHandlers(g *gin.Engine) {
 			API.POST("/datahub/upload/:demo", api.DemoDataUpload)
 			API.POST("/datahub/drop/:demo", api.DemoDataDrop)
 
+			// CUSTOM JOBS
+			API.POST("/custom/exec", api.CustomExecution)
+
 			// Test routes
 			API.POST("/test", api.Test)
-
 		}
 	}
 
