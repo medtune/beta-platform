@@ -34,10 +34,6 @@ jobs:
           command: docker build -t test-cov -f Dockerfile.test-cov --build-arg CODECOV_TOKEN=$CODECOV_TOKEN .
 
   build-prod:
-    branches:
-      only:
-        - master
-
     machine:
       docker_layer_caching: true
     steps:
@@ -60,11 +56,12 @@ workflows:
       - test:
           requires:
             - build-base
-      - build-prod:
-          requires:
-            - build-base
-            - test
       - test-cov:
           requires:
             - build-base
             - test
+      - build-prod:
+          requires:
+            - build-base
+            - test
+            - test-cov
