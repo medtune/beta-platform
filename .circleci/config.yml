@@ -6,6 +6,8 @@ jobs:
       docker_layer_caching: true
     steps:
       - checkout
+      - setup_remote_docker: 
+         docker_layer_caching: true
       - run:
           name: build base image
           command: make build-base
@@ -15,16 +17,17 @@ jobs:
       docker_layer_caching: true
     steps:
       - checkout
+      - setup_remote_docker: 
+         docker_layer_caching: true
       - run:
           name: test packages
           command: make tests
 
   test-cov:
-    machine:
-      docker_layer_caching: true
     steps:
       - checkout
-
+      - setup_remote_docker: 
+         docker_layer_caching: true
       - run:
           name: code coverage tests
           command: make test-cov
@@ -34,10 +37,10 @@ jobs:
           command: docker build -t test-cov -f Dockerfile.test-cov --build-arg CODECOV_TOKEN=$CODECOV_TOKEN .
 
   build-prod:
-    machine:
-      docker_layer_caching: true
     steps:
       - checkout
+      - setup_remote_docker: 
+         docker_layer_caching: true
       - run:
           name: build capsul image
           command: make build-prod
@@ -59,7 +62,6 @@ workflows:
       - test-cov:
           requires:
             - build-base
-            - test
       - build-prod:
           requires:
             - build-base
