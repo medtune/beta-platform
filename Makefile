@@ -30,7 +30,7 @@ tests:
 
 test-cov:
 	@echo running global code coverage tests
-	docker build -t medtune/beta-platform:test -f test/test-codecov.Dockerfile .
+	docker build -t medtune/beta-platform:test -f test/test-codecov.Dockerfile --build-arg CODECOV_TOKEN=$(CODECOV_TOKEN) .
 
 up:
 	docker-compose up

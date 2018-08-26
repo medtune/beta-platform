@@ -35,7 +35,7 @@ var (
 	ginMode     int
 	syncdb      bool
 	wait        bool
-	maxattempt  int
+	maxattempts int
 	timestamp   int
 	createUsers bool
 )
@@ -46,11 +46,11 @@ func init() {
 
 	startCmd.Flags().IntVarP(&port, "port", "p", 8005, "port")
 	startCmd.Flags().IntVarP(&ginMode, "gin-mode", "g", 0, "Gin server mode [0 OR 1]")
-	startCmd.Flags().BoolVarP(&syncdb, "syncdb", "x", true, "Sync database before start")
-	startCmd.Flags().BoolVarP(&createUsers, "create-users", "y", true, "Create default users before start")
+	startCmd.Flags().BoolVarP(&syncdb, "syncdb", "x", false, "Sync database before start")
+	startCmd.Flags().BoolVarP(&createUsers, "create-users", "y", false, "Create default users before start")
 
 	startCmd.Flags().BoolVarP(&wait, "wait", "w", false, "Wait all services to go up")
-	startCmd.Flags().IntVarP(&maxattempt, "wait-attempts", "c", 30, "Wait max attempts")
+	startCmd.Flags().IntVarP(&maxattempts, "wait-attempts", "c", 30, "Wait max attempts")
 	startCmd.Flags().IntVarP(&timestamp, "wait-timestamp", "t", 1, "Wait timestamp")
 
 	root.Cmd.AddCommand(startCmd)
@@ -77,7 +77,6 @@ func runServer() {
 
 	// Alloc configuration
 	var configuration *config.StartupConfig
-
 	// Load configuration
 	if cfg, err := config.LoadConfigFromPath(configFile); err != nil {
 		log.Fatal(err)
@@ -103,7 +102,8 @@ func runServer() {
 
 			if err != nil && wait {
 				attempt := 0
-				for err != nil && attempt < maxattempt {
+				// waiting for err == 0 or attempt > maxattempts
+				for err != nil && attempt < maxattempts {
 					time.Sleep(time.Duration(timestamp) * time.Second)
 					fmt.Printf("waiting for database response (host: %s)\n", configuration.Database.Creds.Host)
 					err = store.Agent.Sync()
@@ -132,16 +132,16 @@ func runServer() {
 				)
 			}
 		}
+	}
 
-		fmt.Println("starting server...")
+	fmt.Println("starting server...")
 
-		Server := server.New(
-			static,
-			port,
-		)
+	Server := server.New(
+		static,
+		port,
+	)
 
-		if err := Server.Run(); err != nil {
-			log.Fatal(err)
-		}
+	if err := Server.Run(); err != nil {
+		log.Fatal(err)
 	}
 }
