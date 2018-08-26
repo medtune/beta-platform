@@ -24,6 +24,8 @@ jobs:
           command: make tests
 
   test-cov:
+    machine:
+      docker_layer_caching: true
     steps:
       - checkout
       - setup_remote_docker: 
@@ -37,6 +39,8 @@ jobs:
           command: docker build -t test-cov -f Dockerfile.test-cov --build-arg CODECOV_TOKEN=$CODECOV_TOKEN .
 
   build-prod:
+    machine:
+      docker_layer_caching: true
     steps:
       - checkout
       - setup_remote_docker: 
