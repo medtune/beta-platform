@@ -37,17 +37,15 @@ func Gen() *genData {
 		Message:   "Error GEN TMPL",
 		Errors:    "NaN",
 		Samples: []Image{
-			{"/static/images/inception.jpg", "inception", "", ""},
-			{"/static/images/inception.jpg", "inception", "", ""},
-			{"/static/images/inception.jpg", "inception", "", ""},
-			{"/static/images/inception.jpg", "inception", "", ""},
-			{"/static/images/inception.jpg", "inception", "", ""},
-			{"/static/images/inception.jpg", "inception", "", ""},
-			{"/static/images/inception.jpg", "inception", "", ""},
-			{"/static/images/inception.jpg", "inception", "", ""},
+			{"debug.png", "debug-name", "", ""},
+			{"debug.png", "debug-name", "", ""},
+			{"debug.png", "debug-name", "", ""},
+			{"debug.png", "debug-name", "", ""},
+			{"debug.png", "debug-name", "", ""},
+			{"debug.png", "debug-name", "", ""},
+			{"debug.png", "debug-name", "", ""},
+			{"debug.png", "debug-name", "", ""},
+			{"debug.png", "debug-name", "", ""},
 		},
 	}
 }
-
-// Null .
-func Null() *Main { return &Main{} }

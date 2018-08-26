@@ -1,4 +1,4 @@
-package hidden
+package platform
 
 import (
 	"fmt"

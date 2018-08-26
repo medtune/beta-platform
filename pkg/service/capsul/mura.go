@@ -14,7 +14,7 @@ import (
 var MuraClient *tfsclient.Client
 
 // RunMuraInference .
-func RunMuraInference(ctx context.Context, infData *jsonutil.RunImageInference) (interface{}, error) {
+func RunMuraInference(ctx context.Context, infData *jsonutil.RunImageInference) (*jsonutil.InferenceResult, error) {
 	if infData.File == "" {
 		return nil, fmt.Errorf("file field is empty: got struct %v", infData)
 	}
@@ -40,5 +40,5 @@ func RunMuraInference(ctx context.Context, infData *jsonutil.RunImageInference) 
 	}
 	result.Keys = s
 
-	return result, nil
+	return &result, nil
 }

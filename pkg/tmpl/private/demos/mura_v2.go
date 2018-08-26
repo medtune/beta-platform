@@ -66,7 +66,7 @@ const (
 				{{range .Samples}}
 				<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet demo-card-square mdl-card mdl-shadow--2dp">
 					<div class="mdl-card__media">
-						<img class="article-image" src="{{ .URL }}" border="0" alt="">
+						<img class="article-image" src="/static/demos/mura/images/{{ .Filename }}" border="0" alt="">
 					</div>
 
 					<div class="mdl-card__supporting-text">

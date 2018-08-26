@@ -61,7 +61,7 @@ var setErrors = function(errors) {
 var Signup = function () { 
     var obj = loadSignup();
     setDisplay(true, 'signup-load')
-    sendJSON('POST', '/signup', obj, (res) => {
+    sendJSON('POST', '/api/signup', obj, (res) => {
         var data = JSON.parse(res);
         //console.log('Signup response:', data);
         if (data.success == true) {

@@ -66,7 +66,7 @@ var _requestInference = function(image, numpreds) {
     var start = new Date();
     sendJSON(
         'POST',
-        '/api/inception_imagenet/run_inference',
+        '/api/demos/inception_imagenet/run_inference',
         data,
         (res) => {
             resp = JSON.parse(res);
@@ -100,7 +100,7 @@ var drop = function(image) {
     };
     sendJSON(
         'POST',
-        '/api/inception_imagenet/drop_image',
+        '/api/datahub/drop/inception',
         data,
         (res) => {
             resp = JSON.parse(res);

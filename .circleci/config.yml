@@ -6,6 +6,10 @@ jobs:
       docker_layer_caching: true
     steps:
       - checkout
+
+      - setup_remote_docker: 
+         docker_layer_caching: true 
+
       - run:
           name: build base image
           command: docker build -t medtune/beta-platform:go-1.10-linux-v0.1.2-build .
@@ -19,8 +23,12 @@ jobs:
   test:
     machine:
       docker_layer_caching: true
+
     steps:
       - checkout
+
+      - setup_remote_docker: 
+         docker_layer_caching: true 
 
       - run:
           name: test packages
@@ -31,6 +39,9 @@ jobs:
       docker_layer_caching: true
     steps:
       - checkout
+
+      - setup_remote_docker: 
+         docker_layer_caching: true 
 
       - run:
           name: inspect image
@@ -53,6 +64,10 @@ jobs:
       docker_layer_caching: true
     steps:
       - checkout
+
+      - setup_remote_docker: 
+         docker_layer_caching: true 
+
       - run:
           name: build capsul image
           command: docker build -t medtune/beta-platform:go-1.10-linux-v0.1.2 -f Dockerfile.prod .

@@ -1,4 +1,4 @@
-package hidden
+package platform
 
 import (
 	"github.com/gin-gonic/gin"
@@ -8,14 +8,15 @@ import (
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
 )
 
-func SlidesMenu(c *gin.Context) {
+// Mnist demo
+func Mnist(c *gin.Context) {
 	if logged := session.GetLoginStatus(c); !logged {
 		c.Redirect(302, "/index")
 		return
 	}
 	c.Status(200)
-	tmpl.SlidesMenu.Execute(c.Writer, &data.Main{
+	tmpl.DemoMnist.Execute(c.Writer, &data.Main{
 		Version:   pkg.VERSION,
-		PageTitle: "Slides Menu",
+		PageTitle: "Handwritten digits classification",
 	})
 }

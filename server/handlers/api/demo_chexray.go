@@ -10,33 +10,30 @@ import (
 	"github.com/medtune/beta-platform/pkg/session"
 )
 
-// MuraRunCam .
-func MuraRunCam(c *gin.Context) {
-	// Check session
+// ChexrayRunInference .
+func ChexrayRunInference(c *gin.Context) {
 	if logged := session.GetLoginStatus(c); !logged {
 		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied :rip")))
 		return
 	}
 
-	// Parse data from body
-	camData := jsonutil.RunImageCam{}
-	err := c.ShouldBindJSON(&camData)
+	infData := jsonutil.RunImageInference{}
+	err := c.ShouldBindJSON(&infData)
 	if err != nil {
 		c.JSON(200, jsonutil.Fail(err))
 		return
 	}
 
 	ctx := context.Background()
+
 	// Run inference
-	resp, err := capsul.RunMuraCAM(ctx, &camData)
+	result, err := capsul.RunChexrayInference(ctx, &infData)
 	if err != nil {
 		c.JSON(200, jsonutil.Fail(err))
 		return
 	}
 
-	// TODO cam file creation
-	// should be used as static
-
 	// Success
-	c.JSON(200, jsonutil.SuccessData(resp))
+	c.JSON(200, jsonutil.SuccessData(result))
+
 }

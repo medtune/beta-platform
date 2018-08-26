@@ -1,33 +1,16 @@
-package access
+package user
 
 import (
 	"fmt"
 
 	"github.com/asaskevich/govalidator"
 	"github.com/medtune/beta-platform/pkg/jsonutil"
-	"github.com/medtune/beta-platform/pkg/secret"
+	"github.com/medtune/beta-platform/pkg/service/secret"
 	"github.com/medtune/beta-platform/pkg/store"
 )
 
-// AuthUser authentificate user from json data
-func AuthUser(loginData *jsonutil.LoginData) (bool, error) {
-	// Validate data
-	ok, err := govalidator.ValidateStruct(loginData)
-	if err != nil || !ok {
-		return false, err
-	}
-
-	// Authentificate user
-	ok, err = store.Agent.AuthentificateUser(loginData.Username, loginData.Password)
-	if err != nil || !ok {
-		return false, err
-	}
-
-	return true, nil
-}
-
-// CreateUser will create a user from json data
-func CreateUser(signupData *jsonutil.SignupData) (bool, error) {
+// Signup will 'try' to create a new user from json req
+func Signup(signupData *jsonutil.SignupData) (bool, error) {
 	// Validate data
 	ok, err := govalidator.ValidateStruct(signupData)
 	if err != nil || !ok {

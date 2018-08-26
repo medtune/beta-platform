@@ -7,7 +7,7 @@ const Login = `{{define "content"}}
 			<h2 class="mdl-card__title-text">Login</h2>
 		</div>
 		<div class="mdl-card__supporting-text">
-			<form action="/login" method="POST" id="login-form">
+			<form action="/api/login" method="POST" id="login-form">
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="fti-username">
 					<input class="mdl-textfield__input" type="text" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{3,20}$" name="username" id="username"/>
 					<label class="mdl-textfield__label" for="username">Username</label>

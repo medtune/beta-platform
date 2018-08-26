@@ -2,7 +2,7 @@ package data
 
 // Image struct
 type Image struct {
-	URL         string
+	Filename    string
 	Name        string
 	Format      string
 	Description string

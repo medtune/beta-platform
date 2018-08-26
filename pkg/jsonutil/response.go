@@ -2,8 +2,8 @@ package jsonutil
 
 import "time"
 
-// SimpleResponse .
-type SimpleResponse struct {
+// DefaultResponse .
+type DefaultResponse struct {
 	Success  bool        `json:"success"`
 	Data     interface{} `json:"data"`
 	Warnings []string    `json:"warnings"`
@@ -20,6 +20,12 @@ type InferenceResult struct {
 type CamResult struct {
 	StaticPath string `json:"static_path"`
 	URL        string `json:"url"`
+}
+
+// ProcessResult .
+type ProcessResult struct {
+	Inference *InferenceResult `json:"inference"`
+	Cam       *CamResult       `json:"cam"`
 }
 
 // PackageVersion .

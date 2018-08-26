@@ -31,6 +31,22 @@ type RunImageCam struct {
 	CamOutputFile string `json:"cam_output_dir"`
 }
 
+// DataDrop .
+type DataDrop struct {
+	Id    int    `json:"id"`
+	Image string `json:"image"`
+	File  string `json:"file"`
+}
+
+// ProcessImage .
+type ProcessImage struct {
+	Id            int    `json:"id"`
+	Image         string `json:"image"`
+	File          string `json:"file"`
+	NumPreds      string `json:"numpreds"`
+	CamOutputFile string `json:"cam_output_dir"`
+}
+
 // TestRequest .
 type TestRequest struct {
 	Test  bool `json:"test"`

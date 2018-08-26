@@ -7,4 +7,4 @@ ADD . .
 
 RUN bash ./hack/install-deps.sh --hack
 
-RUN go build -tags=cicd -o medtune-beta cmd/main.go
+RUN go build -o medtune-beta cmd/main.go

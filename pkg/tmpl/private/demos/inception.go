@@ -171,17 +171,17 @@ const (
 			{{range .Samples}}
 			<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp" id="test--">
 				<div class="mdl-card__media">
-					<img class="article-image" src="{{ .URL }}" border="0" alt="">
+					<img class="article-image" src="/static/demos/inception/images/{{ .Filename }}" border="0" alt="">
 				</div>
 				<div class="mdl-card__title">
 					<h2 class="mdl-card__title-text" style="padding-right: 15px;"> {{ .Name }} </h2>
 					<div class="mdl-progress mdl-js-progress mdl-progress__indeterminate" style="display:none;position: absolute; top: 309; left: 0;" id="load_{{ .Name }}"></div>
 				</div>
 				<div class="" style="position: absolute; text-align: right; width: 100%; bottom: 35px; right: 20px;">
-					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect button__run" onclick="run('{{ .URL }}');">
+					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect button__run" onclick="run('{{ .Filename }}');">
 						<i class="material-icons">arrow_forward_alt</i>
 					</button>
-					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect button__delete" onclick="drop('{{ .URL }}');">
+					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect button__delete" onclick="drop('{{ .Filename }}');">
 						<i class="material-icons">delete</i>
 					</button>
 				</div>

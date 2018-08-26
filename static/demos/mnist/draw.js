@@ -67,7 +67,7 @@ var saveAndRun = function() {
     var start = new Date();
     sendJSON(
         'POST',
-        '/api/mnist/run_inference',
+        '/api/demos/mnist/run_inference',
         data,
         (res) => {
             resp = JSON.parse(res);

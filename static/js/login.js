@@ -43,7 +43,7 @@ var setErrors = function(errors) {
 var Login = function () {
     var obj = loadLogin();
     setDisplay(true, "login-load")
-    sendJSON("POST", "/login", obj, (res) => {
+    sendJSON("POST", "/api/login", obj, (res) => {
         var data = JSON.parse(res);
 
         if (data.success == true) {

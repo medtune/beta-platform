@@ -10,6 +10,6 @@ import (
 var MuraCamURI string
 
 // RunMuraCAM .
-func RunMuraCAM(ctx context.Context, camData *jsonutil.RunImageCam) (interface{}, error) {
+func RunMuraCAM(ctx context.Context, camData *jsonutil.RunImageCam) (*jsonutil.CamResult, error) {
 	return nil, nil
 }

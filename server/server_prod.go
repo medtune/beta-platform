@@ -1,11 +1,11 @@
 package server
 
 import (
-	"strconv"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 	"github.com/medtune/beta-platform/server/handlers/api"
-	"github.com/medtune/beta-platform/server/handlers/hidden"
+	"github.com/medtune/beta-platform/server/handlers/platform"
 	"github.com/medtune/beta-platform/server/handlers/public"
 	"github.com/medtune/beta-platform/server/middleware"
 )
@@ -13,98 +13,92 @@ import (
 // New .
 func New(static string, port int) Engine {
 	server := gin.New()
-	var sport = ":" + strconv.Itoa(port)
 	server.Static(static, static)
+
+	set404Handler(server, func(c *gin.Context) {
+		c.Redirect(302, "/error/404")
+	})
+	setMiddlewares(server)
 	assembleHandlers(server)
+
 	return &engine{
-		engine: server,
-		port:   sport,
+		server,
+		fmt.Sprintf(":%d", port),
 	}
 }
 
-// Make production engine server
-func assembleHandlers(g *gin.Engine) {
-
+func setMiddlewares(server *gin.Engine) {
 	// Set gin middlewares
-	g.Use(gin.Recovery())
-	g.Use(gin.Logger())
-	g.Use(middleware.Session())
+	server.Use(gin.Recovery())
+	server.Use(gin.Logger())
+	server.Use(middleware.Session())
+}
 
-	// Handler for non set routes
-	g.NoRoute(public.NoRouteProxy)
+func set404Handler(server *gin.Engine, nrh gin.HandlerFunc) {
+	server.NoRoute(nrh)
+}
+
+func setStaticFiles(server *gin.Engine, staticDir string, root string) {
+	server.Static(staticDir, root)
+}
+
+// Make production engine server
+func assembleHandlers(server *gin.Engine) {
 
 	// Public routes handlers
-	PUBLIC := g.Group("/")
-	{
-		PUBLIC.GET("/", public.Index)
-		PUBLIC.GET("/index", public.Index)
-		PUBLIC.GET("/login", public.Login)
-		PUBLIC.POST("/login", public.Login)
-		PUBLIC.GET("/signup", public.Signup)
-		PUBLIC.GET("/signup/success", public.SignupSuccess)
-		PUBLIC.POST("/signup", public.Signup)
-	}
+	PUBLIC := server.Group("/")
+	PUBLIC.GET("/", public.Index)
+	PUBLIC.GET("/index", public.Index)
+	PUBLIC.GET("/login", public.Login)
+	PUBLIC.POST("/login", public.Login)
+	PUBLIC.GET("/signup", public.Signup)
+	PUBLIC.POST("/signup", public.Signup)
+	PUBLIC.GET("/signup/success", public.SignupSuccess)
 
-	// Login protected routes
-	PROTECTED := g.Group("/")
-	{
-		PROTECTED.GET("/logout", hidden.Logout)
-		PROTECTED.GET("/home", hidden.Home)
-		PROTECTED.GET("/demos", hidden.DemosMenu)
-		PROTECTED.GET("/datahub", hidden.Datahub)
-		PROTECTED.POST("/datahub_upload", hidden.DatahubUpload)
-		PROTECTED.GET("/slides", hidden.SlidesMenu)
+	// Errors
+	ERRORS := PUBLIC.Group("/error")
+	ERRORS.GET("/:code", public.Error)
 
-		// Demonstrations routes
-		DEMOS := PROTECTED.Group("/demos")
-		{
-			DEMOS.GET("/polynomial_regression", hidden.PolynomialRegression)
-			DEMOS.GET("/mnist", hidden.Mnist)
-			DEMOS.GET("/inception_imagenet", hidden.InceptionImagenet)
-			DEMOS.GET("/mura", hidden.Mura)
-			DEMOS.GET("/mura.v2", hidden.MuraV2)
-			DEMOS.GET("/chexray", hidden.Chexray)
-			DEMOS.GET("/chexray.v2", hidden.ChexrayV2)
-			DEMOS.GET("/sentiment_analysis", hidden.SentimentAnalysis)
-		}
+	// Login platform routes
+	PROTECTED := server.Group("/")
+	PROTECTED.GET("/logout", platform.Logout)
+	PROTECTED.GET("/home", platform.Home)
+	PROTECTED.GET("/demos", platform.DemosMenu)
+	PROTECTED.GET("/slides", platform.SlidesMenu)
+	PROTECTED.GET("/datahub", platform.Datahub)
+	PROTECTED.POST("/datahub_upload", platform.DatahubUpload)
 
-		// Api routes
-		API := PROTECTED.Group("/api")
-		{
-			// Version
-			API.GET("/version", api.Version)
+	// Demonstrations routes
+	DEMOS := PROTECTED.Group("/demos")
+	DEMOS.GET("/polynomial_regression", platform.PolynomialRegression)
+	DEMOS.GET("/mnist", platform.Mnist)
+	DEMOS.GET("/inception_imagenet", platform.InceptionImagenet)
+	DEMOS.GET("/mura", platform.Mura)
+	DEMOS.GET("/mura.v2", platform.MuraV2)
+	DEMOS.GET("/chexray", platform.Chexray)
+	DEMOS.GET("/chexray.v2", platform.ChexrayV2)
+	DEMOS.GET("/sentiment_analysis", platform.SentimentAnalysis)
 
-			// Mnist
-			API.POST("/mnist/run_inference", api.MnistRunInference)
+	// Api routes
+	// public API
+	PUBLICAPI := PUBLIC.Group("/api")
+	PUBLICAPI.GET("/version", api.Version)
+	PUBLICAPI.POST("/test", api.Test)
+	PUBLICAPI.POST("/login", api.Login)
+	PUBLICAPI.POST("/signup", api.Signup)
 
-			// Inception
-			API.POST("/inception_imagenet/run_inference", api.InceptionImagenetRunInference)
-			API.POST("/inception_imagenet/drop_image", api.InceptionImagenetDropImage)
+	API := PROTECTED.Group("/api")
+	API.POST("/custom/exec", api.CustomExecution)
 
-			// Mura
-			API.POST("/mura/run_inference", api.MuraRunInference)
-			API.POST("/mura/run_cam", api.MuraRunCam)
-			API.POST("/mura/drop_image", api.InceptionImagenetDropImage)
+	APIDEMOS := API.Group("/demos")
+	APIDEMOS.POST("/mnist/run_inference", api.MnistRunInference)
+	APIDEMOS.POST("/inception_imagenet/run_inference", api.InceptionImagenetRunInference)
+	APIDEMOS.POST("/mura/process", api.MuraProcess)
+	APIDEMOS.POST("/mura/run_cam", api.MuraRunCam)
+	APIDEMOS.POST("/mura/run_inference", api.MuraRunInference)
+	APIDEMOS.POST("/chexray/run_inference", api.ChexrayRunInference)
 
-			// Chexray
-			API.POST("/chexray/run_inference", api.ChexrayRunInference)
-
-			// Datahub
-			API.POST("/datahub/upload/:demo", api.DemoDataUpload)
-			API.POST("/datahub/drop/:demo", api.DemoDataDrop)
-
-			// CUSTOM JOBS
-			API.POST("/custom/exec", api.CustomExecution)
-
-			// Test routes
-			API.POST("/test", api.Test)
-		}
-	}
-
-	// Errors handler
-	ERRORS := g.Group("/error")
-	{
-		ERRORS.GET("/:code", public.Error)
-	}
-
+	DATAHUB := API.Group("/datahub")
+	DATAHUB.POST("/upload/:demo", api.DemoDataUpload)
+	DATAHUB.POST("/drop/:demo", api.DemoDataDrop)
 }

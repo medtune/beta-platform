@@ -4,17 +4,16 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/medtune/beta-platform/pkg"
-	"github.com/medtune/beta-platform/pkg/service/capsul"
-
 	tfsclient "github.com/medtune/capsul/pkg/tfs-client"
+	"github.com/medtune/go-utils/random"
 
+	"github.com/medtune/beta-platform/pkg"
 	"github.com/medtune/beta-platform/pkg/config"
-	"github.com/medtune/beta-platform/pkg/secret"
+	"github.com/medtune/beta-platform/pkg/service/capsul"
+	"github.com/medtune/beta-platform/pkg/service/secret"
 	"github.com/medtune/beta-platform/pkg/session"
 	"github.com/medtune/beta-platform/pkg/store"
 	"github.com/medtune/beta-platform/pkg/store/db"
-	"github.com/medtune/go-utils/random"
 )
 
 // InitFromFile from configuration file

@@ -12,10 +12,21 @@ services:
     image: medtune/platform:beta.alpine-v0.1.0
     ports:
       - 8005:8005
+
     depends_on:
-      - "postgres"
+      - postgres
+      - mnist
+      - mura
+      - mura-cam
+      - chexray
+
     links:
       - postgres:postgres
+      - mnist:mnist
+      - mura:mura
+      - mura-cam:mura-cam
+      - chexray:chexray
+
     deploy:
       mode: replicated
       replicas: 2
@@ -31,3 +42,23 @@ services:
         reservations:
           cpus: '0.25'
           memory: 50M
+  
+  mnist:
+    image: medtune/capsul:mnist-latest
+    ports: 9000:9000
+
+  inception:
+    image: medtune/capsul:inception-latest
+    ports: 9000:9001
+
+  mura:
+    image: medtune/capsul:mura-latest
+    ports: 9000:9002
+
+  mura_cam:
+    image: medtune/capsul:mura-cam-latest
+    ports: 9000:9020
+
+  chexray:
+    image: medtune/capsul:chexray-latest
+    ports: 9000:9003

@@ -1,0 +1,6 @@
+FROM medtune/beta-platform:go-1.10-linux-v0.1.2-build
+
+RUN go test -tags=cicd -v ./pkg/...
+
+RUN go test -tags=cicd -v ./cmd/...
+

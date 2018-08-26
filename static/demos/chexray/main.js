@@ -66,7 +66,7 @@ var runInference = function() {
     var start = new Date();
     sendJSON(
         'POST',
-        '/api/chexray/run_inference',
+        '/api/demos/chexray/run_inference',
         data,
         (res) => {
             resp = JSON.parse(res);
@@ -98,7 +98,7 @@ var next = function() {
 };
 
 var information = function() {
-    console.log("informations xd lol")
+    console.log("informations")
 };
 
 

@@ -14,7 +14,7 @@ import (
 var ChexrayClient *tfsclient.Client
 
 // RunChexrayInference .
-func RunChexrayInference(ctx context.Context, infData *jsonutil.RunImageInference) (interface{}, error) {
+func RunChexrayInference(ctx context.Context, infData *jsonutil.RunImageInference) (*jsonutil.InferenceResult, error) {
 	if infData.File == "" {
 		return nil, fmt.Errorf("file field is empty: got struct %v", infData)
 	}
@@ -41,5 +41,5 @@ func RunChexrayInference(ctx context.Context, infData *jsonutil.RunImageInferenc
 	}
 	result.Keys = s
 
-	return result, nil
+	return &result, nil
 }

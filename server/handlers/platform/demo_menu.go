@@ -1,4 +1,4 @@
-package hidden
+package platform
 
 import (
 	"github.com/gin-gonic/gin"
@@ -8,15 +8,15 @@ import (
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
 )
 
-func Home(c *gin.Context) {
+// DemosMenu page
+func DemosMenu(c *gin.Context) {
 	if logged := session.GetLoginStatus(c); !logged {
 		c.Redirect(302, "/index")
 		return
 	}
-	inject := data.Main{
-		Version:   pkg.VERSION,
-		PageTitle: "Home",
-	}
 	c.Status(200)
-	tmpl.Home.Execute(c.Writer, &inject)
+	tmpl.DemosMenu.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Demonstrations",
+	})
 }

@@ -12,8 +12,6 @@ func GetTemplatesMap() map[string]*template.Template {
 	m["signup-success"] = SignupSuccess
 	m["login"] = Login
 	m["error"] = Error
-
-	// Protected views
 	m["error-logged"] = ErrorLogged
 	m["demos-menu"] = DemosMenu
 	m["demo-polynomial-regression"] = DemoPolynomialRegression

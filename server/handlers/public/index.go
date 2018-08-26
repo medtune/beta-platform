@@ -8,6 +8,7 @@ import (
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
 )
 
+// Index page handler
 func Index(c *gin.Context) {
 	if session.GetLoginStatus(c) {
 		c.Redirect(302, "home")
