@@ -6,8 +6,6 @@ jobs:
       docker_layer_caching: true
     steps:
       - checkout
-      - setup_remote_docker: 
-         docker_layer_caching: true
       - run:
           name: build base image
           command: make build-base
@@ -17,8 +15,6 @@ jobs:
       docker_layer_caching: true
     steps:
       - checkout
-      - setup_remote_docker: 
-         docker_layer_caching: true
       - run:
           name: test packages
           command: make tests
@@ -28,8 +24,6 @@ jobs:
       docker_layer_caching: true
     steps:
       - checkout
-      - setup_remote_docker: 
-         docker_layer_caching: true
       - run:
           name: code coverage tests
           command: make test-cov
@@ -43,8 +37,6 @@ jobs:
       docker_layer_caching: true
     steps:
       - checkout
-      - setup_remote_docker: 
-         docker_layer_caching: true
       - run:
           name: build capsul image
           command: make build-prod
