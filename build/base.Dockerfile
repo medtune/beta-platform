@@ -1,5 +1,5 @@
 #Base image
-FROM medtune/capsul:dev-v0.1.0
+FROM medtune/capsul:dev-v0.0.2
 # FROM medtune/capsul:dev-latest
 
 WORKDIR /go/src/github.com/medtune/beta-platform

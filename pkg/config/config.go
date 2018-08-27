@@ -74,6 +74,12 @@ type ModelConfig struct {
 	Address   string `yaml:"address"`
 }
 
+type CustomModelConfig struct {
+	ModelConfig
+	PredictURI string
+	HealthURI  string
+}
+
 // Capsul .
 type Capsul struct {
 	Inception *ModelConfig `yaml:"inception"`
@@ -82,22 +88,30 @@ type Capsul struct {
 	Chexray   *ModelConfig `yaml:"chexray"`
 }
 
-// StartupConfig main configuration
-type StartupConfig struct {
-	Meta          *Meta              `yaml:"meta"`
-	Server        *Server            `yaml:"server"`
-	Database      *Database          `yaml:"database"`
-	Session       *Session           `yaml:"session"`
-	Crypto        *Crypto            `yaml:"crypto"`
-	Public        *PublicContent     `yaml:"public"`
-	Secrets       *Secrets           `yaml:"secrets"`
-	Create        *Create            `yaml:"create"`
-	Capsul        *Capsul            `yaml:"capsul"`
-	CapsulHelpers []*ServiceEndpoint `yaml:"capsul_helpers"`
+// CustomCapsul .
+type CustomCapsul struct {
+	Inception *ModelConfig `yaml:"inception"`
+	Mnist     *ModelConfig `yaml:"mnist"`
+	MuraCam   *ModelConfig `yaml:"mura-cam"`
+	Mura      *ModelConfig `yaml:"mura"`
+	Chexray   *ModelConfig `yaml:"chexray"`
 }
 
-// ServiceEndpoint .
-type ServiceEndpoint struct {
-	Name    string `yaml:"name"`
-	Address string `yaml:"address"`
+// StartupConfig main configuration
+type StartupConfig struct {
+	Meta         *Meta          `yaml:"meta"`
+	Server       *Server        `yaml:"server"`
+	Database     *Database      `yaml:"database"`
+	Session      *Session       `yaml:"session"`
+	Crypto       *Crypto        `yaml:"crypto"`
+	Public       *PublicContent `yaml:"public"`
+	Secrets      *Secrets       `yaml:"secrets"`
+	Create       *Create        `yaml:"create"`
+	Capsul       *Capsul        `yaml:"capsul"`
+	CustomCapsul *CustomCapsul  `yaml:"custom_capsul"`
+}
+
+// Validate configuration fields & subfields
+func (sc *StartupConfig) Validate() (bool, error) {
+	return false, nil
 }

@@ -18,16 +18,17 @@ import (
 
 // InitFromFile from configuration file
 func InitFromFile(file string) error {
+	// Read configuration from file
 	config, err := config.LoadConfigFromPath(file)
 	if err != nil {
 		return err
 	}
 
 	// Init from config
-	err = InitFromConfig(config)
-	if err != nil {
+	if err = InitFromConfig(config); err != nil {
 		return err
 	}
+
 	return nil
 }
 
@@ -57,6 +58,12 @@ func InitFromConfig(c *config.StartupConfig) error {
 	if err := initCapsulClients(c.Capsul); err != nil {
 		return err
 	}
+
+	// init package pkg/service/capsul (custom capsules)
+	if err := initCustomCapsulClients(c.CustomCapsul); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -84,8 +91,7 @@ func initStore(c *config.Database, prod bool) error {
 		database = c.Test
 	}
 
-	// Create store engine
-	engine, err := store.New(db.ConnStr{
+	str := db.ConnStr{
 		Host:         c.Creds.Host,
 		Database:     database,
 		User:         c.Creds.User,
@@ -94,7 +100,9 @@ func initStore(c *config.Database, prod bool) error {
 		SslMode:      0,
 		MaxIdleConns: c.MIC,
 		MaxOpenConns: c.MOC,
-	})
+	}
+	// Create store engine
+	engine, err := store.New(str)
 	if err != nil {
 		return err
 	}
@@ -104,14 +112,9 @@ func initStore(c *config.Database, prod bool) error {
 }
 
 func initSecrets(c *config.Secrets) error {
-	if c.Signup == nil {
-		// Need warn
-		return nil
-	}
-
 	for _, s := range c.Signup {
 		secret.Register("signup", s)
-		//log.Printf("Registred signup key: %s", s)
+		log.Printf("Registred signup secret: %s\n", s)
 	}
 
 	return nil
@@ -136,7 +139,6 @@ func initCapsulClients(c *config.Capsul) error {
 	muraClient, err := tfsclient.New(c.Mura.Address)
 	if err != nil {
 		return err
-
 	}
 	capsul.MuraClient = muraClient
 
@@ -146,6 +148,17 @@ func initCapsulClients(c *config.Capsul) error {
 		return err
 	}
 	capsul.ChexrayClient = chexrayClient
+
+	return nil
+}
+
+func initCustomCapsulClients(c *config.CustomCapsul) error {
+	// init mura-cam
+	muraCustomCamClient, err := tfsclient.NewRest(c.MuraCam.Address, 5)
+	if err != nil {
+		return err
+	}
+	capsul.MuraCamClient = muraCustomCamClient
 
 	return nil
 }

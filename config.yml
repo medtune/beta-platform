@@ -30,6 +30,21 @@ crypto:
 public:
   static: ./static
 
+secrets:
+  signup:
+    - supersecret
+    - siistrasbourg
+
+create:
+  users:
+    - username: admin
+      email: admin@medtune.org
+      password: admin
+
+    - username: test
+      email: test@medtune.org
+      password: test
+
 capsul:
   mnist:
     model: mnist
@@ -55,23 +70,9 @@ capsul:
     version: 1
     address: localhost:9003
 
-capsul_helpers:
-  - name: mura-cam
+custom_capsul:
+  mura-cam:
+    model: mura
+    signature: run_cam
+    version: 1
     address: localhost:9020
-      
-secrets:
-  signup:
-    - supersecret
-    - siistrasbourg
-
-create:
-  users:
-    - username: admin
-      email: admin@medtune.org
-      password: admin
-
-    - username: test
-      email: test@medtune.org
-      password: test
-
-      
