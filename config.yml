@@ -50,29 +50,35 @@ capsul:
     model: mnist
     signature: predict_images
     version: 1
-    address: localhost:9000
+    address: mnist
 
   inception:
     model: inception
     signature: predict_images
     version: 1
-    address: localhost:9001
+    address: inception
+
+  mura-irn-v2:
+    model: mura_inception_resnet_v2
+    signature: predict_images
+    version: 1
+    address: mura-irn-v2
 
   mura:
     model: mura
     signature: predict_images
     version: 1
-    address: localhost:9002
+    address: mura
 
   chexray:
     model: chexray
     signature: predict_images
     version: 1
-    address: localhost:9003
+    address: chexray
 
 custom_capsul:
   mura-cam:
     model: mura
     signature: run_cam
     version: 1
-    address: localhost:9020
+    address: mura-cam

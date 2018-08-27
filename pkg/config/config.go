@@ -85,6 +85,7 @@ type Capsul struct {
 	Inception *ModelConfig `yaml:"inception"`
 	Mnist     *ModelConfig `yaml:"mnist"`
 	Mura      *ModelConfig `yaml:"mura"`
+	MuraIRNV2 *ModelConfig `yaml:"mura-irn-v2"`
 	Chexray   *ModelConfig `yaml:"chexray"`
 }
 
