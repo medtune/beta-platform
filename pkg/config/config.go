@@ -1,6 +1,10 @@
 package config
 
-import "github.com/medtune/beta-platform/pkg/store/model"
+import (
+	"fmt"
+
+	"github.com/medtune/beta-platform/pkg/store/model"
+)
 
 // Meta .
 type Meta struct {
@@ -114,5 +118,41 @@ type StartupConfig struct {
 
 // Validate configuration fields & subfields
 func (sc *StartupConfig) Validate() (bool, error) {
-	return false, nil
+	if sc.Meta == nil {
+		return false, fmt.Errorf("Meta is nil")
+	}
+
+	if sc.Server == nil {
+		return false, fmt.Errorf("Server is nil")
+	}
+
+	if sc.Database == nil {
+		return false, fmt.Errorf("Database is nil")
+	}
+
+	if sc.Session == nil {
+		return false, fmt.Errorf("Session is nil")
+	}
+
+	if sc.Crypto == nil {
+		return false, fmt.Errorf("Crypto is nil")
+	}
+
+	if sc.Secrets == nil {
+		return false, fmt.Errorf("Secrets is nil")
+	}
+
+	if sc.Capsul == nil {
+		return false, fmt.Errorf("Capsul is nil")
+	}
+
+	if sc.CustomCapsul == nil {
+		return false, fmt.Errorf("CustomCapsul is nil")
+	}
+
+	if sc.Create == nil {
+		return false, fmt.Errorf("Create is nil")
+	}
+
+	return true, nil
 }

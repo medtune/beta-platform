@@ -34,6 +34,11 @@ func InitFromFile(file string) error {
 
 // InitFromConfig uration file
 func InitFromConfig(c *config.StartupConfig) error {
+	// Validate config
+	if _, err := c.Validate(); err != nil {
+		return fmt.Errorf("Non valid configuration (%v)", err)
+	}
+
 	// Check version
 	if c.Meta.Version != pkg.VERSION {
 		return fmt.Errorf("Configuration meta version did'nt match\n\tpackage version: %v\n\tconfigs version: %v", pkg.VERSION, c.Meta.Version)
