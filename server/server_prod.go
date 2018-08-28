@@ -61,6 +61,8 @@ func assembleHandlers(server *gin.Engine) {
 
 	// Login platform routes
 	PROTECTED := server.Group("/")
+	//FIXME:
+	//PROTECTED.Use(middleware.ProtectedView())
 	PROTECTED.GET("/logout", platform.Logout)
 	PROTECTED.GET("/home", platform.Home)
 	PROTECTED.GET("/demos", platform.DemosMenu)
@@ -88,6 +90,8 @@ func assembleHandlers(server *gin.Engine) {
 	PUBLICAPI.POST("/signup", api.Signup)
 
 	API := PROTECTED.Group("/api")
+	//FIXME:
+	//API.Use(middleware.ProtectedAPI())
 	API.POST("/custom/exec", api.CustomExecution)
 
 	APIDEMOS := API.Group("/demos")
