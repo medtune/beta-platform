@@ -16,19 +16,20 @@ func CollectImagesData(demo string) ([]data.Image, error) {
 		return nil, err
 	}
 
-	images := make([]data.Image, 0, 0)
-
 	// ls dir
 	files, err := ioutil.ReadDir(path)
 	if err != nil {
 		return nil, err
 	}
 
-	// walk over file
+	images := make([]data.Image, 0, 0)
+
+	// walk over file and collect images
 	for _, f := range files {
-		if !f.IsDir() {
+		// ignore 'debug.*' and sub directories
+		if basename := strings.Split(f.Name(), ".")[0]; basename != "debug" && !f.IsDir() {
 			images = append(images, data.Image{
-				Name:     strings.Split(f.Name(), ".")[0],
+				Name:     basename,
 				Filename: f.Name(),
 			})
 		}

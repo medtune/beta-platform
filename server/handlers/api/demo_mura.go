@@ -15,7 +15,7 @@ import (
 // MuraRunInference .
 func MuraRunInference(c *gin.Context) {
 	if logged := session.GetLoginStatus(c); !logged {
-		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied :rip")))
+		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied")))
 		return
 	}
 

@@ -60,7 +60,7 @@ var _showResults = function(res) {
 
 var _requestInference = function(image, numpreds) {
     data = {
-        'file' : '.' + image,
+        'file' : image,
         'numpreds' : numpreds,
     };
     var start = new Date();

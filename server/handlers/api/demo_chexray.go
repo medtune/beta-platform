@@ -26,6 +26,8 @@ func ChexrayRunInference(c *gin.Context) {
 
 	ctx := context.Background()
 
+	infData.File = staticPath("chexray", infData.File)
+
 	// Run inference
 	result, err := capsul.RunChexrayInference(ctx, &infData)
 	if err != nil {

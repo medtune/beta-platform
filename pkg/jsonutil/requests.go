@@ -21,6 +21,7 @@ type RunImageInference struct {
 	Image    string `json:"image"`
 	File     string `json:"file"`
 	NumPreds string `json:"numpreds"`
+	ModelID  string `json:"model_id"`
 }
 
 // RunImageCam .
@@ -29,6 +30,7 @@ type RunImageCam struct {
 	Image         string `json:"image"`
 	File          string `json:"file"`
 	CamOutputFile string `json:"cam_output_dir"`
+	ModelID       string `json:"model_id"`
 }
 
 // DataDrop .
@@ -45,6 +47,7 @@ type ProcessImage struct {
 	File          string `json:"file"`
 	NumPreds      string `json:"numpreds"`
 	CamOutputFile string `json:"cam_output_dir"`
+	ModelID       string `json:"model_id"`
 }
 
 // TestRequest .

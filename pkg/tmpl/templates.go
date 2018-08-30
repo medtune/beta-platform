@@ -4,25 +4,29 @@ import (
 	"html/template"
 )
 
+func init() {
+	CompileTemplates()
+}
+
 var (
-	// Public
+	// Public templates
 	Index         *template.Template
 	Login         *template.Template
 	Signup        *template.Template
 	SignupSuccess *template.Template
 	Error         *template.Template
 
-	// Logged
+	// Private templates
 	ErrorLogged *template.Template
 	Home        *template.Template
 	DataHub     *template.Template
 	Settings    *template.Template
 
-	// Slides
+	// Slides templates
 	SlidesMenu      *template.Template
 	SlideHelloWorld *template.Template
 
-	//Demos
+	// Demos templates
 	DemosMenu                *template.Template
 	DemoPolynomialRegression *template.Template
 	DemoMnist                *template.Template
@@ -33,7 +37,3 @@ var (
 	DemoChexrayV2            *template.Template
 	DemoSentimentAnalysis    *template.Template
 )
-
-func init() {
-	CompileTemplates()
-}

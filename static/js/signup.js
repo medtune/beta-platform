@@ -32,7 +32,7 @@ var signupCorrect = function () {
     var pw = document.getElementById('fti-password').classList.contains('is-invalid');
     var pwc = document.getElementById('fti-passwordc').classList.contains('is-invalid');
     var secret = document.getElementById('fti-email').classList.contains('is-invalid');
-    return email && un && pw && pwc && secret
+    return email && un && pw && pwc && secret;
 }
 
 var setErrors = function(errors) {
@@ -60,7 +60,7 @@ var setErrors = function(errors) {
 
 var Signup = function () { 
     var obj = loadSignup();
-    setDisplay(true, 'signup-load')
+    setDisplay(true, 'signup-load');
     sendJSON('POST', '/api/signup', obj, (res) => {
         var data = JSON.parse(res);
         //console.log('Signup response:', data);
@@ -68,13 +68,13 @@ var Signup = function () {
             setTimeout(function(){
                 setDisplay(false, 'signup-load');
                 window.location.href = '/signup/success';
-            }, 500)
+            }, 500);
         } else {
             //console.log(data.errors);
             setTimeout(function() {
                 setErrors(data.errors);
                 setDisplay(false, 'signup-load');
-            }, 500)
+            }, 500);
         };
-    })
+    });
 };

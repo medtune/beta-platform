@@ -26,9 +26,8 @@ func ProtectedAPI() gin.HandlerFunc {
 		//FIXME
 		s := sessions.Default(c)
 		if v := s.Get("logged"); v == nil || !v.(bool) {
-			c.Abort()
-			c.JSON(200, jsonutil.Fail(
-				fmt.Errorf("protected api ep. please authentificate")),
+			c.AbortWithStatusJSON(200, jsonutil.Fail(
+				fmt.Errorf("protected api ep <authentification required>")),
 			)
 			return
 		}

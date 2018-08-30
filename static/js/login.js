@@ -42,21 +42,20 @@ var setErrors = function(errors) {
 
 var Login = function () {
     var obj = loadLogin();
-    setDisplay(true, "login-load")
+    setDisplay(true, "login-load");
     sendJSON("POST", "/api/login", obj, (res) => {
         var data = JSON.parse(res);
-
         if (data.success == true) {
             setTimeout(function(){
                 setDisplay(false, 'login-load');
                 window.location.href = '/home';
-            }, 500)
+            }, 500);
         } else {
             //console.log(data.errors);
             setTimeout(function() {
                 setErrors(data.errors);
                 setDisplay(false, 'login-load');
-            }, 500)
+            }, 500);
         };
-    })
+    });
 };

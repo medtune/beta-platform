@@ -5,9 +5,11 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/medtune/beta-platform/pkg/jsonutil"
-	"github.com/medtune/capsul/pkg/request/chexray"
+	"github.com/medtune/capsul/pkg/pbreq"
+	"github.com/medtune/capsul/pkg/pbreq/stdimpl"
 	tfsclient "github.com/medtune/capsul/pkg/tfs-client"
+
+	"github.com/medtune/beta-platform/pkg/jsonutil"
 )
 
 // ChexrayClient .
@@ -25,8 +27,10 @@ func RunChexrayInference(ctx context.Context, infData *jsonutil.RunImageInferenc
 		panic(err)
 	}
 
+	request := pbreq.Predict(stdimpl.Chexray, b)
+
 	// Run inference on image path (chexray/images)
-	resp, err := ChexrayClient.Predict(ctx, chexray.Default(b))
+	resp, err := ChexrayClient.Predict(ctx, request)
 	if err != nil {
 		return nil, err
 	}

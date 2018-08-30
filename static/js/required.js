@@ -17,5 +17,5 @@ var scrollToWear = function() {
     var content = $(".mdl-layout__content");
     var target = top ? 0 : $("#try-beta").height();
     content.stop().animate({ scrollTop: target }, "fast");
-}
+};
 

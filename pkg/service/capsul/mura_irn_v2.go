@@ -11,11 +11,14 @@ import (
 	tfsclient "github.com/medtune/capsul/pkg/tfs-client"
 )
 
-// InceptionClient .
-var InceptionClient *tfsclient.Client
+// MuraIRNV2Client .
+var MuraIRNV2Client *tfsclient.Client
 
-// RunInceptionInference .
-func RunInceptionInference(ctx context.Context, infData *jsonutil.RunImageInference) (*jsonutil.InferenceResult, error) {
+// MuraIRNV2CamClient .
+var MuraIRNV2CamClient *tfsclient.RestClient
+
+// RunMuraIRNV2Inference .
+func RunMuraIRNV2Inference(ctx context.Context, infData *jsonutil.RunImageInference, mtype *string) (*jsonutil.InferenceResult, error) {
 	if infData.File == "" {
 		return nil, fmt.Errorf("file field is empty: got struct %v", infData)
 	}
@@ -26,10 +29,9 @@ func RunInceptionInference(ctx context.Context, infData *jsonutil.RunImageInfere
 		panic(err)
 	}
 
-	request := pbreq.Predict(stdimpl.Inception, b)
+	request := pbreq.Predict(stdimpl.MuraMNV2, b)
 
-	// Run inference on image path (chexray/images)
-	resp, err := InceptionClient.Predict(ctx, request)
+	resp, err := MuraIRNV2Client.Predict(ctx, request)
 	if err != nil {
 		return nil, err
 	}
@@ -45,4 +47,9 @@ func RunInceptionInference(ctx context.Context, infData *jsonutil.RunImageInfere
 	result.Keys = s
 
 	return &result, nil
+}
+
+// RunIRNV2MuraCAM .
+func RunIRNV2MuraCAM(ctx context.Context, camData *jsonutil.RunImageCam) (*jsonutil.CamResult, error) {
+	return nil, nil
 }

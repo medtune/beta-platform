@@ -27,6 +27,11 @@ func MnistRunInference(c *gin.Context) {
 	}
 
 	ctx := context.Background()
+
+	if infData.File != "" {
+		infData.File = staticPath("mnist", infData.File)
+	}
+
 	// Run inference
 	resp, err := capsul.RunMnistInference(ctx, &infData)
 	if err != nil {

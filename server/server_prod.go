@@ -18,6 +18,7 @@ func New(static string, port int) Engine {
 	set404Handler(server, func(c *gin.Context) {
 		c.Redirect(302, "/error/404")
 	})
+
 	setMiddlewares(server)
 	assembleHandlers(server)
 
@@ -27,6 +28,7 @@ func New(static string, port int) Engine {
 	}
 }
 
+// Settings general middlewares
 func setMiddlewares(server *gin.Engine) {
 	// Set gin middlewares
 	server.Use(gin.Recovery())
@@ -70,6 +72,9 @@ func assembleHandlers(server *gin.Engine) {
 	PROTECTED.GET("/datahub", platform.Datahub)
 	PROTECTED.POST("/datahub_upload", platform.DatahubUpload)
 
+	SLIDES := PROTECTED.Group("/slides")
+	SLIDES.GET("/hello_world", platform.HelloWorld)
+
 	// Demonstrations routes
 	DEMOS := PROTECTED.Group("/demos")
 	DEMOS.GET("/polynomial_regression", platform.PolynomialRegression)
@@ -82,6 +87,7 @@ func assembleHandlers(server *gin.Engine) {
 	DEMOS.GET("/sentiment_analysis", platform.SentimentAnalysis)
 
 	// Api routes
+
 	// public API
 	PUBLICAPI := PUBLIC.Group("/api")
 	PUBLICAPI.GET("/version", api.Version)

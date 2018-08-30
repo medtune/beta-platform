@@ -6,6 +6,7 @@ import (
 
 	"github.com/medtune/beta-platform/pkg/tmpl/private"
 	"github.com/medtune/beta-platform/pkg/tmpl/private/demos"
+	"github.com/medtune/beta-platform/pkg/tmpl/private/slides"
 	"github.com/medtune/beta-platform/pkg/tmpl/public"
 	"github.com/medtune/beta-platform/pkg/tmpl/shared"
 )
@@ -143,22 +144,6 @@ func CompileTemplates() {
 		DemosMenu = demosMenu
 	}
 
-	// Slides menu page
-	{
-		slidesMenu := template.New("base")
-		slidesMenu, err = slidesMenu.Parse(shared.Base)
-		must(err)
-		slidesMenu, err = slidesMenu.Parse(shared.HeaderLogged)
-		must(err)
-		slidesMenu, err = slidesMenu.Parse(shared.SourceHeaderIndex)
-		must(err)
-		slidesMenu, err = slidesMenu.Parse(shared.Footer)
-		must(err)
-		slidesMenu, err = slidesMenu.Parse(private.Slides)
-		must(err)
-		SlidesMenu = slidesMenu
-	}
-
 	// Polynomial regression page
 	{
 		polynomialRegression := template.New("base")
@@ -278,13 +263,45 @@ func CompileTemplates() {
 		must(err)
 		sentimentAnalysis, err = sentimentAnalysis.Parse(shared.HeaderLogged)
 		must(err)
-		sentimentAnalysis, err = sentimentAnalysis.Parse(shared.SourceHeaderChexray)
+		sentimentAnalysis, err = sentimentAnalysis.Parse(shared.SourceHeaderSentimentAnalysis)
 		must(err)
 		sentimentAnalysis, err = sentimentAnalysis.Parse(shared.Footer)
 		must(err)
 		sentimentAnalysis, err = sentimentAnalysis.Parse(demos.SentimentAnalysis)
 		must(err)
 		DemoSentimentAnalysis = sentimentAnalysis
+	}
+
+	// Slides menu page
+	{
+		slidesMenu := template.New("base")
+		slidesMenu, err = slidesMenu.Parse(shared.Base)
+		must(err)
+		slidesMenu, err = slidesMenu.Parse(shared.HeaderLogged)
+		must(err)
+		slidesMenu, err = slidesMenu.Parse(shared.SourceHeaderIndex)
+		must(err)
+		slidesMenu, err = slidesMenu.Parse(shared.Footer)
+		must(err)
+		slidesMenu, err = slidesMenu.Parse(private.Slides)
+		must(err)
+		SlidesMenu = slidesMenu
+	}
+
+	// Slide Hello world
+	{
+		slideHelloWorld := template.New("base")
+		slideHelloWorld, err = slideHelloWorld.Parse(shared.Base)
+		must(err)
+		slideHelloWorld, err = slideHelloWorld.Parse(shared.HeaderLogged)
+		must(err)
+		slideHelloWorld, err = slideHelloWorld.Parse(shared.SourceHeaderIndex)
+		must(err)
+		slideHelloWorld, err = slideHelloWorld.Parse(shared.Footer)
+		must(err)
+		slideHelloWorld, err = slideHelloWorld.Parse(slides.HelloWorld)
+		must(err)
+		SlideHelloWorld = slideHelloWorld
 	}
 
 	// Datahub page

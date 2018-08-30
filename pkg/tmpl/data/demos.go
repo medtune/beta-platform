@@ -19,3 +19,9 @@ type MuraV2Demo struct {
 	Main
 	Samples []Image
 }
+
+// ChexrayV2Demo data struct
+type ChexrayV2Demo struct {
+	Main
+	Samples []Image
+}

@@ -23,6 +23,7 @@ func GetTemplatesMap() map[string]*template.Template {
 	m["demo-chexray-v2"] = DemoChexrayV2
 	m["demo-sentiment-analysis"] = DemoSentimentAnalysis
 	m["slides-menu"] = SlidesMenu
+	m["slide-hello-world"] = SlideHelloWorld
 	m["datahub"] = DataHub
 	m["settings"] = Settings
 	return m

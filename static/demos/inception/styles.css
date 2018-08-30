@@ -71,3 +71,11 @@ img.article-image {
     margin-bottom: 15px;
     text-align: center;
 }
+
+.side-cell {
+    padding-top: 95px;
+}
+
+.moving-cell {
+    margin-left: auto;
+}

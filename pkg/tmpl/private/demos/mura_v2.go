@@ -137,11 +137,10 @@ const (
 						<div class="mdl-textfield mdl-js-textfield getmdl-select" style="">
 							<input class="mdl-textfield__input" value="" id="model" readonly/>
 							<input value="" type="hidden" name="model-engine"/>
-							<label class="mdl-textfield__label" for="model">Model [MobileNet]</label>
+							<label class="mdl-textfield__label" for="model">Model</label>
 							<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu" for="model">
-								<li class="mdl-menu__item" data-val="mobilenet">MobileNet</li>
-								<li class="mdl-menu__item" data-val="densenet121" disabled>DenseNet-121</li>
-								<li class="mdl-menu__item" data-val="densenet121" disabled>DenseNet-169</li>
+								<li class="mdl-menu__item" data-val="mobilenet-v2">MobileNet V2</li>
+								<li class="mdl-menu__item" data-val="inception-resnet-v2">Inception ResNet V2</li>
 							</ul>
 						</div>
 
@@ -179,6 +178,5 @@ const (
 
 	</div>
 </div>
-
 {{end}}`
 )

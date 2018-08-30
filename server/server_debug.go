@@ -35,6 +35,7 @@ func debugHandlers(g *gin.Engine) {
 		DEBUG.GET("/login", debug.Login)
 		DEBUG.GET("/signup", debug.Signup)
 		DEBUG.GET("/error/:code", debug.Error)
+		DEBUG.GET("/datahub", debug.Datahub)
 		DEBUG.GET("/demos", debug.DemosMenu)
 		DEBUG.GET("/demos/mnist", debug.Mnist)
 		DEBUG.GET("/demos/inception_imagenet", debug.InceptionImagenet)
@@ -44,7 +45,7 @@ func debugHandlers(g *gin.Engine) {
 		DEBUG.GET("/demos/chexray", debug.Chexray)
 		DEBUG.GET("/demos/chexray.v2", debug.ChexrayV2)
 		DEBUG.GET("/demos/sentiment_analysis", debug.SentimentAnalysis)
-		DEBUG.GET("/datahub", debug.Datahub)
 		DEBUG.GET("/slides", debug.SlidesMenu)
+		DEBUG.GET("/slides/hello_world", debug.HelloWorld)
 	}
 }

@@ -12,20 +12,23 @@ type DefaultResponse struct {
 
 // InferenceResult .
 type InferenceResult struct {
-	Keys   []string  `json:"keys"`
-	Scores []float32 `json:"scores"`
+	Keys    []string  `json:"keys"`
+	Scores  []float32 `json:"scores"`
+	ModelID string    `json:"model_id"`
 }
 
 // CamResult .
 type CamResult struct {
 	StaticPath string `json:"static_path"`
 	URL        string `json:"url"`
+	ModelID    string `json:"model_id"`
 }
 
 // ProcessResult .
 type ProcessResult struct {
 	Inference *InferenceResult `json:"inference"`
 	Cam       *CamResult       `json:"cam"`
+	ModelID   string           `json:"model_id"`
 }
 
 // PackageVersion .

@@ -165,9 +165,12 @@ func Chexray(c *gin.Context) {
 // ChexrayV2 debug view
 func ChexrayV2(c *gin.Context) {
 	c.Status(200)
-	tmpl.DemoChexrayV2.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
-		PageTitle: "Demo V2: Chest X-Ray Classification",
+	tmpl.DemoChexrayV2.Execute(c.Writer, &data.ChexrayV2Demo{
+		Main: data.Main{
+			Version:   pkg.VERSION,
+			PageTitle: "Demo V2: Chest X-Ray Classification",
+		},
+		Samples: data.Gen().Samples,
 	})
 }
 
@@ -195,5 +198,13 @@ func SlidesMenu(c *gin.Context) {
 	tmpl.SlidesMenu.Execute(c.Writer, &data.Main{
 		Version:   pkg.VERSION,
 		PageTitle: "Slides menu",
+	})
+}
+
+func HelloWorld(c *gin.Context) {
+	c.Status(200)
+	tmpl.SlideHelloWorld.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Slide: Hello World",
 	})
 }

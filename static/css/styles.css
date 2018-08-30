@@ -548,6 +548,17 @@ and (max-width : 500px) {
     margin-bottom: 30px;
 }
 
+.slides-menu {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.slides-menu-grid {
+    max-width: 900px;  
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
 /*
 .demos-menu-card.mdl-card {
 
@@ -585,6 +596,10 @@ and (max-width : 500px) {
     background: url('/static/images/chexray.jpg') center / cover;
 }
 
+.demos-menu-card > .mdl-card__title__sentiment_analysis {
+    background: url('/static/images/sentiment-analysis.jpg') center / cover;
+}
+
 .demos-menu-card > .mdl-card__title__undefined {
     background: url('/static/images/undenied.jpg') center / cover;
 }
@@ -596,6 +611,23 @@ and (max-width : 500px) {
 
 .demos-menu-card > .mdl-card__menu {
     color: rgb(255, 255, 255);
+}
+
+.slides-menu-card > .mdl-card__menu {
+    color: rgb(255, 255, 255);
+}
+
+.slides-menu-card > .mdl-card__title {
+    color: #fff;
+    height: 176px;
+}
+
+.slides-menu-card > .mdl-card__title__undefined {
+    background: url('/static/images/undenied.jpg') center / cover;
+}
+
+.slides-menu-card > .mdl-card__title__helloworld {
+    background: url('/static/images/hello-world.png') center / cover;
 }
 
 .page-info {

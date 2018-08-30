@@ -6,12 +6,17 @@ import (
 	"io/ioutil"
 
 	"github.com/medtune/beta-platform/pkg/jsonutil"
-	"github.com/medtune/capsul/pkg/request/mura"
+	"github.com/medtune/capsul/pkg/pbreq"
+	"github.com/medtune/capsul/pkg/pbreq/stdimpl"
 	tfsclient "github.com/medtune/capsul/pkg/tfs-client"
 )
 
 // MuraClient .
+// Generally mobile net copy
 var MuraClient *tfsclient.Client
+
+// MuraCamClient .
+var MuraCamClient *tfsclient.RestClient
 
 // RunMuraInference .
 func RunMuraInference(ctx context.Context, infData *jsonutil.RunImageInference) (*jsonutil.InferenceResult, error) {
@@ -25,7 +30,11 @@ func RunMuraInference(ctx context.Context, infData *jsonutil.RunImageInference) 
 		panic(err)
 	}
 
-	resp, err := MuraClient.Predict(ctx, mura.Default(b))
+	// CHECK infData.ModelID
+
+	request := pbreq.Predict(stdimpl.MuraMNV2, b)
+
+	resp, err := MuraClient.Predict(ctx, request)
 	if err != nil {
 		return nil, err
 	}
@@ -41,4 +50,9 @@ func RunMuraInference(ctx context.Context, infData *jsonutil.RunImageInference) 
 	result.Keys = s
 
 	return &result, nil
+}
+
+// RunMuraCAM .
+func RunMuraCAM(ctx context.Context, camData *jsonutil.RunImageCam) (*jsonutil.CamResult, error) {
+	return nil, nil
 }

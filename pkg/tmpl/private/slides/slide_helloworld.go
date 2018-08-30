@@ -1,7 +1,7 @@
 package slides
 
 const (
-	SlideHelloWorld = `{{define "content"}}
-	
+	HelloWorld = `{{define "content"}}
+	Hello world slide
 {{end}}`
 )

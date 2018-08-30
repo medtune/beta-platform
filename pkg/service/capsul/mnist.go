@@ -8,7 +8,8 @@ import (
 
 	"github.com/anthonynsimon/bild/transform"
 	"github.com/medtune/beta-platform/pkg/jsonutil"
-	"github.com/medtune/capsul/pkg/request/mnist"
+	"github.com/medtune/capsul/pkg/pbreq"
+	"github.com/medtune/capsul/pkg/pbreq/stdimpl"
 	tfsclient "github.com/medtune/capsul/pkg/tfs-client"
 	"github.com/vincent-petithory/dataurl"
 )
@@ -46,7 +47,7 @@ func RunMnistInference(ctx context.Context, infData *jsonutil.RunImageInference)
 		data = buf.Bytes()
 
 	} else { // inference on file
-		b, err := ioutil.ReadFile("./static/demos/mnist/images/" + infData.File)
+		b, err := ioutil.ReadFile(infData.File)
 		if err != nil {
 			return nil, err
 		}
@@ -58,7 +59,10 @@ func RunMnistInference(ctx context.Context, infData *jsonutil.RunImageInference)
 		return nil, err
 	}
 
-	resp, err := MnistClient.Predict(ctx, mnist.Default(imgfloat32))
+	request := pbreq.PredictF32(stdimpl.Mnist, imgfloat32)
+
+	// Run inference on image path (chexray/images)
+	resp, err := MnistClient.Predict(ctx, request)
 	if err != nil {
 		return nil, err
 	}

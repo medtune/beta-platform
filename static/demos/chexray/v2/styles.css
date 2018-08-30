@@ -1,14 +1,11 @@
-.demo-mura {
+.demo-chexray {
     width: 100%;
     justify-content: center;
     min-height: 600px;
     padding-bottom: 50px;
 }
 
-.mura-grid {
-}
-
-.mura-grid-view {
+.chexray-grid-view {
     max-width: 1000px;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -17,13 +14,13 @@
 .demo-card-square > .mdl-card__title {
     height: 400px;
     color: #fff;
-    background: url('/static/demos/mura/images/image_0.png') #46B6AC;
+    background: url('/static/demos/chexray/images/image_0.png') #46B6AC;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 }
 
-.mura-settings-ctx {
+.chexray-settings-ctx {
     min-height: 200px;
     min-width: 400px;
 }
