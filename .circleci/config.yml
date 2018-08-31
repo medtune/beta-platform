@@ -2,7 +2,9 @@ version: 2
 jobs:
   #go-latest
   build:
+    machine: true
     steps:
+    
       - checkout
       - run:
           name: build base image
