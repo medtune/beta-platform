@@ -55,7 +55,7 @@ services:
     image: medtune/capsul:mura-latest
     ports: 9000:9002
 
-  mura_cam:
+  mura-cam:
     image: medtune/capsul:mura-cam-latest
     ports: 9000:9020
 
