@@ -28,3 +28,5 @@ gen.config.yml
 
 # excel files
 *.xlsx
+
+reveal.js-3.7.0/

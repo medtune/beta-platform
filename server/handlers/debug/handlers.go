@@ -4,6 +4,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+
 	"github.com/medtune/beta-platform/pkg"
 	"github.com/medtune/beta-platform/pkg/tmpl"
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
@@ -203,8 +204,7 @@ func SlidesMenu(c *gin.Context) {
 
 func HelloWorld(c *gin.Context) {
 	c.Status(200)
-	tmpl.SlideHelloWorld.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
-		PageTitle: "Slide: Hello World",
+	tmpl.SlideHelloWorld.Execute(c.Writer, &data.Slide{
+		Title: "Slide: Hello World",
 	})
 }

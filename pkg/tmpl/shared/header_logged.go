@@ -18,10 +18,10 @@ const HeaderLogged = `{{define "header"}}
 				<a class="mdl-navigation__link" href="">Contribute</a>
 			</nav>
 		</div>
-		<button class="mdl-button mdl-js-button mdl-button--icon nav-button-icon">
+		<button class="mdl-button mdl-js-button mdl-button--icon nav-button-icon" onclick="window.location.href='/datahub'">
 			<i class="material-icons">cloud_upload</i>
 		</button>
-		<button class="mdl-button mdl-js-button mdl-button--icon nav-button-icon">
+		<button class="mdl-button mdl-js-button mdl-button--icon nav-button-icon" onclick="window.location.href='/dashboard'">
 			<i class="material-icons">settings_input_svideo</i>
 		</button>
 		<button class="mdl-button mdl-js-button mdl-button--icon nav-button-icon" id="button_settings">

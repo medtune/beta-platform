@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+
 	"github.com/medtune/beta-platform/pkg/jsonutil"
 	"github.com/medtune/beta-platform/pkg/service/capsul"
 	"github.com/medtune/beta-platform/pkg/session"

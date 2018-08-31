@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
+
 	"github.com/medtune/beta-platform/server/handlers/api"
 	"github.com/medtune/beta-platform/server/handlers/platform"
 	"github.com/medtune/beta-platform/server/handlers/public"

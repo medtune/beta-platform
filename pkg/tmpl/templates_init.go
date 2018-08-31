@@ -291,13 +291,7 @@ func CompileTemplates() {
 	// Slide Hello world
 	{
 		slideHelloWorld := template.New("base")
-		slideHelloWorld, err = slideHelloWorld.Parse(shared.Base)
-		must(err)
-		slideHelloWorld, err = slideHelloWorld.Parse(shared.HeaderLogged)
-		must(err)
-		slideHelloWorld, err = slideHelloWorld.Parse(shared.SourceHeaderIndex)
-		must(err)
-		slideHelloWorld, err = slideHelloWorld.Parse(shared.Footer)
+		slideHelloWorld, err = slideHelloWorld.Parse(slides.Base)
 		must(err)
 		slideHelloWorld, err = slideHelloWorld.Parse(slides.HelloWorld)
 		must(err)
