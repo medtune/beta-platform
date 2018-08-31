@@ -12,11 +12,11 @@ jobs:
 
       - run:
           name: build bin 
-          command: make-compile
+          command: make build-compile
 
       - run:
           name: build prod
-          command: make-prod
+          command: make build-prod
 
       - run:
           name: test
