@@ -2,8 +2,6 @@ version: 2
 jobs:
   #go-latest
   build:
-    machine:
-      docker_layer_caching: true
     steps:
       - checkout
       - run:
