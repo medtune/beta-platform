@@ -12,16 +12,24 @@ type DefaultResponse struct {
 
 // InferenceResult .
 type InferenceResult struct {
-	Keys    []string  `json:"keys"`
-	Scores  []float32 `json:"scores"`
-	ModelID string    `json:"model_id"`
+	Keys      []string      `json:"keys"`
+	Scores    []float32     `json:"scores"`
+	ModelID   string        `json:"model_id"`
+	RoundTrip time.Duration `json:"round_trip"`
 }
 
 // CamResult .
 type CamResult struct {
-	StaticPath string `json:"static_path"`
-	URL        string `json:"url"`
-	ModelID    string `json:"model_id"`
+	Output    string        `json:"output"`
+	URL       string        `json:"url"`
+	ModelID   string        `json:"model_id"`
+	RoundTrip time.Duration `json:"round_trip"`
+}
+
+type StatusResult struct {
+	Status    string        `json:"status"`
+	Version   int64         `json:"version"`
+	RoundTrip time.Duration `json:"round_trip"`
 }
 
 // ProcessResult .
@@ -29,6 +37,7 @@ type ProcessResult struct {
 	Inference *InferenceResult `json:"inference"`
 	Cam       *CamResult       `json:"cam"`
 	ModelID   string           `json:"model_id"`
+	Timing    time.Duration    `json:"timing"`
 }
 
 // PackageVersion .

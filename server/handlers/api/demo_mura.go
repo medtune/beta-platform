@@ -30,6 +30,8 @@ func MuraRunInference(c *gin.Context) {
 
 	ctx := context.Background()
 
+	infData.File = staticPath("mura", infData.File)
+
 	// Run inference
 	result, err := capsul.RunMuraInference(ctx, &infData)
 	if err != nil {
@@ -90,6 +92,17 @@ func MuraProcess(c *gin.Context) {
 	infData := jsonutil.RunImageInference{}
 	camData := jsonutil.RunImageCam{}
 
+	// Set inference data
+	infData.ModelID = procData.ModelID
+	infData.File = staticPath("mura", procData.Target)
+	infData.NumPreds = procData.NumPreds
+
+	// set cam data
+	camData.ModelID = procData.ModelID
+	camData.Target = procData.Target
+	camData.Output = procData.Output
+	camData.Force = true
+
 	// result
 	var infResult *jsonutil.InferenceResult
 	var camResult *jsonutil.CamResult
@@ -99,8 +112,7 @@ func MuraProcess(c *gin.Context) {
 	var camError error
 
 	// timings
-	var infTiming time.Duration
-	var camTiming time.Duration
+	var Timing time.Duration
 
 	{
 		// WaitGroup
@@ -116,7 +128,6 @@ func MuraProcess(c *gin.Context) {
 			// run inference
 			infresult, inferr := capsul.RunMuraInference(ctx, &infData)
 			// copy result
-			infTiming = time.Since(start)
 			infResult = infresult
 			infError = inferr
 			wg.Done()
@@ -126,7 +137,6 @@ func MuraProcess(c *gin.Context) {
 			// run cam
 			camresult, camerr := capsul.RunMuraCAM(ctx, &camData)
 			// copy result
-			camTiming = time.Since(start)
 			camResult = camresult
 			camError = camerr
 			wg.Done()
@@ -135,6 +145,8 @@ func MuraProcess(c *gin.Context) {
 		// wait for goroutines to finish
 		wg.Wait()
 		cancel()
+		Timing = time.Since(start)
+
 	}
 
 	// response objects
@@ -159,6 +171,7 @@ func MuraProcess(c *gin.Context) {
 		processResult.Cam = camResult
 	}
 
+	processResult.Timing = Timing
 	response.Data = processResult
 
 	// Success

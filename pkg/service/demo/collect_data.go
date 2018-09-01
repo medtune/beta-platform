@@ -26,6 +26,9 @@ func CollectImagesData(demo string) ([]data.Image, error) {
 
 	// walk over file and collect images
 	for _, f := range files {
+		if p := strings.Split(f.Name(), "_"); len(p) > 2 {
+			continue
+		}
 		// ignore 'debug.*' and sub directories
 		if basename := strings.Split(f.Name(), ".")[0]; basename != "debug" && !f.IsDir() {
 			images = append(images, data.Image{

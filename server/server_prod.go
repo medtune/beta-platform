@@ -71,6 +71,7 @@ func assembleHandlers(server *gin.Engine) {
 	PROTECTED.GET("/demos", platform.DemosMenu)
 	PROTECTED.GET("/slides", platform.SlidesMenu)
 	PROTECTED.GET("/datahub", platform.Datahub)
+	PROTECTED.GET("/dashboard", platform.Dashboard)
 	PROTECTED.POST("/datahub_upload", platform.DatahubUpload)
 
 	SLIDES := PROTECTED.Group("/slides")
@@ -83,6 +84,7 @@ func assembleHandlers(server *gin.Engine) {
 	DEMOS.GET("/inception_imagenet", platform.InceptionImagenet)
 	DEMOS.GET("/mura", platform.Mura)
 	DEMOS.GET("/mura.v2", platform.MuraV2)
+	DEMOS.POST("/mura/upload", platform.MuraUpload)
 	DEMOS.GET("/chexray", platform.Chexray)
 	DEMOS.GET("/chexray.v2", platform.ChexrayV2)
 	DEMOS.GET("/sentiment_analysis", platform.SentimentAnalysis)
@@ -100,6 +102,9 @@ func assembleHandlers(server *gin.Engine) {
 	//FIXME:
 	//API.Use(middleware.ProtectedAPI())
 	API.POST("/custom/exec", api.CustomExecution)
+
+	APICAPSUL := API.Group("/capsul")
+	APICAPSUL.GET("/status", api.CapsulStatus)
 
 	APIDEMOS := API.Group("/demos")
 	APIDEMOS.POST("/mnist/run_inference", api.MnistRunInference)

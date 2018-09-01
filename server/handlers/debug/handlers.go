@@ -208,3 +208,12 @@ func HelloWorld(c *gin.Context) {
 		Title: "Slide: Hello World",
 	})
 }
+
+// Dashboard .
+func Dashboard(c *gin.Context) {
+	c.Status(200)
+	tmpl.Dashboard.Execute(c.Writer, &data.Main{
+		Version:   pkg.VERSION,
+		PageTitle: "Dashboard",
+	})
+}

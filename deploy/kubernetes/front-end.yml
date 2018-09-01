@@ -1,19 +1,20 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: app-deployment
+  name: mdtn-beta
 spec:
-  replicas: 5
+  replicas: 1
   template:
     metadata:
       labels:
-        app: beta-platform
+        app: beta-platform-app
     spec:
       containers:
-      - name: beta-platform-v0.1.0
+      - name: beta-platform
         image: medtune/beta-platform:v0.1.0
         ports:
         - containerPort: 8005
+
 ---
 kind: Service
 apiVersion: v1

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/gin-contrib/sessions/redis"
 	tfsclient "github.com/medtune/capsul/pkg/tfs-client"
 	"github.com/medtune/go-utils/random"
 
@@ -73,17 +74,26 @@ func InitFromConfig(c *config.StartupConfig) error {
 }
 
 func initSession(c *config.Session) error {
-	var s string
-	if !c.Random {
-		session.SessID = c.Name
-		s = c.Secret
-	} else {
-		session.SessID = random.Alpha(10)
-		s = random.Alpha(10)
-	}
+	if c.Type == "cookie" {
+		var s string
+		if !c.Random {
+			session.SessID = c.Name
+			s = c.Secret
+		} else {
+			session.SessID = random.Alpha(10)
+			s = random.Alpha(10)
+		}
 
-	log.Printf("Session secrets:\n\t-> %v\n\t-> %v\n", session.SessID, s)
-	session.Store = session.NewStore(s)
+		log.Printf("Session secrets:\n\t-> %v\n\t-> %v\n", session.SessID, s)
+		session.Store = session.NewStore(s)
+
+	} else if c.Type == "redis" {
+		store, err := redis.NewStore(10, "tcp", c.Address, c.Password, []byte(c.Secret))
+		if err != nil {
+			return err
+		}
+		session.Store = store
+	}
 	return nil
 }
 
@@ -141,29 +151,44 @@ func initCapsulClients(c *config.Capsul) error {
 	capsul.InceptionClient = inceptionClient
 
 	// init mura client
-	muraClient, err := tfsclient.New(c.Mura.Address)
+	muraMNV2Client, err := tfsclient.New(c.MuraMNV2.Address)
 	if err != nil {
 		return err
 	}
-	capsul.MuraClient = muraClient
+	capsul.MuraMNV2Client = muraMNV2Client
+
+	// init mura client
+
+	muraIRNV2Client, err := tfsclient.New(c.MuraIRNV2.Address)
+	if err != nil {
+		return err
+	}
+	capsul.MuraIRNV2Client = muraIRNV2Client
 
 	// init chexray client
-	chexrayClient, err := tfsclient.New(c.Chexray.Address)
+	chexrayMNV2Client, err := tfsclient.New(c.ChexrayMNV2.Address)
 	if err != nil {
 		return err
 	}
-	capsul.ChexrayClient = chexrayClient
+	capsul.ChexrayMNV2Client = chexrayMNV2Client
 
 	return nil
 }
 
 func initCustomCapsulClients(c *config.CustomCapsul) error {
-	// init mura-cam
-	muraCustomCamClient, err := tfsclient.NewRest(c.MuraCam.Address, 5)
+	// init mura cam
+	muraMNV2CamClient, err := tfsclient.NewRest(c.MuraMNV2Cam.Address, 5)
 	if err != nil {
 		return err
 	}
-	capsul.MuraCamClient = muraCustomCamClient
+	capsul.MuraMNV2CamClient = muraMNV2CamClient
+
+	// init chexray cam
+	chexrayMNV2CamClient, err := tfsclient.NewRest(c.ChexrayMNV2Cam.Address, 5)
+	if err != nil {
+		return err
+	}
+	capsul.ChexrayMNV2CamClient = chexrayMNV2CamClient
 
 	return nil
 }

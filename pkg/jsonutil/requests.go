@@ -26,11 +26,16 @@ type RunImageInference struct {
 
 // RunImageCam .
 type RunImageCam struct {
-	Id            int    `json:"id"`
-	Image         string `json:"image"`
-	File          string `json:"file"`
-	CamOutputFile string `json:"cam_output_dir"`
-	ModelID       string `json:"model_id"`
+	Id      int    `json:"id"`
+	Target  string `json:"target" valid:"required"`
+	Output  string `json:"output"`
+	Force   bool   `json:"force"`
+	ModelID string `json:"model_id" valid:"required"`
+}
+
+// GetStatus .
+type GetStatus struct {
+	ModelID string `json:"model_id" valid:"required"`
 }
 
 // DataDrop .
@@ -42,12 +47,11 @@ type DataDrop struct {
 
 // ProcessImage .
 type ProcessImage struct {
-	Id            int    `json:"id"`
-	Image         string `json:"image"`
-	File          string `json:"file"`
-	NumPreds      string `json:"numpreds"`
-	CamOutputFile string `json:"cam_output_dir"`
-	ModelID       string `json:"model_id"`
+	Id       int    `json:"id"`
+	Target   string `json:"target"`
+	NumPreds string `json:"numpreds"`
+	Output   string `json:"output"`
+	ModelID  string `json:"model_id"`
 }
 
 // TestRequest .

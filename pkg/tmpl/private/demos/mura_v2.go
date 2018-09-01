@@ -21,7 +21,7 @@ const (
 		
 		    <div class='cntt-wrapper'>
 				<div id="fab-hdr">
-			  		<h3>Result</h3>
+			  		<h3 id="title">Result</h3>
 			  		<div class="btn-wrapper">
 						<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab btn-cancel" id="cancel" onclick="closeFAB();">
 							<i class="material-icons">clear</i>
@@ -30,16 +30,57 @@ const (
 				</div>
 		
 				<div class="cntt mdl-grid">
-				
-					<div class="mdl-cell mdl-cell--12-col metadata">
-						meta is here
+					<div class="mdl-cell mdl-cell--6-col">
+						<div class="results-bars">
+						<div class="mdl-list__item">
+							<span id="r1">{class} :</span>
+							<span id="s1" class=""> {score} </span>
+						</div>
+						<div id="p1" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 20px"></div>
+						<div class="mdl-list__item">
+							<span id="r2">{class} :</span>
+							<span id="s2" class=""> {score}</span>
+						</div>
+						<div id="p2" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 20px"></div>
+					</div>	
 					</div>
+					<div class="mdl-cell mdl-grid mdl-cell--6-col metadata">
+						<div class="container-ctx">
+						<div class="demo-list-action mdl-list stats-list">
+						<div class="mdl-list__item">
+
+						  <span class="mdl-list__item-primary-content">
+							<i class="material-icons mdl-list__item-icon">timer</i>
+							<span class="stats-sub-title">Inference time</span>
+						  </span>
+						  <a class="mdl-list__item-secondary-action stats-value" href="#" id="inference-time">392</a>
+						</div>
+						<div class="mdl-list__item">
+						  <span class="mdl-list__item-primary-content">
+							<i class="material-icons mdl-list__item-icon">timer</i>
+							<span class="stats-sub-title">Grad cam time</span>
+						  </span>
+						  <a class="mdl-list__item-secondary-action stats-value" href="#" id="grad-cam-time">11</a>
+						</div>
+						<div class="mdl-list__item">
+						  <span class="mdl-list__item-primary-content">
+							<i class="material-icons mdl-list__item-icon">timer</i>
+							<span class="stats-sub-title">Request roundtrip</span>
+						  </span>
+						  <a class="mdl-list__item-secondary-action  stats-value" href="#" id="req-roundtrip">1232</a>
+						</div>
+					  </div>
+
+					  </div>
+						
+					</div>
+					
 
 					<div class="mdl-cell mdl-cell--6-col demo-card-square mdl-card mdl-shadow--4dp">
 						<div class="mdl-card__supporting-text">
 							Preview
 						</div>
-						<div class="mdl-card__title mdl-card--expand">
+						<div class="mdl-card__title mdl-card--expand" id="preview">
 						</div>
 					</div>
 
@@ -47,7 +88,7 @@ const (
 						<div class="mdl-card__supporting-text">
 							Grad CAM
 						</div>
-						<div class="mdl-card__title mdl-card--expand">
+						<div class="mdl-card__title mdl-card--expand" id="cam">
 						</div>
 					</div>
 
@@ -73,13 +114,11 @@ const (
 						{{ .Name }}
 					</div>
 
-					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect ctrl-btn run-btn" onclick="openFAB();">
+					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect ctrl-btn run-btn" onclick="processCase('{{ .Filename }}');">
 						<i class="material-icons">arrow_forward_ios</i>
 					</button>
 
-					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect ctrl-btn delete-btn" onclick="">
-						<i class="material-icons">remove_red_eye</i>
-					</button>
+	
 				</div>
 				{{end}}
 			</div>
@@ -98,25 +137,27 @@ const (
 					</div>
 
 					<div class="mdl-card__supporting-text mura-settings-ctx">
-
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="">
-							<input class="mdl-textfield__input" type="text" pattern="[A-Z,a-z, ]*" name="name"/>
-							<label class="mdl-textfield__label">Name</label>
-							<span class="mdl-textfield__error">Letters and spaces only</span>
-						</div>
-
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--file" style="">
-							<input class="mdl-textfield__input" placeholder="File" type="text" id="FF" readonly/>
-							<div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
-								<i class="material-icons">attach_file</i>
-								<input type="file" id="ID" onchange="document.getElementById('FF').value=this.files[0].name;" name="file">
+						<div class="mdl-progress mdl-js-progress mdl-progress__indeterminate load-bar-form" id="upload-load"></div>
+						<form action="/demos/mura/upload" method="POST" id="upload-form" enctype="multipart/form-data">
+						
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="">
+								<input class="mdl-textfield__input" type="text" pattern="[A-Z,a-z, ]*" name="name"/>
+								<label class="mdl-textfield__label">Name</label>
+								<span class="mdl-textfield__error">Letters and spaces only</span>
 							</div>
-						</div>
 
-					</div>
-
-					<div class="mdl-card__actions mdl-card--border">
-						<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Send</button>
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--file" style="">
+								<input class="mdl-textfield__input" placeholder="File" type="text" id="FF" readonly/>
+								<div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
+									<i class="material-icons">attach_file</i>
+									<input type="file" id="ID" onchange="document.getElementById('FF').value=this.files[0].name;" name="file">
+								</div>
+							</div>
+							<div class="mdl-card__actions mdl-card--border">
+								<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit">Send</button>
+							</div>
+						</form>
+						
 					</div>
 				</div>
 			</div>
@@ -166,6 +207,8 @@ const (
 								<span class="mdl-switch__label">Always run GRAD-CAM</span>
 							</label>
 						</div>
+
+
 					</div>
 
 					<div class="mdl-card__actions mdl-card--border">

@@ -18,8 +18,8 @@ type Meta struct {
 type Server struct {
 	Mode     string `yaml:"mode"`
 	Port     int    `yaml:"port"`
-	Protocol string `yaml:"protocol,omitempty"`
-	SSLTLS   bool   `yaml:"ssltls,omitempty"`
+	Protocol string `yaml:"protocol"`
+	SSLTLS   bool   `yaml:"ssltls"`
 }
 
 // DBCreds .
@@ -43,10 +43,13 @@ type Database struct {
 
 // Session .
 type Session struct {
-	Type   string `yaml:"type"`
-	Random bool   `yaml:"random"`
-	Secret string `yaml:"secret"`
-	Name   string `yaml:"name"`
+	Type     string `yaml:"type"`
+	Random   bool   `yaml:"random"`
+	Secret   string `yaml:"secret"`
+	Name     string `yaml:"name"`
+	Password string `yaml:"password"`
+	Database string `yaml:"database"`
+	Address  string `yaml:"address"`
 }
 
 // Crypto .
@@ -78,28 +81,20 @@ type ModelConfig struct {
 	Address   string `yaml:"address"`
 }
 
-type CustomModelConfig struct {
-	ModelConfig
-	PredictURI string
-	HealthURI  string
-}
-
 // Capsul .
 type Capsul struct {
-	Inception *ModelConfig `yaml:"inception"`
-	Mnist     *ModelConfig `yaml:"mnist"`
-	Mura      *ModelConfig `yaml:"mura"`
-	MuraIRNV2 *ModelConfig `yaml:"mura-irn-v2"`
-	Chexray   *ModelConfig `yaml:"chexray"`
+	Inception   *ModelConfig `yaml:"inception"`
+	Mnist       *ModelConfig `yaml:"mnist"`
+	MuraMNV2    *ModelConfig `yaml:"mura-mn-v2"`
+	MuraIRNV2   *ModelConfig `yaml:"mura-irn-v2"`
+	ChexrayMNV2 *ModelConfig `yaml:"chexray-mn-v2"`
 }
 
 // CustomCapsul .
 type CustomCapsul struct {
-	Inception *ModelConfig `yaml:"inception"`
-	Mnist     *ModelConfig `yaml:"mnist"`
-	MuraCam   *ModelConfig `yaml:"mura-cam"`
-	Mura      *ModelConfig `yaml:"mura"`
-	Chexray   *ModelConfig `yaml:"chexray"`
+	MuraMNV2Cam    *ModelConfig `yaml:"mura-mn-v2-cam"`
+	MuraIRNV2Cam   *ModelConfig `yaml:"mura-irn-v2-cam"`
+	ChexrayMNV2Cam *ModelConfig `yaml:"chexray-mn-v2-cam"`
 }
 
 // StartupConfig main configuration
@@ -122,36 +117,38 @@ func (sc *StartupConfig) Validate() (bool, error) {
 		return false, fmt.Errorf("Meta is nil")
 	}
 
-	if sc.Server == nil {
-		return false, fmt.Errorf("Server is nil")
-	}
+	/*
+		if sc.Server == nil {
+			return false, fmt.Errorf("Server is nil")
+		}
+	*/
 
 	if sc.Database == nil {
-		return false, fmt.Errorf("Database is nil")
+		return false, fmt.Errorf("database is nil")
 	}
 
 	if sc.Session == nil {
-		return false, fmt.Errorf("Session is nil")
+		return false, fmt.Errorf("session is nil")
 	}
 
 	if sc.Crypto == nil {
-		return false, fmt.Errorf("Crypto is nil")
+		return false, fmt.Errorf("crypto is nil")
 	}
 
 	if sc.Secrets == nil {
-		return false, fmt.Errorf("Secrets is nil")
+		return false, fmt.Errorf("secrets is nil")
 	}
 
 	if sc.Capsul == nil {
-		return false, fmt.Errorf("Capsul is nil")
+		return false, fmt.Errorf("capsul is nil")
 	}
 
 	if sc.CustomCapsul == nil {
-		return false, fmt.Errorf("CustomCapsul is nil")
+		return false, fmt.Errorf("custom capsul is nil")
 	}
 
 	if sc.Create == nil {
-		return false, fmt.Errorf("Create is nil")
+		return false, fmt.Errorf("create is nil")
 	}
 
 	return true, nil

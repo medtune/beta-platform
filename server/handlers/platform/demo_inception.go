@@ -16,6 +16,7 @@ func InceptionImagenet(c *gin.Context) {
 		c.Redirect(302, "/index")
 		return
 	}
+
 	images, err := demo.CollectImagesData("inception")
 	if err != nil {
 		c.Redirect(302, "/error/500")

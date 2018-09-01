@@ -20,6 +20,7 @@ var (
 	ErrorLogged *template.Template
 	Home        *template.Template
 	DataHub     *template.Template
+	Dashboard   *template.Template
 	Settings    *template.Template
 
 	// Slides templates

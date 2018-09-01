@@ -4,19 +4,10 @@ jobs:
   build:
     machine: true
     steps:
-    
       - checkout
       - run:
-          name: build base image
-          command: make build-base
-
-      - run:
-          name: build bin 
-          command: make build-compile
-
-      - run:
-          name: build prod
-          command: make build-prod
+          name: build base/build/prod images
+          command: make build-all
 
       - run:
           name: test
@@ -26,42 +17,15 @@ jobs:
           name: test
           command: make test-cov
 
-  test:
-    machine:
-      docker_layer_caching: true
-    steps:
-      - checkout
       - run:
-          name: test packages
-          command: make tests
-
-  test-cov:
-    machine:
-      docker_layer_caching: true
-    steps:
-      - checkout
-      - run:
-          name: code coverage tests
-          command: make test-cov
-
-      - run:
-          name: test coverage
-          command: docker build -t test-cov -f Dockerfile.test-cov --build-arg CODECOV_TOKEN=$CODECOV_TOKEN .
-
-  build-prod:
-    machine:
-      docker_layer_caching: true
-    steps:
-      - checkout
-      - run:
-          name: build capsul image
-          command: make build-prod
-      - run:
-          name: login docker engine
+          name: login to docker hub
           command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+          
       - run:
           name: push image to registry
-          command: docker push medtune/beta-platform:go-1.10-linux-v0.1.2
+          command: |
+            docker push medtune/beta-platform:v0.1.2
+            docker push medtune/beta-platform:latest
 
 workflows:
   version: 2

@@ -9,6 +9,7 @@ go get -v ./pkg/config
 go get -v ./pkg/session 
 go get -v ./pkg/store 
 go get -v ./pkg/jsonutil
+go get -v ./pkg/initpkg
 
 #
 go get -u github.com/anthonynsimon/bild/transform

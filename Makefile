@@ -44,7 +44,13 @@ build-prod:
 
 	docker tag \
 		medtune/beta-platform:prod \
-		medtune/beta-platform:prod
+		medtune/beta-platform:v0.1.2
+
+	docker tag \
+		medtune/beta-platform:prod \
+		medtune/beta-platform:latest
+
+build-all: build-base build-compile build-prod
 
 tests:
 	@echo running global test
@@ -60,6 +66,69 @@ test-cov:
 		-f test/test-codecov.Dockerfile \
 		--build-arg CODECOV_TOKEN=$(CODECOV_TOKEN) \
 		.
+
+
+# setup capsules
+
+mnist:
+	docker run -dti \
+		--name mnist \
+		-p 10000:10000 \
+		medtune/capsul:mnist
+
+inception:
+	docker run -dti \
+		--name inception \
+		-p 10010:10010 \
+		medtune/capsul:inception
+
+mura-mn-v2:
+	docker run -dti \
+		--name mura-mn-v2 \
+		-p 10020:10020 \
+		medtune/capsul:mura-mn-v2
+
+mura-mn-v2-cam:
+	docker run -dti \
+		--name mura-mn-v2-cam \
+		-p 11020:11020 \
+		-v $(HOME)/go/src/github.com/medtune/beta-platform/static/demos/mura/images:/medtune/data \
+		medtune/capsul:mura-mn-v2-cam
+
+mura-irn-v2:
+	docker run -dti \
+		--name mura-irn-v2 \
+		-p 10021:10021 \
+		medtune/capsul:mura-irn-v2
+
+
+run-capsules: mnist \
+	inception \
+	mura-mn-v2 \
+	mura-mn-v2-cam \
+	mura-irn-v2 \
+
+kill-capsules:
+	docker kill mnist \
+		inception \
+		mura-mn-v2 \
+		mura-mn-v2-cam \
+		mura-irn-v2
+
+	docker rm mnist \
+		inception \
+		mura-mn-v2 \
+		mura-mn-v2-cam \
+		mura-irn-v2
+
+start:
+	go run -tags=gocv \
+		cmd/main.go start \
+		-f dev.config.yml \
+		--syncdb --create-users --wait
+
+debug:
+	go run cmd/main.go debug
 
 up:
 	docker-compose up

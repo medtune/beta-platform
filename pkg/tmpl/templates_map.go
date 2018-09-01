@@ -25,6 +25,7 @@ func GetTemplatesMap() map[string]*template.Template {
 	m["slides-menu"] = SlidesMenu
 	m["slide-hello-world"] = SlideHelloWorld
 	m["datahub"] = DataHub
+	m["dashboard"] = Dashboard
 	m["settings"] = Settings
 	return m
 }

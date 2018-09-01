@@ -113,25 +113,36 @@ func generateConfig() {
 				Model:     "mnist",
 				Signature: "predict_images",
 				Version:   1,
-				Address:   "localhost:9000",
+				Address:   "localhost:10000",
 			},
 			Inception: &config.ModelConfig{
 				Model:     "inception",
 				Signature: "predict_images",
 				Version:   1,
-				Address:   "localhost:9001",
+				Address:   "localhost:10010",
 			},
-			Mura: &config.ModelConfig{
-				Model:     "mura",
+			MuraMNV2: &config.ModelConfig{
+				Model:     "mura_mobilenet_v2",
 				Signature: "predict_images",
 				Version:   1,
-				Address:   "localhost:9002",
+				Address:   "localhost:10020",
 			},
-			Chexray: &config.ModelConfig{
+			MuraIRNV2: &config.ModelConfig{
+				Model:     "mura_inception_resnet_v2",
+				Signature: "predict_images",
+				Version:   1,
+				Address:   "localhost:10021",
+			},
+			ChexrayMNV2: &config.ModelConfig{
 				Model:     "chexray",
 				Signature: "predict_images",
 				Version:   1,
-				Address:   "localhost:9003",
+				Address:   "localhost:10030",
+			},
+		},
+		CustomCapsul: &config.CustomCapsul{
+			MuraMNV2Cam: &config.ModelConfig{
+				Address: "localhost:11020",
 			},
 		},
 	}, output)
