@@ -141,3 +141,6 @@ clean:
 
 clean-gen:
 	rm -rf genered-views
+
+clean-demos:
+	rm -rf static/demos/mura/images/*cam_mn_v2.png

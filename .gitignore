@@ -20,6 +20,9 @@ local.Dockerfile
 .dev/
 templates-gen/
 
+# demos artefacts
+*cam_mn_v2.png
+
 # Generated views
 generated-views/
 
