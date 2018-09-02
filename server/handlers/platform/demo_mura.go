@@ -8,17 +8,12 @@ import (
 
 	"github.com/medtune/beta-platform/pkg"
 	"github.com/medtune/beta-platform/pkg/service/demo"
-	"github.com/medtune/beta-platform/pkg/session"
 	"github.com/medtune/beta-platform/pkg/tmpl"
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
 )
 
 // Mura Demo
 func Mura(c *gin.Context) {
-	if logged := session.GetLoginStatus(c); !logged {
-		c.Redirect(302, "/index")
-		return
-	}
 	c.Status(200)
 	tmpl.DemoMura.Execute(c.Writer, &data.Main{
 		Version:   pkg.VERSION,
@@ -28,10 +23,6 @@ func Mura(c *gin.Context) {
 
 // MuraV2 demo
 func MuraV2(c *gin.Context) {
-	if logged := session.GetLoginStatus(c); !logged {
-		c.Redirect(302, "/index")
-		return
-	}
 	images, err := demo.CollectImagesData("mura")
 	if err != nil {
 		c.Redirect(302, "/error/500")
@@ -49,13 +40,6 @@ func MuraV2(c *gin.Context) {
 
 // MuraUpload .
 func MuraUpload(c *gin.Context) {
-	if logged := session.GetLoginStatus(c); !logged {
-		c.Redirect(302, "/index")
-		return
-	}
-
-	fmt.Println("done")
-
 	// read file
 	file, err := c.FormFile("file")
 	if err != nil {

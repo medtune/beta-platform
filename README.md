@@ -1,4 +1,4 @@
-# MedTune Platform ~ Beta v0.1.2
+# MedTune Platform ~ Beta v0.1.3
 
 [![GitHub license](https://img.shields.io/github/license/medtune/beta-platform.svg)](https://github.com/medtune/beta-platform/blob/iron-master/LICENSE.txt) [![GitHub pull-requests](https://img.shields.io/github/issues-pr/medtune/beta-platform.svg)](https://GitHub.com/medtune/beta-platform/pull/) [![GitHub issues](https://img.shields.io/github/issues/medtune/beta-platform.svg)](https://github.com/medtune/beta-platform/issues) [![GitHub release](https://img.shields.io/github/release/medtune/beta-platform.svg)](https://GitHub.com/medtune/beta-platform/releases) 
 

@@ -1,11 +1,14 @@
 package debug
 
 import (
+	"encoding/json"
 	"strconv"
 
+	"github.com/ghodss/yaml"
 	"github.com/gin-gonic/gin"
 
 	"github.com/medtune/beta-platform/pkg"
+	"github.com/medtune/beta-platform/pkg/service/dashboard"
 	"github.com/medtune/beta-platform/pkg/tmpl"
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
 )
@@ -202,6 +205,7 @@ func SlidesMenu(c *gin.Context) {
 	})
 }
 
+// HelloWorld slide
 func HelloWorld(c *gin.Context) {
 	c.Status(200)
 	tmpl.SlideHelloWorld.Execute(c.Writer, &data.Slide{
@@ -212,8 +216,11 @@ func HelloWorld(c *gin.Context) {
 // Dashboard .
 func Dashboard(c *gin.Context) {
 	c.Status(200)
-	tmpl.Dashboard.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
-		PageTitle: "Dashboard",
+	versionB, _ := json.MarshalIndent(pkg.GetVersion(), "", "    ")
+	configB, _ := yaml.Marshal(dashboard.StartupConfig)
+	tmpl.Dashboard.Execute(c.Writer, &data.Dashboard{
+		Title:   "Dashboard",
+		Version: string(versionB),
+		Config:  string(configB),
 	})
 }

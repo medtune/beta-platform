@@ -27,7 +27,6 @@ func Signup(c *gin.Context) {
 		return
 	}
 
-	session.SetLoginStatus(c, true)
+	session.SetLoginStatus(c, true, false)
 	c.JSON(200, jsonutil.Success())
-
 }

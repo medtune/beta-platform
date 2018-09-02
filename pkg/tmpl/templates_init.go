@@ -331,13 +331,7 @@ func CompileTemplates() {
 	// Dashboard menu page
 	{
 		dashboard := template.New("base")
-		dashboard, err = dashboard.Parse(shared.Base)
-		must(err)
-		dashboard, err = dashboard.Parse(shared.HeaderLogged)
-		must(err)
-		dashboard, err = dashboard.Parse(shared.SourceHeaderIndex)
-		must(err)
-		dashboard, err = dashboard.Parse(shared.Footer)
+		dashboard, err = dashboard.Parse(shared.BaseDashboard)
 		must(err)
 		dashboard, err = dashboard.Parse(private.Dashboard)
 		must(err)

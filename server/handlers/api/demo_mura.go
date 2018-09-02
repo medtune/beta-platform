@@ -2,7 +2,6 @@ package api
 
 import (
 	"context"
-	"fmt"
 	"sync"
 	"time"
 
@@ -10,16 +9,10 @@ import (
 
 	"github.com/medtune/beta-platform/pkg/jsonutil"
 	"github.com/medtune/beta-platform/pkg/service/capsul"
-	"github.com/medtune/beta-platform/pkg/session"
 )
 
 // MuraRunInference .
 func MuraRunInference(c *gin.Context) {
-	if logged := session.GetLoginStatus(c); !logged {
-		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied")))
-		return
-	}
-
 	// Parse body data
 	infData := jsonutil.RunImageInference{}
 	err := c.ShouldBindJSON(&infData)
@@ -45,12 +38,6 @@ func MuraRunInference(c *gin.Context) {
 
 // MuraRunCam .
 func MuraRunCam(c *gin.Context) {
-	// Check session
-	if logged := session.GetLoginStatus(c); !logged {
-		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied")))
-		return
-	}
-
 	// Parse data from body
 	camData := jsonutil.RunImageCam{}
 	err := c.ShouldBindJSON(&camData)
@@ -76,11 +63,6 @@ func MuraRunCam(c *gin.Context) {
 
 // MuraProcess .
 func MuraProcess(c *gin.Context) {
-	if logged := session.GetLoginStatus(c); !logged {
-		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied")))
-		return
-	}
-
 	// Parse body data
 	procData := jsonutil.ProcessImage{}
 	if err := c.ShouldBindJSON(&procData); err != nil {

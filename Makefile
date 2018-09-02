@@ -1,7 +1,48 @@
-OS_TYPE='uname -a'
 PROJECT=beta-platform
-VERSION=v0.1.2
-GO_VERSION=1.10
+MAJOR=0
+MINOR=1
+PATCH=3
+GITCOMMIT=$(shell git rev-parse HEAD)
+OS_TYPE=$(shell uname -a)
+GOVERSION=1.10
+BUILDDATE=$(shell date -u +'%Y-%m-%dT%H:%M:%SZ')
+VERSION=v$(MAJOR).$(MINOR).$(PATCH)
+VPATH=github.com/medtune/beta-platform/pkg
+
+release:
+	go build \
+		-tags=prod \
+		-o medtune-beta \
+		-ldflags="\
+			-X $(VPATH).GitCommit=$(GITCOMMIT) \
+			-X $(VPATH).Major=$(MAJOR) \
+			-X $(VPATH).Minor=$(MINOR) \
+			-X $(VPATH).Patch=$(PATCH) \
+			-X $(VPATH).BuildDate=$(BUILDDATE)" \
+		cmd/main_prod.go \
+
+release-cmd:
+	go build \
+		-o medtune-beta \
+		-ldflags="\
+			-X $(VPATH).GitCommit=$(GITCOMMIT) \
+			-X $(VPATH).Major=$(MAJOR) \
+			-X $(VPATH).Minor=$(MINOR) \
+			-X $(VPATH).Patch=$(PATCH) \
+			-X $(VPATH).BuildDate=$(BUILDDATE)" \
+		cmd/main.go
+
+release-dev:
+	go build \
+		-tags="prod gocv" \
+		-o medtune-beta \
+		-ldflags="\
+			-X $(VPATH).GitCommit=$(GITCOMMIT) \
+			-X $(VPATH).Major=$(MAJOR) \
+			-X $(VPATH).Minor=$(MINOR) \
+			-X $(VPATH).Patch=$(PATCH) \
+			-X $(VPATH).BuildDate=$(BUILDDATE)" \
+		cmd/main.go \
 
 build-base:
 	@echo building base image
@@ -12,7 +53,7 @@ build-base:
 
 	docker tag \
 		medtune/beta-platform:base \
-		medtune/beta-platform:go-1.10-linux-v0.1.2-base
+		medtune/beta-platform:go-1.10-linux-$(VERSION)-base
 
 build-compile:
 	@echo building build image
@@ -24,7 +65,7 @@ build-compile:
 	@echo tag build images
 	docker tag \
 		medtune/beta-platform:build \
-		medtune/beta-platform:go-1.10-linux-v0.1.2-build
+		medtune/beta-platform:go-1.10-linux-$(VERSION)-build
 
 	docker tag \
 		medtune/beta-platform:build \
@@ -40,17 +81,22 @@ build-prod:
 	@echo tag prod images
 	docker tag \
 		medtune/beta-platform:prod \
-		medtune/beta-platform:go-1.10-linux-v0.1.2-prod
+		medtune/beta-platform:go-1.10-linux-$(VERSION)-prod
 
 	docker tag \
 		medtune/beta-platform:prod \
-		medtune/beta-platform:v0.1.2
+		medtune/beta-platform:$(VERSION)
 
 	docker tag \
 		medtune/beta-platform:prod \
 		medtune/beta-platform:latest
 
+
 build-all: build-base build-compile build-prod
+
+push-image:
+	docker push medtune/beta-platform:$(VERSION)
+	docker push medtune/beta-platform:latest
 
 tests:
 	@echo running global test
@@ -69,7 +115,6 @@ test-cov:
 
 
 # setup capsules
-
 mnist:
 	docker run -dti \
 		--name mnist \
@@ -122,13 +167,14 @@ kill-capsules:
 		mura-irn-v2
 
 start:
-	go run -tags=gocv \
-		cmd/main.go start \
+	./medtune-beta start \
 		-f dev.config.yml \
-		--syncdb --create-users --wait
+		--syncdb \
+		--create-users \
+		--wait
 
 debug:
-	go run cmd/main.go debug
+	./medtune-beta debug
 
 up:
 	docker-compose up

@@ -3,6 +3,7 @@ package initpkg
 import (
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/gin-contrib/sessions/redis"
 	tfsclient "github.com/medtune/capsul/pkg/tfs-client"
@@ -11,6 +12,7 @@ import (
 	"github.com/medtune/beta-platform/pkg"
 	"github.com/medtune/beta-platform/pkg/config"
 	"github.com/medtune/beta-platform/pkg/service/capsul"
+	"github.com/medtune/beta-platform/pkg/service/dashboard"
 	"github.com/medtune/beta-platform/pkg/service/secret"
 	"github.com/medtune/beta-platform/pkg/session"
 	"github.com/medtune/beta-platform/pkg/store"
@@ -67,6 +69,11 @@ func InitFromConfig(c *config.StartupConfig) error {
 
 	// init package pkg/service/capsul (custom capsules)
 	if err := initCustomCapsulClients(c.CustomCapsul); err != nil {
+		return err
+	}
+
+	// inint pkg/service/dashboard
+	if err := initDashboard(c); err != nil {
 		return err
 	}
 
@@ -190,5 +197,11 @@ func initCustomCapsulClients(c *config.CustomCapsul) error {
 	}
 	capsul.ChexrayMNV2CamClient = chexrayMNV2CamClient
 
+	return nil
+}
+
+func initDashboard(c *config.StartupConfig) error {
+	dashboard.StartupConfig = c
+	dashboard.StartupDate = time.Now()
 	return nil
 }

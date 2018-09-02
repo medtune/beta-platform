@@ -5,16 +5,10 @@ import (
 
 	"github.com/medtune/beta-platform/pkg/jsonutil"
 	"github.com/medtune/beta-platform/pkg/service/demo"
-	"github.com/medtune/beta-platform/pkg/session"
 )
 
 // DemoDataDrop .
 func DemoDataDrop(c *gin.Context) {
-	if logged := session.GetLoginStatus(c); !logged {
-		c.Redirect(302, "/index")
-		return
-	}
-
 	demoname := c.Param("demo")
 
 	// Parse data from body

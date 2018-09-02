@@ -3,13 +3,23 @@ package pkg
 import (
 	"fmt"
 	"os"
+	"runtime"
 )
 
-// VERSION is the version string for built artifacts. It's set by the build system, and should
-// not be changed in this codebase
-const (
-	VERSION = "v0.1.2"
-)
+// GetVersion .
+func GetVersion() *VersionInfo {
+	return &VersionInfo{
+		Major:      Major,
+		Minor:      Minor,
+		Patch:      Patch,
+		GitVersion: VERSION,
+		GitCommit:  GitCommit,
+		BuildDate:  BuildDate,
+		GoVersion:  runtime.Version(),
+		Compiler:   runtime.Compiler,
+		Platform:   fmt.Sprintf("%s/%s", runtime.GOOS, runtime.GOARCH),
+	}
+}
 
 // PrintAndExit will print the version and exit.
 func PrintAndExit() {

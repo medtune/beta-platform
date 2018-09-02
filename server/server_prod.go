@@ -65,14 +65,17 @@ func assembleHandlers(server *gin.Engine) {
 	// Login platform routes
 	PROTECTED := server.Group("/")
 	//FIXME:
-	//PROTECTED.Use(middleware.ProtectedView())
+	PROTECTED.Use(middleware.ProtectedView())
 	PROTECTED.GET("/logout", platform.Logout)
 	PROTECTED.GET("/home", platform.Home)
 	PROTECTED.GET("/demos", platform.DemosMenu)
 	PROTECTED.GET("/slides", platform.SlidesMenu)
 	PROTECTED.GET("/datahub", platform.Datahub)
-	PROTECTED.GET("/dashboard", platform.Dashboard)
 	PROTECTED.POST("/datahub_upload", platform.DatahubUpload)
+
+	ADMIN := PROTECTED.Group("/")
+	ADMIN.Use(middleware.ProtectedAdmin())
+	ADMIN.GET("/dashboard", platform.Dashboard)
 
 	SLIDES := PROTECTED.Group("/slides")
 	SLIDES.GET("/hello_world", platform.HelloWorld)
@@ -94,14 +97,14 @@ func assembleHandlers(server *gin.Engine) {
 	// public API
 	PUBLICAPI := PUBLIC.Group("/api")
 	PUBLICAPI.GET("/version", api.Version)
-	PUBLICAPI.POST("/test", api.Test)
 	PUBLICAPI.POST("/login", api.Login)
 	PUBLICAPI.POST("/signup", api.Signup)
 
-	API := PROTECTED.Group("/api")
+	API := PUBLIC.Group("/api")
 	//FIXME:
-	//API.Use(middleware.ProtectedAPI())
+	API.Use(middleware.ProtectedAPI())
 	API.POST("/custom/exec", api.CustomExecution)
+	API.POST("/test", api.Test)
 
 	APICAPSUL := API.Group("/capsul")
 	APICAPSUL.GET("/status", api.CapsulStatus)

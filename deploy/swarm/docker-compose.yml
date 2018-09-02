@@ -8,8 +8,12 @@ services:
       - POSTGRES_PASSWORD=mdtn
       - POSTGRES_DB=medtune
 
+  redis:
+    image: redis:latest
+    command: --appendonly yes
+
   platform-server:
-    image: medtune/beta-platform:prod
+    image: medtune/beta-platform:latest
     ports:
       - 8005:8005
 
@@ -18,6 +22,7 @@ services:
       - mnist
       - mura-mn-v2
       - mura-mn-v2-cam
+      - redis
 
     links:
       - postgres:postgres
@@ -25,6 +30,7 @@ services:
       - inception:inception
       - mura-mn-v2:mura-mn-v2
       - mura-mn-v2-cam:mura-cam-v2-cam
+      - redis:redis
 
     volumes:
       - type: volume

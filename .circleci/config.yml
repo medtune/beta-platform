@@ -23,9 +23,7 @@ jobs:
           
       - run:
           name: push image to registry
-          command: |
-            docker push medtune/beta-platform:v0.1.2
-            docker push medtune/beta-platform:latest
+          command: make push-image
 
 workflows:
   version: 2

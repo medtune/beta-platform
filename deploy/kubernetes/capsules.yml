@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mdtn-beta
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: beta-platform-app
+    spec:
+      containers:
+      - name: beta-platform
+        image: medtune/beta-platform:v0.1.0
+        ports:
+        - containerPort: 8005
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mdtn-service
+spec:
+  selector:
+    app: beta-platform
+  ports:
+    - protocol: TCP
+      port: 8005
+  type: LoadBalancer

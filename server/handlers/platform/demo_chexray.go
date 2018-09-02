@@ -5,17 +5,12 @@ import (
 
 	"github.com/medtune/beta-platform/pkg"
 	"github.com/medtune/beta-platform/pkg/service/demo"
-	"github.com/medtune/beta-platform/pkg/session"
 	"github.com/medtune/beta-platform/pkg/tmpl"
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
 )
 
 // Chexray demo
 func Chexray(c *gin.Context) {
-	if logged := session.GetLoginStatus(c); !logged {
-		c.Redirect(302, "/index")
-		return
-	}
 	c.Status(200)
 	tmpl.DemoChexray.Execute(c.Writer, &data.Main{
 		Version:   pkg.VERSION,
@@ -25,10 +20,6 @@ func Chexray(c *gin.Context) {
 
 // ChexrayV2 demo
 func ChexrayV2(c *gin.Context) {
-	if logged := session.GetLoginStatus(c); !logged {
-		c.Redirect(302, "/index")
-		return
-	}
 	images, err := demo.CollectImagesData("chexray")
 	if err != nil {
 		c.Redirect(302, "/error/500")

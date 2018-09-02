@@ -18,11 +18,13 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/ghodss/yaml"
 	"github.com/medtune/beta-platform/cmd/root"
 	"github.com/medtune/beta-platform/pkg/config"
 	"github.com/medtune/beta-platform/pkg/store"
 	"github.com/medtune/beta-platform/pkg/store/db"
 	"github.com/medtune/beta-platform/pkg/store/model"
+	"github.com/medtune/go-utils/crypto"
 	"github.com/spf13/cobra"
 )
 
@@ -84,14 +86,9 @@ func autoMigrateDatabase() {
 		}
 
 		if createUsers && usersConfig != nil {
-			var err error
-			for _, user := range usersConfig {
-				err = engine.CreateUser(user.Email, user.Username, user.Password)
-				if err != nil {
-					fmt.Printf("failed to create user: %s\n    error: %v\n", user.Username, err)
-					continue
-				}
-				fmt.Printf("created user %s %s %s\n", user.Email, user.Username, user.Password)
+			err := createUsersEngine(engine, usersConfig...)
+			if err != nil {
+				log.Fatal(err)
 			}
 		}
 
@@ -109,21 +106,26 @@ func autoMigrateDatabase() {
 		}
 
 		if createUsers && usersConfig != nil {
-			var err error
-			for _, user := range usersConfig {
-				err = engine.CreateUser(user.Email, user.Username, user.Password)
-				if err != nil {
-					fmt.Printf("failed to create user: %s\n\terror: %v\n", user.Username, err)
-					continue
-				}
-				fmt.Printf("created user:\n\temail:%s \n\tusername: %s\n\tpassword: %s\n",
-					user.Email,
-					user.Username,
-					user.Password,
-				)
-			}
+			createUsersEngine(engine, usersConfig...)
 		}
 
 	}
 
+}
+
+func createUsersEngine(e *store.Store, us ...*model.User) error {
+	for _, user := range us {
+		if ok, err := e.Valid(user); err != nil || !ok {
+			b, _ := yaml.Marshal(user)
+			fmt.Printf("unvalid user data:\n\terror: %v\n\tuser:%s", err, string(b))
+			continue
+		}
+		user.Password = crypto.Sha256(user.Password)
+		if _, err := e.Insert(user); err != nil {
+			fmt.Printf("failed to create user: %s\n\terror: %v\n", user.Username, err)
+			continue
+		}
+		fmt.Printf("created user %s %s\n", user.Email, user.Username)
+	}
+	return nil
 }

@@ -1,5 +1,5 @@
 #Base image
-FROM medtune/capsul:v0.0.2
+FROM medtune/capsul:latest
 
 # FROM medtune/capsul:dev-latest
 

@@ -9,18 +9,11 @@ import (
 
 	"github.com/medtune/beta-platform/pkg/jsonutil"
 	"github.com/medtune/beta-platform/pkg/service/custom"
-	"github.com/medtune/beta-platform/pkg/session"
 )
 
 // CustomExecution .
 func CustomExecution(c *gin.Context) {
 	start := time.Now()
-
-	// Check session
-	if logged := session.GetLoginStatus(c); !logged {
-		c.JSON(200, jsonutil.Fail(fmt.Errorf("access denied :rip")))
-		return
-	}
 
 	// Parse data from body
 	cx := jsonutil.CustomExecutionRequest{}

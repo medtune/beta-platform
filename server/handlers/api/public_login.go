@@ -22,14 +22,14 @@ func Login(c *gin.Context) {
 	}
 
 	// Service authentificate user
-	ok, err := user.Auth(&logins)
+	ok, isadmin, err := user.Auth(&logins)
 	if err != nil || !ok {
 		c.JSON(200, jsonutil.Fail(err))
 		return
 	}
 
 	// Success
-	session.SetLoginStatus(c, true)
+	session.SetLoginStatus(c, true, isadmin)
 	c.JSON(200, jsonutil.Success())
 
 }

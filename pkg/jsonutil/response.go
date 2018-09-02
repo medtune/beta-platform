@@ -40,14 +40,6 @@ type ProcessResult struct {
 	Timing    time.Duration    `json:"timing"`
 }
 
-// PackageVersion .
-type PackageVersion struct {
-	Major   int8   `json:"major"`
-	Minor   int8   `json:"minor"`
-	Patch   int8   `json:"patch"`
-	Version string `json:"version"`
-}
-
 // ServiceStatus .
 type ServiceStatus struct {
 	Healthy  bool  `json:"healthy"`

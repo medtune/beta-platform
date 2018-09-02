@@ -9,12 +9,5 @@ import (
 
 // Version description handler
 func Version(c *gin.Context) {
-	// Check session
-
-	c.JSON(200, jsonutil.SuccessData(jsonutil.PackageVersion{
-		Major:   0,
-		Minor:   1,
-		Patch:   2,
-		Version: pkg.VERSION,
-	}))
+	c.JSON(200, jsonutil.SuccessData(pkg.GetVersion()))
 }

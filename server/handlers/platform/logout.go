@@ -9,8 +9,6 @@ import (
 // Logout handler
 // always redirect to index
 func Logout(c *gin.Context) {
-	if logged := session.GetLoginStatus(c); logged {
-		session.SetLoginStatus(c, false)
-	}
+	session.Disconnect(c)
 	c.Redirect(302, "/index")
 }
