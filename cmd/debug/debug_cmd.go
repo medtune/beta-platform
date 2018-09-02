@@ -18,9 +18,10 @@ import (
 	"log"
 
 	"github.com/gin-gonic/gin"
+	"github.com/spf13/cobra"
+
 	"github.com/medtune/beta-platform/cmd/root"
 	"github.com/medtune/beta-platform/server"
-	"github.com/spf13/cobra"
 )
 
 var (

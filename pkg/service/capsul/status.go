@@ -8,6 +8,7 @@ import (
 	pb "tensorflow_serving/apis"
 
 	"github.com/asaskevich/govalidator"
+
 	"github.com/medtune/beta-platform/pkg/jsonutil"
 	"github.com/medtune/capsul/pkg/pbreq"
 	"github.com/medtune/capsul/pkg/pbreq/stdimpl"

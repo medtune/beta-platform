@@ -1,8 +1,9 @@
 package store
 
 import (
-	"github.com/medtune/beta-platform/pkg/store/model"
 	"github.com/medtune/go-utils/errors"
+
+	"github.com/medtune/beta-platform/pkg/store/model"
 )
 
 // Interface ensuring that store engine contains

@@ -2,6 +2,7 @@ package user
 
 import (
 	"github.com/asaskevich/govalidator"
+
 	"github.com/medtune/beta-platform/pkg/jsonutil"
 	"github.com/medtune/beta-platform/pkg/store"
 )

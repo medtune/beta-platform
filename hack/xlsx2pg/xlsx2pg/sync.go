@@ -1,21 +1,23 @@
-package main
+package xlsx2pg
 
 import (
 	"fmt"
+
+	"github.com/tealeg/xlsx"
 
 	"github.com/medtune/beta-platform/pkg/config"
 	"github.com/medtune/beta-platform/pkg/store"
 	"github.com/medtune/beta-platform/pkg/store/db"
 	"github.com/medtune/beta-platform/pkg/store/model"
-	"github.com/tealeg/xlsx"
 )
 
-// Sync database with CXPBA (Chest Xray pathology biological analysis) data
-func syncCXPBAexcel(file string) {
+// SyncCXPBAexcel database with CXPBA
+// (Chest Xray pathology biological analysis) data
+func SyncCXPBAexcel(file string, configFile string) error {
 	var dbconfig *config.Database
 
 	if configuration, err := config.LoadConfigFromPath(configFile); err != nil {
-		panic(err)
+		return err
 	} else {
 		dbconfig = configuration.Database
 	}
@@ -33,13 +35,13 @@ func syncCXPBAexcel(file string) {
 	})
 
 	if err != nil {
-		panic(err)
+		return err
 	}
 
 	// Engine sync
 	err = engine.Sync()
 	if err != nil {
-		panic(err)
+		return err
 	}
 
 	fmt.Println("Start copying sheets")
@@ -47,7 +49,7 @@ func syncCXPBAexcel(file string) {
 	// Read XLSXFILE
 	xlFile, err := xlsx.OpenFile(file)
 	if err != nil {
-		panic(err)
+		return err
 	}
 
 	// Get data
@@ -123,7 +125,7 @@ func syncCXPBAexcel(file string) {
 	for _, e := range analysisData {
 		err := engine.CreatePathologyAL(e)
 		if err != nil {
-			panic(err)
+			return err
 		}
 	}
 	fmt.Println("Done.")
@@ -132,9 +134,10 @@ func syncCXPBAexcel(file string) {
 	for _, e := range specs {
 		err := engine.CreateSpec(e.Name, e.Unit, e.Max, e.Min)
 		if err != nil {
-			panic(err)
+			return err
 		}
 	}
-	fmt.Println("Done.")
 
+	fmt.Println("Done.")
+	return nil
 }

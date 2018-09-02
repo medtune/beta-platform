@@ -7,11 +7,12 @@ import (
 	"io/ioutil"
 
 	"github.com/anthonynsimon/bild/transform"
-	"github.com/medtune/beta-platform/pkg/jsonutil"
 	"github.com/medtune/capsul/pkg/pbreq"
 	"github.com/medtune/capsul/pkg/pbreq/stdimpl"
 	tfsclient "github.com/medtune/capsul/pkg/tfs-client"
 	"github.com/vincent-petithory/dataurl"
+
+	"github.com/medtune/beta-platform/pkg/jsonutil"
 )
 
 // MnistClient .

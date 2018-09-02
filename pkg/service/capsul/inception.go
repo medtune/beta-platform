@@ -5,10 +5,11 @@ import (
 	"fmt"
 	"io/ioutil"
 
+	tfsclient "github.com/medtune/capsul/pkg/tfs-client"
+
 	"github.com/medtune/beta-platform/pkg/jsonutil"
 	"github.com/medtune/capsul/pkg/pbreq"
 	"github.com/medtune/capsul/pkg/pbreq/stdimpl"
-	tfsclient "github.com/medtune/capsul/pkg/tfs-client"
 )
 
 // InceptionClient .

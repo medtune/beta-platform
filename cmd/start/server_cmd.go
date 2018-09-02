@@ -19,16 +19,19 @@ import (
 	"log"
 	"time"
 
+	"github.com/medtune/beta-platform/hack/xlsx2pg/xlsx2pg"
+
 	"github.com/gin-gonic/gin"
+	"github.com/medtune/go-utils/crypto"
+	"github.com/spf13/cobra"
+	"gopkg.in/yaml.v2"
+
 	"github.com/medtune/beta-platform/cmd/root"
 	"github.com/medtune/beta-platform/pkg/config"
 	"github.com/medtune/beta-platform/pkg/initpkg"
 	"github.com/medtune/beta-platform/pkg/store"
 	"github.com/medtune/beta-platform/pkg/store/model"
 	"github.com/medtune/beta-platform/server"
-	"github.com/medtune/go-utils/crypto"
-	"github.com/spf13/cobra"
-	"gopkg.in/yaml.v2"
 )
 
 var (
@@ -41,6 +44,8 @@ var (
 	maxattempts int
 	timestamp   int
 	createUsers bool
+	cxpbaSync   bool
+	cxpbaFile   string
 )
 
 func init() {
@@ -49,12 +54,15 @@ func init() {
 
 	startCmd.Flags().IntVarP(&port, "port", "p", 8005, "port")
 	startCmd.Flags().IntVarP(&ginMode, "gin-mode", "g", 0, "Gin server mode [0 OR 1]")
+
 	startCmd.Flags().BoolVarP(&syncdb, "syncdb", "x", false, "Sync database before start")
 	startCmd.Flags().BoolVarP(&createUsers, "create-users", "y", false, "Create default users before start")
-
 	startCmd.Flags().BoolVarP(&wait, "wait", "w", false, "Wait all services to go up")
 	startCmd.Flags().IntVarP(&maxattempts, "wait-attempts", "c", 30, "Wait max attempts")
 	startCmd.Flags().IntVarP(&timestamp, "wait-timestamp", "t", 1, "Wait timestamp")
+
+	startCmd.Flags().BoolVarP(&cxpbaSync, "sync-cxpba", "X", false, "Sync CXBPA before start")
+	startCmd.Flags().StringVarP(&cxpbaFile, "cxpba-file", "F", "./CXPBA.xlsx", "CXPBA excel file name")
 
 	root.Cmd.AddCommand(startCmd)
 }
@@ -122,6 +130,12 @@ func runServer() {
 		// Create config.Users
 		if createUsers && configuration.Create != nil {
 			createUsersEngine(store.Agent, configuration.Create.Users...)
+		}
+	}
+
+	if cxpbaSync {
+		if err := xlsx2pg.SyncCXPBAexcel(cxpbaFile, configFile); err != nil {
+			log.Println(err)
 		}
 	}
 

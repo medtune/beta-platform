@@ -4,18 +4,16 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/medtune/beta-platform/pkg/jsonutil"
-	user "github.com/medtune/beta-platform/pkg/service/users"
+	"github.com/medtune/beta-platform/pkg/service/user"
 	"github.com/medtune/beta-platform/pkg/session"
 )
 
 // Login page handler
 func Login(c *gin.Context) {
-
 	logins := jsonutil.LoginData{}
-	var err error
 
 	// Parse request body
-	err = c.ShouldBindJSON(&logins)
+	err := c.ShouldBindJSON(&logins)
 	if err != nil {
 		c.JSON(200, jsonutil.Fail(err))
 		return

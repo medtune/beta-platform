@@ -22,10 +22,11 @@ import (
 	"path"
 	"strings"
 
+	"github.com/spf13/cobra"
+
 	"github.com/medtune/beta-platform/cmd/root"
 	"github.com/medtune/beta-platform/pkg/tmpl"
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
-	"github.com/spf13/cobra"
 )
 
 var (

@@ -3,8 +3,9 @@ package store
 import (
 	"fmt"
 
-	"github.com/medtune/beta-platform/pkg/store/model"
 	"github.com/medtune/go-utils/crypto"
+
+	"github.com/medtune/beta-platform/pkg/store/model"
 )
 
 const (

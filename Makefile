@@ -34,7 +34,7 @@ release-cmd:
 
 release-dev:
 	go build \
-		-tags="prod gocv" \
+		-tags="gocv" \
 		-o medtune-beta \
 		-ldflags="\
 			-X $(VPATH).GitCommit=$(GITCOMMIT) \

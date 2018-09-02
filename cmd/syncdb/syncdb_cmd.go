@@ -18,14 +18,15 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/medtune/go-utils/crypto"
+	"github.com/spf13/cobra"
+	"gopkg.in/yaml.v2"
+
 	"github.com/medtune/beta-platform/cmd/root"
 	"github.com/medtune/beta-platform/pkg/config"
 	"github.com/medtune/beta-platform/pkg/store"
 	"github.com/medtune/beta-platform/pkg/store/db"
 	"github.com/medtune/beta-platform/pkg/store/model"
-	"github.com/medtune/go-utils/crypto"
-	"github.com/spf13/cobra"
-	"gopkg.in/yaml.v2"
 )
 
 var (

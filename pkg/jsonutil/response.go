@@ -5,9 +5,9 @@ import "time"
 // DefaultResponse .
 type DefaultResponse struct {
 	Success  bool        `json:"success"`
-	Data     interface{} `json:"data"`
-	Warnings []string    `json:"warnings"`
-	Errors   []string    `json:"errors"`
+	Data     interface{} `json:"data,omitempty"`
+	Warnings []string    `json:"warnings,omitempty"`
+	Errors   []string    `json:"errors,omitempty"`
 }
 
 // InferenceResult .
@@ -21,7 +21,7 @@ type InferenceResult struct {
 // CamResult .
 type CamResult struct {
 	Output    string        `json:"output"`
-	URL       string        `json:"url"`
+	URL       string        `json:"url,omitempty"`
 	ModelID   string        `json:"model_id"`
 	RoundTrip time.Duration `json:"round_trip"`
 }
@@ -34,8 +34,8 @@ type StatusResult struct {
 
 // ProcessResult .
 type ProcessResult struct {
-	Inference *InferenceResult `json:"inference"`
-	Cam       *CamResult       `json:"cam"`
+	Inference *InferenceResult `json:"inference,omitempty"`
+	Cam       *CamResult       `json:"cam,omitempty"`
 	ModelID   string           `json:"model_id"`
 	Timing    time.Duration    `json:"timing"`
 }
@@ -43,7 +43,7 @@ type ProcessResult struct {
 // ServiceStatus .
 type ServiceStatus struct {
 	Healthy  bool  `json:"healthy"`
-	UnixTime int64 `json:"unix_time"`
+	UnixTime int64 `json:"unix_time,omitempty"`
 }
 
 // TestResponse .

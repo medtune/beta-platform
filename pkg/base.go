@@ -16,13 +16,13 @@ func init() {
 }
 
 type VersionInfo struct {
+	GitVersion string `json:"GitVersion"`
+	GitCommit  string `json:"GitCommit"`
 	Major      string `json:"Major"`
 	Minor      string `json:"Minor"`
 	Patch      string `json:"Patch"`
-	GitVersion string `json:"GitVersion"`
-	GitCommit  string `json:"GitCommit"`
+	Compiler   string `json:"Compiler"`
 	GoVersion  string `json:"GoVersion"`
 	Platform   string `json:"Platform"`
-	Compiler   string `json:"Compiler"`
 	BuildDate  string `json:"BuildDate"`
 }

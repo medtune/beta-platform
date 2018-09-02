@@ -3,6 +3,7 @@ package store
 import (
 	"github.com/asaskevich/govalidator"
 	"github.com/go-xorm/xorm"
+
 	"github.com/medtune/beta-platform/pkg/store/db"
 )
 
