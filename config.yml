@@ -41,10 +41,16 @@ create:
     - username: admin
       email: admin@medtune.org
       password: admin
+      account_level: 1
+      account_type: admin
+      account_status: true
 
     - username: test
       email: test@medtune.org
       password: test
+      account_level: 5
+      account_type: default
+      account_status: true
 
 capsul:
   mnist:

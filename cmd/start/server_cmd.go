@@ -19,7 +19,6 @@ import (
 	"log"
 	"time"
 
-	"github.com/ghodss/yaml"
 	"github.com/gin-gonic/gin"
 	"github.com/medtune/beta-platform/cmd/root"
 	"github.com/medtune/beta-platform/pkg/config"
@@ -29,6 +28,7 @@ import (
 	"github.com/medtune/beta-platform/server"
 	"github.com/medtune/go-utils/crypto"
 	"github.com/spf13/cobra"
+	"gopkg.in/yaml.v2"
 )
 
 var (

@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"strconv"
 
-	"github.com/ghodss/yaml"
 	"github.com/gin-gonic/gin"
+	"gopkg.in/yaml.v2"
 
 	"github.com/medtune/beta-platform/pkg"
 	"github.com/medtune/beta-platform/pkg/service/dashboard"

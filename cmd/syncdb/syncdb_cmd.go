@@ -18,7 +18,6 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/ghodss/yaml"
 	"github.com/medtune/beta-platform/cmd/root"
 	"github.com/medtune/beta-platform/pkg/config"
 	"github.com/medtune/beta-platform/pkg/store"
@@ -26,6 +25,7 @@ import (
 	"github.com/medtune/beta-platform/pkg/store/model"
 	"github.com/medtune/go-utils/crypto"
 	"github.com/spf13/cobra"
+	"gopkg.in/yaml.v2"
 )
 
 var (
