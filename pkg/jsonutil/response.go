@@ -43,7 +43,7 @@ type ProcessResult struct {
 // ServiceStatus .
 type ServiceStatus struct {
 	Healthy  bool  `json:"healthy"`
-	UnixTime int64 `json:"unix_time,omitempty"`
+	UnixTime int64 `json:"unix_time"`
 }
 
 // TestResponse .

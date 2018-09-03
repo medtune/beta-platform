@@ -1,14 +1,14 @@
 PROJECT=beta-platform
 OS_TYPE=$(shell uname -a)
+BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
 GITCOMMIT=$(shell git rev-parse HEAD)
 BUILDDATE=$(shell date -u +'%Y-%m-%dT%H:%M:%SZ')
 MAJOR=0
 MINOR=1
 PATCH=4
-REVISION=3
-BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
-GOVERSION=1.10
+REVISION=alpha
 VERSION=v$(MAJOR).$(MINOR).$(PATCH)
+GOVERSION=1.11
 LONGVERSION=v$(MAJOR).$(MINOR).$(PATCH)-$(REVISION)
 VPATH=github.com/medtune/beta-platform/pkg
 AUTHORS=Hilaly.Mohammed-Amine/El.bouchti.Alaa
@@ -193,7 +193,6 @@ mura-irn-v2:
 		-p 10021:10021 \
 		medtune/capsul:mura-irn-v2
 
-
 run-capsules: mnist \
 	inception \
 	mura-mn-v2 \
@@ -238,3 +237,10 @@ clean-gen:
 clean-demos:
 	rm -f static/demos/mura/images/*mn_v2_cam.png
 	rm -f static/demos/chexray/images/*mn_v2_cam.png
+
+verify:
+	GO111MODULE=on go mod verify
+
+vendor:
+	GO111MODULE=on go mod vendor
+

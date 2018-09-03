@@ -20,6 +20,9 @@ local.Dockerfile
 .dev/
 templates-gen/
 
+# vendors
+vendor/
+
 # demos artefacts
 *cam_mn_v2.png
 
@@ -33,3 +36,4 @@ gen.config.yml
 *.xlsx
 
 reveal.js-3.7.0/
+
