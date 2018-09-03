@@ -2,9 +2,38 @@ package pkg
 
 import (
 	"fmt"
-	"os"
 	"runtime"
 )
+
+var (
+	VERSION     string
+	LONGVERSION string
+	Major       = "0"
+	Minor       = "0"
+	Patch       = "0"
+	Revision    = "0-unknown"
+	GitCommit   = "$Format:%H$"
+	BuildDate   = "1970-01-01T00:00:00Z"
+)
+
+func init() {
+	VERSION = fmt.Sprintf("v%s.%s.%s", Major, Minor, Patch)
+	LONGVERSION = fmt.Sprintf("v%s.%s.%s-%s", Major, Minor, Patch, Revision)
+}
+
+// VersionInfo data
+type VersionInfo struct {
+	GitVersion string `json:"GitVersion"`
+	GitCommit  string `json:"GitCommit"`
+	Major      string `json:"Major"`
+	Minor      string `json:"Minor"`
+	Patch      string `json:"Patch"`
+	Revision   string `json:"Revision"`
+	Compiler   string `json:"Compiler"`
+	GoVersion  string `json:"GoVersion"`
+	Platform   string `json:"Platform"`
+	BuildDate  string `json:"BuildDate"`
+}
 
 // GetVersion .
 func GetVersion() *VersionInfo {
@@ -20,10 +49,4 @@ func GetVersion() *VersionInfo {
 		Compiler:   runtime.Compiler,
 		Platform:   fmt.Sprintf("%s/%s", runtime.GOOS, runtime.GOARCH),
 	}
-}
-
-// PrintAndExit will print the version and exit.
-func PrintAndExit() {
-	fmt.Println(VERSION)
-	os.Exit(0)
 }

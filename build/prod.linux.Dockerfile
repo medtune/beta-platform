@@ -8,7 +8,6 @@ ADD medtune-beta .
 ADD static static
 ADD config.yml config.yml
 
-
 # Port to expose
 EXPOSE 8005
 

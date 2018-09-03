@@ -12,7 +12,7 @@ import (
 // ProtectedAPI .
 func ProtectedAPI() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		//FIXME
+		fmt.Println("called")
 		if v := session.GetLoginStatus(c); !v {
 			c.AbortWithStatusJSON(200, jsonutil.Fail(
 				fmt.Errorf("protected api ep: <authentification required>")),
