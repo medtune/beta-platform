@@ -79,7 +79,7 @@ var runInference = function() {
     var start = new Date();
     sendJSON(
         'POST',
-        '/api/mura/run_inference',
+        '/api/demos/mura/run_inference',
         data,
         (res) => {
             resp = JSON.parse(res);

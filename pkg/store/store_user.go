@@ -3,20 +3,25 @@ package store
 import (
 	"fmt"
 
-	"github.com/medtune/beta-platform/pkg/store/model"
 	"github.com/medtune/go-utils/crypto"
+
+	"github.com/medtune/beta-platform/pkg/store/model"
 )
 
 const (
-	// ACCOUNT_ADMIN .
-	ACCOUNT_ADMIN      = "admin"
-	ACCOUNT_BETATESTER = "betatester"
-	ACCOUNT_SII        = "sii"
+	// ADMIN USER
+	ADMIN = "admin"
+	// BETATESTER USER
+	BETATESTER = "betatester"
+	// SII USER
+	SII = "sii"
+	// DEFAULTLEVEL ACCOUNT
+	DEFAULTLEVEL = 5
 )
 
 type userStore interface {
 	CreateUser(string, string, string) error
-	AuthentificateUser(string, string) (bool, error)
+	AuthentificateUser(string, string) (bool, bool, error)
 	GetUser(string) (*model.User, error)
 }
 
@@ -27,14 +32,16 @@ func (s *Store) CreateUser(email, username, password string) error {
 		Username:      username,
 		Password:      crypto.Sha256(password),
 		AccountStatus: true,
-		AccountType:   ACCOUNT_BETATESTER,
-		AccountLevel:  5,
+		AccountType:   BETATESTER,
+		AccountLevel:  DEFAULTLEVEL,
 	}
+
 	// validate user
 	v, err := s.Valid(user)
 	if err != nil || !v {
 		return err
 	}
+
 	// insert user
 	if _, err := s.Insert(&user); err != nil {
 		return err
@@ -49,6 +56,7 @@ func (s *Store) GetUser(username string) (*model.User, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	if !has {
 		return nil, fmt.Errorf("record doesnt exist")
 	}
@@ -62,23 +70,26 @@ func (s *Store) getUserByEmail(email string) (*model.User, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	if !has {
 		return nil, fmt.Errorf("record doesnt exist")
 	}
 	return user, nil
 }
 
-func (s *Store) AuthentificateUser(username, password string) (bool, error) {
+// AuthentificateUser auth a user
+func (s *Store) AuthentificateUser(username, password string) (bool, bool, error) {
 	user, err := s.GetUser(username)
 	if err != nil {
 		// Database server error or record not found
-		return false, fmt.Errorf("username or password incorrect")
+		return false, false, fmt.Errorf("username or password incorrect")
 	}
+
 	// Hashpassword
 	if crypto.Sha256(password) == user.Password {
-		return true, nil
+		return true, user.AccountLevel == 1, nil
 	}
 
 	// Password is incorrect
-	return false, fmt.Errorf("username or password incorrect")
+	return false, false, fmt.Errorf("username or password incorrect")
 }

@@ -1,5 +1,6 @@
 package data
 
+// Error .
 type Error struct {
 	Main
 	Code    int
@@ -9,6 +10,7 @@ type Error struct {
 }
 
 var (
+	// Error404 .
 	Error404 = &Error{
 		Main: Main{
 			PageTitle: "Error 404",
@@ -18,6 +20,7 @@ var (
 		Details: "Page not found.",
 	}
 
+	// Error405 .
 	Error405 = Error{
 		Main: Main{
 			PageTitle: "Error 405",
@@ -27,6 +30,7 @@ var (
 		Details: "Method not allowed",
 	}
 
+	// Error401 .
 	Error401 = &Error{
 		Main: Main{
 			PageTitle: "Error 401",
@@ -36,7 +40,8 @@ var (
 		Details: "Unauthorized",
 	}
 
-	Error500 = Error{
+	// Error500 .
+	Error500 = &Error{
 		Main: Main{
 			PageTitle: "Error 500",
 		},
@@ -45,7 +50,8 @@ var (
 		Details: "Server error.",
 	}
 
-	Error501 = Error{
+	// Error501 .
+	Error501 = &Error{
 		Main: Main{
 			PageTitle: "Error 500",
 		},
@@ -54,7 +60,8 @@ var (
 		Details: "Not implemented",
 	}
 
-	ErrorImAteaPot = Error{
+	// ErrorImAteaPot .
+	ErrorImAteaPot = &Error{
 		Main: Main{
 			PageTitle: "Error 418",
 		},
@@ -63,7 +70,8 @@ var (
 		Details: "Im a tea pot !",
 	}
 
-	ErrorFinalBoss = Error{
+	// ErrorFinalBoss .
+	ErrorFinalBoss = &Error{
 		Main: Main{
 			PageTitle: "Error 418",
 		},

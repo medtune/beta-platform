@@ -17,14 +17,16 @@ package genviews
 import (
 	"fmt"
 	"html/template"
+	"log"
 	"os"
 	"path"
 	"strings"
 
+	"github.com/spf13/cobra"
+
 	"github.com/medtune/beta-platform/cmd/root"
 	"github.com/medtune/beta-platform/pkg/tmpl"
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
-	"github.com/spf13/cobra"
 )
 
 var (
@@ -68,6 +70,8 @@ func generateViews() {
 
 		makeViewsFiles(vs...)
 	}
+
+	os.Exit(0)
 }
 
 func makeViewsFiles(views ...string) {
@@ -80,16 +84,20 @@ func makeViewsFiles(views ...string) {
 		names = views
 	}
 	for _, name := range names {
-		var path string = path.Join(output, name+".html")
+		path := path.Join(output, name+".html")
 		f, err := os.Create(path)
 		if err != nil {
-			panic(err)
+			log.Fatal(err)
 		}
 
 		if err := TEMPLATES[name].Execute(f, data.Gen()); err != nil {
-			panic(err)
+			log.Fatal(err)
 		}
-		f.Close()
+
+		if err := f.Close(); err != nil {
+			log.Fatal(err)
+		}
+
 		fmt.Printf("generated %s.html\n", name)
 	}
 }
@@ -98,7 +106,7 @@ func createDirIfNotExist(dir string) {
 	if _, err := os.Stat(dir); os.IsNotExist(err) {
 		err = os.MkdirAll(dir, 0755)
 		if err != nil {
-			panic(err)
+			log.Fatal(err)
 		}
 	}
 }

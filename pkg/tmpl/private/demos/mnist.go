@@ -60,9 +60,6 @@ const Mnist = `{{define "content"}}
 				
 			</div>
 		</div>
-		<div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-grid mdl-shadow--2dp demo-mnist-logs">
-			<div><h3>LOGS [SERVICE LOCKED]</h3></div>
-		</div>
 	</div>
 </div>
 <script src="/static/demos/mnist/draw.js"></script>

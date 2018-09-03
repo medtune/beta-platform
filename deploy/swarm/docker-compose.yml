@@ -1,0 +1,57 @@
+version: '3.2'
+services:
+  #Database
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=mdtn
+      - POSTGRES_PASSWORD=mdtn
+      - POSTGRES_DB=medtune
+
+  redis:
+    image: redis:latest
+    command: --appendonly yes
+
+  platform-server:
+    image: medtune/beta-platform:latest
+    ports:
+      - 8005:8005
+
+    depends_on:
+      - postgres
+      - mnist
+      - mura-mn-v2
+      - mura-mn-v2-cam
+      - redis
+
+    links:
+      - postgres:postgres
+      - mnist:mnist
+      - inception:inception
+      - mura-mn-v2:mura-mn-v2
+      - mura-mn-v2-cam:mura-cam-v2-cam
+      - redis:redis
+
+    volumes:
+      - type: volume
+        source: mura-images
+        target: /go/src/github.com/medtune/beta-platform/static/demos/mura/images
+  
+  mnist:
+    image: medtune/capsul:mnist
+
+  inception:
+    image: medtune/capsul:inception
+
+  mura-mn-v2:
+    image: medtune/capsul:mura-mn-v2
+
+  mura-mn-v2-cam:
+    image: medtune/capsul:mura-mn-v2-cam
+    volumes:
+      - type: volume
+        source: mura-images
+        target: /medtune/data
+
+volumes:
+  mura-images: 

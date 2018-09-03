@@ -1,37 +1,75 @@
 package jsonutil
 
-type SimpleResponse struct {
+import "time"
+
+// DefaultResponse .
+type DefaultResponse struct {
 	Success  bool        `json:"success"`
-	Data     interface{} `json:"data"`
-	Warnings []string    `json:"warnings"`
-	Errors   []string    `json:"errors"`
+	Data     interface{} `json:"data,omitempty"`
+	Warnings []string    `json:"warnings,omitempty"`
+	Errors   []string    `json:"errors,omitempty"`
 }
 
+// InferenceResult .
 type InferenceResult struct {
-	Keys   []string  `json:"keys"`
-	Scores []float32 `json:"scores"`
+	Keys      []string      `json:"keys"`
+	Scores    []float32     `json:"scores"`
+	ModelID   string        `json:"model_id"`
+	RoundTrip time.Duration `json:"round_trip"`
 }
 
-func Success() *SimpleResponse {
-	return &SimpleResponse{
-		Success: true,
-	}
+// CamResult .
+type CamResult struct {
+	Output    string        `json:"output"`
+	URL       string        `json:"url,omitempty"`
+	ModelID   string        `json:"model_id"`
+	RoundTrip time.Duration `json:"round_trip"`
 }
 
-func SuccessData(data interface{}) *SimpleResponse {
-	return &SimpleResponse{
-		Success: true,
-		Data:    data,
-	}
+type StatusResult struct {
+	Status    string        `json:"status"`
+	Version   int64         `json:"version"`
+	RoundTrip time.Duration `json:"round_trip"`
 }
 
-func Fail(errors ...error) *SimpleResponse {
-	errs := make([]string, 0, len(errors))
-	for _, err := range errors {
-		errs = append(errs, err.Error())
-	}
-	return &SimpleResponse{
-		Success: false,
-		Errors:  errs,
-	}
+// ProcessResult .
+type ProcessResult struct {
+	Inference *InferenceResult `json:"inference,omitempty"`
+	Cam       *CamResult       `json:"cam,omitempty"`
+	ModelID   string           `json:"model_id"`
+	Timing    time.Duration    `json:"timing"`
+}
+
+// ServiceStatus .
+type ServiceStatus struct {
+	Healthy  bool  `json:"healthy"`
+	UnixTime int64 `json:"unix_time,omitempty"`
+}
+
+// TestResponse .
+type TestResponse struct {
+	Test bool `json:"test"`
+}
+
+// JobResult .
+type JobResult struct {
+	Name            string          `json:"name"`
+	Success         bool            `json:"success"`
+	Errors          []string        `json:"errors"`
+	Warnings        []string        `json:"warnings"`
+	RoundTrip       time.Duration   `json:"round_trip"`
+	CamResult       CamResult       `json:"cam_result"`
+	InferenceResult InferenceResult `json:"inference_result"`
+}
+
+// CustomExecutionResponse .
+type CustomExecutionResponse struct {
+	Id                 string        `json:"id"`
+	Name               string        `json:"name"`
+	Success            bool          `json:"success"`
+	RoundTrip          time.Duration `json:"round_trip"`
+	ExecutionRoundTrip time.Duration `json:"execution_round_trip"`
+	Jobs               []*JobResult  `json:"jobs"`
+	Errors             []string      `json:"errors"`
+	Warnings           []string      `json:"warnings"`
 }

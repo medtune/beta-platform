@@ -1,7 +1,7 @@
 meta:
   name: medtune beta platform
   description: medtune beta test
-  version: v0.1.1
+  version: v0.1.3
   prod: true
 
 database:
@@ -13,12 +13,16 @@ database:
     port: 5432
     user: mdtn
     password: mdtn
+  ssl_mode: 0
+  max_idle_conn: 100
+  max_open_conn: 100
   
 session:
-  type: cookie
-  random: true
-  name: default-session
+  type: redis
+  address: redis:6379
   secret: A0123456789
+  password:
+  database: 0
 
 crypto:
   algo: SHA256
@@ -27,31 +31,6 @@ crypto:
 public:
   static: ./static
 
-capsul:
-  inception:
-    model: inception
-    signature: predict_images
-    version: 1
-    address: localhost:9001
-  
-  mnist:
-    model: mnist
-    signature: predict_images
-    version: 1
-    address: localhost:9000
-
-  mura:
-    model: mura
-    signature: predict_images
-    version: 1
-    address: localhost:6666
-
-  chexray:
-    model: chexray
-    signature: predict_images
-    version: 1
-    address: localhost:6666
-      
 secrets:
   signup:
     - supersecret
@@ -62,7 +41,57 @@ create:
     - username: admin
       email: admin@medtune.org
       password: admin
+      account_level: 1
+      account_type: admin
+      account_status: true
 
     - username: test
       email: test@medtune.org
       password: test
+      account_level: 5
+      account_type: default
+      account_status: true
+
+capsul:
+  mnist:
+    model: mnist
+    signature: predict_images
+    version: 1
+    address: mnist:10000 #mnist default port (1 dataset:mnist=00 model:lenet=00)
+
+  inception:
+    model: inception
+    signature: predict_images
+    version: 1
+    address: inception:10010 #inception 
+
+  mura-irn-v2:
+    model: mura_inception_resnet_v2
+    signature: predict_images
+    version: 1
+    address: mura-irn-v2:10021
+
+  mura-mn-v2:
+    model: mura_mobilenet_v2
+    signature: predict_images
+    version: 1
+    address: mura-mn-v2:10020
+
+  chexray-mn-v2:
+    model: chexray
+    signature: predict_images
+    version: 1
+    address: chexray-mn-v2:10030
+
+custom_capsul:
+  mura-mn-v2-cam:
+    model: mura
+    signature: run_cam
+    version: 1
+    address: mura-mn-v2-cam:11020
+  
+  chexray-mn-v2-cam:
+    model: chexray
+    signature: run_cam
+    version: 1
+    address: chexray-mn-v2-cam:11030

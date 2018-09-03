@@ -26,6 +26,7 @@ const (
 					</a>
 				</div>
 			</div>
+			
 		<div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet home-menu-card mdl-card mdl-shadow--2dp" id="div">
 			<div class="mdl-card__title mdl-card__title__demos">
 				<h2 class="mdl-card__title-text">Demonstrations</h2>
@@ -43,18 +44,19 @@ const (
 
 		<div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet home-menu-card mdl-card mdl-shadow--2dp">
 			<div class="mdl-card__title mdl-card__title__learn">
-				<h2 class="mdl-card__title-text">Learn</h2>
+				<h2 class="mdl-card__title-text">Slides</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 				Mauris sagittis pellentesque lacus eleifend lacinia...
 			</div>
 			<div class="mdl-card__actions mdl-card--border">
-				<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-				Get Started
-				</a>
+				<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="window.location.href='/slides'">
+					Get Started
+				</button>
 			</div>
 		</div>
+
 		<div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet home-menu-card mdl-card mdl-shadow--2dp">
 			<div class="mdl-card__title mdl-card__title__howitworks">
 				<h2 class="mdl-card__title-text">How it works</h2>

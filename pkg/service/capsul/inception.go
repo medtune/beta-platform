@@ -5,18 +5,20 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/medtune/beta-platform/pkg/jsonutil"
-	"github.com/medtune/capsul/pkg/request/inception"
 	tfsclient "github.com/medtune/capsul/pkg/tfs-client"
+
+	"github.com/medtune/beta-platform/pkg/jsonutil"
+	"github.com/medtune/capsul/pkg/pbreq"
+	"github.com/medtune/capsul/pkg/pbreq/stdimpl"
 )
 
 // InceptionClient .
 var InceptionClient *tfsclient.Client
 
 // RunInceptionInference .
-func RunInceptionInference(ctx context.Context, infData *jsonutil.RunImageInference) (interface{}, error) {
+func RunInceptionInference(ctx context.Context, infData *jsonutil.RunImageInference) (*jsonutil.InferenceResult, error) {
 	if infData.File == "" {
-		return nil, fmt.Errorf("File field is empty: Got struct %v", infData)
+		return nil, fmt.Errorf("file field is empty: got struct %v", infData)
 	}
 
 	// Read file
@@ -25,8 +27,10 @@ func RunInceptionInference(ctx context.Context, infData *jsonutil.RunImageInfere
 		panic(err)
 	}
 
-	// Send prediction request
-	resp, err := InceptionClient.Predict(ctx, inception.Default(b))
+	request := pbreq.Predict(stdimpl.Inception, b)
+
+	// Run inference on image path (chexray/images)
+	resp, err := InceptionClient.Predict(ctx, request)
 	if err != nil {
 		return nil, err
 	}
@@ -41,5 +45,5 @@ func RunInceptionInference(ctx context.Context, infData *jsonutil.RunImageInfere
 	}
 	result.Keys = s
 
-	return result, nil
+	return &result, nil
 }

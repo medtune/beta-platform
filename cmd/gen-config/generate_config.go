@@ -15,17 +15,24 @@
 package genconfig
 
 import (
+	"log"
+	"os"
+
 	"github.com/medtune/beta-platform/cmd/root"
+	"github.com/medtune/beta-platform/pkg"
 	"github.com/medtune/beta-platform/pkg/config"
+	"github.com/medtune/beta-platform/pkg/store/model"
 	"github.com/spf13/cobra"
 )
 
 var (
 	output string
+	empty  bool
 )
 
 func init() {
 	genConfigCmd.Flags().StringVarP(&output, "output", "o", "gen.config.yml", "output directory")
+	genConfigCmd.Flags().BoolVarP(&empty, "empty", "e", false, "empty configuration")
 
 	root.Cmd.AddCommand(genConfigCmd)
 }
@@ -41,22 +48,107 @@ var genConfigCmd = &cobra.Command{
 }
 
 func generateConfig() {
-	config.Generate(&config.StartupConfig{
-		Meta:   &config.Meta{},
+	if empty {
+		err := config.GenDefault()
+		if err != nil {
+			log.Fatal(err)
+		}
+		os.Exit(0)
+	}
+
+	err := config.Generate(&config.StartupConfig{
+		Meta: &config.Meta{
+			Name:    "Medtune beta platform",
+			Version: pkg.VERSION,
+			IsProd:  true,
+		},
 		Server: &config.Server{},
 		Database: &config.Database{
-			Creds: &config.DBCreds{},
+			Type: "postgres",
+			Prod: "medtune",
+			Test: "medtune-test",
+			Creds: &config.DBCreds{
+				Host:     "localhost",
+				Port:     5432,
+				User:     "mdtn",
+				Password: "mdtn",
+			},
+			SSLMode: 0,
+			MOC:     100,
+			MIC:     100,
 		},
-		Session: &config.Session{},
-		Crypto:  &config.Crypto{},
-		Public:  &config.PublicContent{},
-		Secrets: &config.Secrets{},
-		Create:  &config.Create{},
+		Session: &config.Session{
+			Type:   "cookie",
+			Random: true,
+		},
+		Crypto: &config.Crypto{
+			Algo: "SHA256",
+			Salt: "DEFAULT-SALT",
+		},
+		Public: &config.PublicContent{
+			Static: "./static",
+		},
+		Secrets: &config.Secrets{
+			Signup: []string{
+				"supersecret",
+				"siistrasbourg",
+			},
+		},
+		Create: &config.Create{
+			Users: []*model.User{
+				{
+					Username: "admin",
+					Email:    "admin@medtune.eu",
+					Password: "admin",
+				},
+				{
+					Username: "test",
+					Email:    "test@medtune.eu",
+					Password: "test",
+				},
+			},
+		},
 		Capsul: &config.Capsul{
-			Inception: &config.ModelConfig{},
-			Mnist:     &config.ModelConfig{},
-			Mura:      &config.ModelConfig{},
-			Chexray:   &config.ModelConfig{},
+			Mnist: &config.ModelConfig{
+				Model:     "mnist",
+				Signature: "predict_images",
+				Version:   1,
+				Address:   "localhost:10000",
+			},
+			Inception: &config.ModelConfig{
+				Model:     "inception",
+				Signature: "predict_images",
+				Version:   1,
+				Address:   "localhost:10010",
+			},
+			MuraMNV2: &config.ModelConfig{
+				Model:     "mura_mobilenet_v2",
+				Signature: "predict_images",
+				Version:   1,
+				Address:   "localhost:10020",
+			},
+			MuraIRNV2: &config.ModelConfig{
+				Model:     "mura_inception_resnet_v2",
+				Signature: "predict_images",
+				Version:   1,
+				Address:   "localhost:10021",
+			},
+			ChexrayMNV2: &config.ModelConfig{
+				Model:     "chexray",
+				Signature: "predict_images",
+				Version:   1,
+				Address:   "localhost:10030",
+			},
+		},
+		CustomCapsul: &config.CustomCapsul{
+			MuraMNV2Cam: &config.ModelConfig{
+				Address: "localhost:11020",
+			},
 		},
 	}, output)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	os.Exit(0)
 }

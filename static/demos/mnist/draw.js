@@ -63,15 +63,15 @@ var saveAndRun = function() {
     } else {
         data['image'] = dataURL;
     }
-    console.log(data);
+    console.log("----- sending", data);
     var start = new Date();
     sendJSON(
         'POST',
-        '/api/mnist/run_inference',
+        '/api/demos/mnist/run_inference',
         data,
         (res) => {
             resp = JSON.parse(res);
-            console.log(resp);
+            console.log("----- received", resp);
             var end = new Date();
             if (resp.success) {
                 var x = getMax(resp.data.scores.float_val);

@@ -25,16 +25,17 @@ var (
 	configFile string
 )
 
-// rootCmd represents the base command when called without any subcommands
+// Cmd represents the base command when called without any subcommands
 var Cmd = &cobra.Command{
 	Use:   "medtune-beta",
 	Short: "Medtune Beta Platform entrypoint",
 	Long:  `Medtune Platform ~ Beta`,
 }
 
+// Execute root cmd
 func Execute() {
 	if err := Cmd.Execute(); err != nil {
-		fmt.Println(err, configFile)
+		fmt.Printf("[FATAL] %v", err)
 		os.Exit(1)
 	}
 }

@@ -7,7 +7,7 @@ const Signup = `{{define "content"}}
 			<h2 class="mdl-card__title-text">Sign up</h2>
 		</div>
 		<div class="mdl-card__supporting-text">
-			<form action="/signup" method="post" id="signup-form">
+			<form action="/api/signup" method="post" id="signup-form">
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="fti-email">
 					<input class="mdl-textfield__input" type="text" name="email" id="email"/>
 					<label class="mdl-textfield__label" for="email">Email</label>
@@ -54,16 +54,5 @@ $(document).keydown(function(e){
 		return false;
     }
 });
-</script>
-{{end}}`
-
-var SignupSucces = `{{define "content"}}
-<div class="center-screen">
-Sign up successfull. Redirecting to in 5seconds...
-</div>
-<script>
-	setTimeout(function() {
-		window.location.href = "/home";
-	}, 5000)
 </script>
 {{end}}`

@@ -18,12 +18,15 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/medtune/go-utils/crypto"
+	"github.com/spf13/cobra"
+	"gopkg.in/yaml.v2"
+
 	"github.com/medtune/beta-platform/cmd/root"
 	"github.com/medtune/beta-platform/pkg/config"
 	"github.com/medtune/beta-platform/pkg/store"
 	"github.com/medtune/beta-platform/pkg/store/db"
 	"github.com/medtune/beta-platform/pkg/store/model"
-	"github.com/spf13/cobra"
 )
 
 var (
@@ -55,7 +58,7 @@ func autoMigrateDatabase() {
 	var usersConfig []*model.User
 
 	if configuration, err := config.LoadConfigFromPath(configFile); err != nil {
-		log.Panic(err)
+		log.Fatal(err)
 	} else {
 		dbconfig = configuration.Database
 		usersConfig = configuration.Create.Users
@@ -63,67 +66,67 @@ func autoMigrateDatabase() {
 
 	log.Printf("starting auto-migration on database: %v", dbconfig.Prod)
 
+	cnxStr := db.ConnStr{
+		Host:         dbconfig.Creds.Host,
+		Database:     dbconfig.Prod,
+		User:         dbconfig.Creds.User,
+		Password:     dbconfig.Creds.Password,
+		Port:         dbconfig.Creds.Port,
+		SslMode:      dbconfig.SSLMode,
+		MaxIdleConns: dbconfig.MIC,
+		MaxOpenConns: dbconfig.MOC,
+	}
+
 	{
-		engine, err := store.New(db.ConnStr{
-			Host:     dbconfig.Creds.Host,
-			Database: dbconfig.Prod,
-			User:     dbconfig.Creds.User,
-			Password: dbconfig.Creds.Password,
-			Port:     dbconfig.Creds.Port,
-			SslMode:  0,
-			Maxconn:  2,
-		})
+		engine, err := store.New(cnxStr)
 		if err != nil {
-			log.Panic(err)
+			log.Fatal(err)
 		}
 		if err := engine.Sync(); err != nil {
-			log.Panic(err)
+			log.Fatal(err)
 		}
 
 		if createUsers && usersConfig != nil {
-			var err error
-			for _, user := range usersConfig {
-				err = engine.CreateUser(user.Email, user.Username, user.Password)
-				if err != nil {
-					fmt.Printf("failed to create user: %s\n    error: %v\n", user.Username, err)
-					continue
-				}
-				fmt.Printf("created user %s %s %s\n", user.Email, user.Username, user.Password)
+			err := createUsersEngine(engine, usersConfig...)
+			if err != nil {
+				log.Fatal(err)
 			}
 		}
 
 	}
 
-	log.Printf("starting auto-migration on database: %v", dbconfig.Test)
+	log.Printf("\nstarting auto-migration on database: %v", dbconfig.Test)
 	{
-		engine, err := store.New(db.ConnStr{
-			Host:     dbconfig.Creds.Host,
-			Database: dbconfig.Test,
-			User:     dbconfig.Creds.User,
-			Password: dbconfig.Creds.Password,
-			Port:     dbconfig.Creds.Port,
-			SslMode:  0,
-			Maxconn:  2,
-		})
+		cnxStr.Database = dbconfig.Test
+		engine, err := store.New(cnxStr)
 		if err != nil {
-			log.Panic(err)
+			log.Fatal(err)
 		}
 		if err := engine.Sync(); err != nil {
-			log.Panic(err)
+			log.Fatal(err)
 		}
 
 		if createUsers && usersConfig != nil {
-			var err error
-			for _, user := range usersConfig {
-				err = engine.CreateUser(user.Email, user.Username, user.Password)
-				if err != nil {
-					fmt.Printf("failed to create user: %s\n    error: %v\n", user.Username, err)
-					continue
-				}
-				fmt.Printf("created user %s %s %s\n", user.Email, user.Username, user.Password)
-			}
+			createUsersEngine(engine, usersConfig...)
 		}
 
 	}
 
+}
+
+func createUsersEngine(e *store.Store, us ...*model.User) error {
+	for _, user := range us {
+		if ok, err := e.Valid(user); err != nil || !ok {
+			b, _ := yaml.Marshal(user)
+			fmt.Printf("unvalid user data:\n\terror: %v\n\tuser:%s", err, string(b))
+			continue
+		}
+		user.Password = crypto.Sha256(user.Password)
+		if _, err := e.Insert(user); err != nil {
+			fmt.Printf("failed to create user: %s\n\terror: %v\n", user.Username, err)
+			continue
+		}
+		fmt.Printf("created user %s %s\n", user.Email, user.Username)
+	}
+	return nil
 }

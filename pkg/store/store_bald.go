@@ -20,9 +20,11 @@ type bioAnalysisStore interface {
 
 // CreatePathologyAL .
 func (s *Store) CreatePathologyAL(m *model.PathologyAnalysisLevel) error {
+	// Validate
 	if k, err := s.Valid(m); err != nil || !k {
 		return err
 	}
+	// insert value
 	if _, err := s.Insert(m); err != nil {
 		return err
 	}

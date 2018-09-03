@@ -10,8 +10,8 @@ main
 # Medtune bin
 medtune-beta
 
-# local config
-config.local.yml
+# dev config
+dev.config.yml
 
 # dev dockerfile
 local.Dockerfile
@@ -19,6 +19,9 @@ local.Dockerfile
 # local dev files
 .dev/
 templates-gen/
+
+# demos artefacts
+*cam_mn_v2.png
 
 # Generated views
 generated-views/
@@ -28,3 +31,5 @@ gen.config.yml
 
 # excel files
 *.xlsx
+
+reveal.js-3.7.0/

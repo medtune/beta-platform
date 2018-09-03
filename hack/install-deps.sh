@@ -9,8 +9,13 @@ go get -v ./pkg/config
 go get -v ./pkg/session 
 go get -v ./pkg/store 
 go get -v ./pkg/jsonutil
+go get -v ./pkg/initpkg
 
-# Can change one day at pkg/service
+#
 go get -u github.com/anthonynsimon/bild/transform
 go get -u github.com/vincent-petithory/dataurl
 
+if [ "$1" = "--hack" ]; then
+    echo "installing ./hack/xlsx2pg package dependencies"
+    go get -t -u -v github.com/tealeg/xlsx
+fi

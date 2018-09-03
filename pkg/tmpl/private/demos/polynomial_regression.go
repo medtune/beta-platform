@@ -2,7 +2,6 @@ package demos
 
 const PolynomialRegression = `{{define "content"}}
 <div class="demo-polyreg">
-
 	<div class="mdl-grid demo-polyreg-grid">
 		<div class="mdl-cell mdl-cell--12-col page-info">
 			<span class="title"> Polynomial Regression</span>

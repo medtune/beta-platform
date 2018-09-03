@@ -1,6 +1,6 @@
 package shared
 
-var HeaderLogged = `{{define "header"}}
+const HeaderLogged = `{{define "header"}}
 <div class="mdl-layout--fixed-header mdl-layout mdl-js-layout">
 	<header class="mdl-layout__header page-header">
 	<div class="mdl-layout__header-row">
@@ -13,15 +13,15 @@ var HeaderLogged = `{{define "header"}}
 		<div class="navigation-container">
 			<nav class="mdl-navigation">
 				<a class="mdl-navigation__link" href="/home">Explore</a>
-				<a class="mdl-navigation__link" href="">Account</a>
-				<a class="mdl-navigation__link" href="">The Project</a>
-				<a class="mdl-navigation__link" href="">Contribute</a>
+				<a class="mdl-navigation__link" href="/demos">Demos</a>
+				<a class="mdl-navigation__link" href="/slides">Slides</a>
+				<a class="mdl-navigation__link" href="/datahub">Datahub</a>
 			</nav>
 		</div>
-		<button class="mdl-button mdl-js-button mdl-button--icon nav-button-icon">
+		<button class="mdl-button mdl-js-button mdl-button--icon nav-button-icon" onclick="window.location.href='/datahub'">
 			<i class="material-icons">cloud_upload</i>
 		</button>
-		<button class="mdl-button mdl-js-button mdl-button--icon nav-button-icon">
+		<button class="mdl-button mdl-js-button mdl-button--icon nav-button-icon" onclick="window.location.href='/dashboard'">
 			<i class="material-icons">settings_input_svideo</i>
 		</button>
 		<button class="mdl-button mdl-js-button mdl-button--icon nav-button-icon" id="button_settings">
