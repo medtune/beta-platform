@@ -6,28 +6,29 @@ import (
 )
 
 var (
-	Authors     string = ""
-	Owners      string = ""
-	LicenseURL  string = ""
-	LicenseType string = ""
+	Authors     string
+	Owners      string
+	LicenseURL  string
+	LicenseType string
 
-	VERSION     string = ""
-	LONGVERSION string = ""
-	Major       string = "0"
-	Minor       string = "0"
-	Patch       string = "0"
-	Revision    string = "0-unknown"
-	GitCommit   string = "$Format:%H$"
-	BuildDate   string = "1970-01-01T00:00:00Z"
+	VERSION     string
+	LONGVERSION string
+	Major       = "0"
+	Minor       = "0"
+	Patch       = "0"
+	Revision    = "0-unknown"
+	GitCommit   = "$Format:%H$"
+	BuildDate   = "1970-01-01T00:00:00Z"
 )
 
 func init() {
-	Owners = strings.Replace(Owners, ".", " ", -1)
-	Authors = strings.Replace(Authors, ".", " ", -1)
+	Owners = strings.Replace(strings.Replace(Owners, "/", ", ", -1), ".", " ", -1)
+	Authors = strings.Replace(strings.Replace(Authors, "/", ", ", -1), ".", " ", -1)
 	VERSION = fmt.Sprintf("v%s.%s.%s", Major, Minor, Patch)
-	LONGVERSION = fmt.Sprintf("v%s.%s.%s+%s", Major, Minor, Patch, Revision)
+	LONGVERSION = fmt.Sprintf("v%s.%s.%s-%s", Major, Minor, Patch, Revision)
 }
 
+// VersionInfo data
 type VersionInfo struct {
 	GitVersion string `json:"GitVersion"`
 	GitCommit  string `json:"GitCommit"`
@@ -41,8 +42,9 @@ type VersionInfo struct {
 	BuildDate  string `json:"BuildDate"`
 }
 
+// CopyrightInfo data
 type CopyrightInfo struct {
-	Authors     string `json:"Authors`
+	Authors     string `json:"Authors"`
 	Owners      string `json:"Owners"`
 	LicenseType string `json:"LicenseType"`
 	LicenseURL  string `json:"LicenseURL"`

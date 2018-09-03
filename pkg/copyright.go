@@ -1,7 +1,7 @@
 package pkg
 
 // GetCopyrights .
-func GetCopyrights() *CopyrightInfo {
+func GetCopyright() *CopyrightInfo {
 	return &CopyrightInfo{
 		Authors:     Authors,
 		Owners:      Owners,

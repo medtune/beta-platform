@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package copyrights
+package copyright
 
 import (
 	"encoding/json"
@@ -25,17 +25,17 @@ import (
 )
 
 // versionCmd represents the version command
-var copyrightsCmd = &cobra.Command{
-	Use:     "copyrights",
-	Aliases: []string{"cprs", "license"},
+var copyrightCmd = &cobra.Command{
+	Use:     "copyright",
+	Aliases: []string{"cp", "license"},
 	Short:   "Medtune beta-platform copyrights",
 	Long:    `Print Medtune Beta Platform Copyrights informations`,
 	Run: func(cmd *cobra.Command, args []string) {
-		copyrightsJSON, _ := json.MarshalIndent(pkg.GetCopyrights(), "", "    ")
+		copyrightsJSON, _ := json.MarshalIndent(pkg.GetCopyright(), "", "    ")
 		fmt.Printf("%s\n", copyrightsJSON)
 	},
 }
 
 func init() {
-	root.Cmd.AddCommand(copyrightsCmd)
+	root.Cmd.AddCommand(copyrightCmd)
 }

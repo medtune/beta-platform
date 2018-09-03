@@ -8,6 +8,6 @@ import (
 )
 
 // Copyrights description handler
-func Copyrights(c *gin.Context) {
-	c.JSON(200, jsonutil.SuccessData(pkg.GetCopyrights()))
+func Copyright(c *gin.Context) {
+	c.JSON(200, jsonutil.SuccessData(pkg.GetCopyright()))
 }

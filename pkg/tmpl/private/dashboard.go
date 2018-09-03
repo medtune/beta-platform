@@ -17,25 +17,31 @@ const Dashboard = `{{define "dashboard"}}
 		</div>
 	</header>
 		<main class="mdl-layout__content">
+
 			<div class="mdl-layout__tab-panel is-active" id="overview">
-		
             	<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
 					<div class="mdl-card mdl-cell mdl-cell--12-col">
-					<div class="mdl-card__supporting-text">
-						<h4>Test</h4>
-						<pre>{{ .Version }}</pre>
-					</div>
-						<div class="mdl-card__actions">
-							<a href="#" class="mdl-button">Test</a>
+						<div class="mdl-card__supporting-text">
+							<h4>Version Info</h4>
+							<pre>{{ .Version }}</pre>
+						</div>
+						<div style="justify-content: center;">
+							<div class="mdl-card__actions">
+								<button class="mdl-button mdl-js-button mdl-button--colored" href="https://github.com/medtune/beta-platform/issues/new" >
+									Open ticket
+								</button>
+								<a href="#" class="mdl-button">Tests logs</a>
+								<a href="#" class="mdl-button">Benchmarks</a>
+							</div>
 						</div>
 					</div>
 					<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn1">
 						<i class="material-icons">more_vert</i>
 					</button>
 					<ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn1">
-						<li class="mdl-menu__item">Lorem</li>
-						<li class="mdl-menu__item" disabled>Ipsum</li>
-						<li class="mdl-menu__item">Dolor</li>
+						<li class="mdl-menu__item">Export</li>
+						<li class="mdl-menu__item" disabled>Alloc</li>
+						<li class="mdl-menu__item">Open issue</li>
 					</ul>
 				  </section>
 				  
@@ -79,14 +85,10 @@ const Dashboard = `{{define "dashboard"}}
               <li class="mdl-menu__item">Dolor</li>
             </ul>
 		  </section>
-		
-
 		</div>
 		
 
 		<div class="mdl-layout__tab-panel" id="features">
-		
-
           <section class="section--center mdl-grid mdl-grid--no-spacing">
             <div class="mdl-cell mdl-cell--12-col">
               <h4>Test</h4>
@@ -107,13 +109,12 @@ const Dashboard = `{{define "dashboard"}}
                 <li>Dolor consectetur incididunt in ipsum laborum non et irure pariatur excepteur anim occaecat officia sint.</li>
                 <li>Lorem labore proident officia excepteur do.</li>
               </ul>
-
-
             </div>
           </section>
 		</div>
-		<div class="mdl-layout__tab-panel is-active" id="config">
-			<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+
+		<div class="mdl-layout__tab-panel" id="config">
+		  <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
 			<div class="mdl-card mdl-cell mdl-cell--12-col">
 			<div class="mdl-card__supporting-text">
 				<h4>Test</h4>
@@ -131,22 +132,24 @@ const Dashboard = `{{define "dashboard"}}
 				<li class="mdl-menu__item" disabled>Ipsum</li>
 				<li class="mdl-menu__item">Dolor</li>
 			</ul>
-		</section>
+		  </section>
 		</div>
+
         <footer class="mdl-mega-footer">
           <div class="mdl-mega-footer--bottom-section">
             <div class="mdl-logo">
               More Information
             </div>
             <ul class="mdl-mega-footer--link-list">
-              <li><a href="#">Source</a></li>
-              <li><a href="#">App</a></li>
+			<li><a href="/home">App</a></li>
+			<li><a href="https://github.com/medtune/beta-platform">Source</a></li>
+			  <li><a href="https://github.com/medtune">Organization</a></li>
             </ul>
           </div>
         </footer>
       </main>
     </div>
-    <a href="https://github.com/google/material-design-lite/blob/mdl-1.x/templates/text-only/" target="_blank" id="go-to-app" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Go to app</a>
+    <a href="/home" target="_blank" id="go-to-app" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Go to app</a>
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
 {{end}}`
