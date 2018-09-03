@@ -1,6 +1,9 @@
 package platform
 
 import (
+	"fmt"
+	"path/filepath"
+
 	"github.com/gin-gonic/gin"
 
 	"github.com/medtune/beta-platform/pkg"
@@ -34,4 +37,39 @@ func ChexrayV2(c *gin.Context) {
 		},
 		Samples: images,
 	})
+}
+
+// ChexrayUpload .
+func ChexrayUpload(c *gin.Context) {
+	// read file
+	file, err := c.FormFile("file")
+	if err != nil {
+		c.Redirect(302, "/error/500")
+		return
+	}
+
+	ext := filepath.Ext(file.Filename)
+	// Verify supported extentions
+	if ext != ".png" && ext != ".jpeg" && ext != ".jpg" {
+		c.Redirect(302, "/error/401")
+		return
+	}
+
+	// Use new name if not empty else old filename
+	name := c.PostForm("name")
+	if name == "" {
+		name = file.Filename
+	} else {
+		name += ext
+	}
+
+	savePath := fmt.Sprintf("./static/demos/%s/images/%s", "chexray", name)
+
+	// Save file
+	if err := c.SaveUploadedFile(file, savePath); err != nil {
+		c.Redirect(302, "/error/500")
+		return
+	}
+
+	c.Redirect(302, "/demos/chexray.v2")
 }

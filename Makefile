@@ -65,6 +65,31 @@ release-dev:
 			-X $(VPATH).BuildDate=$(BUILDDATE)" \
 		cmd/main.go \
 
+
+release-alpine:
+	GOOS=linux go build \
+		-tags="prod" \
+		-o medtune-beta \
+		-ldflags="\
+			-X $(VPATH).GitCommit=$(GITCOMMIT) \
+			-X $(VPATH).Major=$(MAJOR) \
+			-X $(VPATH).Minor=$(MINOR) \
+			-X $(VPATH).Patch=$(PATCH) \
+ 			-X $(VPATH).Revision=$(REVISION) \
+			-X $(VPATH).Authors=$(AUTHORS) \
+			-X $(VPATH).Owners=$(OWNERS) \
+			-X $(VPATH).LicenseURL=$(LICENSEURL) \
+			-X $(VPATH).LicenseType=$(LICENSETYPE) \
+			-X $(VPATH).BuildDate=$(BUILDDATE)" \
+		cmd/main_prod.go \
+
+build-alpine: release-alpine
+	@echo building linux prod container
+	docker build \
+		-t medtune/beta-platform:prod-alpine \
+		-f build/prod.linux.Dockerfile \
+		.
+
 build-base:
 	@echo building base image
 	docker build \
@@ -210,4 +235,5 @@ clean-gen:
 	rm -rf genered-views
 
 clean-demos:
-	rm -rf static/demos/mura/images/*cam_mn_v2.png
+	rm -f static/demos/mura/images/*mn_v2_cam.png
+	rm -f static/demos/chexray/images/*mn_v2_cam.png

@@ -2,8 +2,7 @@ package demos
 
 const (
 	MuraV2 = `{{define "content"}}
-	<div id="overlay" onclick="closeFAB();"></div>
-
+<div id="overlay" onclick="closeFAB();"></div>
 <div class="demo-mura">
 	<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
 

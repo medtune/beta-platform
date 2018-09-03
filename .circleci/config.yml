@@ -14,16 +14,14 @@ jobs:
           command: make tests
 
       - run:
-          name: test
+          name: test coverage
           command: make test-cov
-
-      - run:
-          name: login to docker hub
-          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
           
       - run:
           name: push image to registry
-          command: make push-image
+          command: |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            make push-image
 
 workflows:
   version: 2

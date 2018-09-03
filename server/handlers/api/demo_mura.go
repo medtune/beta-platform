@@ -23,7 +23,9 @@ func MuraRunInference(c *gin.Context) {
 
 	ctx := context.Background()
 
-	infData.File = staticPath("mura", infData.File)
+	if infData.File != "" {
+		infData.File = staticPath("mura", infData.File)
+	}
 
 	// Run inference
 	result, err := capsul.RunMuraInference(ctx, &infData)
@@ -76,7 +78,12 @@ func MuraProcess(c *gin.Context) {
 
 	// Set inference data
 	infData.ModelID = procData.ModelID
-	infData.File = staticPath("mura", procData.Target)
+	infData.File = procData.Target
+
+	if infData.File != "" {
+		infData.File = staticPath("mura", procData.Target)
+	}
+
 	infData.NumPreds = procData.NumPreds
 
 	// set cam data

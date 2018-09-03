@@ -90,6 +90,7 @@ func assembleHandlers(server *gin.Engine) {
 	DEMOS.POST("/mura/upload", platform.MuraUpload)
 	DEMOS.GET("/chexray", platform.Chexray)
 	DEMOS.GET("/chexray.v2", platform.ChexrayV2)
+	DEMOS.POST("/chexray/upload", platform.ChexrayUpload)
 	DEMOS.GET("/sentiment_analysis", platform.SentimentAnalysis)
 
 	// Api routes
@@ -117,6 +118,8 @@ func assembleHandlers(server *gin.Engine) {
 	APIDEMOS.POST("/mura/run_cam", api.MuraRunCam)
 	APIDEMOS.POST("/mura/run_inference", api.MuraRunInference)
 	APIDEMOS.POST("/chexray/run_inference", api.ChexrayRunInference)
+	APIDEMOS.POST("/chexray/run_cam", api.ChexrayRunCam)
+	APIDEMOS.POST("/chexray/process", api.ChexrayProcess)
 
 	DATAHUB := API.Group("/datahub")
 	DATAHUB.POST("/upload/:demo", api.DemoDataUpload)

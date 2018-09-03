@@ -13,7 +13,7 @@ services:
     command: --appendonly yes
 
   platform-server:
-    image: medtune/beta-platform:latest
+    image: medtune/beta-platform:prod-alpine
     ports:
       - 8005:8005
 

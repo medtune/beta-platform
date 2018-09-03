@@ -74,8 +74,7 @@ func RunChexrayCAM(ctx context.Context, camData *jsonutil.RunImageCam) (*jsonuti
 		return nil, err
 	}
 
-	if camData.ModelID == "mura-mn-v2" {
-		// make inception restnet v2 cam
+	if camData.ModelID == "chexray-mn-v2" {
 		start := time.Now()
 		r, err := ChexrayMNV2CamClient.Cam(context.Background(), &tfsclient.CamRequest{
 			Target: camData.Target,
@@ -98,7 +97,7 @@ func RunChexrayCAM(ctx context.Context, camData *jsonutil.RunImageCam) (*jsonuti
 			RoundTrip: roundTrip,
 		}, nil
 
-	} else if camData.ModelID == "mura-irn-v2" {
+	} else if camData.ModelID == "chexray-irn-v2" {
 		return nil, fmt.Errorf("unavailable model: %s", camData.ModelID)
 	}
 	return nil, fmt.Errorf("unknown model: %s", camData.ModelID)
