@@ -1,13 +1,18 @@
 PROJECT=beta-platform
+OS_TYPE=$(shell uname -a)
+GITCOMMIT=$(shell git rev-parse HEAD)
+BUILDDATE=$(shell date -u +'%Y-%m-%dT%H:%M:%SZ')
 MAJOR=0
 MINOR=1
 PATCH=3
-GITCOMMIT=$(shell git rev-parse HEAD)
-OS_TYPE=$(shell uname -a)
+REVISION=22
 GOVERSION=1.10
-BUILDDATE=$(shell date -u +'%Y-%m-%dT%H:%M:%SZ')
 VERSION=v$(MAJOR).$(MINOR).$(PATCH)
+LONGVERSION=v$(MAJOR).$(MINOR).$(PATCH)-$(REVISION)
 VPATH=github.com/medtune/beta-platform/pkg
+AUTHORS=Hilaly.Mohammed-Amine/El.bouchti.Alaa
+OWNERS=$(AUTHORS)
+LICENSEURL=https://raw.githubusercontent.com/medtune/beta-platform/master/LICENSE.txt
 
 release:
 	go build \
@@ -18,6 +23,11 @@ release:
 			-X $(VPATH).Major=$(MAJOR) \
 			-X $(VPATH).Minor=$(MINOR) \
 			-X $(VPATH).Patch=$(PATCH) \
+		 	-X $(VPATH).Revision=$(REVISION) \
+			-X $(VPATH).Authors=$(AUTHORS) \
+			-X $(VPATH).Owners=$(OWNERS) \
+			-X $(VPATH).LicenseURL=$(LICENSEURL) \
+			-X $(VPATH).LicenseType=APACHE-2.0 \
 			-X $(VPATH).BuildDate=$(BUILDDATE)" \
 		cmd/main_prod.go \
 
@@ -29,6 +39,11 @@ release-cmd:
 			-X $(VPATH).Major=$(MAJOR) \
 			-X $(VPATH).Minor=$(MINOR) \
 			-X $(VPATH).Patch=$(PATCH) \
+			-X $(VPATH).Revision=$(REVISION) \
+			-X $(VPATH).Authors=$(AUTHORS) \
+			-X $(VPATH).Owners=$(OWNERS) \
+		    -X $(VPATH).LicenseURL=$(LICENSEURL) \
+			-X $(VPATH).LicenseType=APACHE-2.0 \
 			-X $(VPATH).BuildDate=$(BUILDDATE)" \
 		cmd/main.go
 
@@ -41,6 +56,11 @@ release-dev:
 			-X $(VPATH).Major=$(MAJOR) \
 			-X $(VPATH).Minor=$(MINOR) \
 			-X $(VPATH).Patch=$(PATCH) \
+ 			-X $(VPATH).Revision=$(REVISION) \
+			-X $(VPATH).Authors=$(AUTHORS) \
+			-X $(VPATH).Owners=$(OWNERS) \
+			-X $(VPATH).LicenseURL=$(LICENSEURL) \
+			-X $(VPATH).LicenseType=APACHE-2.0 \
 			-X $(VPATH).BuildDate=$(BUILDDATE)" \
 		cmd/main.go \
 

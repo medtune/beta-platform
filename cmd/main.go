@@ -5,6 +5,7 @@ package main
 import (
 	"github.com/medtune/beta-platform/cmd/root"
 
+	_ "github.com/medtune/beta-platform/cmd/copyrights"
 	_ "github.com/medtune/beta-platform/cmd/debug"
 	_ "github.com/medtune/beta-platform/cmd/gen-config"
 	_ "github.com/medtune/beta-platform/cmd/gen-views"

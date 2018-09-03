@@ -97,6 +97,7 @@ func assembleHandlers(server *gin.Engine) {
 	// public API
 	PUBLICAPI := PUBLIC.Group("/api")
 	PUBLICAPI.GET("/version", api.Version)
+	PUBLICAPI.GET("/copyrights", api.Copyrights)
 	PUBLICAPI.POST("/login", api.Login)
 	PUBLICAPI.POST("/signup", api.Signup)
 
