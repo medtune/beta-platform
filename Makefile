@@ -10,7 +10,9 @@ REVISION=alpha
 VERSION=v$(MAJOR).$(MINOR).$(PATCH)
 GOVERSION=1.11
 LONGVERSION=v$(MAJOR).$(MINOR).$(PATCH)-$(REVISION)
+CWD=$(shell pwd)
 VPATH=github.com/medtune/beta-platform/pkg
+PROJECTPATH=$(CWD)
 AUTHORS=Hilaly.Mohammed-Amine/El.bouchti.Alaa
 OWNERS=$(AUTHORS)
 LICENSETYPE=Apache-v2.0
@@ -184,7 +186,7 @@ mura-mn-v2-cam:
 	docker run -dti \
 		--name mura-mn-v2-cam \
 		-p 11020:11020 \
-		-v $(HOME)/go/src/github.com/medtune/beta-platform/static/demos/mura/images:/medtune/data \
+		-v $(PROJECTPATH)/static/demos/mura/images:/medtune/data \
 		medtune/capsul:mura-mn-v2-cam
 
 mura-irn-v2:
@@ -193,24 +195,56 @@ mura-irn-v2:
 		-p 10021:10021 \
 		medtune/capsul:mura-irn-v2
 
+chexray-dn-121:
+	docker run -dti \
+		--name chexray-dn-121 \
+		-p 10031:10031 \
+		medtune/capsul:chexray-dn-121
+
+chexray-pp-helper:
+	docker run -dti \
+		--name chexray-pp-helper \ 
+		-p 12030:12030 \
+		-v $(PROJECTPATH)/static/demos/chexray/images:/medtune/data \
+		medtune/capsul:chexray-pp-helper
+
 run-capsules: mnist \
 	inception \
 	mura-mn-v2 \
 	mura-mn-v2-cam \
 	mura-irn-v2 \
+	chexray-dn-121
+
+start-capsules: 
+	docker start mnist \
+		inception \
+		mura-mn-v2 \
+		mura-mn-v2-cam \
+		mura-irn-v2 \
+		chexray-dn-121
+
+stop-capsules:
+	docker stop mnist \
+		inception \
+		mura-mn-v2 \
+		mura-mn-v2-cam \
+		mura-irn-v2 \
+		chexray-dn-121
 
 kill-capsules:
 	docker kill mnist \
 		inception \
 		mura-mn-v2 \
 		mura-mn-v2-cam \
-		mura-irn-v2
+		mura-irn-v2 \
+		chexray-dn-121
 
 	docker rm mnist \
 		inception \
 		mura-mn-v2 \
 		mura-mn-v2-cam \
-		mura-irn-v2
+		mura-irn-v2 \
+		chexray-dn-121
 
 start:
 	./medtune-beta start \
@@ -237,6 +271,7 @@ clean-gen:
 clean-demos:
 	rm -f static/demos/mura/images/*mn_v2_cam.png
 	rm -f static/demos/chexray/images/*mn_v2_cam.png
+	rm -rf static/demos/chexray/images/000*
 
 verify:
 	GO111MODULE=on go mod verify

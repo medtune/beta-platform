@@ -14,7 +14,6 @@ spec:
         image: medtune/beta-platform:v0.1.0
         ports:
         - containerPort: 8005
-
 ---
 kind: Service
 apiVersion: v1

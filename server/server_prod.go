@@ -12,9 +12,9 @@ import (
 )
 
 // New .
-func New(static string, port int) Engine {
+func New(static string, staticBaseURL string, port int) Engine {
 	server := gin.New()
-	server.Static(static, static)
+	server.Static(staticBaseURL, static)
 
 	set404Handler(server, func(c *gin.Context) {
 		c.Redirect(302, "/error/404")
@@ -79,6 +79,7 @@ func assembleHandlers(server *gin.Engine) {
 
 	SLIDES := PROTECTED.Group("/slides")
 	SLIDES.GET("/hello_world", platform.HelloWorld)
+	SLIDES.GET("/")
 
 	// Demonstrations routes
 	DEMOS := PROTECTED.Group("/demos")

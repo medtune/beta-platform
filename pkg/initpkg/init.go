@@ -24,12 +24,12 @@ func InitFromFile(file string) error {
 	// Read configuration from file
 	config, err := config.LoadConfigFromPath(file)
 	if err != nil {
-		return err
+		return fmt.Errorf("load configuration: %v", err)
 	}
 
 	// Init from config
 	if err = InitFromConfig(config); err != nil {
-		return err
+		return fmt.Errorf("initialize package: %v", err)
 	}
 
 	return nil
@@ -39,42 +39,42 @@ func InitFromFile(file string) error {
 func InitFromConfig(c *config.StartupConfig) error {
 	// Validate config
 	if _, err := c.Validate(); err != nil {
-		return fmt.Errorf("Non valid configuration (%v)", err)
+		return fmt.Errorf("non valid configuration: %v", err)
 	}
 
 	// Check version
 	if c.Meta.Version != pkg.VERSION {
-		return fmt.Errorf("Configuration meta version did'nt match\n\tpackage version: %v\n\tconfigs version: %v", pkg.VERSION, c.Meta.Version)
+		return fmt.Errorf("configuration meta version don't match\n\tpackage version: %v\n\tconfigs version: %v", pkg.VERSION, c.Meta.Version)
 	}
 
 	// init package pkg/session
 	if err := initSession(c.Session); err != nil {
-		return err
+		return fmt.Errorf("init package session failed: %v", err)
 	}
 
 	// init package pkg/store + pkg/store/db
 	if err := initStore(c.Database, c.Meta.IsProd); err != nil {
-		return err
+		return fmt.Errorf("init package store failed: %v", err)
 	}
 
 	// init package pkg/secret
 	if err := initSecrets(c.Secrets); err != nil {
-		return err
+		return fmt.Errorf("init service secrets failed: %v", err)
 	}
 
 	// init package pkg/service/capsul
 	if err := initCapsulClients(c.Capsul); err != nil {
-		return err
+		return fmt.Errorf("init service capsul clients failed: %v", err)
 	}
 
 	// init package pkg/service/capsul (custom capsules)
 	if err := initCustomCapsulClients(c.CustomCapsul); err != nil {
-		return err
+		return fmt.Errorf("init service capsul custom clients failed: %v", err)
 	}
 
 	// inint pkg/service/dashboard
 	if err := initDashboard(c); err != nil {
-		return err
+		return fmt.Errorf("init service dashboard failed: %v", err)
 	}
 
 	return nil

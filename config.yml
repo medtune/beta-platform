@@ -30,6 +30,7 @@ crypto:
 
 public:
   static: ./static
+  prefix: /static
 
 secrets:
   signup:

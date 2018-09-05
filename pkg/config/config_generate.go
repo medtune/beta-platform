@@ -8,7 +8,18 @@ import (
 
 // GenDefault generate empty config file with default name
 func GenDefault() error {
-	return Generate(&StartupConfig{}, configPathGen)
+	return Generate(&StartupConfig{
+		Meta:         &Meta{},
+		Server:       &Server{},
+		Database:     &Database{},
+		Session:      &Session{},
+		Crypto:       &Crypto{},
+		Public:       &PublicContent{},
+		Secrets:      &Secrets{},
+		Create:       &Create{},
+		Capsul:       &Capsul{},
+		CustomCapsul: &CustomCapsul{},
+	}, configPathGen)
 }
 
 // Generate empty config file

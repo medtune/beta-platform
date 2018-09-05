@@ -19,12 +19,12 @@ import (
 	"log"
 	"time"
 
-	"github.com/medtune/beta-platform/hack/xlsx2pg/xlsx2pg"
-
 	"github.com/gin-gonic/gin"
 	"github.com/medtune/go-utils/crypto"
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v2"
+
+	"github.com/medtune/beta-platform/hack/xlsx2pg/xlsx2pg"
 
 	"github.com/medtune/beta-platform/cmd/root"
 	"github.com/medtune/beta-platform/pkg/config"
@@ -35,25 +35,26 @@ import (
 )
 
 var (
-	static      string
-	configFile  string
-	port        int
-	ginMode     int
-	syncdb      bool
-	wait        bool
-	maxattempts int
-	timestamp   int
-	createUsers bool
-	cxpbaSync   bool
-	cxpbaFile   string
+	configFile    string
+	port          int
+	ginMode       int
+	static        string
+	staticBaseURL string
+	syncdb        bool
+	wait          bool
+	maxattempts   int
+	timestamp     int
+	createUsers   bool
+	cxpbaSync     bool
+	cxpbaFile     string
 )
 
 func init() {
-	startCmd.Flags().StringVarP(&configFile, "file", "f", "./config.yml", "Configuration file name")
-	startCmd.Flags().StringVarP(&static, "static", "s", "./static", "Static files directory")
-
 	startCmd.Flags().IntVarP(&port, "port", "p", 8005, "port")
 	startCmd.Flags().IntVarP(&ginMode, "gin-mode", "g", 0, "Gin server mode [0 OR 1]")
+	startCmd.Flags().StringVarP(&configFile, "file", "f", "./config.yml", "Configuration file name")
+	startCmd.Flags().StringVarP(&static, "static", "s", "./static", "Static files directory")
+	startCmd.Flags().StringVarP(&staticBaseURL, "static-url", "z", "/static", "static base url")
 
 	startCmd.Flags().BoolVarP(&syncdb, "syncdb", "x", false, "Sync database before start")
 	startCmd.Flags().BoolVarP(&createUsers, "create-users", "y", false, "Create default users before start")
@@ -70,7 +71,7 @@ func init() {
 // startCmd represents the start command
 var startCmd = &cobra.Command{
 	Use:     "start",
-	Aliases: []string{"run", "run-server"},
+	Aliases: []string{"run", "run-server", "serve"},
 	Short:   "Run Medtune beta server",
 	Long:    `Run Medtune beta server`,
 	Run: func(cmd *cobra.Command, args []string) {
@@ -124,6 +125,7 @@ func runServer() {
 			if err != nil {
 				log.Fatal(err)
 			}
+
 			fmt.Println("connected to database...")
 		}
 
@@ -139,10 +141,19 @@ func runServer() {
 		}
 	}
 
+	if configuration.Public.Static != "" {
+		static = configuration.Public.Static
+	}
+
+	if configuration.Public.Prefix != "" {
+		staticBaseURL = configuration.Public.Prefix
+	}
+
 	fmt.Println("starting server...")
 
 	Server := server.New(
 		static,
+		staticBaseURL,
 		port,
 	)
 
@@ -158,12 +169,16 @@ func createUsersEngine(e *store.Store, us ...*model.User) error {
 			fmt.Printf("unvalid user data:\n\terror: %v\n\tuser:%s", err, string(b))
 			continue
 		}
+
+		unhashed := (*user).Password
 		user.Password = crypto.Sha256(user.Password)
 		if _, err := e.Insert(user); err != nil {
 			fmt.Printf("failed to create user: %s\n\terror: %v\n", user.Username, err)
 			continue
 		}
+
 		fmt.Printf("created user %s %s\n", user.Email, user.Username)
+		user.Password = unhashed
 	}
 	return nil
 }

@@ -87,8 +87,7 @@ func autoMigrateDatabase() {
 		}
 
 		if createUsers && usersConfig != nil {
-			err := createUsersEngine(engine, usersConfig...)
-			if err != nil {
+			if err := createUsersEngine(engine, usersConfig...); err != nil {
 				log.Fatal(err)
 			}
 		}
@@ -107,7 +106,9 @@ func autoMigrateDatabase() {
 		}
 
 		if createUsers && usersConfig != nil {
-			createUsersEngine(engine, usersConfig...)
+			if err := createUsersEngine(engine, usersConfig...); err != nil {
+				log.Fatal(err)
+			}
 		}
 
 	}
@@ -121,12 +122,14 @@ func createUsersEngine(e *store.Store, us ...*model.User) error {
 			fmt.Printf("unvalid user data:\n\terror: %v\n\tuser:%s", err, string(b))
 			continue
 		}
+		unhashed := user.Password
 		user.Password = crypto.Sha256(user.Password)
 		if _, err := e.Insert(user); err != nil {
 			fmt.Printf("failed to create user: %s\n\terror: %v\n", user.Username, err)
 			continue
 		}
 		fmt.Printf("created user %s %s\n", user.Email, user.Username)
+		user.Password = unhashed
 	}
 	return nil
 }

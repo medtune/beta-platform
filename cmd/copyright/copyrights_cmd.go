@@ -24,6 +24,20 @@ import (
 	"github.com/medtune/beta-platform/pkg"
 )
 
+var (
+	authors     bool
+	owners      bool
+	licenseType bool
+	licenseURL  bool
+)
+
+func init() {
+	copyrightCmd.Flags().BoolVarP(&owners, "owners", "o", false, "Print owners only")
+	copyrightCmd.Flags().BoolVarP(&authors, "authors", "a", false, "Print authors onyl")
+	copyrightCmd.Flags().BoolVarP(&licenseType, "license-type", "t", false, "Print license type")
+	copyrightCmd.Flags().BoolVarP(&licenseURL, "license-url", "u", false, "Print license URL")
+}
+
 // versionCmd represents the version command
 var copyrightCmd = &cobra.Command{
 	Use:     "copyright",
@@ -31,8 +45,25 @@ var copyrightCmd = &cobra.Command{
 	Short:   "Medtune beta-platform copyrights",
 	Long:    `Print Medtune Beta Platform Copyrights informations`,
 	Run: func(cmd *cobra.Command, args []string) {
-		copyrightsJSON, _ := json.MarshalIndent(pkg.GetCopyright(), "", "    ")
-		fmt.Printf("%s\n", copyrightsJSON)
+		copyrightInfo := pkg.GetCopyright()
+		copyrightsJSON, _ := json.MarshalIndent(copyrightInfo, "", "    ")
+		shouldNotPrintAll := authors || owners || licenseType || licenseURL
+		if shouldNotPrintAll {
+			if authors {
+				fmt.Printf("%s\n", copyrightInfo.Authors)
+			}
+			if owners {
+				fmt.Printf("%s\n", copyrightInfo.Owners)
+			}
+			if licenseType {
+				fmt.Printf("%s\n", copyrightInfo.LicenseType)
+			}
+			if licenseURL {
+				fmt.Printf("%s\n", copyrightInfo.LicenseURL)
+			}
+		} else {
+			fmt.Printf("%s\n", string(copyrightsJSON))
+		}
 	},
 }
 

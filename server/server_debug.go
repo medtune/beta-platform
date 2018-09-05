@@ -1,3 +1,5 @@
+//+build !prod
+
 package server
 
 import (
@@ -11,9 +13,9 @@ import (
 // Debug return a ui oriented debug version of the plaform server
 // it will serve static content only
 // pkg session / db / cache are inexistent in the debug mode
-func Debug(static string, port int) Engine {
+func Debug(static string, staticBaseURL string, port int) Engine {
 	server := gin.New()
-	server.Static(static, static)
+	server.Static(staticBaseURL, static)
 	debugHandlers(server)
 	var sport = ":" + strconv.Itoa(port)
 	return &engine{
