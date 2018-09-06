@@ -63,7 +63,7 @@ func RunMuraInference(ctx context.Context, infData *jsonutil.RunImageInference) 
 		request := pbreq.Predict(stdimpl.MuraIRNV2, b)
 		start := time.Now()
 
-		response, err := MuraMNV2Client.Predict(ctx, request)
+		response, err := MuraIRNV2Client.Predict(ctx, request)
 		if err != nil {
 			return nil, err
 		}
@@ -115,7 +115,7 @@ func RunMuraCAM(ctx context.Context, camData *jsonutil.RunImageCam) (*jsonutil.C
 		}, nil
 
 	} else if camData.ModelID == "mura-irn-v2" {
-		return nil, fmt.Errorf("unavailable model: %s", camData.ModelID)
+		return nil, fmt.Errorf("unavailable cam model: %s", camData.ModelID)
 	}
 	return nil, fmt.Errorf("unknown model: %s", camData.ModelID)
 }

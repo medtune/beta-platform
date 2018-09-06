@@ -85,20 +85,19 @@ func runServer() {
 		gin.SetMode(gin.DebugMode)
 	} else if ginMode == 1 {
 		gin.SetMode(gin.ReleaseMode)
+	} else {
+		log.Fatalf("unknown gin mode: %v", ginMode)
 	}
 
-	// Alloc configuration
-	var configuration *config.StartupConfig
 	// Load configuration
-	if cfg, err := config.LoadConfigFromPath(configFile); err != nil {
-		log.Fatal(err)
-	} else {
-		configuration = cfg
+	configuration, err := config.LoadConfigFromPath(configFile)
+	if err != nil {
+		log.Fatalln(err)
 	}
 
 	// Init packages
 	if err := initpkg.InitFromConfig(configuration); err != nil {
-		log.Fatal(err)
+		log.Fatalln(err)
 	}
 
 	// Syndb
@@ -123,7 +122,7 @@ func runServer() {
 				}
 			}
 			if err != nil {
-				log.Fatal(err)
+				log.Fatalln(err)
 			}
 
 			fmt.Println("connected to database...")
@@ -158,7 +157,7 @@ func runServer() {
 	)
 
 	if err := Server.Run(); err != nil {
-		log.Fatal(err)
+		log.Fatalln(err)
 	}
 }
 

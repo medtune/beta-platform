@@ -22,8 +22,7 @@ func ChexrayRunInference(c *gin.Context) {
 	}
 
 	ctx := context.Background()
-
-	if infData.File != "" {
+	if infData.File != "" && infData.ModelID == "chexray-mn-v2" {
 		infData.File = staticPath("chexray", infData.File)
 	}
 

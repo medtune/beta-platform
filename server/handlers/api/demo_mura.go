@@ -154,7 +154,6 @@ func MuraProcess(c *gin.Context) {
 
 	// cam check
 	if camError != nil {
-		response.Success = false
 		response.Errors = append(response.Errors, camError.Error())
 	} else {
 		processResult.Cam = camResult

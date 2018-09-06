@@ -7,7 +7,7 @@ import (
 	"github.com/medtune/beta-platform/pkg/jsonutil"
 )
 
-// Copyrights description handler
+// Copyright description handler
 func Copyright(c *gin.Context) {
 	c.JSON(200, jsonutil.SuccessData(pkg.GetCopyright()))
 }

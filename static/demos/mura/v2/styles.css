@@ -26,17 +26,30 @@
 
 .mura-settings-ctx {
     min-height: 200px;
-    min-width: 400px;
+    min-width: 500px;
 }
 
 .settings-container {
     padding-top: 50px;
     display: table;
     margin: 0 auto;
+    width: 500px;
 }
 
 .settings-card {
-    width: 400px;
+    width: auto;
+}
+
+.model-dropdown {
+    width: 500px;
+}
+
+.name-label {
+    width: 500px;
+}
+
+.file-label {
+    width: 500px;
 }
 
 .ctrl-btn {
@@ -68,6 +81,19 @@
     color: rgb(32, 125, 255);
     background: rgb(255, 255, 255);
 }
+
+.preview-btn {
+    right: 80px;
+    color: rgb(54, 94, 213);
+    background-color: white;
+}
+
+.preview-btn:hover {
+    right: 80px;
+    color: white;
+    background-color: rgb(54, 94, 213);
+}
+
 
 img.article-image {
     height: 250px;

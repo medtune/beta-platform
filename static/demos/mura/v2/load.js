@@ -6,7 +6,10 @@ var overlay = $("#overlay"),
       title = $("#title");
         cam = $("#cam");
     preview = $("#preview");
-
+  previewCC = $("#preview-cc");
+      camCC = $("#cam-cc");
+  camTiming = $("#cam-timing");
+       cntt = $("#cntt");
 
 function _setModalTitle(title) {
     document.getElementById("title").innerHTML = title;
@@ -14,10 +17,27 @@ function _setModalTitle(title) {
 
 function _setModalResults(image, data, time) {
     //cam.setBackground("url('/static/demos/mura/images" + data.in)
-    preview.css('background-image', 'url(' + '/static/demos/mura/images/' + image + ')');
-    cam.css('background-image', 'url(' + '/static/demos/mura/images/' + data.cam.output + ')');
+    if (data.cam == null) {
+        console.log("hidding cam output");
+        previewCC.hide();
+        camCC.hide();
+        camTiming.hide();
+        fab.css('top', '30%');
+        cntt.css('padding-bottom', '30px');
+    } else {
+        console.log("showing preview/cam CC");
+        preview.css('background-image', 'url(' + '/static/demos/mura/images/' + image + ')');
+        cam.css('background-image', 'url(' + '/static/demos/mura/images/' + data.cam.output + ')');
+        fab.css('top', '10%');
+        cntt.css('padding-bottom', '0px');
+        document.getElementById("grad-cam-time").innerHTML = (data.cam.round_trip/1000000).toFixed(2) + ' ms';
+        previewCC.show();
+        camCC.show();
+        camTiming.show();
+    }
     var v1 = (data.inference.scores[0]*100).toFixed(9);
     var v2 = (data.inference.scores[1]*100).toFixed(9);
+
     document.getElementById("r1").innerHTML = data.inference.keys[0] + "&nbsp;";
     document.getElementById("s1").innerHTML = "&nbsp;" + v1;
     document.getElementById("r2").innerHTML = data.inference.keys[1]; + "&nbsp;"
@@ -25,7 +45,6 @@ function _setModalResults(image, data, time) {
     document.querySelector('#p1').MaterialProgress.setProgress(v1);
     document.querySelector('#p2').MaterialProgress.setProgress(v2);
     document.getElementById("inference-time").innerHTML = (data.inference.round_trip/1000000).toFixed(2) + ' ms';
-    document.getElementById("grad-cam-time").innerHTML = (data.cam.round_trip/1000000).toFixed(2) + ' ms';
     document.getElementById("req-roundtrip").innerHTML = (data.timing/1000000).toFixed(2) + ' ms';
 
     console.log("time ----", time);
@@ -53,7 +72,7 @@ function closeFAB(event) {
     if (event) {
         event.preventDefault();
         event.stopImmediatePropagation();
-    }
+    };
     fab.removeClass('active');
     overlay.removeClass('dark-overlay');
     _cleanModal();
@@ -67,14 +86,28 @@ function previewCase(image) {
     _setModalPreview(image);
 }
 
+function _getEngineType() {
+    var m = "";
+    _model = document.getElementById('model').value;
+    if (_model == "MobileNet V2" || _model == "") {
+        m = "mura-mn-v2";
+    } else if (_model == "Inception ResNet V2") {
+        m = "mura-irn-v2";
+    };
+    console.log("detected config:", m);
+    return m;
+}
+
 // Request the server to run cam and inference before
 // showing the results in the main modal pop up
 function processCase(image) {
     _setModalTitle("Result 1");
+    var m = _getEngineType();
     data = {
         'target' : image,
-        'model_id' : 'mura-mn-v2',
+        'model_id' : m,
     };
+    
     var start = new Date();
     sendJSON(
         'POST',
@@ -83,17 +116,19 @@ function processCase(image) {
         (res) => {
             resp = JSON.parse(res);
             var end = new Date();
+            var r = resp.data;
+            var d = r.data;
             if (resp.success == true) {
-                console.log('success\n\t', resp.data);
-                if (resp.data.success == true) {
-                    _setModalResults(image, resp.data.data, diff(start, end));
+                console.log('success\n\t', r);
+                if (d.errors == null || d.errors.lenght == 1) {
+                    _setModalResults(image, d, diff(start, end));
                     openFAB();
                 } else {
-                    console.log("not enough data to proc");
+                    console.log("proc failed:", d.errors);
                 };
             } else if (resp.success == false) {
                 console.log('fail:\n\t', resp);
                 _alertFailure(resp.errors);
-            }
+            };
         });
 }

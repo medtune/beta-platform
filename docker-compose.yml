@@ -1,6 +1,5 @@
 version: '3.2'
 services:
-  #Database
   postgres:
     image: postgres:latest
     environment:
@@ -13,29 +12,39 @@ services:
     command: --appendonly yes
 
   platform-server:
-    image: medtune/beta-platform:prod-alpine
+    image: medtune/beta-platform:prod
     ports:
-      - 8005:8005
+      - 8006:8005
 
     depends_on:
       - postgres
+      - redis
       - mnist
       - mura-mn-v2
       - mura-mn-v2-cam
-      - redis
+      - mura-irn-v2
+      - chexray-pp
+      - chexray-dn-121
 
     links:
+      - redis:redis
       - postgres:postgres
       - mnist:mnist
       - inception:inception
       - mura-mn-v2:mura-mn-v2
+      - mura-irn-v2:mura-irn-v2
       - mura-mn-v2-cam:mura-cam-v2-cam
-      - redis:redis
+      - chexray-pp:chexray-pp
+      - chexray-dn-121:chexray-dn-121
 
     volumes:
       - type: volume
         source: mura-images
         target: /go/src/github.com/medtune/beta-platform/static/demos/mura/images
+
+      - type: volume
+        source: chexray-images
+        target: /go/src/github.com/medtune/beta-platform/static/demos/chexray/images
   
   mnist:
     image: medtune/capsul:mnist
@@ -46,6 +55,9 @@ services:
   mura-mn-v2:
     image: medtune/capsul:mura-mn-v2
 
+  mura-irn-v2:
+    image: medtune/capsul:mura-irn-v2
+
   mura-mn-v2-cam:
     image: medtune/capsul:mura-mn-v2-cam
     volumes:
@@ -53,5 +65,16 @@ services:
         source: mura-images
         target: /medtune/data
 
+  chexray-dn-121:
+    image: medtune/capsul:chexray-dn-121
+
+  chexray-pp:
+    image: medtune/capsul:chexray-pp-helper
+    volumes:
+      - type: volume
+        source: chexray-images
+        target: /medtune/data
+
 volumes:
   mura-images: 
+  chexray-images:

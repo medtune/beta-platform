@@ -10,15 +10,16 @@ const (
 			<a href="#cases-panel" class="mdl-tabs__tab is-active">cases</a>
 			<a href="#upload-panel" class="mdl-tabs__tab">Upload</a>
 			<a href="#settings-panel" class="mdl-tabs__tab">Settings</a>
+			<a href="#informations-panel" class="mdl-tabs__tab">Informations</a>
 		</div>
 
 		<!-- ----------- -->
 		<!-- RESULT POP UP -->
 		<!-- ----------- -->
 
-		<div class="fab">
+		<div class="fab" id="fabm">
 		
-		    <div class='cntt-wrapper'>
+		    <div class="cntt-wrapper" id="cntt-wrapper">
 				<div id="fab-hdr">
 			  		<h3 id="title">Result</h3>
 			  		<div class="btn-wrapper">
@@ -28,7 +29,7 @@ const (
 					</div>
 				</div>
 		
-				<div class="cntt mdl-grid">
+				<div class="cntt mdl-grid" id="cntt">
 					<div class="mdl-cell mdl-cell--6-col">
 						<div class="results-bars">
 						<div class="mdl-list__item">
@@ -54,7 +55,7 @@ const (
 						  </span>
 						  <a class="mdl-list__item-secondary-action stats-value" href="#" id="inference-time">392</a>
 						</div>
-						<div class="mdl-list__item">
+						<div class="mdl-list__item" id="cam-timing">
 						  <span class="mdl-list__item-primary-content">
 							<i class="material-icons mdl-list__item-icon">timer</i>
 							<span class="stats-sub-title">Grad cam time</span>
@@ -75,7 +76,7 @@ const (
 					</div>
 					
 
-					<div class="mdl-cell mdl-cell--6-col demo-card-square mdl-card mdl-shadow--4dp">
+					<div class="mdl-cell mdl-cell--6-col demo-card-square mdl-card mdl-shadow--4dp" id="preview-cc">
 						<div class="mdl-card__supporting-text">
 							Preview
 						</div>
@@ -83,7 +84,7 @@ const (
 						</div>
 					</div>
 
-					<div class="mdl-cell mdl-cell--6-col demo-card-square mdl-card mdl-shadow--4dp">
+					<div class="mdl-cell mdl-cell--6-col demo-card-square mdl-card mdl-shadow--4dp" id="cam-cc">
 						<div class="mdl-card__supporting-text">
 							Grad CAM
 						</div>
@@ -117,6 +118,9 @@ const (
 						<i class="material-icons">arrow_forward_ios</i>
 					</button>
 
+					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect ctrl-btn preview-btn" onclick="previewCase('{{ .Filename }}');">
+						<i class="material-icons">remove_red_eye</i>
+					</button>
 	
 				</div>
 				{{end}}
@@ -129,30 +133,29 @@ const (
 
 		<div class="mdl-tabs__panel" id="upload-panel">
 			<div class="settings-container">
-				<div class="mdl-card mdl-shadow--4dp">
+				<div class="mdl-card mdl-shadow--4dp settings-card">
 
 					<div class="mdl-card__title mdl-color--primary mdl-color-text--white">
 						<h2 class="mdl-card__title-text">Upload</h2>
 					</div>
 
 					<div class="mdl-card__supporting-text mura-settings-ctx">
-						<div class="mdl-progress mdl-js-progress mdl-progress__indeterminate load-bar-form" id="upload-load"></div>
 						<form action="/demos/mura/upload" method="POST" id="upload-form" enctype="multipart/form-data">
 						
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="">
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label name-label" style="">
 								<input class="mdl-textfield__input" type="text" pattern="[A-Z,a-z, ]*" name="name"/>
 								<label class="mdl-textfield__label">Name</label>
 								<span class="mdl-textfield__error">Letters and spaces only</span>
 							</div>
 
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--file" style="">
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--file file-label">
 								<input class="mdl-textfield__input" placeholder="File" type="text" id="FF" readonly/>
 								<div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
 									<i class="material-icons">attach_file</i>
 									<input type="file" id="ID" onchange="document.getElementById('FF').value=this.files[0].name;" name="file">
 								</div>
 							</div>
-							<div class="mdl-card__actions mdl-card--border">
+							<div class="mdl-card__actions mdl-card--border" style="margin-top:50px;">
 								<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit">Send</button>
 							</div>
 						</form>
@@ -168,16 +171,16 @@ const (
 
 		<div class="mdl-tabs__panel" id="settings-panel">
 			<div class="settings-container">
-				<div class="mdl-card mdl-shadow--4dp">
+				<div class="mdl-card mdl-shadow--4dp settings-card">
 					<div class="mdl-card__title mdl-color--primary mdl-color-text--white">
 						<h2 class="mdl-card__title-text">Settings</h2>
 					</div>
 					<div class="mdl-card__supporting-text mura-settings-ctx">
 
-						<div class="mdl-textfield mdl-js-textfield getmdl-select" style="">
+						<div class="mdl-textfield mdl-js-textfield getmdl-select model-dropdown">
 							<input class="mdl-textfield__input" value="" id="model" readonly/>
 							<input value="" type="hidden" name="model-engine"/>
-							<label class="mdl-textfield__label" for="model">Model</label>
+							<label class="mdl-textfield__label" for="model">Inference Model</label>
 							<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu" for="model">
 								<li class="mdl-menu__item" data-val="mobilenet-v2">MobileNet V2</li>
 								<li class="mdl-menu__item" data-val="inception-resnet-v2">Inception ResNet V2</li>
@@ -210,12 +213,13 @@ const (
 
 					</div>
 
-					<div class="mdl-card__actions mdl-card--border">
-						<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Save</button>
-					</div>
 				</div>
 
 			</div>
+		</div>
+
+		<div class="mdl-tabs__panel" id="informations-panel">
+		test
 		</div>
 
 	</div>

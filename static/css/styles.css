@@ -597,7 +597,7 @@ and (max-width : 500px) {
 }
 
 .demos-menu-card > .mdl-card__title__sentiment_analysis {
-    background: url('/static/images/sentiment-analysis.jpg') center / cover;
+    /*background: url('/static/images/sentiment-analysis.jpg') center / cover;*/
 }
 
 .demos-menu-card > .mdl-card__title__undefined {

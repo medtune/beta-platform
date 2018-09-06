@@ -42,8 +42,8 @@ func init() {
 var copyrightCmd = &cobra.Command{
 	Use:     "copyright",
 	Aliases: []string{"cp", "license"},
-	Short:   "Medtune beta-platform copyrights",
-	Long:    `Print Medtune Beta Platform Copyrights informations`,
+	Short:   "Medtune beta-platform copyright",
+	Long:    `Print Medtune Beta Platform Copyright informations`,
 	Run: func(cmd *cobra.Command, args []string) {
 		copyrightInfo := pkg.GetCopyright()
 		copyrightsJSON, _ := json.MarshalIndent(copyrightInfo, "", "    ")

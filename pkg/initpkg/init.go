@@ -179,6 +179,13 @@ func initCapsulClients(c *config.Capsul) error {
 	}
 	capsul.ChexrayMNV2Client = chexrayMNV2Client
 
+	// init chexray dn121 client
+	chexrayDN121Client, err := tfsclient.New(c.ChexrayDN121.Address)
+	if err != nil {
+		return err
+	}
+	capsul.ChexrayDN121Client = chexrayDN121Client
+
 	return nil
 }
 
@@ -196,6 +203,13 @@ func initCustomCapsulClients(c *config.CustomCapsul) error {
 		return err
 	}
 	capsul.ChexrayMNV2CamClient = chexrayMNV2CamClient
+
+	// init chexray preprocessing helper
+	chexrayPPHelper, err := tfsclient.NewRest(c.ChexrayPP.Address, 5)
+	if err != nil {
+		return err
+	}
+	capsul.ChexrayPPHelper = chexrayPPHelper
 
 	return nil
 }
