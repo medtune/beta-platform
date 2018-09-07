@@ -1,4 +1,4 @@
-//+build !prod
+//+build !prod debug
 
 package server
 
@@ -51,5 +51,6 @@ func debugHandlers(g *gin.Engine) {
 		DEBUG.GET("/demos/sentiment_analysis", debug.SentimentAnalysis)
 		DEBUG.GET("/slides", debug.SlidesMenu)
 		DEBUG.GET("/slides/hello_world", debug.HelloWorld)
+		DEBUG.GET("/slides/test", debug.SlideTest)
 	}
 }

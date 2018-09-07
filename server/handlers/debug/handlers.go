@@ -215,6 +215,15 @@ func HelloWorld(c *gin.Context) {
 	})
 }
 
+// HelloWorld slide
+func SlideTest(c *gin.Context) {
+	c.Status(200)
+	tmpl.SlideTest.Execute(c.Writer, &data.Slide{
+		Title: "Slide: Hello World",
+	})
+}
+
+
 // Dashboard .
 func Dashboard(c *gin.Context) {
 	c.Status(200)
