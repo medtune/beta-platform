@@ -27,7 +27,7 @@ var (
 	// ChexrayMNV2CamClient .
 	ChexrayMNV2CamClient *tfsclient.RestClient
 	// ChexrayPredictionClasses .
-	ChexrayPredictionClasses = []string{
+	chexrayPredictionClasses = []string{
 		"Atelectasis",
 		"Cardiomegaly",
 		"Effusion",
@@ -124,7 +124,7 @@ func RunChexrayInference(ctx context.Context, infData *jsonutil.RunImageInferenc
 	// construct responses
 	result := jsonutil.InferenceResult{}
 	result.Scores = resp.GetOutputs()["scores"].GetFloatVal()
-	result.Keys = ChexrayPredictionClasses
+	result.Keys = chexrayPredictionClasses
 	result.RoundTrip = roundTrip
 
 	return &result, nil

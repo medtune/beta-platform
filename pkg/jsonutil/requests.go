@@ -54,6 +54,16 @@ type ProcessImage struct {
 	ModelID  string `json:"model_id"`
 }
 
+// GetPathologyAL .
+type GetPathologyAL struct {
+	Pathology string `json:"pathology" valid:"required"`
+}
+
+// GetSpecPoolGrid .
+type GetSpecPoolGrid struct {
+	Ignore []string `json:"ignore"`
+}
+
 // TestRequest .
 type TestRequest struct {
 	Test  bool `json:"test"`

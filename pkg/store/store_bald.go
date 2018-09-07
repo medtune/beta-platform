@@ -39,7 +39,7 @@ func (s *Store) GetPathologyAL(name string) (*model.PathologyAnalysisLevel, erro
 		return nil, err
 	}
 	if !has {
-		return nil, fmt.Errorf("record doesnt exist")
+		return nil, fmt.Errorf("record doesnt exist: %v", err)
 	}
 	return pal, nil
 }
@@ -79,7 +79,7 @@ func (s *Store) GetSpec(name string) (*model.SpecAnalysisPool, error) {
 		return nil, err
 	}
 	if !has {
-		return nil, fmt.Errorf("record doesnt exist")
+		return nil, fmt.Errorf("record doesnt exist: %v", err)
 	}
 	return spec, nil
 }
@@ -89,7 +89,7 @@ func (s *Store) GetSpecs() (*[]model.SpecAnalysisPool, error) {
 	var specs []model.SpecAnalysisPool
 	err := s.Find(&specs)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("cant find specs: %v", err)
 	}
 	return &specs, nil
 }

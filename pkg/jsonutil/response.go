@@ -1,6 +1,8 @@
 package jsonutil
 
-import "time"
+import (
+	"time"
+)
 
 // DefaultResponse .
 type DefaultResponse struct {
@@ -49,6 +51,17 @@ type ServiceStatus struct {
 // TestResponse .
 type TestResponse struct {
 	Test bool `json:"test"`
+}
+
+// GetPathologyALResponse .
+type GetPathologyALResponse struct {
+	Table interface{} `json:"table"`
+}
+
+// GetSpecPoolGridResponse .
+type GetSpecPoolGridResponse struct {
+	Pathology string      `json:"pathology"`
+	Specs     interface{} `json:"specs"`
 }
 
 // JobResult .

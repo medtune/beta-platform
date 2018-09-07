@@ -25,6 +25,8 @@ var (
 	MuraMNV2Client *tfsclient.Client
 	// MuraMNV2CamClient .
 	MuraMNV2CamClient *tfsclient.RestClient
+	// MuraPredictionClasses .
+	muraPredictionClasses = []string{"positive", "negative"}
 )
 
 // RunMuraInference .
@@ -77,7 +79,7 @@ func RunMuraInference(ctx context.Context, infData *jsonutil.RunImageInference) 
 	// construct responses
 	result := jsonutil.InferenceResult{}
 	result.Scores = resp.Outputs["scores"].FloatVal
-	result.Keys = []string{"positive", "negative"}
+	result.Keys = muraPredictionClasses
 	result.RoundTrip = roundTrip
 
 	return &result, nil

@@ -2,6 +2,9 @@ package server
 
 import "github.com/gin-gonic/gin"
 
+// Static Compile check
+var _ Engine = &engine{}
+
 // Wrapping gin server implementation
 type engine struct {
 	engine *gin.Engine
