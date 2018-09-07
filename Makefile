@@ -37,7 +37,6 @@ release:
 			-X $(VPATH).BuildDate=$(BUILDDATE)" \
 		cmd/main_prod.go \
 
-
 # Compile all possible commands binaries
 release-cmd:
 	go build \
@@ -265,7 +264,7 @@ chexray-pp:
 		--name chexray-pp-helper \ 
 		-p 12030:12030 \
 		-v $(PROJECTPATH)/static/demos/chexray/images:/medtune/data \
-		medtune/capsul:chexray-pp
+		medtune/capsul:chexray-pp-helper
 
 
 run-capsules: mnist \
@@ -273,7 +272,8 @@ run-capsules: mnist \
 	mura-mn-v2 \
 	mura-mn-v2-cam \
 	mura-irn-v2 \
-	chexray-dn-121
+	chexray-dn-121 \
+	chexray-pp
 
 
 start-capsules: 
@@ -282,7 +282,8 @@ start-capsules:
 		mura-mn-v2 \
 		mura-mn-v2-cam \
 		mura-irn-v2 \
-		chexray-dn-121
+		chexray-dn-121 \
+		chexray-pp-helper
 
 
 stop-capsules:
@@ -291,7 +292,9 @@ stop-capsules:
 		mura-mn-v2 \
 		mura-mn-v2-cam \
 		mura-irn-v2 \
-		chexray-dn-121
+		chexray-dn-121 \
+		chexray-pp-helper
+
 
 
 kill-capsules:
@@ -300,14 +303,16 @@ kill-capsules:
 		mura-mn-v2 \
 		mura-mn-v2-cam \
 		mura-irn-v2 \
-		chexray-dn-121
+		chexray-dn-121 \
+		chexray-pp-helper
 
 	docker rm mnist \
 		inception \
 		mura-mn-v2 \
 		mura-mn-v2-cam \
 		mura-irn-v2 \
-		chexray-dn-121
+		chexray-dn-121 \
+		chexray-pp-helper
 
 
 start:

@@ -11,10 +11,16 @@ var overlay = $("#overlay"),
   camTiming = $("#cam-timing");
        cntt = $("#cntt");
 
+// Set modal title
 function _setModalTitle(title) {
     document.getElementById("title").innerHTML = title;
 }
 
+// Set Modal results
+// Will show grad-cam/preview if a grad cam result exist
+// else will only show classification results. if both 
+// classification/grad-cam fail, it will log errors and
+// not proc
 function _setModalResults(image, data, time) {
     //cam.setBackground("url('/static/demos/mura/images" + data.in)
     if (data.cam == null) {
@@ -86,6 +92,7 @@ function previewCase(image) {
     _setModalPreview(image);
 }
 
+// Query engine type from settings dropdown
 function _getEngineType() {
     var m = "";
     _model = document.getElementById('model').value;
@@ -121,6 +128,7 @@ function processCase(image) {
             if (resp.success == true) {
                 console.log('success\n\t', r);
                 if (d.errors == null || d.errors.lenght == 1) {
+                    //_alertFailure(d.errors);
                     _setModalResults(image, d, diff(start, end));
                     openFAB();
                 } else {
