@@ -298,14 +298,7 @@ func CompileTemplates() {
 		SlideHelloWorld = slideHelloWorld
 	}
 
-	{
-		slideHelloWorld := template.New("base")
-		slideHelloWorld, err = slideHelloWorld.Parse(slides.Base)
-		must(err)
-		slideHelloWorld, err = slideHelloWorld.Parse(slides.TesTT)
-		must(err)
-		SlideTest = slideHelloWorld
-	}
+
 
 	// Datahub page
 	{

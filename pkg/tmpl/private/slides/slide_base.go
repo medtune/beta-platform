@@ -15,10 +15,11 @@ const Base = `{{define "base"}}
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" />
-    	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<link rel="stylesheet" href="/static/reveal.js-3.7.0/css/reveal.css">
-		<link rel="stylesheet" href="/static/reveal.js-3.7.0/css/theme/white.css" id="theme">
+		<link rel="stylesheet" href="/static/reveal.js-3.7.0/css/theme/beige.css" id="theme">
 		<link rel="stylesheet" href="/static/reveal.js-3.7.0/lib/css/zenburn.css">
+		<link rel="stylesheet" href="/static/slides/demo/styles.css">
 
 		<script>
 			var link = document.createElement( 'link' );
@@ -44,7 +45,7 @@ const Base = `{{define "base"}}
 				progress: true,
 				history: true,
 				center: true,
-				transition: 'slide',
+				transition: 'convex',
 				dependencies: [
 					{ src: '/static/reveal.js-3.7.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
 					{ src: '/static/reveal.js-3.7.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },

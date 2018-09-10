@@ -27,7 +27,7 @@ Base Styles
 ***************************/
 
 body {
-  color: #414042;
+  color: #143dad;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: normal;
 }
@@ -131,31 +131,31 @@ Layout Styles
     width: 100%;
   }
   .col-plus-1 {
-    margin-left: 8.33333%;
+    margin-left: 8.33333% !important;
   }
   .col-plus-2 {
-    margin-left: 16.6666%;
+    margin-left: 16.6666% !important;
   }
   .col-plus-3 {
-    margin-left: 25%;
+    margin-left: 25% !important;
   }
   .col-plus-4 {
-    margin-left: 33.3333%;
+    margin-left: 33.3333% !important;
   }
   .col-plus-5 {
-    margin-left: 41.6666%;
+    margin-left: 41.6666% !important;
   }
   .col-plus-6 {
-    margin-left: 50%;
+    margin-left: 50% !important;
   }
   .col-plus-7 {
-    margin-left: 58.33333%;
+    margin-left: 58.33333% !important;
   }
   .col-plus-8 {
-    margin-left: 66.6666%;
+    margin-left: 66.6666% !important;
   }
   .col-plus-9 {
-    margin-left: 75%;
+    margin-left: 75% !important;
   }
 }
 

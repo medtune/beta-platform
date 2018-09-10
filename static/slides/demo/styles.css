@@ -1,4 +1,20 @@
 
+.barre{
+    margin-bottom: 0.5em !important;
+    height:10px;
+}
+.barre--violette{
+    background-color: #8d338a;
+}
+.barre--verte{
+    background-color: #b2c039;
+}
+.barre--grise{
+    background-color: #7f898d;
+}
+.barre--orange{
+    background-color: #d64911;
+}
 #adresse{
     text-align: center;
     text-overflow: ellipsis;
@@ -19,9 +35,10 @@
 }
 
 .slide-2{
+    color : #005AA3;
     text-align: center;
-    font-size: 40px !important;
-    padding: 55px !important;  
+    font-size: 0.75em !important;
+    padding: 0.5em !important;  
 }
 
 span > li {
@@ -30,15 +47,15 @@ span > li {
 .slide-3{
     padding: 30px !important
 }
+.slide-3 >li{
+    text-align: left;
+    padding: 0.5em !important
+}
 .slide-4{
-    margin:10px !important;
-    font-size: 18px !important;
+    text-align: left;
+    font-size: 15px !important;
 }
-.slide-4-img{
-    width: 20%;
-    margin-right: 2em !important;
-    margin-left: 5em !important;
-}
+
 .slide-5{
     display: block !important;
     box-sizing: border-box;
@@ -59,22 +76,18 @@ span > li {
 .slide-5-img-5 {width: 41.66%;}
 .slide-5-img-6 {width: 50%;}
 
-.slide-6{
-    margin-right: 0.40em !important;
-}
 
 .slide-6 > p,.slide-6 > li{
-    margin: 0.5em;
+    margin: 0.3em;
     font-size: 20px !important;
     text-align: left !important;
 }
 .slide-6>img{
-    margin-right: 0.5em !important;
-    height: 8%;
+    height: 5em !important;
 }
 
 .slide-7>li, .slide-7>ul{
-    margin: 0.5em;
+    margin: 0.3em !important;
     font-size: 20px !important;
     text-align: left !important;
 }
@@ -86,10 +99,11 @@ span > li {
 }
 
 .slide-10 > i{
-    font-size: 15px;
+    font-size: 0.3em;
 }
 .slide-10 > p{
-    font-size: 20px;
+    text-align: left;
+    font-size: 0.5em !important;
 }
 .slide-11{
     padding: 0.2em;
@@ -122,4 +136,12 @@ caption b{
 #img-slide-12{
     width : 100%;
     height: 100%;
+}
+
+[class*="slide-4"]{
+    color:rgb(14, 14, 184);
+}
+
+.color-bar-container{
+
 }

@@ -26,7 +26,6 @@ var (
 	// Slides templates
 	SlidesMenu      *template.Template
 	SlideHelloWorld *template.Template
-	SlideTest *template.Template
 
 	// Demos templates
 	DemosMenu                *template.Template

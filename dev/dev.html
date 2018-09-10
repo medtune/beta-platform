@@ -10,161 +10,194 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="../static/reveal.js-3.7.0/css/reveal.css">
     <link rel="stylesheet" href="../static/reveal.js-3.7.0/css/theme/beige.css" id="theme">
     <link rel="stylesheet" href="../static/reveal.js-3.7.0/lib/css/zenburn.css">
     <link rel="stylesheet" href="../static/slides/demo/styles.css">
+    <link rel="stylesheet" href="../static/slides/demo/layout.css">
 
     <script>
         var link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = window.location.search.match(/print-pdf/gi) ? '../static/reveal.js-3.7.0/css/print/pdf.css' : '../static/reveal.js-3.7.0/css/print/paper.css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../static/reveal.js-3.7.0/css/print/pdf.css' :
+            '../static/reveal.js-3.7.0/css/print/paper.css';
         document.getElementsByTagName('head')[0].appendChild(link);
     </script>
 </head>
 
 <body>
     <div class="reveal">
+        <div class="container">
+            <div class="row">
+                <div class=""></div>
+            </div>
+        </div>
         <div class="slides">
-            <section>
-                <div class="mdl-grid">
-                    <h1 class="mdl-cell mdl-cell--12-col mdl-cell--top">Projet MEDTUNE</h1>
-                    <h4 class="mdl-cell mdl-cell--12-col mdl-cell--top">Présentation ICL Nancy</h4>
-                    <h6 class="mdl-cell mdl-cell--12-col mdl-cell--top">12 Septembre 2018</h6>
-                    <span id="adresse" class="mdl-cell mdl-cell--6-col mdl-color-text--blue-900">Agence SII EST : 4 ,rue de Sarrelouis - 67000 Strasbourg</span>
-                    <span id="coord" class="mdl-cell mdl-cell--6-col mdl-color-text--blue-900">Tél : 03 90 23 62 62 Fax : 03 88 32 07 66 www.groupe-sii.com </span>
+            <section class="container" data-transition="slide-in fade-out">
+                <div class="row">
+                    <h1 class="col-12-12">Projet MEDTUNE</h1>
+                    <h4 class="col-12-12">Présentation ICL Nancy</h4>
+                    <h6 class="col-12-12">12 Septembre 2018</h6>
+                    <span id="adresse" class="col-6-12">Agence SII EST : 4
+                        , Rue de Sarrelouis - 67000 Strasbourg</span>
+                    <span id="coord" class="col-6-12"> www.groupe-sii.com </span>
                 </div>
             </section>
             <!--slide 2 : Ordre du jour-->
-            <section>
-                <div class="mdl-grid">
-                    <h3 class="mdl-cell mdl-cell--12-col mdl-cell--top slide-title">Ordre du jour</h3>
-                    <span class="mdl-cell mdl-cell--6-col mdl-color-text--blue-900 slide-2">Pourquoi ce projet ?</span>
-                    <span class="mdl-cell mdl-cell--6-col mdl-color-text--blue-900 slide-2">Aspects techniques</span>
-                    <span class="mdl-cell mdl-cell--6-col mdl-color-text--blue-900 slide-2">Description du projet</span>
-                    <span class="mdl-cell mdl-cell--6-col mdl-color-text--blue-900 slide-2">Démonstrations</span>
+            <section class="container" data-transition="convex">
+                <div class="row">
+                    <div class="col-3-12 barre barre--violette"></div>
+                    <div class="col-3-12 barre barre--verte"></div>
+                    <div class="col-3-12 barre barre--grise"></div>
+                    <div class="col-3-12 barre barre--orange"></div>
+                    <h3 class="col-12-12">Ordre du jour</h3>
+                    <span class="col-12-12 slide-2">Constat de départ</span>
+                    <span class="col-12-12 slide-2">Pourquoi ce projet ?</span>
+                    <span class="col-12-12 slide-2">Aspects techniques</span>
+                    <span class="col-12-12 slide-2">Description du projet</span>
+                    <span class="col-12-12 slide-2">Démonstrations</span>
                 </div>
             </section>
             <!--slide 3 : Constat de départ et objectif majeur-->
-            <section>
-                <div class="mdl-grid">
-                    <h3 class="mdl-cell mdl-cell--12-col mdl-cell--top">Constat de départ et objectif majeur</h3>
-                    <span class="mdl-cell mdl-cell--12-col mdl-color-text--blue-900 slide-3">Constat de départ
-                        <li>Un manque d’outils avancés accessibles par les acteurs dans le domaine de la recherche scientifique
+            <section class="container" data-transition="convex">
+                <div class="row">
+                    <h3 class="col-12-12">Constat de départ et objectif majeur</h3>
+                    <span class="col-12-12 slide-3">Constat de départ
+                        <li>Un manque d’outils avancés accessibles par les acteurs dans le domaine de la recherche
+                            scientifique
                             et de la santé.
                         </li>
                         <li>Une domination des big pharma dans le domaine de la santé.
                         </li>
                     </span>
-                    <span class="mdl-cell mdl-cell--12-col mdl-color-text--blue-900 slide-3">Objectif majeur
-                        <li>En offrant un service contenant un ensemble d’outils intelligents, permettant d’exploiter plusieurs
+                    <span class="col-12-12 slide-3">Objectif majeur
+                        <li>En offrant un service contenant un ensemble d’outils intelligents, permettant d’exploiter
+                            plusieurs
                             types d’information ou de document.
                         </li>
                     </span>
-                    <span class="mdl-cell mdl-cell--12-col mdl-color-text--blue-900 slide-3">Première cible : l’imagerie médicale
+                    <span class="col-12-12 slide-3">Première cible :
+                        l’imagerie médicale
                     </span>
                 </div>
             </section>
             <!--slide 4 : Pourquoi ce projet?-->
-            <section>
-                <div class="mdl-grid">
-                    <h3 class="mdl-cell mdl-cell--12-col mdl-cell--top slide-title">Pourquoi de projet?</h3>
-                    <img class="mdl-cell mdl-cell--4-col mdl-cell--4-offset slide-4-img" src="../static/images/presentation/lesechos.png"></img>
-                    <img class="mdl-cell mdl-cell--4-col" src="../static/images/presentation/citationIA.png"></img>
-                    <p class="slide-4">Grâce au « machine learning assisté», […] l’algorithme sera capable de reconnaitre et d’interpréter des
-                        clichés, mais aussi d’apprendre tout seul des « cas » en comparant une image aux milliers – voire
+            <section class="container" data-transition="convex">
+                <div class="row">
+                    <h3 class="col-12-12 slide-title">Pourquoi ce projet?</h3>
+                    <img class="col-4-12 col-plus-1" src="../static/images/presentation/lesechos.png"></img>
+                    <img class="col-4-12 col-plus-2 " src="../static/images/presentation/citationIA.png"></img>
+                    <p class="col-12-12 slide-4">Grâce au « machine learning assisté», […] l’algorithme sera capable de
+                        reconnaitre et d’interpréter des
+                        clichés, mais aussi d’apprendre tout seul des « cas » en comparant une image aux milliers –
+                        voire
                         aux millions – d’autres entrées dans sa base, et proposer un pré diagnostic. […]</p>
-                    <p class="slide-4">Sur un point, tout le monde est à peu près d’accord : l’IA sera un outil d’aide à la décision qui améliorera
+                    <p class="col-12-12 slide-4">Sur un point, tout le monde est à peu près d’accord : l’IA sera un outil d’aide
+                        à la décision qui améliorera
                         la prise en charge des patients.</p>
-                    <p class="slide-4">[...] le nombre d’actes d’imagerie médicale en France, 80 millions aujourd’hui, augmente chaque année
+                    <p class="col-12-12 slide-4">[...] le nombre d’actes d’imagerie médicale en France, 80 millions aujourd’hui,
+                        augmente chaque année
                         d’environ 4 %.</p>
-                    <p class="slide-4">Les algorithmes doivent aider les praticiens à gérer cette inflation d’examens qu’ils ont de plus en
+                    <p class="col-12-12 slide-4">Les algorithmes doivent aider les praticiens à gérer cette inflation d’examens
+                        qu’ils ont de plus en
                         plus de difficultés à absorber.</p>
-                    <p class="slide-4">Pour des tâches répétitives, le logiciel va augmenter la précision du diagnostic. Il sera capable de
-                        trier rapidement les images qui ne présentent aucune zone à problème, laissant plus de temps au radiologue
+                    <p class="col-12-12 slide-4">Pour des tâches répétitives, le logiciel va augmenter la précision du
+                        diagnostic. Il sera capable de
+                        trier rapidement les images qui ne présentent aucune zone à problème, laissant plus de temps au
+                        radiologue
                         pour se concentrer sur les cas complexes et la pathologie du patient.</p>
-                    <p class="slide-4">[…] deux limites : « un algorithme ne peut donner des renseignements que sur ce qu’il connait. Par ailleurs,
-                        s’il réalise un calcul à partir de données qui ne sont pas justes, les résultats seront faussés.
+                    <p class="col-12-12 slide-4">[…] deux limites : « un algorithme ne peut donner des renseignements que sur ce
+                        qu’il connait. Par ailleurs,
+                        s’il réalise un calcul à partir de données qui ne sont pas justes, les résultats seront
+                        faussés.
                         »
                     </p>
 
                 </div>
             </section>
             <!--slide 5 : Pourquoi ce projet?-->
-            <section>
-                <div class="mdl-grid">
-                    <h3 class="mdl-cell mdl-cell--12-col mdl-cell--top slide-title">Pourquoi de projet?</h3>
-                    <span class="mdl-cell mdl-cell--12-col mdl-color-text--blue-900">De nombreuses publications scientifiques sur le sujet
+            <section class="container" data-transition="convex">
+                <div class="row">
+                    <h3 class="col-12-12 slide-title">Pourquoi de projet?</h3>
+                    <span class="col-12-12">De nombreuses publications
+                        scientifiques sur le sujet
                     </span>
-                    <img class="mdl-cell mdl-cell--4-col" src="../static/images/presentation/naturescience.png"></img>
-                    <p class="mdl-cell mdl-cell--8-col slide-4">Machine learning
+                    <img class="col-4-12" src="../static/images/presentation/naturescience.png"></img>
+                    <p class="col-8-12 slide-4">Machine learning
                         <i>AI for medical imaging goes deep</i>
                         <i>Nature Medecine 24, 539-540(2018)</i>
                     </p>
-                    <p class="mdl-cell mdl-cell--12-col slide-4">An artificial intelligence (AI) using a deep-learning approach can classify retinal images from optical
-                        coherence tomography for early diagnosis of retinal diseases and has the potential to be used in
+                    <p class="col-12-12 slide-4">An artificial intelligence (AI) using a deep-learning
+                        approach can classify retinal images from optical
+                        coherence tomography for early diagnosis of retinal diseases and has the potential to be used
+                        in
                         other image-based medical diagnoses.
                     </p>
-                </div>
-                <div class="slide-5">
-                    <img class="slide-5-img-2" src="../static/images/presentation/ibm.png"></img>
-                    <img class="slide-5-img-2" src="../static/images/presentation/googleai.png"></img>
-                    <img class="slide-5-img-2" src="../static/images/presentation/siemens.png"></img>
-                </div>
-                <div class="slide-5">
-                    <img class="slide-5-img-2" src="../static/images/presentation/watson.png"></img>
-                    <img class="slide-5-img-2" src="../static/images/presentation/googlebrain.png"></img>
-                    <img class="slide-5-img-2" src="../static/images/presentation/siemensinfo.png"></img>
+                    <div class="col-2-12 col-plus-1">
+                        <img src="../static/images/presentation/ibm.png"></img>
+                        <img src="../static/images/presentation/watson.png"></img>
+                    </div>
+                    <div class="col-2-12 col-plus-2">
+                        <img src="../static/images/presentation/googleai.png"></img>
+                        <img src="../static/images/presentation/googlebrain.png"></img>
+
+                    </div>
+                    <div class="col-2-12 col-plus-2">
+                        <img src="../static/images/presentation/siemens.png"></img>
+                        <img src="../static/images/presentation/siemensinfo.png"></img>
+                    </div>
                 </div>
             </section>
             <!--slide 6 : DESCRIPTION DU PROJET-->
-            <section>
-                <div class="mdl-grid">
-                    <h3 class="mdl-cell mdl-cell--12-col mdl-cell--top">DESCRIPTION DU PROJET</h3>
-                    <span class="mdl-cell mdl-cell--6-col mdl-color-text--blue-900 slide-6">Le point de départ:
+            <section class="container">
+                <div class="row">
+                    <h3 class="col-12-12">DESCRIPTION DU PROJET</h3>
+                    <span class="col-6-12 slide-6">Le point de départ :
                         <p>Des thèses scientifiques publiques traitant d’IA et d’imagerie décrivent :</p>
                         <li>
-                            <b>But des thèses</b>: faire une validation du modèle avec un taux de confiance « correct » mais
+                            <b>But des thèses</b> : faire une validation du modèle avec un taux de confiance « correct »
+                            mais
                             peu optimisé (recherche fondamentale, sponsors, quantité des publications vs qualité).
                         </li>
                         <li>
-                            <b>Un sujet scientifique</b>: par exemple, les pathologies pulmonaires.
+                            <b>Un sujet scientifique</b> : par exemple, les pathologies pulmonaires.
                         </li>
                         <li>
-                            <b>Un algorithme</b>: description ± succincte du programme et de sa philosophie.
+                            <b>Un algorithme</b> : description ± succincte du programme et de sa philosophie.
                         </li>
                         <li>
-                            <b>Une base documentaire</b>: référence à d’autres thèses ou articles scientifiques.
+                            <b>Une base documentaire</b> : référence à d’autres thèses ou articles scientifiques.
                         </li>
                         <li>
-                            <b>Une base de données (imagerie et/ou données)</b>: anonymisées et accessibles en libre service
+                            <b>Une base de données (imagerie et/ou données)</b> : anonymisées et accessibles en libre
+                            service
                             sur des sites officiels (NIH, univ. Stanford, …).
                         </li>
                     </span>
-                    <span class="mdl-cell mdl-cell--6-col mdl-color-text--blue-900 slide-6">Travail réalisé :
-                        <li>Lire un certain nombre de thèses en fonction des « thèmes » ciblés (> 150 thèses identifiées).
+                    <span class="col-5-12 col-plus-1 slide-6">Travail réalisé :
+                        <li>Lire un certain nombre de thèses en fonction des « thèmes » ciblés (> 150 thèses
+                            identifiées).
                         </li>
                         <li>Identifier le potentiel du travail présenté dans chacune.
                         </li>
                         <li>Evaluer l’amélioration qui peut être apportée à l’algorithme
                         </li>
-                        <li>Identifier les prérequis techniques et fonctionnels pour la reproductibilité des résultats trouvés.
+                        <li>Identifier les prérequis techniques et fonctionnels pour la reproductibilité des résultats
+                            trouvés.
                         </li>
                     </span>
                 </div>
             </section>
             <!--slide 7 : DESCRIPTION DU PROJET-->
-            <section>
-                <div class="mdl-grid">
-                    <h3 class="mdl-cell mdl-cell--12-col mdl-cell--top slide-title">DESCRIPTION DU PROJET
+            <section class="container">
+                <div class="row">
+                    <h3 class="col-12-12 slide-title">DESCRIPTION DU PROJET
                     </h3>
-                    <span class="mdl-cell mdl-cell--12-col mdl-color-text--blue-900">Bases d’informations utilisées à ce jour
+                    <span class="col-12-12">Bases d’informations utilisées à
+                        ce jour
                     </span>
-                    <div class="mdl-cell mdl-cell--6-col slide-6">
+                    <div class="col-6-12 slide-6">
                         <p>
                             <b>ChestX (NIH)</b>
                             <li>14 pathologies pulmonaires</li>
@@ -176,7 +209,7 @@
                         <img src="../static/images/presentation/chest1.png"></img>
                         <img src="../static/images/presentation/chest2.png"></img>
                     </div>
-                    <div class="mdl-cell mdl-cell--6-col slide-6">
+                    <div class="col-5-12 col-plus-1 slide-6">
                         <p>
                             <b>MURA (Univ Stanford)</b>
                             <li>Problèmes musculo-squelettiques</li>
@@ -191,10 +224,10 @@
                 </div>
             </section>
             <!--slide 8 : DESCRIPTION DU PROJET-->
-            <section>
-                <div class="mdl-grid">
-                    <h3 class="mdl-cell mdl-cell--12-col mdl-cell--top">DESCRIPTION DU PROJET</h3>
-                    <ul class="mdl-cell mdl-cell--12-col mdl-color-text--blue-900 slide-7">La mise en œuvre:
+            <section class="container">
+                <div class="row">
+                    <h3 class="col-12-12">DESCRIPTION DU PROJET</h3>
+                    <ul class="col-12-12 slide-7">La mise en œuvre:
                         <li>
                             Récupération des informations (imagerie et données associées ) utilisées par la thèse.
                         </li>
@@ -204,7 +237,8 @@
                         <li>Reproductibilité des résultats trouvés dans la thèse (indice de confiance).
                             <ul>
                                 <li>Apprentissage (machine learning) sur 90% des images/données.</li>
-                                <li>Réalisation d’un nombre important d’itérations (50 à 100 sur l’ensemble des données).</li>
+                                <li>Réalisation d’un nombre important d’itérations (50 à 100 sur l’ensemble des
+                                    données).</li>
                                 <li>Obtention d’un indice de confiance.</li>
                             </ul>
                         </li>
@@ -225,37 +259,39 @@
                 </div>
             </section>
             <!--slide 9 : DESCRIPTION DU PROJET-->
-            <section>
-                <div class="mdl-grid">
-                    <h3 class="mdl-cell mdl-cell--12-col mdl-cell--top slide-title">DESCRIPTION DU PROJET
+            <section class="container">
+                <div class="row">
+                    <h3 class="col-12-12 slide-title">DESCRIPTION DU PROJET
                     </h3>
-                    <span class="mdl-cell mdl-cell--12-col mdl-color-text--blue-900 slide-9">Exemples de courbes de machine learning sur imagerie
+                    <span class="col-12-12 slide-9">Exemples de courbes de
+                        machine learning sur imagerie
                     </span>
-                    <img class="mdl-cell mdl-cell--6-col slide-6" src="../static/images/presentation/appmauvais.PNG"></img>
-                    <img class="mdl-cell mdl-cell--6-col slide-6" src="../static/images/presentation/appbon.PNG"></img>
+                    <img class="col-5-12 slide-6" src="../static/images/presentation/appmauvais.PNG"></img>
+                    <img class="col-5-12 col-plus-1 slide-6" src="../static/images/presentation/appbon.PNG"></img>
                 </div>
             </section>
             <!--slide 10 : DESCRIPTION DU PROJET-->
-            <section>
-                <div class="mdl-grid">
-                    <h3 class="mdl-cell mdl-cell--12-col mdl-cell--top slide-title">DESCRIPTION DU PROJET
+            <section class="container">
+                <div class="row">
+                    <h3 class="col-12-12 slide-title">DESCRIPTION DU PROJET
                     </h3>
-                    <span class="mdl-cell mdl-cell--12-col mdl-color-text--blue-900 slide-10">Organisation en mode agile (Sprint*)
-                        <p>Sprint : de la récupération des informations jusqu’à la livraison à l’utilisateur pour qu’il teste
+                    <span class="col-12-12 slide-10">Organisation en mode
+                        agile (Sprint*)
+                        <p>Sprint : de la récupération des informations jusqu’à la livraison à l’utilisateur pour qu’il
+                            teste
                             ses propres images sur la plateforme technique.
                         </p>
                         <i>* Le travail d’analyse des thèses de recherche est hors périmètre du sprint</i>
                     </span>
-                    <span class="mdl-cell mdl-cell--2-col"></span>
-                    <img class="mdl-cell mdl-cell--9-col mdl-cell--middle" src="../static/images/presentation/gantt.png"></img>
+                    <img class="col-9-12 col-plus-1" src="../static/images/presentation/gantt.png"></img>
                 </div>
             </section>
             <!--slide 11 : DESCRIPTION DU PROJET-->
-            <section>
-                <div class="mdl-grid">
-                    <h3 class="mdl-cell mdl-cell--12-col mdl-cell--top slide-title">DESCRIPTION DU PROJET
+            <section class="container">
+                <div class="row">
+                    <h3 class="col-12-12 slide-title">DESCRIPTION DU PROJET
                     </h3>
-                    <span class="mdl-cell mdl-cell--12-col mdl-color-text--blue-900">Informations sur un Sprint</span>
+                    <span class="col-12-12">Informations sur un Sprint</span>
                 </div>
                 <table>
                     <caption>
@@ -327,22 +363,22 @@
                 </span>
             </section>
             <!--slide 12: ASPECTS TECHNIQUES-->
-            <section>
-                <div class="mdl-grid">
-                    <h3 class="mdl-cell mdl-cell--12-col mdl-cell--top">ASPECTS TECHNIQUES
+            <section class="container">
+                <div class="row">
+                    <h3 class="col-12-12">ASPECTS TECHNIQUES
                     </h3>
-                    <div class="mdl-cell mdl-cell--12-col">
+                    <div class="col-12-12">
                         <img id="img-slide-12" src="../static/images/presentation/beta-platform-diagram.png">
                     </div>
                 </div>
             </section>
             <!--slide 13: ASPECTS TECHNIQUES-->
-            <section>
-                <div class="mdl-grid">
-                    <h3 class="mdl-cell mdl-cell--12-col mdl-cell--top">ASPECTS TECHNIQUES
+            <section class="container">
+                <div class="row">
+                    <h3 class="col-12-12">ASPECTS TECHNIQUES
                     </h3>
-                    <span class="mdl-cell mdl-cell--12-col mdl-color-text--blue-900">Les Frameworks Machine Learning</span>
-                    <div class="mdl-cell mdl-cell--12-col">
+                    <span class="col-12-12">Les Frameworks Machine Learning</span>
+                    <div class="col-12-12">
                         <img src="../static/images/presentation/theano.jpg">
                         <img src="../static/images/presentation/cntk.png">
                         <img src="../static/images/presentation/caffe.png">
@@ -352,29 +388,29 @@
                 </div>
             </section>
             <!--slide 14: ASPECTS TECHNIQUES-->
-            <section>
-                <div class="mdl-grid">
-                    <h3 class="mdl-cell mdl-cell--12-col mdl-cell--top">ASPECTS TECHNIQUES
+            <section class="container">
+                <div class="row">
+                    <h3 class="col-12-12">ASPECTS TECHNIQUES
                     </h3>
-                    <span class="mdl-cell mdl-cell--12-col mdl-color-text--blue-900">TensorFlow</span>
-                    <div class="mdl-cell mdl-cell--2-col mdl-cell--middle">
+                    <span class="col-12-12">TensorFlow</span>
+                    <div class="col-2-12">
                         <img src="../static/images/presentation/tensorflow.jpg">
                     </div>
-                    <div class="mdl-cell mdl-cell--10-col">
+                    <div class="col-10-12">
                         <img src="../static/images/presentation/Tensorflow slide Medtune ICL NAncy.png">
                     </div>
                 </div>
             </section>
             <!--slide 15: ASPECTS TECHNIQUES-->
-            <section>
-                <div class="mdl-grid">
-                    <h3 class="mdl-cell mdl-cell--12-col mdl-cell--top">ASPECTS TECHNIQUES
+            <section class="container">
+                <div class="row">
+                    <h3 class="col-12-12">ASPECTS TECHNIQUES
                     </h3>
-                    <span class="mdl-cell mdl-cell--12-col mdl-color-text--blue-900">TensorFlow</span>
-                    <div class="mdl-cell mdl-cell--2-col mdl-cell--middle">
+                    <span class="col-12-12">TensorFlow</span>
+                    <div class="col-2-12">
                         <img src="../static/images/presentation/tensorflow.jpg">
                     </div>
-                    <div class="mdl-cell mdl-cell--10-col">
+                    <div class="col-10-12">
                         <img src="../static/images/presentation/Tensorflow slide Medtune ICL NAncy.png">
                     </div>
                 </div>
@@ -384,26 +420,52 @@
 
     <script src="../static/reveal.js-3.7.0/lib/js/head.min.js"></script>
     <script src="../static/reveal.js-3.7.0/js/reveal.js"></script>
-    <script src="../static/slides/demo/main.js"></script>
     <script>
-
         Reveal.initialize({
             controls: true,
             progress: true,
             history: true,
             center: true,
-            transition: 'slide',
-            dependencies: [
-                { src: '../static/reveal.js-3.7.0/lib/js/classList.js', condition: function () { return !document.body.classList; } },
-                { src: '../static/reveal.js-3.7.0/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
-                { src: '../static/reveal.js-3.7.0/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
-                { src: '../static/reveal.js-3.7.0/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
-                { src: '../static/reveal.js-3.7.0/plugin/search/search.js', async: true },
-                { src: '../static/reveal.js-3.7.0/plugin/zoom-js/zoom.js', async: true },
-                { src: '../static/reveal.js-3.7.0/plugin/notes/notes.js', async: true }
+            transition: 'convex',
+            dependencies: [{
+                    src: '../static/reveal.js-3.7.0/lib/js/classList.js',
+                    condition: function () {
+                        return !document.body.classList;
+                    }
+                },
+                {
+                    src: '../static/reveal.js-3.7.0/plugin/markdown/marked.js',
+                    condition: function () {
+                        return !!document.querySelector('[data-markdown]');
+                    }
+                },
+                {
+                    src: '../static/reveal.js-3.7.0/plugin/markdown/markdown.js',
+                    condition: function () {
+                        return !!document.querySelector('[data-markdown]');
+                    }
+                },
+                {
+                    src: '../static/reveal.js-3.7.0/plugin/highlight/highlight.js',
+                    async: true,
+                    callback: function () {
+                        hljs.initHighlightingOnLoad();
+                    }
+                },
+                {
+                    src: '../static/reveal.js-3.7.0/plugin/search/search.js',
+                    async: true
+                },
+                {
+                    src: '../static/reveal.js-3.7.0/plugin/zoom-js/zoom.js',
+                    async: true
+                },
+                {
+                    src: '../static/reveal.js-3.7.0/plugin/notes/notes.js',
+                    async: true
+                }
             ]
         });
-
     </script>
 
 </body>
