@@ -1,0 +1,125 @@
+
+#adresse{
+    text-align: center;
+    text-overflow: ellipsis;
+    font-size: 30px !important;
+    padding: 80px !important;
+    left:30px;
+    top: 50px;
+    position: relative; 
+}
+#coord{
+    text-align: center;
+    text-overflow: ellipsis;
+    font-size: 30px !important;
+    padding: 80px !important;
+    left:30px;
+    top: 50px;
+    position: relative; 
+}
+
+.slide-2{
+    text-align: center;
+    font-size: 40px !important;
+    padding: 55px !important;  
+}
+
+span > li {
+    font-size: 20px !important;
+}
+.slide-3{
+    padding: 30px !important
+}
+.slide-4{
+    margin:10px !important;
+    font-size: 18px !important;
+}
+.slide-4-img{
+    width: 20%;
+    margin-right: 2em !important;
+    margin-left: 5em !important;
+}
+.slide-5{
+    display: block !important;
+    box-sizing: border-box;
+}
+.slide-5::after{
+    content: "";
+    clear: both;
+    display: table;
+}
+[class*="slide-5-img"]{
+    float: center;
+    padding: 15px;
+}
+.slide-5-img-1 {width: 8.33%;}
+.slide-5-img-2 {width: 16.66%;}
+.slide-5-img-3 {width: 25%;}
+.slide-5-img-4 {width: 33.33%;}
+.slide-5-img-5 {width: 41.66%;}
+.slide-5-img-6 {width: 50%;}
+
+.slide-6{
+    margin-right: 0.40em !important;
+}
+
+.slide-6 > p,.slide-6 > li{
+    margin: 0.5em;
+    font-size: 20px !important;
+    text-align: left !important;
+}
+.slide-6>img{
+    margin-right: 0.5em !important;
+    height: 8%;
+}
+
+.slide-7>li, .slide-7>ul{
+    margin: 0.5em;
+    font-size: 20px !important;
+    text-align: left !important;
+}
+
+.slide-9{
+    margin-top : 1em !important;
+    margin-bottom : 1em !important;
+    font-size: 0.8em !important;
+}
+
+.slide-10 > i{
+    font-size: 15px;
+}
+.slide-10 > p{
+    font-size: 20px;
+}
+.slide-11{
+    padding: 0.2em;
+}
+.slide-11 >td{
+    border: 2px solid brown;
+    border-bottom:0.5px solid brown; 
+    font-size: .5em !important;
+    text-align: center !important;
+}
+.slide-11 > th{
+    color: brown;
+    border: 2px solid brown;
+    font-size: .5em !important;
+    text-align: center !important;
+}
+caption{
+    font-size: .5em !important;
+    text-align: right;
+    padding-top: 1em !important;
+}
+caption b{
+    color: tomato;
+}
+#dureecharge{
+    font-size: 0.7em !important;
+    border: brown 2px solid;
+    border-radius: 5px;
+}
+#img-slide-12{
+    width : 100%;
+    height: 100%;
+}
