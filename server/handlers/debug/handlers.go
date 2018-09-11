@@ -215,6 +215,7 @@ func HelloWorld(c *gin.Context) {
 	})
 }
 
+
 // Dashboard .
 func Dashboard(c *gin.Context) {
 	c.Status(200)

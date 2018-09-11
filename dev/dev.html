@@ -1,8 +1,34 @@
-package slides
+<!doctype html>
+<html lang="en">
 
-const (
-	HelloWorld = `{{define "slide"}}
-	<div class="slides">
+<head>
+    <meta charset="utf-8">
+
+    <title> {{ .Title }} </title>
+
+    <meta name="description" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../static/reveal.js-3.7.0/css/reveal.css">
+    <link rel="stylesheet" href="../static/reveal.js-3.7.0/css/theme/beige.css" id="theme">
+    <link rel="stylesheet" href="../static/reveal.js-3.7.0/lib/css/zenburn.css">
+    <link rel="stylesheet" href="../static/slides/demo/styles.css">
+    <link rel="stylesheet" href="../static/slides/demo/layout.css">
+
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../static/reveal.js-3.7.0/css/print/pdf.css' :
+            '../static/reveal.js-3.7.0/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
             <section class="container" data-transition="slide-in fade-out">
                 <div class="row">
                     <h1 class="col-12-12">Projet MEDTUNE</h1>
@@ -63,8 +89,8 @@ const (
                     <div class="col-3-12 barre barre--grise"></div>
                     <div class="col-3-12 barre barre--orange"></div>
                     <h3 class="col-12-12 barre--violette-text">Pourquoi ce projet?</h3>
-                    <img class="col-4-12 col-plus-1" src="/static/images/presentation/lesechos.png"></img>
-                    <img class="col-4-12 col-plus-2 " src="/static/images/presentation/citationIA.png"></img>
+                    <img class="col-4-12 col-plus-1" src="../static/images/presentation/lesechos.png"></img>
+                    <img class="col-4-12 col-plus-2 " src="../static/images/presentation/citationIA.png"></img>
                     <p class="col-12-12 slide-4">Grâce au <b>« machine learning assisté»</b>, […] l’algorithme sera
                         capable de
                         reconnaitre et d’interpréter des
@@ -107,7 +133,7 @@ const (
                     <span class="col-12-12">De nombreuses publications
                         scientifiques sur le sujet
                     </span>
-                    <img class="col-5-12" src="/static/images/presentation/naturescience.png"></img>
+                    <img class="col-5-12" src="../static/images/presentation/naturescience.png"></img>
                     <p class="col-5-12 col-plus-1 slide-4">Machine learning
                         <i>AI for medical imaging goes deep</i>
                         <i>Nature Medecine 24, 539-540(2018)</i>
@@ -119,17 +145,17 @@ const (
                         other image-based medical diagnoses.
                     </p>
                     <div class="col-2-12 col-plus-1">
-                        <img src="/static/images/presentation/ibm.png"></img>
-                        <img src="/static/images/presentation/watson.png"></img>
+                        <img src="../static/images/presentation/ibm.png"></img>
+                        <img src="../static/images/presentation/watson.png"></img>
                     </div>
                     <div class="col-2-12 col-plus-2">
-                        <img src="/static/images/presentation/googleai.png"></img>
-                        <img src="/static/images/presentation/googlebrain.png"></img>
+                        <img src="../static/images/presentation/googleai.png"></img>
+                        <img src="../static/images/presentation/googlebrain.png"></img>
 
                     </div>
                     <div class="col-2-12 col-plus-2">
-                        <img src="/static/images/presentation/siemens.png"></img>
-                        <img src="/static/images/presentation/siemensinfo.png"></img>
+                        <img src="../static/images/presentation/siemens.png"></img>
+                        <img src="../static/images/presentation/siemensinfo.png"></img>
                     </div>
                 </div>
             </section>
@@ -199,8 +225,8 @@ const (
                             <li>Machine learning sur 100.000 images</li>
                             <li>Validation sur 12.000 images</li>
                         </p>
-                        <img src="/static/images/presentation/chest1.png"></img>
-                        <img src="/static/images/presentation/chest2.png"></img>
+                        <img src="../static/images/presentation/chest1.png"></img>
+                        <img src="../static/images/presentation/chest2.png"></img>
                     </div>
                     <div class="col-5-12 col-plus-1 slide-6">
                         <p>
@@ -211,8 +237,8 @@ const (
                             <li>Machine learning sur 34.000 images</li>
                             <li>Validation sur 4.000 images</li>
                         </p>
-                        <img src="/static/images/presentation/mura1.PNG"></img>
-                        <img src="/static/images/presentation/mura2.PNG"></img>
+                        <img src="../static/images/presentation/mura1.PNG"></img>
+                        <img src="../static/images/presentation/mura2.PNG"></img>
                     </div>
                 </div>
             </section>
@@ -267,8 +293,8 @@ const (
                     <span class="col-12-12 slide-9">Exemples de courbes de
                         machine learning sur imagerie
                     </span>
-                    <img class="col-5-12 slide-6" src="/static/images/presentation/appmauvais.PNG"></img>
-                    <img class="col-5-12 col-plus-1 slide-6" src="/static/images/presentation/appbon.PNG"></img>
+                    <img class="col-5-12 slide-6" src="../static/images/presentation/appmauvais.PNG"></img>
+                    <img class="col-5-12 col-plus-1 slide-6" src="../static/images/presentation/appbon.PNG"></img>
                 </div>
             </section>
             <!--slide 10 : DESCRIPTION DU PROJET-->
@@ -288,7 +314,7 @@ const (
                         </p>
                         <i>* Le travail d’analyse des thèses de recherche est hors périmètre du sprint</i>
                     </span>
-                    <img class="col-9-12 col-plus-1" src="/static/images/presentation/gantt.png"></img>
+                    <img class="col-9-12 col-plus-1" src="../static/images/presentation/gantt.png"></img>
                 </div>
             </section>
             <!--slide 11 : DESCRIPTION DU PROJET-->
@@ -454,10 +480,10 @@ const (
                     </h3>
                     <span class="col-12-12">TensorFlow</span>
                     <div class="col-2-12">
-                        <img src="/static/images/presentation/tensorflow.jpg">
+                        <img src="../static/images/presentation/tensorflow.jpg">
                     </div>
                     <div class="col-10-12">
-                        <img src="/static/images/presentation/Tensorflow slide Medtune ICL NAncy.png">
+                        <img src="../static/images/presentation/Tensorflow slide Medtune ICL NAncy.png">
                     </div>
                 </div>
             </section>
@@ -471,7 +497,7 @@ const (
                     <h3 class="col-12-12 barre--grise-text">ASPECTS TECHNIQUES
                     </h3>
                     <div class="col-12-12">
-                        <img id="img-slide-14" src="/static/images/presentation/entrainement-schema.PNG">
+                        <img id="img-slide-14" src="../static/images/presentation/entrainement-schema.PNG">
                     </div>
                 </div>
             </section>
@@ -485,7 +511,7 @@ const (
                     <h3 class="col-12-12 barre--grise-text">ASPECTS TECHNIQUES
                     </h3>
                     <div class="col-12-12">
-                        <img id="img-slide-12" src="/static/images/presentation/technos-deployment.png">
+                        <img id="img-slide-12" src="../static/images/presentation/technos-deployment.png">
                     </div>
                 </div>
             </section>
@@ -499,7 +525,7 @@ const (
                     <h3 class="col-12-12 barre--grise-text">ASPECTS TECHNIQUES
                     </h3>
                     <div class="col-12-12">
-                        <img class="img-slide-12" src="/static/images/presentation/services.png">
+                        <img class="img-slide-12" src="../static/images/presentation/services.png">
                     </div>
                 </div>
             </section>
@@ -515,5 +541,58 @@ const (
                 </div>
             </section>
         </div>
-{{end}}`
-)
+    </div>
+
+    <script src="../static/reveal.js-3.7.0/lib/js/head.min.js"></script>
+    <script src="../static/reveal.js-3.7.0/js/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            transition: 'convex',
+            dependencies: [{
+                    src: '../static/reveal.js-3.7.0/lib/js/classList.js',
+                    condition: function () {
+                        return !document.body.classList;
+                    }
+                },
+                {
+                    src: '../static/reveal.js-3.7.0/plugin/markdown/marked.js',
+                    condition: function () {
+                        return !!document.querySelector('[data-markdown]');
+                    }
+                },
+                {
+                    src: '../static/reveal.js-3.7.0/plugin/markdown/markdown.js',
+                    condition: function () {
+                        return !!document.querySelector('[data-markdown]');
+                    }
+                },
+                {
+                    src: '../static/reveal.js-3.7.0/plugin/highlight/highlight.js',
+                    async: true,
+                    callback: function () {
+                        hljs.initHighlightingOnLoad();
+                    }
+                },
+                {
+                    src: '../static/reveal.js-3.7.0/plugin/search/search.js',
+                    async: true
+                },
+                {
+                    src: '../static/reveal.js-3.7.0/plugin/zoom-js/zoom.js',
+                    async: true
+                },
+                {
+                    src: '../static/reveal.js-3.7.0/plugin/notes/notes.js',
+                    async: true
+                }
+            ]
+        });
+    </script>
+
+</body>
+
+</html>

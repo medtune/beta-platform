@@ -37,4 +37,5 @@ gen.config.yml
 *.xlsx
 
 reveal.js-3.7.0/
-
+#vscode settings
+.vscode
