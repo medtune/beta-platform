@@ -1,4 +1,4 @@
-//+build !prod
+//+build !prod debug
 
 package server
 
