@@ -16,26 +16,32 @@
     background-color: #d64911;
 }
 .barre--active{
-    height:30px;
+    height:50px;
+}
+.barre--violette-text{
+    color: #8d338a !important;
+}
+.barre--verte-text{
+    color: #b2c039 !important;
+}
+.barre--grise-text{
+    color: #7f898d !important;
+}
+.barre--orange-text{
+    color: #d64911 !important;
 }
 
+.slide-1{
+    margin-bottom: 5em !important;
+}
 #adresse{
     text-align: center;
-    text-overflow: ellipsis;
-    font-size: 30px !important;
-    padding: 80px !important;
-    left:30px;
-    top: 50px;
-    position: relative; 
+    font-size: 0.8em !important;
 }
 #coord{
     text-align: center;
-    text-overflow: ellipsis;
-    font-size: 30px !important;
-    padding: 80px !important;
-    left:30px;
-    top: 50px;
-    position: relative; 
+    font-size: 1em !important;
+    padding: 0.8em;
 }
 
 .slide-2{
@@ -58,6 +64,7 @@ span > li {
 .slide-4{
     text-align: left;
     font-size: 15px !important;
+    margin: 0.5em !important;
 }
 
 .slide-5{
@@ -69,10 +76,7 @@ span > li {
     clear: both;
     display: table;
 }
-[class*="slide-5-img"]{
-    float: center;
-    padding: 15px;
-}
+
 .slide-5-img-1 {width: 8.33%;}
 .slide-5-img-2 {width: 16.66%;}
 .slide-5-img-3 {width: 25%;}
@@ -104,24 +108,21 @@ span > li {
     margin-bottom : 1em !important;
     font-size: 0.8em !important;
 }
-.slide-10{
-    margin-bottom: 1em !important;
-}
+
 .slide-10 > i{
     text-align: left;
     font-size: 0.3em;
 }
 .slide-10 > p{
+    margin-bottom: -0.5em; 
     text-align: left;
     font-size: 0.5em !important;
 }
-.slide-11{
-    padding: 0.2em;
-}
+
 .slide-11 >td{
     border: 2px solid brown;
     border-bottom:0.5px solid brown; 
-    font-size: .5em !important;
+    font-size: .4em !important;
     text-align: center !important;
 }
 .slide-11 > th{
@@ -143,12 +144,8 @@ caption b{
     border: brown 2px solid;
     border-radius: 5px;
 }
-#img-slide-12{
-    width : 100%;
-    height: 100%;
-}
 
-.row>h3, .row>h2{
+.row>h2{
     color:rgb(14, 14, 184);
 }
 
@@ -160,4 +157,9 @@ li>b{
 }
 span>li, span>p{
     color: #333;
+}
+
+#img-slide-14{
+    width : 60%;
+    height: 60%;
 }
