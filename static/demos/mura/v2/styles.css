@@ -132,13 +132,17 @@ img.article-image {
     cursor: default;
     background: #FFF;
     border-radius: .125em;
-    width: 1000px;
+    width: 1050px;
     height: auto;
     box-shadow: 0 25px 35px 0 rgba(0, 0, 0, 0.35);
     top: 10%;
-    right: calc(50% - 500px);
-    max-height: calc(100vh - 130px);
+    right: calc(50% - 525px);
+    max-height: calc(100vh - 90px);
     overflow-y: auto;
+}
+
+canvas {
+    margin: auto;
 }
 
 
@@ -211,4 +215,24 @@ img.article-image {
 .results-bars {
     padding-top: 15px;
     padding-left: 20px;
+}
+
+.cntt-prev {
+    color: #757575;
+    margin: 0 auto;
+    padding-left:13px;
+}
+
+.cntt-prev-ctrl {
+    padding: 110px 35px 0 35px;
+}
+
+.prev-clear-btn:hover{
+    color: white;
+    background-color: #5663b7;
+}
+
+.prev-clear-btn{
+    color: #5663b7;
+    background-color: white;
 }

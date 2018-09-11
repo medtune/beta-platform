@@ -28,7 +28,9 @@ type CamResult struct {
 	RoundTrip time.Duration `json:"round_trip"`
 }
 
+// StatusResult .
 type StatusResult struct {
+	ModelID   string        `json:"model_id"`
 	Status    string        `json:"status"`
 	Version   int64         `json:"version"`
 	RoundTrip time.Duration `json:"round_trip"`
@@ -44,8 +46,9 @@ type ProcessResult struct {
 
 // ServiceStatus .
 type ServiceStatus struct {
-	Healthy  bool  `json:"healthy"`
-	UnixTime int64 `json:"unix_time"`
+	Healthy   bool          `json:"healthy"`
+	UnixTime  int64         `json:"unix_time"`
+	RoundTrip time.Duration `json:"round_trip"`
 }
 
 // TestResponse .
@@ -55,13 +58,13 @@ type TestResponse struct {
 
 // GetPathologyALResponse .
 type GetPathologyALResponse struct {
-	Table interface{} `json:"table"`
+	Pathology string      `json:"pathology"`
+	Table     interface{} `json:"table"`
 }
 
 // GetSpecPoolGridResponse .
 type GetSpecPoolGridResponse struct {
-	Pathology string      `json:"pathology"`
-	Specs     interface{} `json:"specs"`
+	Specs interface{} `json:"specs"`
 }
 
 // JobResult .
@@ -85,4 +88,17 @@ type CustomExecutionResponse struct {
 	Jobs               []*JobResult  `json:"jobs"`
 	Errors             []string      `json:"errors"`
 	Warnings           []string      `json:"warnings"`
+}
+
+type CapsulHealthCheckResponse struct {
+	Healthy   bool          `json:"healthy"`
+	Status    string        `json:"status"`
+	Version   int64         `json:"version"`
+	RoundTrip time.Duration `json:"round_trip"`
+}
+
+// CapsulGlobalHealthCheckResponse .
+type CapsulGlobalHealthCheckResponse struct {
+	RoundTrip time.Duration                `json:"round_trip"`
+	Report    []*CapsulHealthCheckResponse `json:"report"`
 }

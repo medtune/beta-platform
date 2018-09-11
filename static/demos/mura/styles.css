@@ -88,3 +88,23 @@
 .keykey {
     margin-top: 10px;
 }
+
+.cntt-prev {
+    color: #757575;
+    margin: 0 auto;
+    padding-left:13px;
+}
+
+.cntt-prev-ctrl {
+    padding: 110px 25px 0 25px;
+}
+
+.prev-clear-btn:hover{
+    color: white;
+    background-color: #5663b7;
+}
+
+.prev-clear-btn{
+    color: #5663b7;
+    background-color: white;
+}

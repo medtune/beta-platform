@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.replicas.yml -o deploy/kubernetes
+    kompose.version: 1.16.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mura-irn-v2
+  name: mura-irn-v2
+spec:
+  ports:
+  - name: "10021"
+    port: 10021
+    targetPort: 10021
+  selector:
+    io.kompose.service: mura-irn-v2
+status:
+  loadBalancer: {}

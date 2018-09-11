@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"path/filepath"
 	"time"
 
 	pb "tensorflow_serving/apis"
@@ -20,6 +21,8 @@ import (
 var (
 	// ChexrayDN121Client .
 	ChexrayDN121Client *tfsclient.Client
+	// ChexrayDN121CamClient .
+	ChexrayDN121CamClient *tfsclient.RestClient
 	// ChexrayPPHelper .
 	ChexrayPPHelper *tfsclient.RestClient
 	// ChexrayMNV2Client .
@@ -78,17 +81,20 @@ func RunChexrayInference(ctx context.Context, infData *jsonutil.RunImageInferenc
 
 	} else if infData.ModelID == "chexray-dn-121" {
 
-		// Preprocess Image
-		pprequest, err := ChexrayPPHelper.Process(ctx, &tfsclient.ProcessRequest{Target: infData.File})
+		// Preprocess Image request
+		pprequest, err := ChexrayPPHelper.Process(ctx, &tfsclient.ProcessRequest{
+			Target: filepath.Base(infData.File),
+		})
 		if err != nil {
 			return nil, err
 		}
 
+		// validate success
 		if !pprequest.Success {
 			return nil, fmt.Errorf("chexray preprocessing request failed: %v:%v", pprequest, err)
 		}
 
-		// Transform out string to [][][][][]float32
+		// convert string to [][][][][]float32
 		var data [][][][][]float32
 		err = json.Unmarshal([]byte(pprequest.Out), &data)
 		if err != nil {
@@ -106,10 +112,11 @@ func RunChexrayInference(ctx context.Context, infData *jsonutil.RunImageInferenc
 			}
 		}
 
-		// Run request
+		// prepare request
 		request := pbreq.PredictFTest(stdimpl.ChexrayDN121, dataList)
 		start := time.Now()
 
+		// send prediction request
 		response, err := ChexrayDN121Client.Predict(ctx, request)
 		if err != nil {
 			return nil, err
@@ -139,7 +146,7 @@ func RunChexrayCAM(ctx context.Context, camData *jsonutil.RunImageCam) (*jsonuti
 
 	if camData.ModelID == "chexray-mn-v2-cam" {
 		start := time.Now()
-		r, err := ChexrayMNV2CamClient.Cam(context.Background(), &tfsclient.CamRequest{
+		r, err := ChexrayMNV2CamClient.Cam(ctx, &tfsclient.CamRequest{
 			Target: camData.Target,
 			Dest:   camData.Output,
 			Force:  camData.Force,

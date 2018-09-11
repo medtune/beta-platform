@@ -19,6 +19,7 @@ const (
 
 		<div class="fab" id="fabm">
 		
+
 		    <div class="cntt-wrapper" id="cntt-wrapper">
 				<div id="fab-hdr">
 			  		<h3 id="title">Result</h3>
@@ -28,6 +29,75 @@ const (
 						</button>
 					</div>
 				</div>
+
+				<div class="cntt-prev-ctrl mdl-grid" id="cntt-prev-ctrl">
+					<div class="mdl-cell mdl-cell-3--col" style="width: auto;">
+						<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" id="remove-brightness">
+							<i class="material-icons">remove</i>
+						</button>
+						<span style="color: black">Brightness</span>
+						<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" id="add-brightness">
+							<i class="material-icons">add</i>
+						</button>
+					</div>
+
+					<div class="mdl-cell mdl-cell-3--col" style="width: auto;">
+						<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" id="remove-contrast">
+							<i class="material-icons">remove</i>
+						</button>
+						<span style="color: black">Contrast</span>
+						<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" id="add-contrast">
+							<i class="material-icons">add</i>
+						</button>
+					</div>
+
+					<div class="mdl-cell mdl-cell-3--col" style="width: auto;">
+						<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" id="remove-saturation">
+							<i class="material-icons">remove</i>
+						</button>
+						<span style="color: black">Saturation</span>
+						<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" id="add-saturation">
+							<i class="material-icons">add</i>
+						</button>
+					</div>
+
+					<div class="mdl-cell mdl-cell-3--col" style="width: auto;">
+						<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" id="remove-noise">
+							<i class="material-icons">remove</i>
+						</button>
+						<span style="color: black">Noise</span>
+						<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" id="add-noise">
+							<i class="material-icons">add</i>
+						</button>
+					</div>
+
+					<div class="mdl-cell mdl-cell-3--col" style="width: auto;">
+						<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" id="remove-hue">
+							<i class="material-icons">remove</i>
+						</button>
+						<span style="color: black">Hue</span>
+						<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" id="add-hue">
+							<i class="material-icons">add</i>
+						</button>
+					</div>
+					<div class="mdl-cell mdl-cell-3--col" style="width: auto;">
+						<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" id="remove-vibrance">
+							<i class="material-icons">remove</i>
+						</button>
+						<span style="color: black">Vibrance</span>
+						<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" id="add-vibrance">
+							<i class="material-icons">add</i>
+						</button>
+					</div>
+					<div class="mdl-cell mdl-cell-3--col" style="width: auto;">
+						<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab prev-clear-btn" id="prev-clear">
+							<i class="material-icons">clear</i>
+						</button>
+					</div>
+				</div>
+				<div class="cntt-prev mdl-grid" id="cntt-prev">
+					<canvas class="mdl-cell mdl-cell-12--col" id="canvas" style=""></canvas>
+				</div>
 		
 				<div class="cntt mdl-grid" id="cntt">
 					<div class="mdl-cell mdl-cell--6-col">
@@ -36,12 +106,12 @@ const (
 							<span id="r1">{class} :</span>
 							<span id="s1" class=""> {score} </span>
 						</div>
-						<div id="p1" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 20px"></div>
+						<div id="p1" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 11px"></div>
 						<div class="mdl-list__item">
 							<span id="r2">{class} :</span>
 							<span id="s2" class=""> {score}</span>
 						</div>
-						<div id="p2" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 20px"></div>
+						<div id="p2" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 11px"></div>
 					</div>	
 					</div>
 					<div class="mdl-cell mdl-grid mdl-cell--6-col metadata">
@@ -96,6 +166,7 @@ const (
 		 	</div>
 		</div>
 
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/camanjs/4.1.2/caman.full.min.js"></script>
 		<script src="/static/demos/mura/v2/load.js"></script>
 
 		<!-- ----------- -->

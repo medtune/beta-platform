@@ -5,6 +5,10 @@
     padding-bottom: 50px;
 }
 
+.chexray-grid {
+    height: auto;
+}
+
 .chexray-grid-view {
     max-width: 1000px;
     padding-top: 20px;
@@ -14,7 +18,7 @@
 .demo-card-square > .mdl-card__title {
     height: 400px;
     color: #fff;
-    background: url('/static/demos/chexray/images/image_0.png') #46B6AC;
+    background: url('/static/demos/chexray/images/image_0.png') rgb(186, 186, 186);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -22,17 +26,30 @@
 
 .chexray-settings-ctx {
     min-height: 200px;
-    min-width: 400px;
+    min-width: 500px;
 }
 
 .settings-container {
     padding-top: 50px;
     display: table;
     margin: 0 auto;
+    width: 500px;
 }
 
 .settings-card {
-    width: 400px;
+    width: auto;
+}
+
+.model-dropdown {
+    width: 500px;
+}
+
+.name-label {
+    width: 500px;
+}
+
+.file-label {
+    width: 500px;
 }
 
 .ctrl-btn {
@@ -64,6 +81,19 @@
     color: rgb(32, 125, 255);
     background: rgb(255, 255, 255);
 }
+
+.preview-btn {
+    right: 80px;
+    color: rgb(54, 94, 213);
+    background-color: white;
+}
+
+.preview-btn:hover {
+    right: 80px;
+    color: white;
+    background-color: rgb(54, 94, 213);
+}
+
 
 img.article-image {
     height: 250px;
@@ -102,11 +132,13 @@ img.article-image {
     cursor: default;
     background: #FFF;
     border-radius: .125em;
-    width: 1000px;
+    width: 1050px;
     height: auto;
     box-shadow: 0 25px 35px 0 rgba(0, 0, 0, 0.35);
     top: 10%;
-    right: calc(50% - 500px);
+    right: calc(50% - 525px);
+    max-height: calc(100vh - 90px);
+    overflow-y: auto;
 }
 
 
@@ -137,6 +169,16 @@ img.article-image {
     color: #757575;
 }
 
+.cntt-prev {
+    color: #757575;
+    margin: 0 auto;
+    padding-left:13px;
+}
+
+.cntt-prev-ctrl {
+    padding: 110px 25px 0 25px;
+}
+
 .btn-wrapper {
     position: absolute;
     right: 0;
@@ -155,3 +197,43 @@ img.article-image {
     color: rgb(255, 255, 255);
     background-color: rgba(45, 45, 45, 0.507);
 }
+
+.stats-list {
+    width: fit-content;
+    padding-left:70px;
+}
+
+.stats-value {
+    color: rgb(0, 0,0);
+    font-weight: 350;
+    text-decoration: none;
+}
+
+.stats-sub-title {
+    width: 160px;
+    font-weight: 350;
+}
+
+.center-ctx {
+    align-content: center;
+}
+
+.results-bars {
+    padding-top: 15px;
+    padding-left: 20px;
+}
+
+.table-cxpba {
+    width: 100%;
+}
+
+.prev-clear-btn:hover{
+    color: white;
+    background-color: #5663b7;
+}
+
+.prev-clear-btn{
+    color: #5663b7;
+    background-color: white;
+}
+

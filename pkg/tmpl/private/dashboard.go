@@ -6,8 +6,8 @@ const Dashboard = `{{define "dashboard"}}
 		<div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
 		<a href="#overview" class="mdl-layout__tab is-active">Overview</a>
 			<a href="#features" class="mdl-layout__tab">Stats</a>
-			<a href="#features" class="mdl-layout__tab">Capsules</a>
-			<a href="#features" class="mdl-layout__tab">Storage</a>
+			<a href="#capsules" class="mdl-layout__tab">Capsules</a>
+			<a href="#storage" class="mdl-layout__tab">Storage</a>
 			<a href="#config" class="mdl-layout__tab">Config</a>
 			<a href="#features" class="mdl-layout__tab"></a>
 			<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent" id="add">
@@ -18,7 +18,7 @@ const Dashboard = `{{define "dashboard"}}
 	</header>
 		<main class="mdl-layout__content">
 
-			<div class="mdl-layout__tab-panel is-active" id="overview">
+			<div class="mdl-layout__tab-panel is-active" id="overview" style="padding-bottom: 50px;">
             	<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
 					<div class="mdl-card mdl-cell mdl-cell--12-col">
 						<div class="mdl-card__supporting-text">
@@ -110,6 +110,95 @@ const Dashboard = `{{define "dashboard"}}
                 <li>Lorem labore proident officia excepteur do.</li>
               </ul>
             </div>
+          </section>
+    </div>
+    
+    <div class="mdl-layout__tab-panel" id="capsules">
+          <section class="section--center mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--6-col">
+              <button class="mdl-button mdl-js-button mdl-button--colored" onclick="runGlobalHealthCheck();">
+                 HEALTH CHECK
+              </button>
+              <button class="mdl-button mdl-js-button mdl-button--colored" onclick="runGlobalTests();">
+                RUN TESTS
+              </button>
+              
+              <button class="mdl-button mdl-js-button mdl-button--colored" onlick="runGlobalBenchmarks();">
+                RUN BENCHMARKS
+              </button>
+            </div>
+
+            <div class="mdl-cell mdl-cell--6-col">
+            </div>
+
+            {{range .Capsules}}
+              <div class="mdl-cell mdl-cell--4-col">
+                <ul class="demo-list-two mdl-list">
+                  <li class="mdl-list__item mdl-list__item--two-line">
+                    <span class="mdl-list__item-primary-content">
+                      <i class="material-icons mdl-list__item-avatar">filter_tilt_shift</i>
+                      <span>{{ .Name }}</span>
+                      <span class="mdl-list__item-sub-title">{{ .Address }}</span>
+                    </span>
+                    <button class="mdl-button mdl-js-button mdl-button--icon" onclick="updateModelStatus({{ .Name }});" id="check-{{ .Name }}">
+                        <i class="material-icons" id="referesh-{{ .Name }}">cached</i>
+                        <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active" style="display: none;" id="load-{{ .Name }}"></div>
+                    </button>
+                    <span class="mdl-list__item-secondary-content">
+                      <span class="mdl-list__item-secondary-info">Status</span>
+                      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons" id="status-{{ .Name }}">remove</i></a>
+                    </span>
+                  </li>
+                </ul>
+             </div>
+             {{end}}
+            <div class="mdl-cell mdl-cell--12-col">
+              
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing">
+
+          </section>
+    </div>
+    
+    <div class="mdl-layout__tab-panel" id="storage">
+          <section class="section--center mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--6-col">
+              <button class="mdl-button mdl-js-button mdl-button--colored" onclick="runGlobalHealthCheck();">
+                 HEALTH CHECK
+              </button>
+            </div>
+
+            <div class="mdl-cell mdl-cell--6-col">
+            </div>
+
+            {{range .Storage}}
+              <div class="mdl-cell mdl-cell--4-col">
+                <ul class="demo-list-two mdl-list">
+                  <li class="mdl-list__item mdl-list__item--two-line">
+                    <span class="mdl-list__item-primary-content">
+                      <i class="material-icons mdl-list__item-avatar">filter_tilt_shift</i>
+                      <span>{{ .Name }}</span>
+                      <span class="mdl-list__item-sub-title">{{ .Address }}</span>
+                    </span>
+                    <button class="mdl-button mdl-js-button mdl-button--icon" onclick="updateModelStatus({{ .Name }});" id="check-{{ .Name }}">
+                        <i class="material-icons" id="referesh-{{ .Name }}">cached</i>
+                        <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active" style="display: none;" id="load-{{ .Name }}"></div>
+                    </button>
+                    <span class="mdl-list__item-secondary-content">
+                      <span class="mdl-list__item-secondary-info">Status</span>
+                      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons" id="status-{{ .Name }}">remove</i></a>
+                    </span>
+                  </li>
+                </ul>
+             </div>
+             {{end}}
+            <div class="mdl-cell mdl-cell--12-col">
+              
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing">
+
           </section>
 		</div>
 

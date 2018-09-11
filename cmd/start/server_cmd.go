@@ -19,12 +19,12 @@ import (
 	"log"
 	"time"
 
+	"github.com/medtune/beta-platform/hack/xlsx2pg/xlsx2pg"
+
 	"github.com/gin-gonic/gin"
 	"github.com/medtune/go-utils/crypto"
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v2"
-
-	"github.com/medtune/beta-platform/hack/xlsx2pg/xlsx2pg"
 
 	"github.com/medtune/beta-platform/cmd/root"
 	"github.com/medtune/beta-platform/pkg/config"
@@ -47,6 +47,7 @@ var (
 	createUsers   bool
 	cxpbaSync     bool
 	cxpbaFile     string
+	soft          bool
 )
 
 func init() {
@@ -56,10 +57,11 @@ func init() {
 	startCmd.Flags().StringVarP(&static, "static", "s", "./static", "Static files directory")
 	startCmd.Flags().StringVarP(&staticBaseURL, "static-url", "z", "/static", "static base url")
 
+	startCmd.Flags().BoolVarP(&soft, "soft", "S", false, "don't panic mode")
 	startCmd.Flags().BoolVarP(&syncdb, "syncdb", "x", false, "Sync database before start")
 	startCmd.Flags().BoolVarP(&createUsers, "create-users", "y", false, "Create default users before start")
 	startCmd.Flags().BoolVarP(&wait, "wait", "w", false, "Wait all services to go up")
-	startCmd.Flags().IntVarP(&maxattempts, "wait-attempts", "c", 30, "Wait max attempts")
+	startCmd.Flags().IntVarP(&maxattempts, "wait-attempts", "c", 180, "Wait max attempts")
 	startCmd.Flags().IntVarP(&timestamp, "wait-timestamp", "t", 1, "Wait timestamp")
 
 	startCmd.Flags().BoolVarP(&cxpbaSync, "sync-cxpba", "X", false, "Sync CXBPA before start")
@@ -85,18 +87,20 @@ func runServer() {
 		gin.SetMode(gin.DebugMode)
 	} else if ginMode == 1 {
 		gin.SetMode(gin.ReleaseMode)
-	} else {
+	} else if !soft {
 		log.Fatalf("unknown gin mode: %v", ginMode)
+	} else {
+
 	}
 
 	// Load configuration
 	configuration, err := config.LoadConfigFromPath(configFile)
-	if err != nil {
+	if err != nil && !soft {
 		log.Fatalln(err)
 	}
 
 	// Init packages
-	if err := initpkg.InitFromConfig(configuration); err != nil {
+	if err := initpkg.InitFromConfig(configuration); err != nil && !soft {
 		log.Fatalln(err)
 	}
 
@@ -116,12 +120,12 @@ func runServer() {
 				// waiting for err == 0 or attempt > maxattempts
 				for err != nil && attempt < maxattempts {
 					time.Sleep(time.Duration(timestamp) * time.Second)
-					fmt.Printf("waiting for database response (host: %s)\n", configuration.Database.Creds.Host)
+					fmt.Printf("waiting for database response (host: %s) (attempt: %d)\n", configuration.Database.Creds.Host, attempt)
 					err = store.Agent.Sync()
 					attempt++
 				}
 			}
-			if err != nil {
+			if err != nil && !soft {
 				log.Fatalln(err)
 			}
 

@@ -8,6 +8,7 @@ import (
 
 	"github.com/medtune/beta-platform/pkg"
 	"github.com/medtune/beta-platform/pkg/service/demo"
+	"github.com/medtune/beta-platform/pkg/store"
 	"github.com/medtune/beta-platform/pkg/tmpl"
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
 )
@@ -25,8 +26,12 @@ func Chexray(c *gin.Context) {
 func ChexrayV2(c *gin.Context) {
 	images, err := demo.CollectImagesData("chexray")
 	if err != nil {
-		c.Redirect(302, "/error/500")
-		return
+		images = nil
+	}
+
+	cxpbaData, err := store.Agent.GetSpecs(nil)
+	if err != nil {
+		cxpbaData = nil
 	}
 
 	c.Status(200)
@@ -35,7 +40,8 @@ func ChexrayV2(c *gin.Context) {
 			Version:   pkg.VERSION,
 			PageTitle: "Demo V2: Chest X-Ray Classification",
 		},
-		Samples: images,
+		Samples:    images,
+		Cxpbatable: cxpbaData,
 	})
 }
 

@@ -10,11 +10,19 @@ var overlay = $("#overlay"),
       camCC = $("#cam-cc");
   camTiming = $("#cam-timing");
        cntt = $("#cntt");
-
+   cnttPrev = $("#cntt-prev");
+  cnttPCtrl = $("#cntt-prev-ctrl");
+ pageHeader = $("#page-header");
+     tabBar = $("#tab-bar");
+     
 // Set modal title
 function _setModalTitle(title) {
     document.getElementById("title").innerHTML = title;
 }
+
+
+cnttPCtrl.hide();
+cnttPrev.hide();
 
 // Set Modal results
 // Will show grad-cam/preview if a grad cam result exist
@@ -81,6 +89,11 @@ function closeFAB(event) {
     };
     fab.removeClass('active');
     overlay.removeClass('dark-overlay');
+    cntt.hide();
+    cnttPrev.hide();
+    cnttPCtrl.hide();
+    tabBar.slideDown();
+    pageHeader.slideDown();
     _cleanModal();
 }
 
@@ -88,8 +101,20 @@ function closeFAB(event) {
 
 // Open modal pop up to preview image 
 function previewCase(image) {
-    _setModalTitle("Preview");
-    _setModalPreview(image);
+    _setModalTitle("Preview:&nbsp;" + image);
+    cntt.hide();
+    console.log("preview:", image)
+    cnttPrev.html('<canvas id="canvas"></canvas>');
+    Caman("#canvas", "/static/demos/mura/images/"+image, function () {
+        // operation
+        this.render();
+
+    });
+    fab.css('top', '10%');
+    cnttPrev.show();
+    cnttPCtrl.show();
+    tabBar.slideUp();
+    openFAB();
 }
 
 // Query engine type from settings dropdown
@@ -108,7 +133,7 @@ function _getEngineType() {
 // Request the server to run cam and inference before
 // showing the results in the main modal pop up
 function processCase(image) {
-    _setModalTitle("Result 1");
+    _setModalTitle("Result:&nbsp;" + image);
     var m = _getEngineType();
     data = {
         'target' : image,
@@ -127,9 +152,10 @@ function processCase(image) {
             var d = r.data;
             if (resp.success == true) {
                 console.log('success\n\t', r);
-                if (d.errors == null || d.errors.lenght == 1) {
+                if (d.errors == null || d.errors.length == 1) {
                     //_alertFailure(d.errors);
                     _setModalResults(image, d, diff(start, end));
+                    cntt.show();
                     openFAB();
                 } else {
                     console.log("proc failed:", d.errors);
@@ -140,3 +166,108 @@ function processCase(image) {
             };
         });
 }
+
+var removeBrightness = $("#remove-brightness");
+var addBrightness = $("#add-brightness");
+var removeContrast = $("#remove-contrast");
+var addContrast = $("#add-contrast");
+var removeSaturation = $("#remove-saturation");
+var addSaturation = $("#add-saturation");
+var removeNoise = $("#remove-noise");
+var addNoise = $("#add-noise");
+var removeHue = $("#remove-hue");
+var addHue = $("#add-hue");
+var removeVibrance = $("#remove-vibrance");
+var addVibrance = $("#add-vibrance");
+var clearBtn = $("#prev-clear");
+
+removeBrightness.click(function() {
+    Caman("#canvas", function () {
+        // operation
+        this.brightness(-5).render();
+    });
+})
+
+addBrightness.click(function() {
+    Caman("#canvas", function () {
+        // operation
+        this.brightness(5).render();
+    });
+})
+
+removeContrast.click(function() {
+    Caman("#canvas", function () {
+        // operation
+        this.contrast(-5).render();
+    });
+})
+
+addContrast.click(function() {
+    Caman("#canvas", function () {
+        // operation
+        this.contrast(5).render();
+    });
+})
+
+removeSaturation.click(function() {
+    Caman("#canvas", function () {
+        // operation
+        this.saturation(-5).render();
+    });
+})
+
+addSaturation.click(function() {
+    Caman("#canvas", function () {
+        // operation
+        this.saturation(5).render();
+    });
+})
+
+removeNoise.click(function() {
+    Caman("#canvas", function () {
+        // operation
+        this.noise(-5).render();
+    });
+})
+
+addNoise.click(function() {
+    Caman("#canvas", function () {
+        // operation
+        this.noise(5).render();
+    });
+})
+
+removeHue.click(function() {
+    Caman("#canvas", function () {
+        // operation
+        this.hue(-5).render();
+    });
+})
+
+addHue.click(function() {
+    Caman("#canvas", function () {
+        // operation
+        this.hue(5).render();
+    });
+})
+
+
+removeVibrance.click(function() {
+    Caman("#canvas", function () {
+        // operation
+        this.vibrance(-5).render();
+    });
+})
+
+addVibrance.click(function() {
+    Caman("#canvas", function () {
+        // operation
+        this.vibrance(5).render();
+    });
+})
+
+clearBtn.click(function(){
+    Caman('#canvas', function() {
+        this.revert();
+    })
+})

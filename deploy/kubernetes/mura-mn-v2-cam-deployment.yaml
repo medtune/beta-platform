@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.replicas.yml -o deploy/kubernetes
+    kompose.version: 1.16.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mura-mn-v2-cam
+  name: mura-mn-v2-cam
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: mura-mn-v2-cam
+    spec:
+      containers:
+      - image: medtune/capsul:mura-mn-v2-cam
+        name: mura-mn-v2-cam
+        ports:
+        - containerPort: 11020
+        resources: {}
+        volumeMounts:
+        - mountPath: /medtune/data
+          name: mura-images
+      restartPolicy: Always
+      volumes:
+      - name: mura-images
+        persistentVolumeClaim:
+          claimName: mura-images
+status: {}

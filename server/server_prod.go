@@ -110,7 +110,13 @@ func assembleHandlers(server *gin.Engine) {
 	API.POST("/test", api.Test)
 
 	APICAPSUL := API.Group("/capsul")
-	APICAPSUL.GET("/status", api.CapsulStatus)
+	APICAPSUL.POST("/status", api.CapsulStatus)
+	APICAPSUL.GET("/list", api.CapsulList)
+	APICAPSUL.GET("/test", api.CapsulTest)
+	APICAPSUL.GET("/benchmark", api.CapsulBenchmark)
+	APICAPSUL.GET("/global_healthchecks", api.CapsulGlobalHealthChecks)
+	APICAPSUL.GET("/global_tests", api.CapsulGlobalTests)
+	APICAPSUL.GET("/global_benchmarks", api.CapsulGlobalBenchmarks)
 
 	APIDEMOS := API.Group("/demos")
 	APIDEMOS.POST("/mnist/run_inference", api.MnistRunInference)
@@ -121,6 +127,8 @@ func assembleHandlers(server *gin.Engine) {
 	APIDEMOS.POST("/chexray/run_inference", api.ChexrayRunInference)
 	APIDEMOS.POST("/chexray/run_cam", api.ChexrayRunCam)
 	APIDEMOS.POST("/chexray/process", api.ChexrayProcess)
+	APIDEMOS.POST("/chexray/cxpba/pathology_al", api.PathologyAL)
+	APIDEMOS.POST("/chexray/cxpba/spec_ap", api.SpecAnalysisPool)
 
 	DATAHUB := API.Group("/datahub")
 	DATAHUB.POST("/upload/:demo", api.DemoDataUpload)

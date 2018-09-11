@@ -76,6 +76,7 @@ type Create struct {
 
 // ModelConfig .
 type ModelConfig struct {
+	Name      string `yaml:"name"`
 	Model     string `yaml:"model"`
 	Signature string `yaml:"signature"`
 	Version   int    `yaml:"version"`

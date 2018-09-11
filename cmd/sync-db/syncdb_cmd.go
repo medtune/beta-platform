@@ -44,7 +44,7 @@ func init() {
 // syncdbCmd represents the syncdb command
 var autoMigrateCmd = &cobra.Command{
 	Use:     "automigrate",
-	Aliases: []string{"syncdb"},
+	Aliases: []string{"sync-db", "syncdb"},
 	Short:   "Auto migrate database",
 	Long: `Sync database models by updating/creating existing 
 database tables`,

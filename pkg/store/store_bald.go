@@ -13,9 +13,9 @@ type bioAnalysisStore interface {
 	GetPathologiesAL() (*[]model.PathologyAnalysisLevel, error)
 
 	// Specs
-	CreateSpec(string, string, float64, float64) error
+	CreateSpec(string, string, string, string) error
 	GetSpec(string) (*model.SpecAnalysisPool, error)
-	GetSpecs() (*[]model.SpecAnalysisPool, error)
+	GetSpecs([]string) (*[]model.SpecAnalysisPool, error)
 }
 
 // CreatePathologyAL .
@@ -36,11 +36,14 @@ func (s *Store) GetPathologyAL(name string) (*model.PathologyAnalysisLevel, erro
 	pal := &model.PathologyAnalysisLevel{}
 	has, err := s.Where("name = ?", name).Get(pal)
 	if err != nil {
+		fmt.Println("trolololol")
 		return nil, err
 	}
+
 	if !has {
 		return nil, fmt.Errorf("record doesnt exist: %v", err)
 	}
+
 	return pal, nil
 }
 
@@ -51,11 +54,12 @@ func (s *Store) GetPathologiesAL() (*[]model.PathologyAnalysisLevel, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	return &pal, nil
 }
 
 // CreateSpec .
-func (s *Store) CreateSpec(name string, unit string, min float64, max float64) error {
+func (s *Store) CreateSpec(name string, unit string, min string, max string) error {
 	m := &model.SpecAnalysisPool{
 		Name: name,
 		Unit: unit,
@@ -85,11 +89,14 @@ func (s *Store) GetSpec(name string) (*model.SpecAnalysisPool, error) {
 }
 
 // GetSpecs .
-func (s *Store) GetSpecs() (*[]model.SpecAnalysisPool, error) {
+func (s *Store) GetSpecs(ignore []string) (*[]model.SpecAnalysisPool, error) {
 	var specs []model.SpecAnalysisPool
+	// TODO Ignore specs
+
 	err := s.Find(&specs)
 	if err != nil {
-		return nil, fmt.Errorf("cant find specs: %v", err)
+		return nil, fmt.Errorf("find specs failed: %v", err)
 	}
+
 	return &specs, nil
 }

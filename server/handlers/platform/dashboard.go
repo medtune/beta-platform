@@ -17,9 +17,11 @@ func Dashboard(c *gin.Context) {
 	c.Status(200)
 	versionB, _ := json.MarshalIndent(pkg.GetVersion(), "", "    ")
 	configB, _ := yaml.Marshal(dashboard.StartupConfig)
+	capsules, _ := dashboard.GetCapsulesList()
 	tmpl.Dashboard.Execute(c.Writer, &data.Dashboard{
-		Title:   "Dashboard",
-		Version: string(versionB),
-		Config:  string(configB),
+		Title:    "Dashboard",
+		Version:  string(versionB),
+		Config:   string(configB),
+		Capsules: capsules,
 	})
 }

@@ -12,6 +12,7 @@ medtune-beta
 
 # dev config
 dev.config.yml
+dev.docker-compose.yml
 
 # dev dockerfile
 local.Dockerfile

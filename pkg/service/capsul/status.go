@@ -26,7 +26,7 @@ func GetStatus(ctx context.Context, r *jsonutil.GetStatus) (*jsonutil.StatusResu
 	start := time.Now()
 
 	switch r.ModelID {
-	case "mnist":
+	case "mnist-lenet":
 		resp, err := MnistClient.Status(ctx, pbreq.Status(stdimpl.Mnist))
 		if err != nil {
 			return nil, err
@@ -34,7 +34,7 @@ func GetStatus(ctx context.Context, r *jsonutil.GetStatus) (*jsonutil.StatusResu
 		rt = time.Since(start)
 		status = resp
 
-	case "inception":
+	case "imagenet-inception-v3":
 		resp, err := InceptionClient.Status(ctx, pbreq.Status(stdimpl.Inception))
 		if err != nil {
 			return nil, err
@@ -42,7 +42,7 @@ func GetStatus(ctx context.Context, r *jsonutil.GetStatus) (*jsonutil.StatusResu
 		rt = time.Since(start)
 		status = resp
 
-	case "mura-mn-v2":
+	case "mura-mobilenet-v2":
 		resp, err := MuraMNV2Client.Status(ctx, pbreq.Status(stdimpl.MuraMNV2))
 		if err != nil {
 			return nil, err
@@ -50,7 +50,7 @@ func GetStatus(ctx context.Context, r *jsonutil.GetStatus) (*jsonutil.StatusResu
 		rt = time.Since(start)
 		status = resp
 
-	case "mura-irn-v2":
+	case "mura-inception-resnet-v2":
 		resp, err := MuraIRNV2Client.Status(ctx, pbreq.Status(stdimpl.MuraIRNV2))
 		if err != nil {
 			return nil, err
@@ -58,7 +58,7 @@ func GetStatus(ctx context.Context, r *jsonutil.GetStatus) (*jsonutil.StatusResu
 		rt = time.Since(start)
 		status = resp
 
-	case "mura-mn-v2-cam":
+	case "mura-mobilenet-v2-cam":
 		resp, err := MuraMNV2CamClient.Status(ctx, nil)
 		if err != nil {
 			return nil, err
@@ -66,7 +66,7 @@ func GetStatus(ctx context.Context, r *jsonutil.GetStatus) (*jsonutil.StatusResu
 		rt = time.Since(start)
 		status = resp
 
-	case "chexray-mn-v2":
+	case "chexray-mobilenet-v2":
 		resp, err := ChexrayMNV2Client.Status(ctx, pbreq.Status(stdimpl.MuraMNV2))
 		if err != nil {
 			return nil, err
@@ -74,7 +74,7 @@ func GetStatus(ctx context.Context, r *jsonutil.GetStatus) (*jsonutil.StatusResu
 		rt = time.Since(start)
 		status = resp
 
-	case "chexray-mn-v2-cam":
+	case "chexray-mobilenet-v2-cam":
 		resp, err := ChexrayMNV2CamClient.Status(ctx, nil)
 		if err != nil {
 			return nil, err
@@ -82,7 +82,7 @@ func GetStatus(ctx context.Context, r *jsonutil.GetStatus) (*jsonutil.StatusResu
 		status = resp
 		rt = time.Since(start)
 
-	case "chexray-dn-121":
+	case "chexray-densenet-121":
 		resp, err := ChexrayDN121Client.Status(ctx, pbreq.Status(stdimpl.ChexrayDN121))
 		if err != nil {
 			return nil, err
@@ -90,11 +90,20 @@ func GetStatus(ctx context.Context, r *jsonutil.GetStatus) (*jsonutil.StatusResu
 		rt = time.Since(start)
 		status = resp
 
+	case "chexray-pp-helper":
+		resp, err := ChexrayPPHelper.Status(ctx, nil)
+		if err != nil {
+			return nil, err
+		}
+		rt = time.Since(start)
+		status = resp
+
 	default:
-		return nil, fmt.Errorf("unkown model id: %s", r.ModelID)
+		return nil, fmt.Errorf("unknown model id: %s", r.ModelID)
 	}
 
 	return &jsonutil.StatusResult{
+		ModelID:   r.ModelID,
 		Status:    pb.ModelVersionStatus_State_name[int32(status.GetModelVersionStatus()[0].State)],
 		Version:   status.GetModelVersionStatus()[0].Version,
 		RoundTrip: rt,

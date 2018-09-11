@@ -45,7 +45,7 @@ const (
 								<span id="r1">{score} :</span>
 								<span id="s1" class=""> {class} </span>
 							</div>
-							<div id="p1" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 20px"></div>
+							<div id="p1" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 11px;"></div>
 							<script>
 								document.querySelector('#p1').addEventListener('mdl-componentupgraded', function() {
 									this.MaterialProgress.setProgress(10);
@@ -57,7 +57,7 @@ const (
 								<span id="r2">{score} :</span>
 								<span id="s2" class=""> {class} </span>
 							</div>
-							<div id="p2" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 20px"></div>
+							<div id="p2" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 11px;"></div>
 							<script>
 								document.querySelector('#p2').addEventListener('mdl-componentupgraded', function() {
 									this.MaterialProgress.setProgress(10);
@@ -69,7 +69,7 @@ const (
 								<span id="r3">{score} :</span>
 								<span id="s3" class=""> {class} </span>
 							</div>
-							<div id="p3" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 20px"></div>
+							<div id="p3" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 11px;"></div>
 							<script>
 								document.querySelector('#p3').addEventListener('mdl-componentupgraded', function() {
 									this.MaterialProgress.setProgress(10);
@@ -81,7 +81,7 @@ const (
 								<span id="r4">{score} :</span>
 								<span id="s4" class=""> {class} </span>
 							</div>
-							<div id="p4" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 20px"></div>
+							<div id="p4" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 11px;"></div>
 							<script>
 								document.querySelector('#p4').addEventListener('mdl-componentupgraded', function() {
 									this.MaterialProgress.setProgress(10);
@@ -93,7 +93,7 @@ const (
 								<span id="r5">{score} :</span>
 								<span id="s5" class=""> {class} </span>
 							</div>
-							<div id="p5" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 20px"></div>
+							<div id="p5" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 11px;"></div>
 							<script>
 								document.querySelector('#p5').addEventListener('mdl-componentupgraded', function() {
 									this.MaterialProgress.setProgress(10);
@@ -105,7 +105,7 @@ const (
 								<span id="r6">{score} :</span>
 								<span id="s6" class=""> {class} </span>
 							</div>
-							<div id="p6" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 20px"></div>
+							<div id="p6" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 11px;"></div>
 							<script>
 								document.querySelector('#p6').addEventListener('mdl-componentupgraded', function() {
 									this.MaterialProgress.setProgress(10);
@@ -117,7 +117,7 @@ const (
 								<span id="r7">{score} :</span>
 								<span id="s7" class=""> {class} </span>
 							</div>
-							<div id="p7" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 20px"></div>
+							<div id="p7" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 11px;"></div>
 							<script>
 								document.querySelector('#p7').addEventListener('mdl-componentupgraded', function() {
 									this.MaterialProgress.setProgress(10);
@@ -129,7 +129,7 @@ const (
 								<span id="r8">{score} :</span>
 								<span id="s8" class=""> {class} </span>
 							</div>
-							<div id="p8" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 20px"></div>
+							<div id="p8" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 11px;"></div>
 							<script>
 								document.querySelector('#p8').addEventListener('mdl-componentupgraded', function() {
 									this.MaterialProgress.setProgress(10);
@@ -141,7 +141,7 @@ const (
 								<span id="r9">{score} :</span>
 								<span id="s9" class=""> {class} </span>
 							</div>
-							<div id="p9" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 20px"></div>
+							<div id="p9" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 11px;"></div>
 							<script>
 								document.querySelector('#p9').addEventListener('mdl-componentupgraded', function() {
 									this.MaterialProgress.setProgress(15);
@@ -153,7 +153,7 @@ const (
 								<span id="r10">{score} :</span>
 								<span id="s10" class=""> {class} </span>
 							</div>
-							<div id="p10" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 20px"></div>
+							<div id="p10" class="mdl-progress prog-bar mdl-js-progress" style="width: 400px; height: 11px;"></div>
 							<script>
 								document.querySelector('#p10').addEventListener('mdl-componentupgraded', function() {
 									this.MaterialProgress.setProgress(10);

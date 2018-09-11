@@ -33,6 +33,6 @@ func getModels() map[string]interface{} {
 	m := make(map[string]interface{}, 3)
 	m["User"] = &model.User{}
 	m["Pathology Analysis Level"] = &model.PathologyAnalysisLevel{}
-	m["Analysis Specifications Pool"] = &model.PathologyAnalysisLevel{}
+	m["Analysis Specifications Pool"] = &model.SpecAnalysisPool{}
 	return m
 }

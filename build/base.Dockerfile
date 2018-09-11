@@ -7,7 +7,6 @@ WORKDIR /go/src/github.com/medtune/beta-platform
 
 ADD build build
 ADD cmd cmd
-ADD deploy deploy
 ADD hack hack
 ADD pkg pkg
 ADD server server
@@ -17,7 +16,6 @@ ADD config.yml .
 ADD Makefile .
 ADD MAINTAINERS.txt .
 ADD LICENSE.txt .
-#ADD CXPBA.xlsx .
+ADD CXPBA.xlsx .
 
 RUN bash ./hack/install-deps.sh --hack
-

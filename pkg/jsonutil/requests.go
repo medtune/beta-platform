@@ -90,6 +90,11 @@ type CustomExecutionRequest struct {
 	Context       string `json:"context" valid:"required"`
 }
 
+// CapsulGlobalHealthCheckRequest .
+type CapsulGlobalHealthCheckRequest struct {
+	Id string `json:"id"`
+}
+
 /*
 # Request example
 {

@@ -47,14 +47,14 @@ func InitFromConfig(c *config.StartupConfig) error {
 		return fmt.Errorf("configuration meta version don't match\n\tpackage version: %v\n\tconfigs version: %v", pkg.VERSION, c.Meta.Version)
 	}
 
-	// init package pkg/session
-	if err := initSession(c.Session); err != nil {
-		return fmt.Errorf("init package session failed: %v", err)
-	}
-
 	// init package pkg/store + pkg/store/db
 	if err := initStore(c.Database, c.Meta.IsProd); err != nil {
 		return fmt.Errorf("init package store failed: %v", err)
+	}
+
+	// init package pkg/session
+	if err := initSession(c.Session); err != nil {
+		return fmt.Errorf("init package session failed: %v", err)
 	}
 
 	// init package pkg/secret

@@ -179,6 +179,14 @@ build-prod:
 		medtune/beta-platform:latest
 
 
+# Build k8s
+build-k8s: #build-base build-compile
+	@echo building kubernetes prod image
+	docker build \
+		-t medtune/beta-platform:k8s \
+		-f build/prod.k8s.Dockerfile \
+		.
+
 # Just let the make make the magic
 build-all: build-base build-compile build-prod
 
@@ -188,6 +196,9 @@ push-image:
 	docker push medtune/beta-platform:$(VERSION)
 	docker push medtune/beta-platform:latest
 
+genk:
+	rm -rf deploy/kubernetes/*
+	kompose convert -f docker-compose.replicas.yml -o deploy/kubernetes
 
 # Test package
 tests:
@@ -261,10 +272,10 @@ chexray-dn-121-cam:
 
 chexray-pp:
 	docker run -dti \
-		--name chexray-pp-helper \ 
-		-p 12030:12030 \
-		-v $(PROJECTPATH)/static/demos/chexray/images:/medtune/data \
-		medtune/capsul:chexray-pp-helper
+			--name chexray-pp-helper \
+			-p 12030:12030 \
+			-v $(PROJECTPATH)/static/demos/chexray/images:/medtune/data \
+			medtune/capsul:chexray-pp-helper
 
 
 run-capsules: mnist \
@@ -320,8 +331,23 @@ start:
 		-f dev.config.yml \
 		--syncdb \
 		--create-users \
+		--sync-cxpba \
 		--wait \
 		--gin-mode 1
+
+run:
+	go run -ldflags="\
+		-X $(VPATH).Major=$(MAJOR) \
+		-X $(VPATH).Minor=$(MINOR) \
+		-X $(VPATH).Patch=$(PATCH)" \
+		-tags=gocv \
+		./cmd/main.go \
+		start \
+		-f dev.config.yml \
+		--syncdb \
+		--sync-cxpba \
+		--create-users \
+		--gin-mode 0
 
 debug:
 	./medtune-beta debug
@@ -331,7 +357,7 @@ up:
 
 down:
 	docker-compose down
-
+  
 clean:
 	rm medtune-beta
 
