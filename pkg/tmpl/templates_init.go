@@ -298,6 +298,8 @@ func CompileTemplates() {
 		SlideHelloWorld = slideHelloWorld
 	}
 
+
+
 	// Datahub page
 	{
 		datahub := template.New("base")
