@@ -15,6 +15,10 @@
 .barre--orange{
     background-color: #d64911;
 }
+.barre--active{
+    height:30px;
+}
+
 #adresse{
     text-align: center;
     text-overflow: ellipsis;
@@ -85,8 +89,11 @@ span > li {
 .slide-6>img{
     height: 5em !important;
 }
-
-.slide-7>li, .slide-7>ul{
+.slide-7{
+    color:#77abd7;
+}
+.slide-7>li{
+    color: #333;
     margin: 0.3em !important;
     font-size: 20px !important;
     text-align: left !important;
@@ -97,8 +104,11 @@ span > li {
     margin-bottom : 1em !important;
     font-size: 0.8em !important;
 }
-
+.slide-10{
+    margin-bottom: 1em !important;
+}
 .slide-10 > i{
+    text-align: left;
     font-size: 0.3em;
 }
 .slide-10 > p{
@@ -138,10 +148,16 @@ caption b{
     height: 100%;
 }
 
-[class*="slide-4"]{
+.row>h3, .row>h2{
     color:rgb(14, 14, 184);
 }
 
-.color-bar-container{
-
+.row > span, p>b{
+    color: #77abd7;
+}
+li>b{
+    color: #d64911;
+}
+span>li, span>p{
+    color: #333;
 }
