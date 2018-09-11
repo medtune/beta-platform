@@ -24,8 +24,8 @@ var (
 	Settings    *template.Template
 
 	// Slides templates
-	SlidesMenu      *template.Template
-	SlideHelloWorld *template.Template
+	SlidesMenu               *template.Template
+	SlideMedtunePresentation *template.Template
 
 	// Demos templates
 	DemosMenu                *template.Template

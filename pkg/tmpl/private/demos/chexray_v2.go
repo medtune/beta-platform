@@ -10,7 +10,6 @@ const (
 			<a href="#cases-panel" class="mdl-tabs__tab is-active">cases</a>
 			<a href="#upload-panel" class="mdl-tabs__tab">Upload</a>
 			<a href="#settings-panel" class="mdl-tabs__tab">Settings</a>
-			<a href="#informations-panel" class="mdl-tabs__tab">Informations</a>
 		</div>
 
 		<!-- ----------- -->
@@ -434,10 +433,6 @@ const (
 				</div>
 
 			</div>
-		</div>
-
-		<div class="mdl-tabs__panel" id="informations-panel">
-			test
 		</div>
 
 	</div>

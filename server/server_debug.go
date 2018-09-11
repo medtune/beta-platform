@@ -3,7 +3,7 @@
 package server
 
 import (
-	"strconv"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 
@@ -17,7 +17,7 @@ func Debug(static string, staticBaseURL string, port int) Engine {
 	server := gin.New()
 	server.Static(staticBaseURL, static)
 	debugHandlers(server)
-	var sport = ":" + strconv.Itoa(port)
+	var sport = fmt.Sprintf(":%d", port)
 	return &engine{
 		engine: server,
 		port:   sport,
@@ -50,6 +50,6 @@ func debugHandlers(g *gin.Engine) {
 		DEBUG.GET("/demos/chexray.v2", debug.ChexrayV2)
 		DEBUG.GET("/demos/sentiment_analysis", debug.SentimentAnalysis)
 		DEBUG.GET("/slides", debug.SlidesMenu)
-		DEBUG.GET("/slides/hello_world", debug.HelloWorld)
+		DEBUG.GET("/slides/medtune_presentation", debug.MedtunePresentation)
 	}
 }

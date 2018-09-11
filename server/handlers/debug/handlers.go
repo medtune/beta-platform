@@ -207,14 +207,13 @@ func SlidesMenu(c *gin.Context) {
 	})
 }
 
-// HelloWorld slide
-func HelloWorld(c *gin.Context) {
+// MedtunePresentation slide
+func MedtunePresentation(c *gin.Context) {
 	c.Status(200)
-	tmpl.SlideHelloWorld.Execute(c.Writer, &data.Slide{
+	tmpl.SlideMedtunePresentation.Execute(c.Writer, &data.Slide{
 		Title: "Slide: Hello World",
 	})
 }
-
 
 // Dashboard .
 func Dashboard(c *gin.Context) {

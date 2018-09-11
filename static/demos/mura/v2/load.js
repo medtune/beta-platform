@@ -121,10 +121,10 @@ function previewCase(image) {
 function _getEngineType() {
     var m = "";
     _model = document.getElementById('model').value;
-    if (_model == "MobileNet V2" || _model == "") {
-        m = "mura-mn-v2";
-    } else if (_model == "Inception ResNet V2") {
+    if (_model == "Inception ResNet V2" || _model == "") {
         m = "mura-irn-v2";
+    } else if (_model == "MobileNet V2") {
+        m = "mura-mn-v2";
     };
     console.log("detected config:", m);
     return m;

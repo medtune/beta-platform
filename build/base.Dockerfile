@@ -14,8 +14,13 @@ ADD static static
 ADD test test
 ADD config.yml .
 ADD Makefile .
+ADD CXPBA.xlsx .
+
 ADD MAINTAINERS.txt .
 ADD LICENSE.txt .
-ADD CXPBA.xlsx .
+
+ADD .codecov.yml .
+ADD .circleci/config.yml .
+ADD .git/ .
 
 RUN bash ./hack/install-deps.sh --hack

@@ -288,17 +288,15 @@ func CompileTemplates() {
 		SlidesMenu = slidesMenu
 	}
 
-	// Slide Hello world
+	// slide Hello world
 	{
-		slideHelloWorld := template.New("base")
-		slideHelloWorld, err = slideHelloWorld.Parse(slides.Base)
+		slideMedtunePresentation := template.New("base")
+		slideMedtunePresentation, err = slideMedtunePresentation.Parse(slides.Base)
 		must(err)
-		slideHelloWorld, err = slideHelloWorld.Parse(slides.HelloWorld)
+		slideMedtunePresentation, err = slideMedtunePresentation.Parse(slides.MedtunePresentation)
 		must(err)
-		SlideHelloWorld = slideHelloWorld
+		SlideMedtunePresentation = slideMedtunePresentation
 	}
-
-
 
 	// Datahub page
 	{

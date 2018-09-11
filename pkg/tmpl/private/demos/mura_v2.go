@@ -10,7 +10,6 @@ const (
 			<a href="#cases-panel" class="mdl-tabs__tab is-active">cases</a>
 			<a href="#upload-panel" class="mdl-tabs__tab">Upload</a>
 			<a href="#settings-panel" class="mdl-tabs__tab">Settings</a>
-			<a href="#informations-panel" class="mdl-tabs__tab">Informations</a>
 		</div>
 
 		<!-- ----------- -->
@@ -253,8 +252,8 @@ const (
 							<input value="" type="hidden" name="model-engine"/>
 							<label class="mdl-textfield__label" for="model">Inference Model</label>
 							<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu" for="model">
-								<li class="mdl-menu__item" data-val="mobilenet-v2">MobileNet V2</li>
 								<li class="mdl-menu__item" data-val="inception-resnet-v2">Inception ResNet V2</li>
+								<li class="mdl-menu__item" data-val="mobilenet-v2">MobileNet V2</li>
 							</ul>
 						</div>
 
@@ -289,9 +288,6 @@ const (
 			</div>
 		</div>
 
-		<div class="mdl-tabs__panel" id="informations-panel">
-		test
-		</div>
 
 	</div>
 </div>

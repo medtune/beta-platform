@@ -1,5 +1,3 @@
-// +build prod
-
 package server
 
 import (
@@ -80,8 +78,7 @@ func assembleHandlers(server *gin.Engine) {
 	ADMIN.GET("/dashboard", platform.Dashboard)
 
 	SLIDES := PROTECTED.Group("/slides")
-	SLIDES.GET("/hello_world", platform.HelloWorld)
-	SLIDES.GET("/")
+	SLIDES.GET("/medtune_presentation", platform.MedtunePresentation)
 
 	// Demonstrations routes
 	DEMOS := PROTECTED.Group("/demos")

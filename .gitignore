@@ -33,9 +33,6 @@ generated-views/
 # Generate config
 gen.config.yml
 
-# excel files
-*.xlsx
-
 reveal.js-3.7.0/
 #vscode settings
 .vscode

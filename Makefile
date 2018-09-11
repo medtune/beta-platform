@@ -218,6 +218,11 @@ test-cov:
 		--build-arg CODECOV_TOKEN=$(CODECOV_TOKEN) \
 		.
 
+	docker run \
+		-v "$(PWD)/shared":/shared \
+		medtune/beta-platform:test
+
+
 
 # setup capsules
 mnist:

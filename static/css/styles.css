@@ -601,7 +601,7 @@ and (max-width : 500px) {
 }
 
 .demos-menu-card > .mdl-card__title__undefined {
-    background: url('/static/images/undenied.jpg') center / cover;
+
 }
 
 .demos-menu-card > .mdl-card__title {
@@ -623,7 +623,7 @@ and (max-width : 500px) {
 }
 
 .slides-menu-card > .mdl-card__title__undefined {
-    background: url('/static/images/undenied.jpg') center / cover;
+
 }
 
 .slides-menu-card > .mdl-card__title__helloworld {

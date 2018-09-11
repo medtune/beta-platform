@@ -15,7 +15,10 @@ jobs:
 
       - run:
           name: test coverage
-          command: make test-cov
+          command: |
+            mkdir -p shared
+            make test-cov
+            bash <(curl -s https://codecov.io/bash)
           
       - run:
           name: push image to registry

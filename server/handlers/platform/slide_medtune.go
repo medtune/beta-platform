@@ -7,10 +7,10 @@ import (
 	"github.com/medtune/beta-platform/pkg/tmpl/data"
 )
 
-// HelloWorld .
-func HelloWorld(c *gin.Context) {
+// MedtunePresentation .
+func MedtunePresentation(c *gin.Context) {
 	c.Status(200)
-	tmpl.SlideHelloWorld.Execute(c.Writer, &data.Slide{
-		Title: "Slide: Hello world",
+	tmpl.SlideMedtunePresentation.Execute(c.Writer, &data.Slide{
+		Title: "Slide: MedTune Presentation",
 	})
 }
