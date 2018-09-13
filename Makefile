@@ -196,9 +196,9 @@ push-image:
 	docker push medtune/beta-platform:$(VERSION)
 	docker push medtune/beta-platform:latest
 
-genk:
+gen-k8s:
 	rm -rf deploy/kubernetes/*
-	kompose convert -f docker-compose.replicas.yml -o deploy/kubernetes
+	kompose convert -f docker-compose.k8s.yml -o deploy/kubernetes
 
 # Test package
 tests:
@@ -312,7 +312,6 @@ stop-capsules:
 		chexray-pp-helper
 
 
-
 kill-capsules:
 	docker kill mnist \
 		inception \
@@ -380,5 +379,21 @@ verify:
 vendor:
 	GO111MODULE=on go mod vendor
 
+
 loc:
-	scc --pbl static/reveal.js-3.7.0
+	scc --pbl static/reveal.js-3.7.0,vendor
+
+
+start-scene: start-capsules
+	docker start postgreshost redis
+
+
+stop-scene: stop-capsules
+	docker stop postgreshost redis
+
+
+kill-scene: kill-capsules
+	docker kill postgreshost redis
+	docker rm postgreshost redis
+
+

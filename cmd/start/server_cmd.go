@@ -61,7 +61,7 @@ func init() {
 	startCmd.Flags().BoolVarP(&syncdb, "syncdb", "x", false, "Sync database before start")
 	startCmd.Flags().BoolVarP(&createUsers, "create-users", "y", false, "Create default users before start")
 	startCmd.Flags().BoolVarP(&wait, "wait", "w", false, "Wait all services to go up")
-	startCmd.Flags().IntVarP(&maxattempts, "wait-attempts", "c", 180, "Wait max attempts")
+	startCmd.Flags().IntVarP(&maxattempts, "wait-attempts", "c", 60, "Wait max attempts")
 	startCmd.Flags().IntVarP(&timestamp, "wait-timestamp", "t", 1, "Wait timestamp")
 
 	startCmd.Flags().BoolVarP(&cxpbaSync, "sync-cxpba", "X", false, "Sync CXBPA before start")
@@ -96,12 +96,12 @@ func runServer() {
 	// Load configuration
 	configuration, err := config.LoadConfigFromPath(configFile)
 	if err != nil && !soft {
-		log.Fatalln(err)
+		log.Fatalf("failed to load configuration: %v\n\t%v\n", err, configFile)
 	}
 
 	// Init packages
 	if err := initpkg.InitFromConfig(configuration); err != nil && !soft {
-		log.Fatalln(err)
+		log.Fatalf("failed to initialize packages: %v\n\t%v\n\t%v\n", err, configFile, configuration)
 	}
 
 	// Syndb

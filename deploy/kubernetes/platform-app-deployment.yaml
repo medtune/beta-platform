@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert -f docker-compose.replicas.yml -o deploy/kubernetes
+    kompose.cmd: kompose convert -f docker-compose.k8s.yml -o deploy/kubernetes
     kompose.service.type: LoadBalancer
     kompose.version: 1.16.0 ()
   creationTimestamp: null

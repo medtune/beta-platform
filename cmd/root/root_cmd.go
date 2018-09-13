@@ -21,10 +21,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var (
-	configFile string
-)
-
 // Cmd represents the base command when called without any subcommands
 var Cmd = &cobra.Command{
 	Use:   "medtune-beta",

@@ -12,15 +12,16 @@ ADD pkg pkg
 ADD server server
 ADD static static
 ADD test test
-ADD config.yml .
 ADD Makefile .
-ADD CXPBA.xlsx .
 
 ADD MAINTAINERS.txt .
 ADD LICENSE.txt .
 
+ADD config.yml .
+ADD CXPBA.xlsx .
+
 ADD .codecov.yml .
-ADD .circleci/config.yml .
-ADD .git/ .
+ADD .circleci .circleci
+ADD .git/ .git
 
 RUN bash ./hack/install-deps.sh --hack
