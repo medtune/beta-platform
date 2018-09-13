@@ -25,13 +25,15 @@ import (
 )
 
 var (
-	static string
-	port   int
+	static        string
+	staticBaseURL string
+	port          int
 )
 
 func init() {
-	debugCmd.Flags().StringVarP(&static, "static", "s", "./static", "Static files directory")
 	debugCmd.Flags().IntVarP(&port, "port", "p", 8005, "port")
+	debugCmd.Flags().StringVarP(&static, "static", "s", "./static", "Static files directory")
+	debugCmd.Flags().StringVarP(&staticBaseURL, "static-url", "z", "/static", "Base url for static files")
 
 	root.Cmd.AddCommand(debugCmd)
 }
@@ -39,7 +41,7 @@ func init() {
 // startCmd represents the start command
 var debugCmd = &cobra.Command{
 	Use:     "debug",
-	Aliases: []string{"debug-server"},
+	Aliases: []string{"debug-server", "debug-ui", "ui"},
 	Short:   "debug server for UI dev",
 	Long:    `Debug UI server`,
 	Run: func(cmd *cobra.Command, args []string) {
@@ -52,6 +54,7 @@ func debugServer() {
 
 	Server := server.Debug(
 		static,
+		staticBaseURL,
 		port,
 	)
 

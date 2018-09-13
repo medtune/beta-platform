@@ -1,4 +1,6 @@
 #ci config
 
-.circleci/
-deploy/
+#.circleci/
+#.git/
+
+.dev/

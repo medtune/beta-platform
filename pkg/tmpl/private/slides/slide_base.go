@@ -14,8 +14,10 @@ const Base = `{{define "base"}}
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<link rel="stylesheet" href="/static/reveal.js-3.7.0/css/reveal.css">
-		<link rel="stylesheet" href="/static/reveal.js-3.7.0/css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="/static/reveal.js-3.7.0/css/theme/beige.css" id="theme">
 		<link rel="stylesheet" href="/static/reveal.js-3.7.0/lib/css/zenburn.css">
+		<link rel="stylesheet" href="/static/slides/demo/styles.css">
+		<link rel="stylesheet" href="/static/slides/demo/layout.css">
 
 		<script>
 			var link = document.createElement( 'link' );
@@ -41,7 +43,7 @@ const Base = `{{define "base"}}
 				progress: true,
 				history: true,
 				center: true,
-				transition: 'slide',
+				transition: 'convex',
 				dependencies: [
 					{ src: '/static/reveal.js-3.7.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
 					{ src: '/static/reveal.js-3.7.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },

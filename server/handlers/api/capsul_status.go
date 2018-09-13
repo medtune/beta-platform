@@ -1,6 +1,9 @@
 package api
 
 import (
+	"context"
+	"time"
+
 	"github.com/gin-gonic/gin"
 
 	"github.com/medtune/beta-platform/pkg/jsonutil"
@@ -17,8 +20,11 @@ func CapsulStatus(c *gin.Context) {
 		return
 	}
 
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
 	// get model status
-	status, err := capsul.GetStatus(&getStatus)
+	status, err := capsul.GetStatus(ctx, &getStatus)
 	if err != nil {
 		c.JSON(200, jsonutil.Fail(err))
 		return

@@ -1,7 +1,9 @@
+//+build !prod debug
+
 package server
 
 import (
-	"strconv"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 
@@ -11,11 +13,11 @@ import (
 // Debug return a ui oriented debug version of the plaform server
 // it will serve static content only
 // pkg session / db / cache are inexistent in the debug mode
-func Debug(static string, port int) Engine {
+func Debug(static string, staticBaseURL string, port int) Engine {
 	server := gin.New()
-	server.Static(static, static)
+	server.Static(staticBaseURL, static)
 	debugHandlers(server)
-	var sport = ":" + strconv.Itoa(port)
+	var sport = fmt.Sprintf(":%d", port)
 	return &engine{
 		engine: server,
 		port:   sport,
@@ -48,6 +50,6 @@ func debugHandlers(g *gin.Engine) {
 		DEBUG.GET("/demos/chexray.v2", debug.ChexrayV2)
 		DEBUG.GET("/demos/sentiment_analysis", debug.SentimentAnalysis)
 		DEBUG.GET("/slides", debug.SlidesMenu)
-		DEBUG.GET("/slides/hello_world", debug.HelloWorld)
+		DEBUG.GET("/slides/medtune_presentation", debug.MedtunePresentation)
 	}
 }

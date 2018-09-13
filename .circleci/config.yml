@@ -14,16 +14,17 @@ jobs:
           command: make tests
 
       - run:
-          name: test
-          command: make test-cov
-
-      - run:
-          name: login to docker hub
-          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+          name: test coverage
+          command: |
+            mkdir -p shared
+            make test-cov
+            bash <(curl -s https://codecov.io/bash)
           
       - run:
           name: push image to registry
-          command: make push-image
+          command: |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            make push-image
 
 workflows:
   version: 2

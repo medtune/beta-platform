@@ -1,7 +1,7 @@
 meta:
   name: medtune beta platform
   description: medtune beta test
-  version: v0.1.3
+  version: v0.1.4
   prod: true
 
 database:
@@ -30,6 +30,7 @@ crypto:
 
 public:
   static: ./static
+  prefix: /static
 
 secrets:
   signup:
@@ -53,45 +54,66 @@ create:
       account_status: true
 
 capsul:
-  mnist:
-    model: mnist
-    signature: predict_images
-    version: 1
-    address: mnist:10000 #mnist default port (1 dataset:mnist=00 model:lenet=00)
-
   inception:
+    name: imagenet-inception-v3
     model: inception
     signature: predict_images
     version: 1
-    address: inception:10010 #inception 
+    address: inception:10010
+  
+  mnist:
+    name: mnist-lenet
+    model: mnist
+    signature: predict_images
+    version: 1
+    address: mnist:10000
 
   mura-irn-v2:
+    name: mura-inception-resnet-v2
     model: mura_inception_resnet_v2
     signature: predict_images
     version: 1
     address: mura-irn-v2:10021
 
   mura-mn-v2:
-    model: mura_mobilenet_v2
+    name: mura-mobilenet-v2
+    model: mura
     signature: predict_images
     version: 1
     address: mura-mn-v2:10020
 
   chexray-mn-v2:
+    name: chexray-mobilenet-v2
     model: chexray
     signature: predict_images
     version: 1
     address: chexray-mn-v2:10030
 
+  chexray-dn-121:
+    name: chexray-densenet-121
+    model: chexray
+    signature: process_img
+    version: 1
+    address: chexray-dn-121:10031
+
 custom_capsul:
   mura-mn-v2-cam:
+    name: mura-mobilenet-v2-cam
     model: mura
     signature: run_cam
     version: 1
     address: mura-mn-v2-cam:11020
-  
+
   chexray-mn-v2-cam:
+    name: chexray-mobilenet-v2-cam
     model: chexray
     signature: run_cam
     version: 1
     address: chexray-mn-v2-cam:11030
+
+  chexray-pp-helper:
+    name: chexray-pp-helper
+    model: none
+    signature: process_img
+    version: 1
+    address: chexray-pp:12030

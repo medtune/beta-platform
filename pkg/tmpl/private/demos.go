@@ -16,7 +16,7 @@ const (
 
 		<div class="mdl-cell mdl-cell--4-col demos-menu-card mdl-card mdl-shadow--2dp">
 			<div class="mdl-card__title mdl-card__title__polyreg">
-				<h2 class="mdl-card__title-text demo-text-dark bold">Polynomial Regression</h2>
+				<h2 class="mdl-card__title-text demo-text-dark">Polynomial Regression</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -30,7 +30,7 @@ const (
 
 		<div class="mdl-cell mdl-cell--4-col demos-menu-card mdl-card mdl-shadow--2dp">
 			<div class="mdl-card__title mdl-card__title__mnist">
-				<h2 class="mdl-card__title-text demo-text-colored bold">MNIST</h2>
+				<h2 class="mdl-card__title-text demo-text-dark">MNIST</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -44,7 +44,7 @@ const (
 
 		<div class="mdl-cell mdl-cell--4-col demos-menu-card mdl-card mdl-shadow--2dp">
 			<div class="mdl-card__title mdl-card__title__inception">
-				<h2 class="mdl-card__title-text bold">Inception</h2>
+				<h2 class="mdl-card__title-text">Inception</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -86,7 +86,7 @@ const (
 
 		<div class="mdl-cell mdl-cell--4-col demos-menu-card mdl-card mdl-shadow--2dp">
 			<div class="mdl-card__title mdl-card__title__sentiment_analysis">
-				<h2 class="mdl-card__title-text demo-text-dark bold">Sentiment Analysis</h2>
+				<h2 class="mdl-card__title-text demo-text-dark">Undefined</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit.

@@ -87,6 +87,7 @@ func SyncCXPBAexcel(file string, configFile string) error {
 				raw.Cells[12].String(),
 				raw.Cells[13].String(),
 				raw.Cells[14].String(),
+				raw.Cells[15].String(),
 				raw.Cells[16].String(),
 				raw.Cells[17].String(),
 				raw.Cells[18].String(),
@@ -106,15 +107,13 @@ func SyncCXPBAexcel(file string, configFile string) error {
 
 	// Copy medical analysis
 	for index, raw := range sheetN.Rows[1:] {
-		min, _ := raw.Cells[2].Float()
-		max, _ := raw.Cells[3].Float()
 		specs = append(specs,
 			&model.SpecAnalysisPool{
 				int64(index),
 				raw.Cells[0].String(),
 				raw.Cells[1].String(),
-				min,
-				max,
+				raw.Cells[2].String(),
+				raw.Cells[3].String(),
 			},
 		)
 	}

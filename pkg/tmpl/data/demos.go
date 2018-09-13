@@ -1,5 +1,7 @@
 package data
 
+import "github.com/medtune/beta-platform/pkg/store/model"
+
 // Image struct
 type Image struct {
 	Filename    string
@@ -23,5 +25,6 @@ type MuraV2Demo struct {
 // ChexrayV2Demo data struct
 type ChexrayV2Demo struct {
 	Main
-	Samples []Image
+	Samples    []Image
+	Cxpbatable *[]model.SpecAnalysisPool
 }

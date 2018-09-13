@@ -4,6 +4,7 @@ ARG CODECOV_TOKEN
 
 RUN bash ./hack/go.test-race.sh
 
-RUN curl -s https://codecov.io/bash > codecov.sh
+RUN mkdir /shared -p
 
-RUN bash codecov.sh -t $CODECOV_TOKEN
+ENTRYPOINT [ "mv", "coverage.txt", "/shared" ]
+

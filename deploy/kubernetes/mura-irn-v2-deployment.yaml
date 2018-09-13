@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.k8s.yml -o deploy/kubernetes
+    kompose.version: 1.16.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mura-irn-v2
+  name: mura-irn-v2
+spec:
+  replicas: 2
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: mura-irn-v2
+    spec:
+      containers:
+      - image: medtune/capsul:mura-irn-v2
+        name: mura-irn-v2
+        ports:
+        - containerPort: 10021
+        resources: {}
+      restartPolicy: Always
+status: {}

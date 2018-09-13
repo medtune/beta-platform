@@ -19,7 +19,9 @@ func InceptionImagenetRunInference(c *gin.Context) {
 		return
 	}
 
-	infData.File = staticPath("inception", infData.File)
+	if infData.File != "" {
+		infData.File = staticPath("inception", infData.File)
+	}
 
 	ctx := context.Background()
 	// Run inference

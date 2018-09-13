@@ -1,19 +1,25 @@
 PROJECT=beta-platform
 OS_TYPE=$(shell uname -a)
+BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
 GITCOMMIT=$(shell git rev-parse HEAD)
 BUILDDATE=$(shell date -u +'%Y-%m-%dT%H:%M:%SZ')
 MAJOR=0
 MINOR=1
-PATCH=3
-REVISION=22
-GOVERSION=1.10
+PATCH=4
+REVISION=alpha
 VERSION=v$(MAJOR).$(MINOR).$(PATCH)
+GOVERSION=1.11
 LONGVERSION=v$(MAJOR).$(MINOR).$(PATCH)-$(REVISION)
+CWD=$(shell pwd)
 VPATH=github.com/medtune/beta-platform/pkg
-AUTHORS=Hilaly.Mohammed-Amine/El.bouchti.Alaa
+PROJECTPATH=$(CWD)
+AUTHORS=El.bouchti.Alaa/Hilaly.Mohammed-Amine
 OWNERS=$(AUTHORS)
+LICENSETYPE=Apache-v2.0
 LICENSEURL=https://raw.githubusercontent.com/medtune/beta-platform/master/LICENSE.txt
 
+
+# Compile prod version of binaries
 release:
 	go build \
 		-tags=prod \
@@ -27,10 +33,11 @@ release:
 			-X $(VPATH).Authors=$(AUTHORS) \
 			-X $(VPATH).Owners=$(OWNERS) \
 			-X $(VPATH).LicenseURL=$(LICENSEURL) \
-			-X $(VPATH).LicenseType=APACHE-2.0 \
+			-X $(VPATH).LicenseType=$(LICENSETYPE) \
 			-X $(VPATH).BuildDate=$(BUILDDATE)" \
 		cmd/main_prod.go \
 
+# Compile all possible commands binaries
 release-cmd:
 	go build \
 		-o medtune-beta \
@@ -43,10 +50,13 @@ release-cmd:
 			-X $(VPATH).Authors=$(AUTHORS) \
 			-X $(VPATH).Owners=$(OWNERS) \
 		    -X $(VPATH).LicenseURL=$(LICENSEURL) \
-			-X $(VPATH).LicenseType=APACHE-2.0 \
+			-X $(VPATH).LicenseType=$(LICENSETYPE) \
 			-X $(VPATH).BuildDate=$(BUILDDATE)" \
 		cmd/main.go
 
+
+# Compile developpement version
+# GOCV under darwin/amd64
 release-dev:
 	go build \
 		-tags="gocv" \
@@ -60,10 +70,61 @@ release-dev:
 			-X $(VPATH).Authors=$(AUTHORS) \
 			-X $(VPATH).Owners=$(OWNERS) \
 			-X $(VPATH).LicenseURL=$(LICENSEURL) \
-			-X $(VPATH).LicenseType=APACHE-2.0 \
+			-X $(VPATH).LicenseType=$(LICENSETYPE) \
 			-X $(VPATH).BuildDate=$(BUILDDATE)" \
 		cmd/main.go \
 
+
+# Compile linux version
+# 30Mb IMAGE !!
+release-alpine:
+	GOOS=linux go build \
+		-tags="prod" \
+		-o medtune-beta \
+		-ldflags="\
+			-X $(VPATH).GitCommit=$(GITCOMMIT) \
+			-X $(VPATH).Major=$(MAJOR) \
+			-X $(VPATH).Minor=$(MINOR) \
+			-X $(VPATH).Patch=$(PATCH) \
+ 			-X $(VPATH).Revision=$(REVISION) \
+			-X $(VPATH).Authors=$(AUTHORS) \
+			-X $(VPATH).Owners=$(OWNERS) \
+			-X $(VPATH).LicenseURL=$(LICENSEURL) \
+			-X $(VPATH).LicenseType=$(LICENSETYPE) \
+			-X $(VPATH).BuildDate=$(BUILDDATE)" \
+		cmd/main_prod.go \
+
+
+# Compile debug binaries
+release-debug:
+	go build \
+		-tags="debug" \
+		-o medtune-beta \
+		-ldflags="\
+			-X $(VPATH).GitCommit=$(GITCOMMIT) \
+			-X $(VPATH).Major=$(MAJOR) \
+			-X $(VPATH).Minor=$(MINOR) \
+			-X $(VPATH).Patch=$(PATCH) \
+ 			-X $(VPATH).Revision=$(REVISION) \
+			-X $(VPATH).Authors=$(AUTHORS) \
+			-X $(VPATH).Owners=$(OWNERS) \
+			-X $(VPATH).LicenseURL=$(LICENSEURL) \
+			-X $(VPATH).LicenseType=$(LICENSETYPE) \
+			-X $(VPATH).BuildDate=$(BUILDDATE)" \
+		cmd/main_debug.go \
+
+
+# Build light image version (30mb)
+build-alpine: release-alpine
+	@echo building linux prod container
+	docker build \
+		-t medtune/beta-platform:prod-alpine \
+		-f build/prod.linux.Dockerfile \
+		.
+
+
+# Build base image
+# Doesnt compile anything
 build-base:
 	@echo building base image
 	docker build \
@@ -75,6 +136,10 @@ build-base:
 		medtune/beta-platform:base \
 		medtune/beta-platform:go-1.10-linux-$(VERSION)-base
 
+
+# 1 - Build compile use build-base image and compile
+# the binaries using this makefile
+# 2 - Tag image specifications
 build-compile:
 	@echo building build image
 	docker build \
@@ -91,6 +156,8 @@ build-compile:
 		medtune/beta-platform:build \
 		medtune/beta-platform:build
 
+
+# Build production image (based on build-compile)
 build-prod:
 	@echo building prod image
 	docker build \
@@ -112,12 +179,28 @@ build-prod:
 		medtune/beta-platform:latest
 
 
+# Build k8s
+build-k8s: #build-base build-compile
+	@echo building kubernetes prod image
+	docker build \
+		-t medtune/beta-platform:k8s \
+		-f build/prod.k8s.Dockerfile \
+		.
+
+# Just let the make make the magic
 build-all: build-base build-compile build-prod
 
+
+# Public images in docker hub (hub.docker.com/medtune)
 push-image:
 	docker push medtune/beta-platform:$(VERSION)
 	docker push medtune/beta-platform:latest
 
+gen-k8s:
+	rm -rf deploy/kubernetes/*
+	kompose convert -f docker-compose.k8s.yml -o deploy/kubernetes
+
+# Test package
 tests:
 	@echo running global test
 	docker build \
@@ -125,6 +208,8 @@ tests:
 		-f test/test.Dockerfile \
 		.
 
+
+# Test coverage and push results to codecov
 test-cov:
 	@echo running global code coverage tests
 	docker build \
@@ -132,6 +217,11 @@ test-cov:
 		-f test/test-codecov.Dockerfile \
 		--build-arg CODECOV_TOKEN=$(CODECOV_TOKEN) \
 		.
+
+	docker run \
+		-v "$(PWD)/shared":/shared \
+		medtune/beta-platform:test
+
 
 
 # setup capsules
@@ -141,11 +231,13 @@ mnist:
 		-p 10000:10000 \
 		medtune/capsul:mnist
 
+
 inception:
 	docker run -dti \
 		--name inception \
 		-p 10010:10010 \
 		medtune/capsul:inception
+
 
 mura-mn-v2:
 	docker run -dti \
@@ -153,12 +245,14 @@ mura-mn-v2:
 		-p 10020:10020 \
 		medtune/capsul:mura-mn-v2
 
+
 mura-mn-v2-cam:
 	docker run -dti \
 		--name mura-mn-v2-cam \
 		-p 11020:11020 \
-		-v $(HOME)/go/src/github.com/medtune/beta-platform/static/demos/mura/images:/medtune/data \
+		-v $(PROJECTPATH)/static/demos/mura/images:/medtune/data \
 		medtune/capsul:mura-mn-v2-cam
+
 
 mura-irn-v2:
 	docker run -dti \
@@ -167,31 +261,97 @@ mura-irn-v2:
 		medtune/capsul:mura-irn-v2
 
 
+chexray-dn-121:
+	docker run -dti \
+		--name chexray-dn-121 \
+		-p 10031:10031 \
+		medtune/capsul:chexray-dn-121
+
+
+chexray-dn-121-cam:
+	docker run -dti \
+		--name chexray-dn-121-cam \
+		-p 10031:10031 \
+		medtune/capsul:chexray-dn-121-cam
+
+
+chexray-pp:
+	docker run -dti \
+			--name chexray-pp-helper \
+			-p 12030:12030 \
+			-v $(PROJECTPATH)/static/demos/chexray/images:/medtune/data \
+			medtune/capsul:chexray-pp-helper
+
+
 run-capsules: mnist \
 	inception \
 	mura-mn-v2 \
 	mura-mn-v2-cam \
 	mura-irn-v2 \
+	chexray-dn-121 \
+	chexray-pp
+
+
+start-capsules: 
+	docker start mnist \
+		inception \
+		mura-mn-v2 \
+		mura-mn-v2-cam \
+		mura-irn-v2 \
+		chexray-dn-121 \
+		chexray-pp-helper
+
+
+stop-capsules:
+	docker stop mnist \
+		inception \
+		mura-mn-v2 \
+		mura-mn-v2-cam \
+		mura-irn-v2 \
+		chexray-dn-121 \
+		chexray-pp-helper
+
 
 kill-capsules:
 	docker kill mnist \
 		inception \
 		mura-mn-v2 \
 		mura-mn-v2-cam \
-		mura-irn-v2
+		mura-irn-v2 \
+		chexray-dn-121 \
+		chexray-pp-helper
 
 	docker rm mnist \
 		inception \
 		mura-mn-v2 \
 		mura-mn-v2-cam \
-		mura-irn-v2
+		mura-irn-v2 \
+		chexray-dn-121 \
+		chexray-pp-helper
+
 
 start:
 	./medtune-beta start \
 		-f dev.config.yml \
 		--syncdb \
 		--create-users \
-		--wait
+		--sync-cxpba \
+		--wait \
+		--gin-mode 1
+
+run:
+	go run -ldflags="\
+		-X $(VPATH).Major=$(MAJOR) \
+		-X $(VPATH).Minor=$(MINOR) \
+		-X $(VPATH).Patch=$(PATCH)" \
+		-tags=gocv \
+		./cmd/main.go \
+		start \
+		-f dev.config.yml \
+		--syncdb \
+		--sync-cxpba \
+		--create-users \
+		--gin-mode 0
 
 debug:
 	./medtune-beta debug
@@ -201,7 +361,7 @@ up:
 
 down:
 	docker-compose down
-
+  
 clean:
 	rm medtune-beta
 
@@ -209,4 +369,31 @@ clean-gen:
 	rm -rf genered-views
 
 clean-demos:
-	rm -rf static/demos/mura/images/*cam_mn_v2.png
+	rm -f static/demos/mura/images/*mn_v2_cam.png
+	rm -f static/demos/chexray/images/*mn_v2_cam.png
+	rm -rf static/demos/chexray/images/000*
+
+verify:
+	GO111MODULE=on go mod verify
+
+vendor:
+	GO111MODULE=on go mod vendor
+
+
+loc:
+	scc --pbl static/reveal.js-3.7.0,vendor
+
+
+start-scene: start-capsules
+	docker start postgreshost redis
+
+
+stop-scene: stop-capsules
+	docker stop postgreshost redis
+
+
+kill-scene: kill-capsules
+	docker kill postgreshost redis
+	docker rm postgreshost redis
+
+

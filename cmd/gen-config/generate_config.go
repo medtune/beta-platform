@@ -18,11 +18,12 @@ import (
 	"log"
 	"os"
 
+	"github.com/spf13/cobra"
+
 	"github.com/medtune/beta-platform/cmd/root"
 	"github.com/medtune/beta-platform/pkg"
 	"github.com/medtune/beta-platform/pkg/config"
 	"github.com/medtune/beta-platform/pkg/store/model"
-	"github.com/spf13/cobra"
 )
 
 var (
@@ -87,6 +88,7 @@ func generateConfig() {
 		},
 		Public: &config.PublicContent{
 			Static: "./static",
+			Prefix: "/static",
 		},
 		Secrets: &config.Secrets{
 			Signup: []string{

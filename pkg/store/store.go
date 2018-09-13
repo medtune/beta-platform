@@ -7,7 +7,7 @@ import (
 	"github.com/medtune/beta-platform/pkg/store/db"
 )
 
-// Compile time check
+// Compile time static type checking
 var _ userStore = &Store{}
 var _ bioAnalysisStore = &Store{}
 var _ syncer = &Store{}

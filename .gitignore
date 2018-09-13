@@ -12,6 +12,7 @@ medtune-beta
 
 # dev config
 dev.config.yml
+dev.docker-compose.yml
 
 # dev dockerfile
 local.Dockerfile
@@ -19,6 +20,9 @@ local.Dockerfile
 # local dev files
 .dev/
 templates-gen/
+
+# vendors
+vendor/
 
 # demos artefacts
 *cam_mn_v2.png
@@ -29,7 +33,6 @@ generated-views/
 # Generate config
 gen.config.yml
 
-# excel files
-*.xlsx
-
 reveal.js-3.7.0/
+#vscode settings
+.vscode

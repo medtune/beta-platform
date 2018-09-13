@@ -2,7 +2,7 @@ package shared
 
 const HeaderLogged = `{{define "header"}}
 <div class="mdl-layout--fixed-header mdl-layout mdl-js-layout">
-	<header class="mdl-layout__header page-header">
+	<header class="mdl-layout__header page-header" id="page-header">
 	<div class="mdl-layout__header-row">
 			
 		<span class="mdl-layout-title">MedTune</span><span class="v-beta">beta</span>

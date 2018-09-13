@@ -1,0 +1,108 @@
+version: '3.2'
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=mdtn
+      - POSTGRES_PASSWORD=mdtn
+      - POSTGRES_DB=medtune
+    ports:
+      - 5432:5432
+
+  redis:
+    image: redis:latest
+    command: --appendonly yes
+    ports:
+      - 6379:6379
+
+  platform-app:
+    image: medtune/beta-platform:k8s
+
+    labels:
+      kompose.service.type: LoadBalancer
+
+    ports:
+      - 8005:8005
+
+    deploy:
+      replicas: 10
+
+    depends_on:
+      - postgres
+      - redis
+      - mnist
+      - mura-mn-v2
+      - mura-mn-v2-cam
+      - mura-irn-v2
+      - chexray-pp
+      - chexray-dn-121
+
+    links:
+      - redis:redis
+      - postgres:postgres
+      - mnist:mnist
+      - inception:inception
+      - mura-mn-v2:mura-mn-v2
+      - mura-irn-v2:mura-irn-v2
+      - mura-mn-v2-cam:mura-cam-v2-cam
+      - chexray-pp:chexray-pp
+      - chexray-dn-121:chexray-dn-121
+
+    volumes:
+      - mura-images:/go/src/github.com/medtune/beta-platform/static/demos/mura/images
+      - chexray-images:/go/src/github.com/medtune/beta-platform/static/demos/chexray/images
+
+  mnist:
+    image: medtune/capsul:mnist
+    ports:
+      - 10000:10000
+
+    deploy:
+      replicas: 2
+
+  inception:
+    image: medtune/capsul:inception
+    ports:
+      - 10010:10010
+    deploy:
+      replicas: 2
+    
+
+  mura-mn-v2:
+    image: medtune/capsul:mura-mn-v2
+    ports:
+      - 10020:10020
+    deploy:
+      replicas: 2
+
+  mura-irn-v2:
+    image: medtune/capsul:mura-irn-v2
+    ports:
+      - 10021:10021
+    deploy:
+      replicas: 2
+
+  mura-mn-v2-cam:
+    image: medtune/capsul:mura-mn-v2-cam
+    ports:
+      - 11020:11020
+    volumes:
+      - mura-images:/medtune/data
+
+  chexray-dn-121:
+    image: medtune/capsul:chexray-dn-121
+    ports:
+      - 10031:10031
+    deploy:
+      replicas: 2
+
+  chexray-pp:
+    image: medtune/capsul:chexray-pp-helper
+    ports:
+      - 12030:12030
+    volumes:
+      - chexray-images:/medtune/data
+
+volumes:
+  mura-images: {}
+  chexray-images: {}

@@ -12,9 +12,9 @@ import (
 )
 
 // New .
-func New(static string, port int) Engine {
+func New(static string, staticBaseURL string, port int) Engine {
 	server := gin.New()
-	server.Static(static, static)
+	server.Static(staticBaseURL, static)
 
 	set404Handler(server, func(c *gin.Context) {
 		c.Redirect(302, "/error/404")
@@ -78,7 +78,7 @@ func assembleHandlers(server *gin.Engine) {
 	ADMIN.GET("/dashboard", platform.Dashboard)
 
 	SLIDES := PROTECTED.Group("/slides")
-	SLIDES.GET("/hello_world", platform.HelloWorld)
+	SLIDES.GET("/medtune_presentation", platform.MedtunePresentation)
 
 	// Demonstrations routes
 	DEMOS := PROTECTED.Group("/demos")
@@ -90,6 +90,7 @@ func assembleHandlers(server *gin.Engine) {
 	DEMOS.POST("/mura/upload", platform.MuraUpload)
 	DEMOS.GET("/chexray", platform.Chexray)
 	DEMOS.GET("/chexray.v2", platform.ChexrayV2)
+	DEMOS.POST("/chexray/upload", platform.ChexrayUpload)
 	DEMOS.GET("/sentiment_analysis", platform.SentimentAnalysis)
 
 	// Api routes
@@ -97,7 +98,7 @@ func assembleHandlers(server *gin.Engine) {
 	// public API
 	PUBLICAPI := PUBLIC.Group("/api")
 	PUBLICAPI.GET("/version", api.Version)
-	PUBLICAPI.GET("/copyrights", api.Copyrights)
+	PUBLICAPI.GET("/copyright", api.Copyright)
 	PUBLICAPI.POST("/login", api.Login)
 	PUBLICAPI.POST("/signup", api.Signup)
 
@@ -108,7 +109,13 @@ func assembleHandlers(server *gin.Engine) {
 	API.POST("/test", api.Test)
 
 	APICAPSUL := API.Group("/capsul")
-	APICAPSUL.GET("/status", api.CapsulStatus)
+	APICAPSUL.POST("/status", api.CapsulStatus)
+	APICAPSUL.GET("/list", api.CapsulList)
+	APICAPSUL.GET("/test", api.CapsulTest)
+	APICAPSUL.GET("/benchmark", api.CapsulBenchmark)
+	APICAPSUL.GET("/global_healthchecks", api.CapsulGlobalHealthChecks)
+	APICAPSUL.GET("/global_tests", api.CapsulGlobalTests)
+	APICAPSUL.GET("/global_benchmarks", api.CapsulGlobalBenchmarks)
 
 	APIDEMOS := API.Group("/demos")
 	APIDEMOS.POST("/mnist/run_inference", api.MnistRunInference)
@@ -117,6 +124,10 @@ func assembleHandlers(server *gin.Engine) {
 	APIDEMOS.POST("/mura/run_cam", api.MuraRunCam)
 	APIDEMOS.POST("/mura/run_inference", api.MuraRunInference)
 	APIDEMOS.POST("/chexray/run_inference", api.ChexrayRunInference)
+	APIDEMOS.POST("/chexray/run_cam", api.ChexrayRunCam)
+	APIDEMOS.POST("/chexray/process", api.ChexrayProcess)
+	APIDEMOS.POST("/chexray/cxpba/pathology_al", api.PathologyAL)
+	APIDEMOS.POST("/chexray/cxpba/spec_ap", api.SpecAnalysisPool)
 
 	DATAHUB := API.Group("/datahub")
 	DATAHUB.POST("/upload/:demo", api.DemoDataUpload)

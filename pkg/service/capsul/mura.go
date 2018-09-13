@@ -25,6 +25,8 @@ var (
 	MuraMNV2Client *tfsclient.Client
 	// MuraMNV2CamClient .
 	MuraMNV2CamClient *tfsclient.RestClient
+	// MuraPredictionClasses .
+	muraPredictionClasses = []string{"positive", "negative"}
 )
 
 // RunMuraInference .
@@ -63,7 +65,7 @@ func RunMuraInference(ctx context.Context, infData *jsonutil.RunImageInference) 
 		request := pbreq.Predict(stdimpl.MuraIRNV2, b)
 		start := time.Now()
 
-		response, err := MuraMNV2Client.Predict(ctx, request)
+		response, err := MuraIRNV2Client.Predict(ctx, request)
 		if err != nil {
 			return nil, err
 		}
@@ -77,7 +79,7 @@ func RunMuraInference(ctx context.Context, infData *jsonutil.RunImageInference) 
 	// construct responses
 	result := jsonutil.InferenceResult{}
 	result.Scores = resp.Outputs["scores"].FloatVal
-	result.Keys = []string{"positive", "negative"}
+	result.Keys = muraPredictionClasses
 	result.RoundTrip = roundTrip
 
 	return &result, nil
@@ -115,7 +117,7 @@ func RunMuraCAM(ctx context.Context, camData *jsonutil.RunImageCam) (*jsonutil.C
 		}, nil
 
 	} else if camData.ModelID == "mura-irn-v2" {
-		return nil, fmt.Errorf("unavailable model: %s", camData.ModelID)
+		return nil, fmt.Errorf("unavailable cam model: %s", camData.ModelID)
 	}
 	return nil, fmt.Errorf("unknown model: %s", camData.ModelID)
 }
