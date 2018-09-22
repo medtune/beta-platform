@@ -21,7 +21,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/medtune/beta-platform/cmd/root"
-	"github.com/medtune/beta-platform/pkg/server"
+	"github.com/medtune/beta-platform/internal/server"
 )
 
 var (
