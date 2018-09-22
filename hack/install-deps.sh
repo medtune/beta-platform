@@ -15,11 +15,11 @@ go get -u github.com/gin-gonic/gin
 go get -u github.com/spf13/cobra
 
 # Dependencies
-go get -v ./pkg/config 
-go get -v ./pkg/session 
-go get -v ./pkg/store 
-go get -v ./pkg/jsonutil
-go get -v ./pkg/initpkg
+go get -v ./internal/config 
+go get -v ./internal/session 
+go get -v ./internal/store 
+go get -v ./internal/jsonutil
+go get -v ./internal/initinternal
 
 #
 go get -u github.com/anthonynsimon/bild/transform
