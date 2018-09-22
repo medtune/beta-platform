@@ -3,8 +3,6 @@
 package main
 
 import (
-	"runtime/pprof"
-
 	"github.com/medtune/beta-platform/cmd/root"
 
 	_ "github.com/medtune/beta-platform/cmd/copyright"
@@ -18,7 +16,5 @@ import (
 )
 
 func main() {
-
-	defer pprof.StopCPUProfile()
 	root.Execute()
 }

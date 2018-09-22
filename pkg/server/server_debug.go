@@ -7,7 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/medtune/beta-platform/server/handlers/debug"
+	"github.com/medtune/beta-platform/pkg/server/handlers/debug"
 )
 
 // Debug return a ui oriented debug version of the plaform server

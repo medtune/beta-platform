@@ -1,6 +1,6 @@
 FROM medtune/beta-platform:build
 
-RUN rm -rf vendor cmd pkg server
+RUN rm -rf vendor cmd pkg
 
 # Port to expose
 EXPOSE 8005

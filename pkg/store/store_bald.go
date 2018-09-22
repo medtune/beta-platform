@@ -36,7 +36,6 @@ func (s *Store) GetPathologyAL(name string) (*model.PathologyAnalysisLevel, erro
 	pal := &model.PathologyAnalysisLevel{}
 	has, err := s.Where("name = ?", name).Get(pal)
 	if err != nil {
-		fmt.Println("trolololol")
 		return nil, err
 	}
 

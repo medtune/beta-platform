@@ -10,8 +10,7 @@ var (
 
 func init() {
 	secrets = make(map[string][]string, 0)
-
-	secrets["signup"] = []string{"supersecret"}
+	secrets["signup"] = make([]string, 0, 0)
 	secrets["auth"] = make([]string, 0, 0)
 }
 

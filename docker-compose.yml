@@ -7,14 +7,12 @@ services:
       - POSTGRES_PASSWORD=mdtn
       - POSTGRES_DB=medtune
     
-
   redis:
     image: redis:latest
     command: --appendonly yes
     
-
   platform-app:
-    image: medtune/beta-platform:prod
+    image: medtune/beta-platform:prod-alpine
     ports:
       - 8006:8005
 
@@ -40,8 +38,8 @@ services:
       - chexray-dn-121:chexray-dn-121
 
     volumes:
-      - mura-images:/go/src/github.com/medtune/beta-platform/static/demos/mura/images
-      - chexray-images:/go/src/github.com/medtune/beta-platform/static/demos/chexray/images
+      - mura-images:/mdtn/static/demos/mura/images
+      - chexray-images:/mdtn/static/demos/chexray/images
 
   mnist:
     image: medtune/capsul:mnist

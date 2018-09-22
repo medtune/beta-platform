@@ -1,3 +1,5 @@
+// +build prod !debug
+
 package server
 
 import (
@@ -5,10 +7,10 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/medtune/beta-platform/server/handlers/api"
-	"github.com/medtune/beta-platform/server/handlers/platform"
-	"github.com/medtune/beta-platform/server/handlers/public"
-	"github.com/medtune/beta-platform/server/middleware"
+	"github.com/medtune/beta-platform/pkg/server/handlers/api"
+	"github.com/medtune/beta-platform/pkg/server/handlers/platform"
+	"github.com/medtune/beta-platform/pkg/server/handlers/public"
+	"github.com/medtune/beta-platform/pkg/server/middleware"
 )
 
 // New .
@@ -64,7 +66,6 @@ func assembleHandlers(server *gin.Engine) {
 
 	// Login platform routes
 	PROTECTED := server.Group("/")
-	//FIXME:
 	PROTECTED.Use(middleware.ProtectedView())
 	PROTECTED.GET("/logout", platform.Logout)
 	PROTECTED.GET("/home", platform.Home)
@@ -103,7 +104,6 @@ func assembleHandlers(server *gin.Engine) {
 	PUBLICAPI.POST("/signup", api.Signup)
 
 	API := PUBLIC.Group("/api")
-	//FIXME:
 	API.Use(middleware.ProtectedAPI())
 	API.POST("/custom/exec", api.CustomExecution)
 	API.POST("/test", api.Test)

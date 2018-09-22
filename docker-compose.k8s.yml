@@ -67,7 +67,6 @@ services:
     deploy:
       replicas: 2
     
-
   mura-mn-v2:
     image: medtune/capsul:mura-mn-v2
     ports:

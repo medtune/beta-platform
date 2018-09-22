@@ -5,7 +5,7 @@ GITCOMMIT=$(shell git rev-parse HEAD)
 BUILDDATE=$(shell date -u +'%Y-%m-%dT%H:%M:%SZ')
 MAJOR=0
 MINOR=1
-PATCH=4
+PATCH=5
 REVISION=alpha
 VERSION=v$(MAJOR).$(MINOR).$(PATCH)
 GOVERSION=1.11
@@ -14,7 +14,6 @@ CWD=$(shell pwd)
 VPATH=github.com/medtune/beta-platform/pkg
 PROJECTPATH=$(CWD)
 AUTHORS=El.bouchti.Alaa/Hilaly.Mohammed-Amine
-OWNERS=$(AUTHORS)
 LICENSETYPE=Apache-v2.0
 LICENSEURL=https://raw.githubusercontent.com/medtune/beta-platform/master/LICENSE.txt
 
@@ -77,8 +76,11 @@ release-dev:
 
 # Compile linux version
 # 30Mb IMAGE !!
-release-alpine:
-	GOOS=linux go build \
+release-linux:
+	GOARCH=amd64 \
+	CGO_ENABLED=0 \
+	GOOS=linux \
+	go build \
 		-tags="prod" \
 		-o medtune-beta \
 		-ldflags="\
@@ -115,7 +117,10 @@ release-debug:
 
 
 # Build light image version (30mb)
-build-alpine: release-alpine
+build-alpine:  build-base build-compile
+	docker rm build-stage
+	docker run --name=build-stage medtune/beta-platform:build
+	docker cp build-stage:/go/src/github.com/medtune/beta-platform/medtune-beta $(PWD)/medtune-beta
 	@echo building linux prod container
 	docker build \
 		-t medtune/beta-platform:prod-alpine \
@@ -381,7 +386,7 @@ vendor:
 
 
 loc:
-	scc --pbl static/reveal.js-3.7.0,vendor
+	scc --pbl static/reveal.js-3.7.0,vendor,.dev
 
 
 start-scene: start-capsules
