@@ -16,7 +16,7 @@ func Index(c *gin.Context) {
 	} else {
 		c.Status(200)
 		inject := data.Main{
-			Version:   pkg.VERSION,
+			Version:   internal.VERSION,
 			PageTitle: "Index",
 		}
 		tmpl.Index.Execute(c.Writer, &inject)

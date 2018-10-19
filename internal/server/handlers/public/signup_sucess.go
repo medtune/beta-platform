@@ -17,7 +17,7 @@ func SignupSuccess(c *gin.Context) {
 	}
 	c.Status(200)
 	tmpl.SignupSuccess.Execute(c.Writer, data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "Signup ~ Success",
 	})
 }

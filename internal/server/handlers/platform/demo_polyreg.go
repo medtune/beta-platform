@@ -12,7 +12,7 @@ import (
 func PolynomialRegression(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemoPolynomialRegression.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "Polynomial Regression",
 	})
 }

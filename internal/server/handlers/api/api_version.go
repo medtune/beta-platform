@@ -9,5 +9,5 @@ import (
 
 // Version description handler
 func Version(c *gin.Context) {
-	c.JSON(200, jsonutil.SuccessData(pkg.GetVersion()))
+	c.JSON(200, jsonutil.SuccessData(internal.GetVersion()))
 }

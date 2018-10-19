@@ -9,5 +9,5 @@ import (
 
 // Copyright description handler
 func Copyright(c *gin.Context) {
-	c.JSON(200, jsonutil.SuccessData(pkg.GetCopyright()))
+	c.JSON(200, jsonutil.SuccessData(internal.GetCopyright()))
 }

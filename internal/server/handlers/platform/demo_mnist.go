@@ -12,7 +12,7 @@ import (
 func Mnist(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemoMnist.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "Handwritten digits classification",
 	})
 }

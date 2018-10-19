@@ -38,6 +38,7 @@ type Database struct {
 	SSLMode int8     `yaml:"sslmode"`
 	MOC     int      `yaml:"max_idle_conns"`
 	MIC     int      `yaml:"max_open_conns"`
+	LTC     float64  `yaml:"max_conn_lifetime"`
 	Creds   *DBCreds `yaml:"creds"`
 }
 

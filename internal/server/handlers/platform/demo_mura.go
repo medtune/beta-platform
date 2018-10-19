@@ -16,7 +16,7 @@ import (
 func Mura(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemoMura.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "Demo: MURA Classification",
 	})
 }
@@ -31,7 +31,7 @@ func MuraV2(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemoMuraV2.Execute(c.Writer, &data.MuraV2Demo{
 		Main: data.Main{
-			Version:   pkg.VERSION,
+			Version:   internal.VERSION,
 			PageTitle: "Demo V2: MURA Classification",
 		},
 		Samples: images,

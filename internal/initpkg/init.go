@@ -3,9 +3,13 @@ package initpkg
 import (
 	"fmt"
 	"log"
+	"os"
 	"time"
 
+	"github.com/go-xorm/xorm"
+
 	"github.com/gin-contrib/sessions/redis"
+	"github.com/go-xorm/core"
 	tfsclient "github.com/medtune/capsul/pkg/tfs-client"
 	"github.com/medtune/go-utils/random"
 
@@ -43,36 +47,36 @@ func InitFromConfig(c *config.StartupConfig) error {
 	}
 
 	// Check version
-	if c.Meta.Version != pkg.VERSION {
-		return fmt.Errorf("configuration meta version don't match\n\tpackage version: %v\n\tconfigs version: %v", pkg.VERSION, c.Meta.Version)
+	if c.Meta.Version != internal.VERSION {
+		return fmt.Errorf("configuration meta version don't match\n\tpackage version: %v\n\tconfigs version: %v", internal.VERSION, c.Meta.Version)
 	}
 
-	// init package pkg/store + pkg/store/db
+	// init package internal/store + internal/store/db
 	if err := initStore(c.Database, c.Meta.IsProd); err != nil {
 		return fmt.Errorf("init package store failed: %v", err)
 	}
 
-	// init package pkg/session
+	// init package internal/session
 	if err := initSession(c.Session); err != nil {
 		return fmt.Errorf("init package session failed: %v", err)
 	}
 
-	// init package pkg/secret
+	// init package internal/secret
 	if err := initSecrets(c.Secrets); err != nil {
 		return fmt.Errorf("init service secrets failed: %v", err)
 	}
 
-	// init package pkg/service/capsul
+	// init package internal/service/capsul
 	if err := initCapsulClients(c.Capsul); err != nil {
 		return fmt.Errorf("init service capsul clients failed: %v", err)
 	}
 
-	// init package pkg/service/capsul (custom capsules)
+	// init package internal/service/capsul (custom capsules)
 	if err := initCustomCapsulClients(c.CustomCapsul); err != nil {
 		return fmt.Errorf("init service capsul custom clients failed: %v", err)
 	}
 
-	// inint pkg/service/dashboard
+	// inint internal/service/dashboard
 	if err := initDashboard(c); err != nil {
 		return fmt.Errorf("init service dashboard failed: %v", err)
 	}
@@ -113,21 +117,32 @@ func initStore(c *config.Database, prod bool) error {
 		database = c.Test
 	}
 
-	str := db.ConnStr{
-		Host:         c.Creds.Host,
-		Database:     database,
-		User:         c.Creds.User,
-		Password:     c.Creds.Password,
-		Port:         c.Creds.Port,
-		SslMode:      0,
-		MaxIdleConns: c.MIC,
-		MaxOpenConns: c.MOC,
+	if c.LTC == 0.0 {
+		fmt.Println("using 0.0 (ms) as connection max lifetime")
+		c.LTC = 0.001
 	}
+
+	str := db.ConnStr{
+		Host:             c.Creds.Host,
+		Database:         database,
+		User:             c.Creds.User,
+		Password:         c.Creds.Password,
+		Port:             c.Creds.Port,
+		SslMode:          0,
+		MaxIdleConns:     c.MIC,
+		MaxOpenConns:     c.MOC,
+		MaxLifetimeConns: c.LTC,
+	}
+
 	// Create store engine
 	engine, err := store.New(str)
 	if err != nil {
 		return err
 	}
+
+	engine.ShowSQL(true)
+	engine.Logger().SetLevel(core.LOG_DEBUG)
+	engine.SetLogger(xorm.NewSimpleLogger(os.Stdout))
 
 	store.Agent = engine
 	return nil

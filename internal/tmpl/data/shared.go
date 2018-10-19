@@ -31,7 +31,7 @@ type genData struct {
 // Used for inception in debug mode
 func Gen() *genData {
 	return &genData{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "GENERATED TEMPLATE",
 		Code:      666,
 		Message:   "Error GEN TMPL",

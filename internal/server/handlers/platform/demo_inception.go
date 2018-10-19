@@ -3,10 +3,10 @@ package platform
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/medtune/beta-platform/internal"
 	"github.com/medtune/beta-platform/internal/service/demo"
 	"github.com/medtune/beta-platform/internal/tmpl"
 	"github.com/medtune/beta-platform/internal/tmpl/data"
+	"github.com/medtune/capsul/pkg"
 )
 
 // InceptionImagenet demo

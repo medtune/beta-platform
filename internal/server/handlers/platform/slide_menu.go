@@ -12,7 +12,7 @@ import (
 func SlidesMenu(c *gin.Context) {
 	c.Status(200)
 	tmpl.SlidesMenu.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "Slides Menu",
 	})
 }

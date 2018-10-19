@@ -60,7 +60,7 @@ func generateConfig() {
 	err := config.Generate(&config.StartupConfig{
 		Meta: &config.Meta{
 			Name:    "Medtune beta platform",
-			Version: pkg.VERSION,
+			Version: internal.VERSION,
 			IsProd:  true,
 		},
 		Server: &config.Server{},

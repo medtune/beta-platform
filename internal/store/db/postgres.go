@@ -3,6 +3,7 @@ package db
 import (
 	"fmt"
 	"strconv"
+	"time"
 
 	"github.com/go-xorm/xorm"
 	// Load postgres lib
@@ -19,14 +20,15 @@ const (
 // ConnStr contain necessary information to establish
 // secure and non-secure connections with a postgres db
 type ConnStr struct {
-	Host         string
-	User         string
-	Password     string
-	Database     string
-	Port         int
-	SslMode      int8
-	MaxIdleConns int
-	MaxOpenConns int
+	Host             string
+	User             string
+	Password         string
+	Database         string
+	Port             int
+	SslMode          int8
+	MaxIdleConns     int
+	MaxOpenConns     int
+	MaxLifetimeConns float64
 }
 
 // MakeConnectionString return a string that express
@@ -60,5 +62,6 @@ func NewPGEngine(c ConnStr) (*xorm.Engine, error) {
 	engine, err := xorm.NewEngine(postgres, cstr)
 	engine.SetMaxOpenConns(c.MaxOpenConns)
 	engine.SetMaxIdleConns(c.MaxIdleConns)
+	engine.SetConnMaxLifetime(time.Millisecond * time.Duration(c.MaxLifetimeConns))
 	return engine, err
 }

@@ -11,7 +11,7 @@ import (
 // Home page handler
 func Home(c *gin.Context) {
 	inject := data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "Home",
 	}
 	c.Status(200)

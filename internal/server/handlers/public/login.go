@@ -20,7 +20,7 @@ func Login(c *gin.Context) {
 
 	// Render login view
 	tmpl.Login.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "login",
 	})
 

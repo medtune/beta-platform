@@ -12,7 +12,7 @@ import (
 func SentimentAnalysis(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemoSentimentAnalysis.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "Demo: Sentiment Analysis",
 	})
 }

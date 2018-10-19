@@ -11,7 +11,7 @@ import (
 
 // CollectImagesData collect pictures informations for demo
 func CollectImagesData(demo string) ([]data.Image, error) {
-	path := fmt.Sprintf("static/demos/%v/images", demo)
+	path := fmt.Sprintf("static/demos/%s/images", demo)
 	if _, err := os.Stat(path); err != nil || os.IsNotExist(err) {
 		return nil, err
 	}
@@ -30,7 +30,7 @@ func CollectImagesData(demo string) ([]data.Image, error) {
 			continue
 		}
 		// ignore 'debug.*' and sub directories
-		if basename := strings.Split(f.Name(), ".")[0]; basename != "debug" && !f.IsDir() {
+		if basename := strings.Split(f.Name(), ".")[0]; basename != "image_debug" && !f.IsDir() {
 			images = append(images, data.Image{
 				Name:     basename,
 				Filename: f.Name(),

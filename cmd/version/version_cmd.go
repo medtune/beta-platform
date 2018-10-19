@@ -30,7 +30,7 @@ var versionCmd = &cobra.Command{
 	Short: "Medtune beta actual version",
 	Long:  `Print Medtune Beta version`,
 	Run: func(cmd *cobra.Command, args []string) {
-		versionJSON, _ := json.MarshalIndent(pkg.GetVersion(), "", "    ")
+		versionJSON, _ := json.MarshalIndent(internal.GetVersion(), "", "    ")
 		fmt.Printf("%s\n", versionJSON)
 	},
 }

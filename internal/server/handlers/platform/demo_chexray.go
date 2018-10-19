@@ -17,7 +17,7 @@ import (
 func Chexray(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemoChexray.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "Demo: Chest X-Ray Classification",
 	})
 }
@@ -37,7 +37,7 @@ func ChexrayV2(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemoChexrayV2.Execute(c.Writer, &data.ChexrayV2Demo{
 		Main: data.Main{
-			Version:   pkg.VERSION,
+			Version:   internal.VERSION,
 			PageTitle: "Demo V2: Chest X-Ray Classification",
 		},
 		Samples:    images,

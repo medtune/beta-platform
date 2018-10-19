@@ -7,7 +7,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"gopkg.in/yaml.v2"
+	yaml "gopkg.in/yaml.v2"
 
 	"github.com/medtune/beta-platform/internal"
 	"github.com/medtune/beta-platform/internal/service/dashboard"
@@ -18,7 +18,7 @@ import (
 // Home debug view
 func Home(c *gin.Context) {
 	inject := data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "Home",
 	}
 	c.Status(200)
@@ -29,7 +29,7 @@ func Home(c *gin.Context) {
 func Index(c *gin.Context) {
 	c.Status(200)
 	inject := data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "Index",
 	}
 	tmpl.Index.Execute(c.Writer, &inject)
@@ -39,7 +39,7 @@ func Index(c *gin.Context) {
 func Login(c *gin.Context) {
 	c.Status(200)
 	tmpl.Login.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "login",
 	})
 }
@@ -48,7 +48,7 @@ func Login(c *gin.Context) {
 func Signup(c *gin.Context) {
 	c.Status(200)
 	tmpl.Signup.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "Signup",
 	})
 }
@@ -101,7 +101,7 @@ func ErrorLogged(c *gin.Context) {
 func DemosMenu(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemosMenu.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "Demos menu",
 	})
 }
@@ -110,7 +110,7 @@ func DemosMenu(c *gin.Context) {
 func PolynomialRegression(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemoPolynomialRegression.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "Demo: Polynomial Regression",
 	})
 }
@@ -119,7 +119,7 @@ func PolynomialRegression(c *gin.Context) {
 func Mnist(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemoMnist.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "Demo: Image classification",
 	})
 }
@@ -129,7 +129,7 @@ func InceptionImagenet(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemoInceptionImagenet.Execute(c.Writer, &data.InceptionDemo{
 		Main: data.Main{
-			Version:   pkg.VERSION,
+			Version:   internal.VERSION,
 			PageTitle: "Demo: Image classification",
 		},
 		Samples: data.Gen().Samples,
@@ -141,7 +141,7 @@ func InceptionImagenet(c *gin.Context) {
 func Mura(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemoMura.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "Demo: MURA Classification",
 	})
 }
@@ -151,7 +151,7 @@ func MuraV2(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemoMuraV2.Execute(c.Writer, &data.MuraV2Demo{
 		Main: data.Main{
-			Version:   pkg.VERSION,
+			Version:   internal.VERSION,
 			PageTitle: "Demo: Image classification",
 		},
 		Samples: data.Gen().Samples,
@@ -163,7 +163,7 @@ func MuraV2(c *gin.Context) {
 func Chexray(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemoChexray.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "Demo: Chest X-Ray Classification",
 	})
 }
@@ -173,7 +173,7 @@ func ChexrayV2(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemoChexrayV2.Execute(c.Writer, &data.ChexrayV2Demo{
 		Main: data.Main{
-			Version:   pkg.VERSION,
+			Version:   internal.VERSION,
 			PageTitle: "Demo V2: Chest X-Ray Classification",
 		},
 		Samples: data.Gen().Samples,
@@ -184,7 +184,7 @@ func ChexrayV2(c *gin.Context) {
 func SentimentAnalysis(c *gin.Context) {
 	c.Status(200)
 	tmpl.DemoSentimentAnalysis.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "Demo: Sentiment Analysis",
 	})
 }
@@ -193,7 +193,7 @@ func SentimentAnalysis(c *gin.Context) {
 func Datahub(c *gin.Context) {
 	c.Status(200)
 	tmpl.DataHub.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "Datahub",
 	})
 }
@@ -202,7 +202,7 @@ func Datahub(c *gin.Context) {
 func SlidesMenu(c *gin.Context) {
 	c.Status(200)
 	tmpl.SlidesMenu.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "Slides menu",
 	})
 }
@@ -218,7 +218,7 @@ func MedtunePresentation(c *gin.Context) {
 // Dashboard .
 func Dashboard(c *gin.Context) {
 	c.Status(200)
-	versionB, _ := json.MarshalIndent(pkg.GetVersion(), "", "    ")
+	versionB, _ := json.MarshalIndent(internal.GetVersion(), "", "    ")
 	configB, _ := yaml.Marshal(dashboard.StartupConfig)
 	tmpl.Dashboard.Execute(c.Writer, &data.Dashboard{
 		Title:   "Dashboard",

@@ -372,11 +372,14 @@ clean:
 
 clean-gen:
 	rm -rf genered-views
+	
 
 clean-demos:
-	rm -f static/demos/mura/images/*mn_v2_cam.png
-	rm -f static/demos/chexray/images/*mn_v2_cam.png
-	rm -rf static/demos/chexray/images/000*
+	rm -f static/demos/mura/images/*_mn_v2_cam.png
+	rm -f static/demos/mura/images/[^image_*]*
+
+	rm -f static/demos/chexray/images/[^debug.png][^image_*]*
+	rm -f static/demos/chexray/images/[^image_*]*
 
 verify:
 	GO111MODULE=on go mod verify
@@ -386,7 +389,7 @@ vendor:
 
 
 loc:
-	scc --pbl static/reveal.js-3.7.0,vendor,.dev
+	scc --pbl static/reveal.js-3.7.0,vendor,.dev,.git
 
 
 start-scene: start-capsules

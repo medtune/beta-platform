@@ -15,7 +15,7 @@ import (
 func Datahub(c *gin.Context) {
 	c.Status(200)
 	tmpl.DataHub.Execute(c.Writer, &data.Main{
-		Version:   pkg.VERSION,
+		Version:   internal.VERSION,
 		PageTitle: "Data Hub",
 	})
 }
