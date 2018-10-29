@@ -21,7 +21,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/medtune/beta-platform/cmd/root"
-	"github.com/medtune/beta-platform/pkg"
+	"github.com/medtune/beta-platform/internal"
 )
 
 // versionCmd represents the version command
@@ -30,7 +30,7 @@ var versionCmd = &cobra.Command{
 	Short: "Medtune beta actual version",
 	Long:  `Print Medtune Beta version`,
 	Run: func(cmd *cobra.Command, args []string) {
-		versionJSON, _ := json.MarshalIndent(pkg.GetVersion(), "", "    ")
+		versionJSON, _ := json.MarshalIndent(internal.GetVersion(), "", "    ")
 		fmt.Printf("%s\n", versionJSON)
 	},
 }

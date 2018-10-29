@@ -36,3 +36,6 @@ gen.config.yml
 reveal.js-3.7.0/
 #vscode settings
 .vscode
+
+gke-limited/
+gke-min/

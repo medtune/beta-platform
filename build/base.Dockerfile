@@ -8,8 +8,7 @@ WORKDIR /go/src/github.com/medtune/beta-platform
 ADD build build
 ADD cmd cmd
 ADD hack hack
-ADD pkg pkg
-ADD server server
+ADD internal internal
 ADD static static
 ADD test test
 ADD Makefile .

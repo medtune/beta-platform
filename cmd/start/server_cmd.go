@@ -19,19 +19,19 @@ import (
 	"log"
 	"time"
 
-	"github.com/medtune/beta-platform/hack/xlsx2pg/xlsx2pg"
-
 	"github.com/gin-gonic/gin"
 	"github.com/medtune/go-utils/crypto"
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v2"
 
+	"github.com/medtune/beta-platform/hack/xlsx2pg/xlsx2pg"
+
 	"github.com/medtune/beta-platform/cmd/root"
-	"github.com/medtune/beta-platform/pkg/config"
-	"github.com/medtune/beta-platform/pkg/initpkg"
-	"github.com/medtune/beta-platform/pkg/store"
-	"github.com/medtune/beta-platform/pkg/store/model"
-	"github.com/medtune/beta-platform/server"
+	"github.com/medtune/beta-platform/internal/config"
+	"github.com/medtune/beta-platform/internal/initpkg"
+	"github.com/medtune/beta-platform/internal/server"
+	"github.com/medtune/beta-platform/internal/store"
+	"github.com/medtune/beta-platform/internal/store/model"
 )
 
 var (

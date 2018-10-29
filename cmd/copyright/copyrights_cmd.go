@@ -21,7 +21,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/medtune/beta-platform/cmd/root"
-	"github.com/medtune/beta-platform/pkg"
+	"github.com/medtune/beta-platform/internal"
 )
 
 var (
@@ -33,7 +33,7 @@ var (
 
 func init() {
 	copyrightCmd.Flags().BoolVarP(&owners, "owners", "o", false, "Print owners only")
-	copyrightCmd.Flags().BoolVarP(&authors, "authors", "a", false, "Print authors onyl")
+	copyrightCmd.Flags().BoolVarP(&authors, "authors", "a", false, "Print authors only")
 	copyrightCmd.Flags().BoolVarP(&licenseType, "license-type", "t", false, "Print license type")
 	copyrightCmd.Flags().BoolVarP(&licenseURL, "license-url", "u", false, "Print license URL")
 }
@@ -45,7 +45,7 @@ var copyrightCmd = &cobra.Command{
 	Short:   "Medtune beta-platform copyright",
 	Long:    `Print Medtune Beta Platform Copyright informations`,
 	Run: func(cmd *cobra.Command, args []string) {
-		copyrightInfo := pkg.GetCopyright()
+		copyrightInfo := internal.GetCopyright()
 		copyrightsJSON, _ := json.MarshalIndent(copyrightInfo, "", "    ")
 		shouldNotPrintAll := authors || owners || licenseType || licenseURL
 		if shouldNotPrintAll {

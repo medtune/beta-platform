@@ -1,4 +1,4 @@
 #Base image
 FROM medtune/beta-platform:base
 
-RUN make release
+RUN make release-linux

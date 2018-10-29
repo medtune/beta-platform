@@ -1,18 +1,21 @@
 #Base image
 FROM alpine:latest
 
-WORKDIR /medtune
+WORKDIR /mdtn
 
 ADD medtune-beta .
-
 ADD static static
 ADD config.yml config.yml
 ADD CXPBA.xlsx CXPBA.xlsx
 
+RUN chmod +x medtune-beta
+
+RUN ls -la
+RUN ./medtune-beta version
+
 # Port to expose
 EXPOSE 8005
 
-# please precise -v $CONFIGPATH:/medtune/beta-platform/deploy
 ENTRYPOINT [ "./medtune-beta", \
     "start", \
     "--syncdb", \
