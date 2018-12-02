@@ -1,6 +1,6 @@
 version: 1
 
-UID: 000000000
+UID: 0x00000000
 name: platform
 engine: docker
 storage: hub.docker.com

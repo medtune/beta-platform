@@ -44,7 +44,6 @@ var Cmd = &cobra.Command{
 	Use:   "bump-version",
 	Short: "tool to bump versions accross project confs & packages",
 	Run: func(cmd *cobra.Command, args []string) {
-
 		if configs != "" {
 			files := strings.Split(configs, ",")
 			for _, file := range files {
@@ -65,7 +64,6 @@ var Cmd = &cobra.Command{
 				updateVersion(file, "readme")
 			}
 		}
-
 	},
 }
 

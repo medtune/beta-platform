@@ -3,10 +3,7 @@ package initpkg
 import (
 	"fmt"
 	"log"
-	"os"
 	"time"
-
-	"github.com/go-xorm/xorm"
 
 	"github.com/gin-contrib/sessions/redis"
 	"github.com/go-xorm/core"
@@ -142,7 +139,7 @@ func initStore(c *config.Database, prod bool) error {
 
 	engine.ShowSQL(true)
 	engine.Logger().SetLevel(core.LOG_DEBUG)
-	engine.SetLogger(xorm.NewSimpleLogger(os.Stdout))
+	//engine.SetLogger(xorm.NewSimpleLogger(os.Stdout))
 
 	store.Agent = engine
 	return nil
