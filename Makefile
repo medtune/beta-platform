@@ -375,7 +375,7 @@ clean-gen:
 	
 
 clean-demos:
-	rm -f static/demos/mura/images/*_mn_v2_cam.png
+	rm -f static/demos/mura/images/*_mn_v2_cam.*
 	rm -f static/demos/mura/images/[^image_*]*
 
 	rm -f static/demos/chexray/images/[^debug.png][^image_*]*
