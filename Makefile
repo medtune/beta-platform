@@ -338,7 +338,7 @@ kill-capsules:
 
 start:
 	./medtune-beta start \
-		-f dev.config.yml \
+		-f etc/dev.config.yml \
 		--syncdb \
 		--create-users \
 		--sync-cxpba \
@@ -353,7 +353,7 @@ run:
 		-tags=gocv \
 		./cmd/main.go \
 		start \
-		-f dev.config.yml \
+		-f etc/dev.config.yml \
 		--syncdb \
 		--sync-cxpba \
 		--create-users \

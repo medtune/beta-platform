@@ -1,7 +1,7 @@
 meta:
   name: medtune beta platform
   description: medtune beta test
-  version: v0.1.5
+  version: v0.1.6
   prod: true
 
 database:
