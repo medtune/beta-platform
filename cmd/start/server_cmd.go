@@ -17,6 +17,7 @@ package start
 import (
 	"fmt"
 	"log"
+	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -48,6 +49,7 @@ var (
 	cxpbaSync     bool
 	cxpbaFile     string
 	soft          bool
+	secrets       string
 )
 
 func init() {
@@ -63,6 +65,7 @@ func init() {
 	startCmd.Flags().BoolVarP(&wait, "wait", "w", false, "Wait all services to go up")
 	startCmd.Flags().IntVarP(&maxattempts, "wait-attempts", "c", 60, "Wait max attempts")
 	startCmd.Flags().IntVarP(&timestamp, "wait-timestamp", "t", 1, "Wait timestamp")
+	startCmd.Flags().StringVarP(&secrets, "secrets", "u", "", "secrets strings")
 
 	startCmd.Flags().BoolVarP(&cxpbaSync, "sync-cxpba", "X", false, "Sync CXBPA before start")
 	startCmd.Flags().StringVarP(&cxpbaFile, "cxpba-file", "F", "./CXPBA.xlsx", "CXPBA excel file name")
@@ -97,6 +100,11 @@ func runServer() {
 	configuration, err := config.LoadConfigFromPath(configFile)
 	if err != nil && !soft {
 		log.Fatalf("failed to load configuration: %v\n\t%v\n", err, configFile)
+	}
+
+	if secrets != "" {
+		secretsList := strings.Split(secrets, ",")
+		configuration.Secrets.Signup = secretsList
 	}
 
 	// Init packages

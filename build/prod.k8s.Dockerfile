@@ -5,7 +5,7 @@ RUN rm -rf vendor cmd pkg server
 # Port to expose
 EXPOSE 8005
 
-ADD config.k8s.yml .
+ADD etc/config.k8s.yml .
 
 # please precise -v $CONFIGPATH:/medtune/beta-platform/deploy
 ENTRYPOINT [ "./medtune-beta",\
@@ -14,5 +14,5 @@ ENTRYPOINT [ "./medtune-beta",\
     "--syncdb",\
     "--sync-cxpba",\
     "--wait",\
-    "--create-users"]
+    "--create-users" ]
 

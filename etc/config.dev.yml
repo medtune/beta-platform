@@ -1,7 +1,7 @@
 meta:
   name: medtune beta platform
   description: medtune beta test
-  version: v0.1.5
+  version: v0.1.6
   prod: true
 
 database:
@@ -9,17 +9,21 @@ database:
   prod: medtune
   test: medtune-test
   creds:
-    host: postgres
+    host: localhost
     port: 5432
-    user: mdtn
-    password: mdtn
+    user: root
+    password: root
   ssl_mode: 0
   max_idle_conn: 100
   max_open_conn: 100
   
 session:
+  #type: cookie
+  #random: true
+  #name: default-session
+  #secret: A0123456789
   type: redis
-  address: redis:6379
+  address: localhost:6379
   secret: A0123456789
   password:
   database: 0
@@ -29,7 +33,7 @@ crypto:
   salt: MORE-SALT-PLEASE
 
 public:
-  static: ./static
+  static: static
   prefix: /static
 
 secrets:
@@ -59,42 +63,42 @@ capsul:
     model: inception
     signature: predict_images
     version: 1
-    address: inception:10010
+    address: localhost:10010
   
   mnist:
     name: mnist-lenet
     model: mnist
     signature: predict_images
     version: 1
-    address: mnist:10000
+    address: localhost:10000
 
   mura-irn-v2:
     name: mura-inception-resnet-v2
     model: mura_inception_resnet_v2
     signature: predict_images
     version: 1
-    address: mura-irn-v2:10021
+    address: localhost:10021
 
   mura-mn-v2:
     name: mura-mobilenet-v2
     model: mura
     signature: predict_images
     version: 1
-    address: mura-mn-v2:10020
+    address: localhost:10020
 
   chexray-mn-v2:
     name: chexray-mobilenet-v2
     model: chexray
     signature: predict_images
     version: 1
-    address: chexray-mn-v2:10030
+    address: localhost:10030
 
   chexray-dn-121:
     name: chexray-densenet-121
     model: chexray
     signature: process_img
     version: 1
-    address: chexray-dn-121:10031
+    address: localhost:10031
 
 custom_capsul:
   mura-mn-v2-cam:
@@ -102,18 +106,18 @@ custom_capsul:
     model: mura
     signature: run_cam
     version: 1
-    address: mura-mn-v2-cam:11020
+    address: localhost:11020
 
   chexray-mn-v2-cam:
     name: chexray-mobilenet-v2-cam
     model: chexray
     signature: run_cam
     version: 1
-    address: chexray-mn-v2-cam:11030
+    address: localhost:11030
 
   chexray-pp-helper:
     name: chexray-pp-helper
     model: none
     signature: process_img
     version: 1
-    address: chexray-pp:12030
+    address: localhost:12030

@@ -3,13 +3,9 @@ package initpkg
 import (
 	"fmt"
 	"log"
-	"os"
 	"time"
 
-	"github.com/go-xorm/xorm"
-
 	"github.com/gin-contrib/sessions/redis"
-	"github.com/go-xorm/core"
 	tfsclient "github.com/medtune/capsul/pkg/tfs-client"
 	"github.com/medtune/go-utils/random"
 
@@ -140,9 +136,9 @@ func initStore(c *config.Database, prod bool) error {
 		return err
 	}
 
-	engine.ShowSQL(true)
-	engine.Logger().SetLevel(core.LOG_DEBUG)
-	engine.SetLogger(xorm.NewSimpleLogger(os.Stdout))
+	//engine.ShowSQL(true)
+	//engine.Logger().SetLevel(core.LOG_DEBUG)
+	//engine.SetLogger(xorm.NewSimpleLogger(os.Stdout))
 
 	store.Agent = engine
 	return nil
