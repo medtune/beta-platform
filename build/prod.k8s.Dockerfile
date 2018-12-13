@@ -14,5 +14,5 @@ ENTRYPOINT [ "./medtune-beta",\
     "--syncdb",\
     "--sync-cxpba",\
     "--wait",\
-    "--create-users"]
+    "--create-users" ]
 
