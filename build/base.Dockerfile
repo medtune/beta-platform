@@ -16,8 +16,8 @@ ADD Makefile .
 ADD MAINTAINERS.txt .
 ADD LICENSE.txt .
 
-ADD config.yml .
-ADD CXPBA.xlsx .
+ADD etc/config.yml .
+ADD assets/CXPBA.xlsx .
 
 ADD .codecov.yml .
 ADD .circleci .circleci

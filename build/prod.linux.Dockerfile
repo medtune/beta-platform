@@ -5,8 +5,8 @@ WORKDIR /mdtn
 
 ADD medtune-beta .
 ADD static static
-ADD config.yml config.yml
-ADD CXPBA.xlsx CXPBA.xlsx
+ADD etc/config.yml config.yml
+ADD assets/CXPBA.xlsx CXPBA.xlsx
 
 RUN chmod +x medtune-beta
 

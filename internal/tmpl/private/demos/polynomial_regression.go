@@ -22,8 +22,8 @@ const PolynomialRegression = `{{define "content"}}
 				<input class="mdl-slider mdl-js-slider" type="range" id="orderPolySlider" min="1" max="10" step="1" value="1">
 			</div>
 			<div class="mdl-cell mdl-cell--12-col demo-polyreg-ctrl__div">
-				<label>Learning Rate <span style="color: #515151; font-size: 12px;">[0.001 - 30]</span></label>
-				<input class="mdl-slider mdl-js-slider" id="learningRateSlider" type="range" min="0.001" max="30" step="0.001" value="0.001">
+				<label>Learning Rate <span style="color: #515151; font-size: 12px;">[0.001 - 3]</span></label>
+				<input class="mdl-slider mdl-js-slider" id="learningRateSlider" type="range" min="0.001" max="3" step="0.001" value="0.001">
 			</div>
 			<div class="mdl-cell mdl-cell--12-col demo-polyreg-ctrl__div demo-polyreg-ctrl__buttons">
 			<div class="drawer-separator"></div>

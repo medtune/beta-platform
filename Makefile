@@ -5,7 +5,7 @@ GITCOMMIT=$(shell git rev-parse HEAD)
 BUILDDATE=$(shell date -u +'%Y-%m-%dT%H:%M:%SZ')
 MAJOR=0
 MINOR=1
-PATCH=5
+PATCH=6
 REVISION=alpha
 VERSION=v$(MAJOR).$(MINOR).$(PATCH)
 GOVERSION=1.11
@@ -14,6 +14,7 @@ CWD=$(shell pwd)
 VPATH=github.com/medtune/beta-platform/internal
 PROJECTPATH=$(CWD)
 AUTHORS=El.bouchti.Alaa/Hilaly.Mohammed-Amine
+OWNERS=$(AUTHORS)
 LICENSETYPE=Apache-v2.0
 LICENSEURL=https://raw.githubusercontent.com/medtune/beta-platform/master/LICENSE.txt
 
@@ -203,7 +204,7 @@ push-image:
 
 gen-k8s:
 	rm -rf deploy/kubernetes/*
-	kompose convert -f docker-compose.k8s.yml -o deploy/kubernetes
+	kompose convert -f deployments/docker-compose.k8s-gen.yml -o deployments/k8s-generated
 
 # Test package
 tests:
