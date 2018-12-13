@@ -37,6 +37,12 @@ secrets:
 
 create:
   users:
+    - username: admin
+      email: admin@medtune.org
+      password: SUPERSECRET
+      account_level: 1
+      account_type: admin
+      account_status: true
 
 capsul:
   inception:

@@ -13,6 +13,15 @@ services:
     
   platform-app:
     image: medtune/beta-platform:v0.1.6
+    entrypoint:
+      - ./medtune-beta
+      - start
+      - --wait
+      - --sync-cxpba
+      - --syncdb
+      - --create-users
+      - --secrets=TEST,TEST
+
     ports:
       - 8006:8005
 
